@@ -54,7 +54,7 @@ class Start extends React.Component {
                         <img src={logo} width="280px" height="280px" alt="description"></img>
                         <br></br>
                         <br></br>
-                        <b id="logoMeans">Sistema Del laboratorio de agricultura xd no c</b>
+                        <b id="logoMeans">Sistema de información del laboratorio de agricultura inteligente</b>
                         <br></br>
                         <br></br>
                         <Container>
