@@ -31,10 +31,13 @@ class Searching extends React.Component {
     super(props);
     this.state = {
       words: this.props.location.state.words,
+      word_searched: "",
       toggle_cat1: false,
       toggle_cat2: false,
       toggle_cat3: false,
       toggle_cat4: false,
+      results: [],
+      counts_tipos: {}
     }
   }
 
@@ -58,17 +61,26 @@ class Searching extends React.Component {
     this.setState({ toggle_cat4: !this.state.toggle_cat4 });
   }
 
-  componentDidMount(){
+  newBasicSearch = e => {
 
     const basicURL = "http://localhost:8000/basic/search";
 
-    axios.post(basicURL, {words: this.state.words})
+    axios.post(basicURL, { words: this.state.words })
       .then(res => {
-        console.log(res.data.result);
+        this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words });
       })
       .catch(err => {
         console.log(err);
       })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.newBasicSearch();
+  }
+
+  componentDidMount() {
+    this.newBasicSearch();
   }
 
   render() {
@@ -84,7 +96,7 @@ class Searching extends React.Component {
           <div >
             <Row>
               <Col>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                   <InputGroup className="no-border">
                     <Input onChange={this.handleInput} value={this.state.words !== "error" ? this.state.words : "error"} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
                     <InputGroupAddon addonType="append">
@@ -99,13 +111,13 @@ class Searching extends React.Component {
               <Col>
                 <Nav className="mr-auto">
 
-                  <NavItem>
+                  {/* <NavItem>
                     <NavLink href="/">Restore</NavLink>
-                  </NavItem>
+                  </NavItem> */}
 
                   <NavItem>
                     <Dropdown name="toggle_cat1" isOpen={this.state.toggle_cat1} toggle={this.change_toggle1}>
-                      <DropdownToggle nav caret>Proveedor</DropdownToggle>
+                      <DropdownToggle nav caret>Categoria</DropdownToggle>
                       <DropdownMenu right>
                         <DropdownItem>prov1</DropdownItem>
                         <DropdownItem>prov1</DropdownItem>
@@ -116,7 +128,7 @@ class Searching extends React.Component {
 
                   <NavItem>
                     <Dropdown name="toggle_cat2" isOpen={this.state.toggle_cat2} toggle={this.change_toggle2}>
-                      <DropdownToggle nav caret>Sector</DropdownToggle>
+                      <DropdownToggle nav caret>Subcategoria</DropdownToggle>
                       <DropdownMenu right>
                         <DropdownItem>prov1</DropdownItem>
                         <DropdownItem>prov1</DropdownItem>
@@ -125,9 +137,20 @@ class Searching extends React.Component {
                     </Dropdown>
                   </NavItem>
 
-                  <NavItem>
+                  {/* <NavItem>
                     <Dropdown name="toggle_cat3" isOpen={this.state.toggle_cat3} toggle={this.change_toggle3}>
-                      <DropdownToggle nav caret>Anhos</DropdownToggle>
+                      <DropdownToggle nav caret>Municipio</DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem> */}
+
+                  <NavItem>
+                    <Dropdown name="toggle_cat4" isOpen={this.state.toggle_cat4} toggle={this.change_toggle4}>
+                      <DropdownToggle nav caret>Tipo</DropdownToggle>
                       <DropdownMenu right>
                         <DropdownItem>prov1</DropdownItem>
                         <DropdownItem>prov1</DropdownItem>
@@ -138,7 +161,7 @@ class Searching extends React.Component {
 
                   <NavItem>
                     <Dropdown name="toggle_cat4" isOpen={this.state.toggle_cat4} toggle={this.change_toggle4}>
-                      <DropdownToggle nav caret>cat4</DropdownToggle>
+                      <DropdownToggle nav caret>Formato</DropdownToggle>
                       <DropdownMenu right>
                         <DropdownItem>prov1</DropdownItem>
                         <DropdownItem>prov1</DropdownItem>
@@ -146,7 +169,7 @@ class Searching extends React.Component {
                       </DropdownMenu>
                     </Dropdown>
                   </NavItem>
-                
+
                 </Nav>
               </Col>
             </Row>
@@ -154,65 +177,36 @@ class Searching extends React.Component {
           </div>
           <div>
             <Alert color="success">
-              <h5><b>Resultados:</b></h5>
-              <i>Publicaciones: 5</i> <br />
-              <i>Datasets: 5</i> <br />
+              <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
+              <b>Archivo crudo: {this.state.counts_tipos.AC}</b> <br />
+              <b>Archivo procesado: {this.state.counts_tipos.AP}</b> <br />
+              <b>Imagen cruda: {this.state.counts_tipos.IC}</b> <br />
+              <b>Imagen procesada: {this.state.counts_tipos.IP}</b> <br />
+              <b>Compilación: {this.state.counts_tipos.C}</b> <br />
+
             </Alert>
           </div>
           <Table hover={true}>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Proveedor</th>
-                <th>Anho</th>
-                <th>Sector</th>
-                <th>Recurso</th>
-              </tr>
-            </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Arroz1</td>
-                <td>Proveedor</td>
-                <td>1997</td>
-                <td>Valle</td>
-                <td>
-                  <a href="/">Descargar</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Arroz1</td>
-                <td>Proveedor</td>
-                <td>1997</td>
-                <td>Valle</td>
-                <td><a href="/">Descargar</a></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Arroz1</td>
-                <td>Proveedor</td>
-                <td>1997</td>
-                <td>Valle</td>
-                <td><a href="/">Descargar</a></td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Arroz1</td>
-                <td>Proveedor</td>
-                <td>1997</td>
-                <td>Valle</td>
-                <td><a href="/">Descargar</a></td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Arroz1</td>
-                <td>Proveedor</td>
-                <td>1997</td>
-                <td>Valle</td>
-                <td><a href="/">Descargar</a></td>
-              </tr>
+              {
+                this.state.results.map((e, i) => (
+                  <tr>
+                    <th key={i} scope="row">{i + 1}</th>
+                    <td>
+                      <b>Titulo: </b>{e.titulo} <br />
+                      <b>Publicador: </b>{e.publicador}
+                    </td>
+                    <td>
+                      <b>Tipo: </b>{e.tipo} <br />
+                      <b>D: </b>{e.resumen}
+                    </td>
+                    <td>
+                      <b>Formato: </b>{e.formato} <br />
+                      <b>Tamano: </b>{e.tamano}
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </Table>
         </Container>
