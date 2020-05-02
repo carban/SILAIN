@@ -21,5 +21,5 @@ app.use('/',routes);
 
 //start server
 app.listen(app.get('port'),() => {
-  console.log('😬 Backend Running on port:',app.get('port'));
+  console.log('😬 Backend Running on port:', app.get('port'));
 })

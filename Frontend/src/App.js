@@ -2,20 +2,20 @@ import React from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
-import DashLayout from "layouts/DashLayout.jsx";
+// import DashLayout from "layouts/DashLayout.jsx";
 import Start from "views/Start.jsx";
 import Searching from "views/Searching.jsx";
 import Acerca from "views/Acerca.jsx";
 
 
-import Login from "components/login/Login.jsx";
-import GetBill from "components/GetBill.jsx";
+// import Login from "components/login/Login.jsx";
+// import GetBill from "components/GetBill.jsx";
 
-import routesAdmin from "routes/adminRoutes.js";
-import routesOperator from "routes/operatorRoutes.js";
-import routesManager from "routes/managerRoutes.js";
+// import routesAdmin from "routes/adminRoutes.js";
+// import routesOperator from "routes/operatorRoutes.js";
+// import routesManager from "routes/managerRoutes.js";
 
-import { ProtectedRoute, ProtectedLoginRoute } from "components/auth/ProtectedRoute.js";
+// import { ProtectedRoute, ProtectedLoginRoute } from "components/auth/ProtectedRoute.js";
 
 const hist = createBrowserHistory();
 

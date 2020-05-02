@@ -1,14 +1,16 @@
 const { Pool } = require('pg')
-var pool; ///Singleton Pattern
+
+var pool;
+
 module.exports = {
-  getPool: function () {
+  getPool: () => {
     if (pool) {
       return pool;
     } else {
       pool = new Pool({
         user: 'postgres',
         host: 'localhost',
-        database: 'hateful42',
+        database: 'silain',
         password: 'lordpostgres123',
         port: 5432
       });

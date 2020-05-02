@@ -11,7 +11,7 @@ import {
     InputGroupText,
     Container,
     Button,
-    Row, Col
+    Col
 } from "reactstrap";
 
 import logo from "logo.png";
@@ -21,7 +21,7 @@ class Start extends React.Component {
         super(props);
         this.state = {
             redirect: false,
-            words: "Arroz valle del cauca",
+            words: "",
             doAnime: false
         }
     }

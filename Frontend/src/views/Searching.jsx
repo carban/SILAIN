@@ -2,24 +2,25 @@ import React from "react";
 
 // reactstrap components
 import {
-  Collapse,
+  // Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
+  Dropdown,
+  // NavbarText,
   Row, Input, Col,
-  Container, Table, Alert, InputGroup, InputGroupAddon, InputGroupText, Button
+  Container, Table, Alert, InputGroup, InputGroupAddon, InputGroupText,
+  // Button
 } from 'reactstrap';
-// import Axios from "axios";
+import axios from "axios";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 import Footer from "components/Footer/Footer.jsx";
@@ -29,21 +30,52 @@ class Searching extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      words: this.props.location.state.words,
+      toggle_cat1: false,
+      toggle_cat2: false,
+      toggle_cat3: false,
+      toggle_cat4: false,
     }
+  }
+
+  handleInput = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  change_toggle1 = () => {
+    this.setState({ toggle_cat1: !this.state.toggle_cat1 });
+  }
+
+  change_toggle2 = () => {
+    this.setState({ toggle_cat2: !this.state.toggle_cat2 });
+  }
+
+  change_toggle3 = () => {
+    this.setState({ toggle_cat3: !this.state.toggle_cat3 });
+  }
+
+  change_toggle4 = () => {
+    this.setState({ toggle_cat4: !this.state.toggle_cat4 });
+  }
+
+  componentDidMount(){
+
+    const basicURL = "http://localhost:8000/basic/search";
+
+    axios.post(basicURL, {words: this.state.words})
+      .then(res => {
+        console.log(res.data.result);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
 
-    var words;
-    try {
-      words = this.props.location.state.words;
-    } catch (error) {
-      console.log(error);
-      words = "error";
-    }
-
     return (
-      <div className={words != "error" ? "animated fadeInUpBig faster" : ""}>
+      // className={words != "error" ? "animated fadeInUpBig faster" : ""}
+      <div>
         <Navbar color="dark" light expand="md">
           <NavbarBrand href="/">SILAIN | search</NavbarBrand>
           <NavbarToggler />
@@ -54,7 +86,7 @@ class Searching extends React.Component {
               <Col>
                 <form>
                   <InputGroup className="no-border">
-                    <Input value={words != "error" ? words : "error"} onChange={this.handleInput} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
+                    <Input onChange={this.handleInput} value={this.state.words !== "error" ? this.state.words : "error"} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
                     <InputGroupAddon addonType="append">
                       <InputGroupText>
                         <i className="nc-icon nc-zoom-split" />
@@ -66,67 +98,56 @@ class Searching extends React.Component {
               </Col>
               <Col>
                 <Nav className="mr-auto">
+
                   <NavItem>
                     <NavLink href="/">Restore</NavLink>
                   </NavItem>
-                  <NavItem>
-                    <UncontrolledDropdown nav inNavbar>
-                      <DropdownToggle nav caret>
-                        Proveedor
-                    </DropdownToggle>
-                      <DropdownMenu right>
-                        <DropdownItem>
-                          prov1
-                  </DropdownItem>
-                        <DropdownItem>
-                          prov2
-                  </DropdownItem>
-                        <DropdownItem>
-                          Prov3
-                  </DropdownItem>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
 
-                  </NavItem>
                   <NavItem>
-                    <UncontrolledDropdown nav inNavbar>
-                      <DropdownToggle nav caret>
-                        Sector
-                    </DropdownToggle>
+                    <Dropdown name="toggle_cat1" isOpen={this.state.toggle_cat1} toggle={this.change_toggle1}>
+                      <DropdownToggle nav caret>Proveedor</DropdownToggle>
                       <DropdownMenu right>
-                        <DropdownItem>
-                          Cali
-                  </DropdownItem>
-                        <DropdownItem>
-                          Buga
-                  </DropdownItem>
-                        <DropdownItem>
-                          Tulua
-                  </DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
                       </DropdownMenu>
-                    </UncontrolledDropdown>
+                    </Dropdown>
                   </NavItem>
-                  <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                      Anhos
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>
-                        2000
-                  </DropdownItem>
-                      <DropdownItem>
-                        2001
-                  </DropdownItem>
-                      <DropdownItem>
-                        2002
-                  </DropdownItem>
-                      <DropdownItem>
-                        2003
-                  </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
+
+                  <NavItem>
+                    <Dropdown name="toggle_cat2" isOpen={this.state.toggle_cat2} toggle={this.change_toggle2}>
+                      <DropdownToggle nav caret>Sector</DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem>
+
+                  <NavItem>
+                    <Dropdown name="toggle_cat3" isOpen={this.state.toggle_cat3} toggle={this.change_toggle3}>
+                      <DropdownToggle nav caret>Anhos</DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem>
+
+                  <NavItem>
+                    <Dropdown name="toggle_cat4" isOpen={this.state.toggle_cat4} toggle={this.change_toggle4}>
+                      <DropdownToggle nav caret>cat4</DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                        <DropdownItem>prov1</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </NavItem>
+                
                 </Nav>
-
               </Col>
             </Row>
 
@@ -138,7 +159,7 @@ class Searching extends React.Component {
               <i>Datasets: 5</i> <br />
             </Alert>
           </div>
-          <Table hover="true">
+          <Table hover={true}>
             <thead>
               <tr>
                 <th>#</th>

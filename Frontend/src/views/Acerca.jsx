@@ -1,25 +1,25 @@
 import React from "react";
 
-// reactstrap components
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText,
-    Row, Input, Col,
-    Container, Table
-} from 'reactstrap';
-// import Axios from "axios";
+// // reactstrap components
+// import {
+//     Collapse,
+//     Navbar,
+//     NavbarToggler,
+//     NavbarBrand,
+//     Nav,
+//     NavItem,
+//     NavLink,
+//     UncontrolledDropdown,
+//     DropdownToggle,
+//     DropdownMenu,
+//     DropdownItem,
+//     NavbarText,
+//     Row, Input, Col,
+//     Container, Table
+// } from 'reactstrap';
+// // import Axios from "axios";
 
-import Footer from "components/Footer/Footer.jsx";
+// import Footer from "components/Footer/Footer.jsx";
 
 import alex from "alex.jpeg";
 
