@@ -17,6 +17,7 @@
     "react-google-maps": "9.4.5",
     "react-google-recaptcha": "^2.0.1",
     "react-leaflet": "^2.6.3",
+    "react-loading": "^2.0.3",
     "react-notification-alert": "0.0.12",
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",

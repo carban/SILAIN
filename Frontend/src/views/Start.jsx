@@ -22,7 +22,6 @@ class Start extends React.Component {
         this.state = {
             redirect: false,
             words: "",
-            doAnime: false
         }
     }
 
@@ -33,7 +32,7 @@ class Start extends React.Component {
     }
 
     setRedirect = () => {
-        this.setState({ redirect: true, doAnime: true });       
+        this.setState({ redirect: true });
     }
 
     renderRedirect = () => {
@@ -47,7 +46,7 @@ class Start extends React.Component {
 
     render() {
         return (
-            <div className={this.state.doAnime ? "animated fadeOutUpBig faster" : ""}>
+            <div>
                 {/* <DemoNavbar {...this.props} /> */}
                 <div className="contentStart">
                     <center>

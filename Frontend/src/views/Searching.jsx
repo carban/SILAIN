@@ -3,8 +3,9 @@ import React from "react";
 // reactstrap components
 import {
   Row, Input, Col,
-  Container, Table, Alert, InputGroup, InputGroupAddon, InputGroupText,
+  Container, Table, Alert, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
+
 import axios from "axios";
 
 // import { Link } from "react-router-dom";
@@ -12,7 +13,9 @@ import Footer from "components/Footer/Footer.jsx";
 
 import SNavBar from "components/SNavBar.jsx";
 import CustomFilters from "components/CustomFilters.jsx";
-import ResultsTable from "components/ResultsTable";
+
+import ReactLoading from "react-loading";
+// import ResultsTable from "components/ResultsTable";
 
 class Searching extends React.Component {
   constructor(props) {
@@ -28,7 +31,8 @@ class Searching extends React.Component {
         municipio: "Select",
         tipo: "Select",
         formato: "Select"
-      }
+      },
+      loading: undefined
     }
   }
 
@@ -38,15 +42,18 @@ class Searching extends React.Component {
 
   newBasicSearch = e => {
 
-    const basicURL = "http://localhost:8000/basic/search";
+    if (this.state.words !== "") {
+      const basicURL = "http://localhost:8000/basic/search";
 
-    axios.post(basicURL, { words: this.state.words })
-      .then(res => {
-        this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      axios.post(basicURL, { words: this.state.words })
+        .then(res => {
+          this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words, loading: true });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      this.setState({ loading: undefined });
+    }
   }
 
   handleSubmit = e => {
@@ -54,8 +61,12 @@ class Searching extends React.Component {
     this.newBasicSearch();
   }
 
-  getFilters = obj => {
-    this.setState({ filters: obj })
+  getFilters = (obj, load) => {
+    this.setState({ loading: undefined })
+    setTimeout(() => {
+      this.setState({ filters: obj, loading: true })
+    }, 150)
+
   }
 
   componentDidMount() {
@@ -68,7 +79,7 @@ class Searching extends React.Component {
 
     // const resultsFiltered = this.state.results;
     const resultsFiltered = this.state.results.filter(ele => (
-      this.state.filters.tipo !== "Select" ? ele.tipo == this.state.filters.tipo : true
+      this.state.filters.tipo !== "Select" ? ele.tipo === this.state.filters.tipo : true
     ));
 
 
@@ -97,84 +108,93 @@ class Searching extends React.Component {
             <br />
           </div>
           <div>
-            <div>
-              <Alert color={this.state.results.length > 0 ? "success" : "danger"}>
-                {
-                  this.state.results.length > 0
-                    ? (
-                      <div>
-                        <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
-                        <Row>
-                          <Col>
-                            <b>*Archivo crudo:  {this.state.counts_tipos.AC}</b>
-                          </Col>
-                          <Col>
-                            <b>*Archivo procesado:  {this.state.counts_tipos.AP}</b>
-                          </Col>
-                          <Col>
-                            <b>*Imagen cruda:  {this.state.counts_tipos.IC}</b>
-                          </Col>
-                          <Col>
-                            <b>*Imagen procesada:  {this.state.counts_tipos.IP}</b>
-                          </Col>
-                          <Col>
-                            <b>*Compilación:  {this.state.counts_tipos.C}</b>
-                          </Col>
-                        </Row>
-                      </div>
-                    )
-                    : (
-                      <h5><b>No hay datos relacionados con: "{this.state.word_searched}": </b></h5>
-                    )
-                }
-              </Alert>
-            </div>
-            <Table hover={true}>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Titulo y resumen</th>
-                  <th>Publicador</th>
-                  <th>Tipo</th>
-                  <th>Formato</th>
-                  <th>Tamano</th>
-                  <th>creado</th>
-                  <th>disponibilidad</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  resultsFiltered.map((e, i) => (
-                    <tr key={i}>
-                      <th scope="row">{i + 1}</th>
-                      <td>
-                        <b>{e.titulo}</b> <br />
-                        <i>{e.resumen}</i>
-                      </td>
-                      <td className="centerTd">
-                        {e.publicador} <br />
-                      </td>
-                      <td className="centerTd">
-                        {e.tipo}
-                      </td>
-                      <td className="centerTd">
-                        {e.formato} <br />
-                      </td>
-                      <td className="centerTd">
-                        {e.tamano}
-                      </td>
-                      <td className="centerTd">
-                        {e.creado} <br />
-                      </td>
-                      <td className="centerTd">
-                        {e.disponibilidad}
-                      </td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </Table>
+            <Alert color={this.state.results.length > 0 ? "success" : "danger"}>
+              {
+                this.state.results.length > 0
+                  ? (
+                    <div>
+                      <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
+                      <Row>
+                        <Col>
+                          <b>*Archivo crudo:  {this.state.counts_tipos.AC}</b>
+                        </Col>
+                        <Col>
+                          <b>*Archivo procesado:  {this.state.counts_tipos.AP}</b>
+                        </Col>
+                        <Col>
+                          <b>*Imagen cruda:  {this.state.counts_tipos.IC}</b>
+                        </Col>
+                        <Col>
+                          <b>*Imagen procesada:  {this.state.counts_tipos.IP}</b>
+                        </Col>
+                        <Col>
+                          <b>*Compilación:  {this.state.counts_tipos.C}</b>
+                        </Col>
+                      </Row>
+                    </div>
+                  )
+                  : (
+                    <h5><b>No hay datos relacionados con: "{this.state.word_searched}": </b></h5>
+                  )
+              }
+            </Alert>
           </div>
+          {
+            !this.state.loading ? (
+              <center>
+                <ReactLoading type={"bars"} color={"#51BCDA"} />
+              </center>
+            ) : (
+                <div>
+                  <Table hover={true}>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Titulo y resumen</th>
+                        <th>Publicador</th>
+                        <th>Tipo</th>
+                        <th>Formato</th>
+                        <th>Tamano</th>
+                        <th>creado</th>
+                        <th>disponibilidad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        resultsFiltered.map((e, i) => (
+                          <tr key={i}>
+                            <th scope="row">{i + 1}</th>
+                            <td>
+                              <b>{e.titulo}</b> <br />
+                              <i>{e.resumen}</i>
+                            </td>
+                            <td className="centerTd">
+                              {e.publicador} <br />
+                            </td>
+                            <td className="centerTd">
+                              {e.tipo}
+                            </td>
+                            <td className="centerTd">
+                              {e.formato} <br />
+                            </td>
+                            <td className="centerTd">
+                              {e.tamano}
+                            </td>
+                            <td className="centerTd">
+                              {e.creado} <br />
+                            </td>
+                            <td className="centerTd">
+                              {e.disponibilidad}
+                            </td>
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </Table>
+                </div>
+
+              )
+          }
 
         </Container>
         <Footer />
