@@ -37,9 +37,10 @@ class Start extends React.Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
+            const w = this.state.words;
             return <Redirect to={{
                 pathname: '/searching',
-                state: { words: this.state.words }
+                words: w
             }} />;
         }
     }
@@ -47,7 +48,6 @@ class Start extends React.Component {
     render() {
         return (
             <div>
-                {/* <DemoNavbar {...this.props} /> */}
                 <div className="contentStart">
                     <center>
                         <img src={logo} width="280px" height="280px" alt="description"></img>

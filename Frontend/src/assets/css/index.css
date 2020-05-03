@@ -84,3 +84,7 @@ thead{
 .icon-click{
   cursor: pointer;
 }
+
+.datsBigger{
+  font-size: 15px;
+}

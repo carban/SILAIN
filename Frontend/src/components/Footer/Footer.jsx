@@ -37,6 +37,7 @@ class Footer extends React.Component {
               <ul>
                 <li>
                   <Link to="/acerca">Acerca de SILAIN</Link>
+                  {/* <a href="/acerca"></a> */}
                 </li>
               </ul>
             </nav>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-    Alert, Row, Col, Table
+    Table
 } from "reactstrap";
 
 class ResultsTable extends React.Component {
@@ -16,42 +16,10 @@ class ResultsTable extends React.Component {
 
     render() {
 
-        console.log(this.state.results);
+        // console.log(this.state.results);
 
         return (
             <div>
-                <div>
-                    <Alert color={this.state.results.length > 0 ? "success" : "danger"}>
-                        {
-                            this.state.results.length > 0
-                                ? (
-                                    <div>
-                                        <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
-                                        <Row>
-                                            <Col>
-                                                <b>*Archivo crudo:  {this.state.counts_tipos.AC}</b>
-                                            </Col>
-                                            <Col>
-                                                <b>*Archivo procesado:  {this.state.counts_tipos.AP}</b>
-                                            </Col>
-                                            <Col>
-                                                <b>*Imagen cruda:  {this.state.counts_tipos.IC}</b>
-                                            </Col>
-                                            <Col>
-                                                <b>*Imagen procesada:  {this.state.counts_tipos.IP}</b>
-                                            </Col>
-                                            <Col>
-                                                <b>*Compilación:  {this.state.counts_tipos.C}</b>
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                )
-                                : (
-                                    <h5><b>No hay datos relacionados con: "{this.state.word_searched}": </b></h5>
-                                )
-                        }
-                    </Alert>
-                </div>
                 <Table hover={true}>
                     <thead>
                         <tr>

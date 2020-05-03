@@ -3,7 +3,7 @@ import React from "react";
 // reactstrap components
 import {
   Row, Input, Col,
-  Container, Table, Alert, InputGroup, InputGroupAddon, InputGroupText
+  Container, Alert, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
 
 import axios from "axios";
@@ -15,13 +15,13 @@ import SNavBar from "components/SNavBar.jsx";
 import CustomFilters from "components/CustomFilters.jsx";
 
 import ReactLoading from "react-loading";
-// import ResultsTable from "components/ResultsTable";
+import ResultsTable from "components/ResultsTable";
 
 class Searching extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: this.props.location.state.words,
+      words: this.props.location.words,
       word_searched: "",
       results: [],
       counts_tipos: {},
@@ -32,7 +32,8 @@ class Searching extends React.Component {
         tipo: "Select",
         formato: "Select"
       },
-      loading: undefined
+      loading: false,
+      loading_filter: false
     }
   }
 
@@ -47,12 +48,12 @@ class Searching extends React.Component {
 
       axios.post(basicURL, { words: this.state.words })
         .then(res => {
-          this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words, loading: true });
+          this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words, loading: true, loading_filter: true });
         })
         .catch(err => {
           console.log(err);
         })
-      this.setState({ loading: undefined });
+      this.setState({ loading: false, loading_filter: false });
     }
   }
 
@@ -62,9 +63,9 @@ class Searching extends React.Component {
   }
 
   getFilters = (obj, load) => {
-    this.setState({ loading: undefined })
+    this.setState({ loading_filter: false })
     setTimeout(() => {
-      this.setState({ filters: obj, loading: true })
+      this.setState({ filters: obj, loading_filter: true })
     }, 150)
 
   }
@@ -107,38 +108,6 @@ class Searching extends React.Component {
             </Col>
             <br />
           </div>
-          <div>
-            <Alert color={this.state.results.length > 0 ? "success" : "danger"}>
-              {
-                this.state.results.length > 0
-                  ? (
-                    <div>
-                      <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
-                      <Row>
-                        <Col>
-                          <b>*Archivo crudo:  {this.state.counts_tipos.AC}</b>
-                        </Col>
-                        <Col>
-                          <b>*Archivo procesado:  {this.state.counts_tipos.AP}</b>
-                        </Col>
-                        <Col>
-                          <b>*Imagen cruda:  {this.state.counts_tipos.IC}</b>
-                        </Col>
-                        <Col>
-                          <b>*Imagen procesada:  {this.state.counts_tipos.IP}</b>
-                        </Col>
-                        <Col>
-                          <b>*Compilación:  {this.state.counts_tipos.C}</b>
-                        </Col>
-                      </Row>
-                    </div>
-                  )
-                  : (
-                    <h5><b>No hay datos relacionados con: "{this.state.word_searched}": </b></h5>
-                  )
-              }
-            </Alert>
-          </div>
           {
             !this.state.loading ? (
               <center>
@@ -146,53 +115,49 @@ class Searching extends React.Component {
               </center>
             ) : (
                 <div>
-                  <Table hover={true}>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Titulo y resumen</th>
-                        <th>Publicador</th>
-                        <th>Tipo</th>
-                        <th>Formato</th>
-                        <th>Tamano</th>
-                        <th>creado</th>
-                        <th>disponibilidad</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                  <div>
+                    <Alert color={this.state.results.length > 0 ? "info" : "danger"}>
                       {
-                        resultsFiltered.map((e, i) => (
-                          <tr key={i}>
-                            <th scope="row">{i + 1}</th>
-                            <td>
-                              <b>{e.titulo}</b> <br />
-                              <i>{e.resumen}</i>
-                            </td>
-                            <td className="centerTd">
-                              {e.publicador} <br />
-                            </td>
-                            <td className="centerTd">
-                              {e.tipo}
-                            </td>
-                            <td className="centerTd">
-                              {e.formato} <br />
-                            </td>
-                            <td className="centerTd">
-                              {e.tamano}
-                            </td>
-                            <td className="centerTd">
-                              {e.creado} <br />
-                            </td>
-                            <td className="centerTd">
-                              {e.disponibilidad}
-                            </td>
-                          </tr>
-                        ))
+                        this.state.results.length > 0
+                          ? (
+                            <div>
+                              <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
+                              <Row className="datsBigger">
+                                <Col>
+                                  *Archivo crudo:  <b>{this.state.counts_tipos.AC}</b>
+                                </Col>
+                                <Col>
+                                  *Archivo procesado:  <b>{this.state.counts_tipos.AP}</b>
+                                </Col>
+                                <Col>
+                                  *Imagen cruda:  <b>{this.state.counts_tipos.IC}</b>
+                                </Col>
+                                <Col>
+                                  *Imagen procesada:  <b>{this.state.counts_tipos.IP}</b>
+                                </Col>
+                                <Col>
+                                  *Compilación:  <b>{this.state.counts_tipos.C}</b>
+                                </Col>
+                              </Row>
+                            </div>
+                          )
+                          : (
+                            <h5><b>No hay datos relacionados con: "{this.state.word_searched}": </b></h5>
+                          )
                       }
-                    </tbody>
-                  </Table>
+                    </Alert>
+                  </div>
+                  {
+                    !this.state.loading_filter ? (
+                      <center>
+                        <ReactLoading type={"bars"} color={"#51BCDA"} />
+                      </center>
+                    )
+                      : (
+                        <ResultsTable word_searched={this.state.words} results={resultsFiltered} counts_tipos={this.state.counts_tipos} />
+                      )
+                  }
                 </div>
-
               )
           }
 
