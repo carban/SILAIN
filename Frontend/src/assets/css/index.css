@@ -72,3 +72,15 @@
 #inputSearcher{
   width: 10%;
 }
+
+thead{
+  text-align: center;
+}
+
+.centerTd{
+  text-align: center;
+}
+
+.icon-click{
+  cursor: pointer;
+}
