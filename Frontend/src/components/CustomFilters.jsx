@@ -16,8 +16,8 @@ class CustomFilters extends React.Component {
             formatos: [],
             current_sub: [],
             selections: {
-                cat: "Select",
-                sub: "Select",
+                categoria: "Select",
+                subcategoria: "Select",
                 municipio: "Select",
                 tipo: "Select",
                 formato: "Select"
@@ -41,12 +41,12 @@ class CustomFilters extends React.Component {
         var c_sub = [];
 
         if (val === "-1") {
-            sele["cat"] = "Select";
+            sele["categoria"] = "Select";
         } else {
-            sele["cat"] = this.state.cats[val];
+            sele["categoria"] = this.state.cats[val];
             c_sub = this.state.subs[val]
         }
-        sele["sub"] = "Select";
+        sele["subcategoria"] = "Select";
         this.props.getFilters(sele);
         this.setState({ selections: sele, current_sub: c_sub });
         
@@ -86,7 +86,7 @@ class CustomFilters extends React.Component {
                     </Col>
                     <Col>
                         <b>Subcategoria</b>
-                        <Input onChange={this.handleSelects} value={this.state.selections.sub} type="select" name="sub" id="exampleSelect">
+                        <Input onChange={this.handleSelects} value={this.state.selections.subcategoria} type="select" name="subcategoria" id="exampleSelect">
                             <option>Select</option>
                             {
                                 this.state.current_sub.map((e, i) => (

@@ -2,12 +2,24 @@ const express = require('express')
 const router = express.Router()
 const pg = require('../db/database.js').getPool();
 
+function getCreado(creado) {
+  var splitted = creado.split(" ");
+  var c = splitted[1] + " " + splitted[2] + " " + splitted[3];
+  return c;
+}
+
+function getDisponible(disponible) {
+  var splitted2 = disponible.split(" ");
+  var d = splitted2[1] + " " + splitted2[2] + " " + splitted2[3];
+  return d;
+}
+
 router.post('/search', async (req, res) => {
 
   const { words } = req.body;
 
   const query = {
-    text: "select titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from metadato where pclave iLIKE $1",
+    text: "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio from finca_muni where pclave iLIKE $1",
     values: [`%${words}%`]
   }
 
@@ -43,15 +55,8 @@ router.post('/search', async (req, res) => {
           break;
       }
 
-      var creado = result.rows[i].creado.toString();
-      var splitted = creado.split(" ");
-      var c = splitted[1] + " " + splitted[2] + " " + splitted[3];
-      result.rows[i].creado = c;
-
-      var disponible = result.rows[i].disponibilidad.toString();
-      var splitted2 = disponible.split(" ");
-      var d = splitted2[1] + " " + splitted2[2] + " " + splitted2[3];
-      result.rows[i].disponibilidad = d;
+      result.rows[i].creado = getCreado(result.rows[i].creado.toString());
+      result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
     }
 
     res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
@@ -60,5 +65,66 @@ router.post('/search', async (req, res) => {
     res.sendStatus(400);
   }
 })
+
+function getTextWithFilters(filters, word) {
+  var s = "";
+  var c = false;
+  j = 1;
+  for (let i in filters) {
+    if (filters[i] !== "Select") {
+      j++;
+      if (c) {
+        s += " and";
+        c = false;
+      }
+      s += " " + i + " = $" + j + "";
+      c = true
+    }
+  }
+  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio from finca_muni where pclave iLIKE $1";
+  if (s !== "") {
+    text = text + " and" + s;
+  }
+  return text;
+}
+
+function getValuesFromFilters(filters, word) {
+  var vals = [`%${word}%`]
+  for (let i in filters) {
+    if (filters[i] !== "Select") {
+      vals.push(filters[i])
+    }
+  }
+  return vals;
+}
+
+router.post('/search_by_filter', async (req, res) => {
+  const { filters, word } = req.body;
+
+  var text = getTextWithFilters(filters, word);
+  var values = getValuesFromFilters(filters, word);
+  // console.log(text, values)
+  var query = {
+    text: text,
+    values: values
+  }
+
+  try {
+    const result = await pg.query(query);
+
+    for (let i = 0; i < result.rows.length; i++) {
+
+      result.rows[i].creado = getCreado(result.rows[i].creado.toString());
+      result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
+      
+    }
+    res.status(200).send({ result: result.rows });
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(400);
+  }
+
+});
+
 
 module.exports = router;

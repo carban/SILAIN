@@ -32,7 +32,9 @@ class Start extends React.Component {
     }
 
     setRedirect = () => {
-        this.setState({ redirect: true });
+        if (this.state.words !== "") {
+            this.setState({ redirect: true });
+        }
     }
 
     renderRedirect = () => {

@@ -26,11 +26,11 @@ class Searching extends React.Component {
       results: [],
       counts_tipos: {},
       filters: {
-        cat: "Select",
-        sub: "Select",
-        municipio: "Select",
-        tipo: "Select",
-        formato: "Select"
+        // cat: "Select",
+        // sub: "Select",
+        // municipio: "Select",
+        // tipo: "Select",
+        // formato: "Select"
       },
       loading: false,
       loading_filter: false
@@ -48,7 +48,14 @@ class Searching extends React.Component {
 
       axios.post(basicURL, { words: this.state.words })
         .then(res => {
-          this.setState({ results: res.data.result, counts_tipos: res.data.counts, word_searched: this.state.words, loading: true, loading_filter: true });
+          // console.log(res.data.result)
+          this.setState({
+            results: res.data.result,
+            counts_tipos: res.data.counts,
+            word_searched: this.state.words,
+            loading: true,
+            loading_filter: true
+          });
         })
         .catch(err => {
           console.log(err);
@@ -63,11 +70,21 @@ class Searching extends React.Component {
   }
 
   getFilters = (obj, load) => {
-    this.setState({ loading_filter: false })
-    setTimeout(() => {
-      this.setState({ filters: obj, loading_filter: true })
-    }, 150)
 
+    this.setState({ loading_filter: false })
+    axios.post("http://localhost:8000/basic/search_by_filter", { filters: obj,  word: this.state.word_searched})
+      .then(res => {
+        this.setState({
+          results: res.data.result,
+          word_searched: this.state.words,
+          loading: true,
+          loading_filter: true,
+          filters: obj
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   componentDidMount() {
@@ -75,15 +92,6 @@ class Searching extends React.Component {
   }
 
   render() {
-
-    // const resultTable = <ResultsTable word_searched={this.state.words} results={this.state.results} counts_tipos={this.state.counts_tipos} />;
-
-    // const resultsFiltered = this.state.results;
-    const resultsFiltered = this.state.results.filter(ele => (
-      this.state.filters.tipo !== "Select" ? ele.tipo === this.state.filters.tipo : true
-    ));
-
-
     return (
       <div>
         <SNavBar />
@@ -94,7 +102,7 @@ class Searching extends React.Component {
                 <Col md="12" lg="12">
                   <form onSubmit={this.handleSubmit}>
                     <InputGroup className="no-border">
-                      <Input onChange={this.handleInput} value={this.state.words !== "error" ? this.state.words : "error"} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
+                      <Input onChange={this.handleInput} value={this.state.words} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
                       <InputGroupAddon addonType="append">
                         <InputGroupText onClick={this.handleSubmit} className="icon-click">
                           <i className="nc-icon nc-zoom-split" />
@@ -154,7 +162,7 @@ class Searching extends React.Component {
                       </center>
                     )
                       : (
-                        <ResultsTable word_searched={this.state.words} results={resultsFiltered} counts_tipos={this.state.counts_tipos} />
+                        <ResultsTable word_searched={this.state.words} results={this.state.results} counts_tipos={this.state.counts_tipos} />
                       )
                   }
                 </div>
