@@ -26,14 +26,13 @@ class Searching extends React.Component {
       results: [],
       counts_tipos: {},
       filters: {
-        // cat: "Select",
-        // sub: "Select",
-        // municipio: "Select",
-        // tipo: "Select",
-        // formato: "Select"
+        categoria: "Select",
+        subcategoria: "Select",
+        municipio: "Select",
+        tipo: "Select",
+        formato: "Select"
       },
       loading: false,
-      loading_filter: false
     }
   }
 
@@ -44,23 +43,22 @@ class Searching extends React.Component {
   newBasicSearch = e => {
 
     if (this.state.words !== "") {
-      const basicURL = "http://localhost:8000/basic/search";
+      const basicURL = "http://localhost:8000/basic/search_by_filter";
 
-      axios.post(basicURL, { words: this.state.words })
+      axios.post(basicURL, { filters: this.state.filters, word: this.state.words })
         .then(res => {
           // console.log(res.data.result)
           this.setState({
             results: res.data.result,
             counts_tipos: res.data.counts,
             word_searched: this.state.words,
-            loading: true,
-            loading_filter: true
+            loading: false,
           });
         })
         .catch(err => {
           console.log(err);
         })
-      this.setState({ loading: false, loading_filter: false });
+      this.setState({ loading: true });
     }
   }
 
@@ -69,16 +67,16 @@ class Searching extends React.Component {
     this.newBasicSearch();
   }
 
-  getFilters = (obj, load) => {
-
-    this.setState({ loading_filter: false })
-    axios.post("http://localhost:8000/basic/search_by_filter", { filters: obj,  word: this.state.word_searched})
+  getFilters = obj => {
+    const basicURL = "http://localhost:8000/basic/search_by_filter";
+    this.setState({ loading: true })
+    axios.post(basicURL, { filters: obj, word: this.state.word_searched })
       .then(res => {
         this.setState({
           results: res.data.result,
+          counts_tipos: res.data.counts,
           word_searched: this.state.words,
-          loading: true,
-          loading_filter: true,
+          loading: false,
           filters: obj
         });
       })
@@ -117,7 +115,7 @@ class Searching extends React.Component {
             <br />
           </div>
           {
-            !this.state.loading ? (
+            this.state.loading ? (
               <center>
                 <ReactLoading type={"bars"} color={"#51BCDA"} />
               </center>
@@ -155,16 +153,7 @@ class Searching extends React.Component {
                       }
                     </Alert>
                   </div>
-                  {
-                    !this.state.loading_filter ? (
-                      <center>
-                        <ReactLoading type={"bars"} color={"#51BCDA"} />
-                      </center>
-                    )
-                      : (
-                        <ResultsTable word_searched={this.state.words} results={this.state.results} counts_tipos={this.state.counts_tipos} />
-                      )
-                  }
+                  <ResultsTable word_searched={this.state.words} results={this.state.results} counts_tipos={this.state.counts_tipos} />
                 </div>
               )
           }
