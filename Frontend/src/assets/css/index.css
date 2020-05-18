@@ -1,5 +1,5 @@
 .contentStart{
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .leaflet-container {
@@ -87,4 +87,25 @@ thead{
 
 .datsBigger{
   font-size: 15px;
+}
+
+.ButtonLikeLink{
+  background-color: white;
+  border: none;
+  color: deepskyblue;
+}
+
+.ButtonLikeLink:hover{
+  text-decoration: underline;
+}
+
+.ButtonLikeLinkSelected{
+  background-color: white;
+  border: none;
+  color: blue;
+  font-weight: bold;
+}
+
+.ButtonLikeLinkSelected:hover{
+  text-decoration: underline;
 }

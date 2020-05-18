@@ -34,7 +34,7 @@ function getTextWithFilters(filters) {
   if (s !== "") {
     text = text + " and" + s;
   }
-  return text;
+  return { text: text, counter: j };
 }
 
 function getValuesFromFilters(filters, word) {
@@ -103,56 +103,62 @@ router.post('/search', async (req, res) => {
 
 router.post('/search_by_filter', async (req, res) => {
   const { filters, word } = req.body;
-  
-  var text = getTextWithFilters(filters, word);
+
+  var { text, counter } = getTextWithFilters(filters, word);
   var values = getValuesFromFilters(filters, word);
   // console.log(text, values)
-  var query = {
-    text: text,
-    values: values
-  }
 
-  try {
-    const result = await pg.query(query);
 
-    var AC = 0;
-    var AP = 0;
-    var IC = 0;
-    var IP = 0;
-    var C = 0;
-
-    for (let i = 0; i < result.rows.length; i++) {
-      const tipo = result.rows[i].tipo;
-      switch (tipo) {
-        case "Archivo crudo":
-          AC++;
-          break;
-        case "Archivo procesado":
-          AP++;
-          break;
-        case "Imagen cruda":
-          IC++;
-          break;
-        case "Imagen procesada":
-          IP++;
-          break;
-        case "Compilación":
-          C++;
-          break;
-        default:
-          break;
-      }
-
-      result.rows[i].creado = getCreado(result.rows[i].creado.toString());
-      result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
-
+  if (counter == 1 && values[0] == "%%") {
+    res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
+  } else {
+    var query = {
+      text: text,
+      values: values
     }
-    res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(400);
-  }
 
+    try {
+      const result = await pg.query(query);
+
+      var AC = 0;
+      var AP = 0;
+      var IC = 0;
+      var IP = 0;
+      var C = 0;
+
+      for (let i = 0; i < result.rows.length; i++) {
+        const tipo = result.rows[i].tipo;
+        switch (tipo) {
+          case "Archivo crudo":
+            AC++;
+            break;
+          case "Archivo procesado":
+            AP++;
+            break;
+          case "Imagen cruda":
+            IC++;
+            break;
+          case "Imagen procesada":
+            IP++;
+            break;
+          case "Compilación":
+            C++;
+            break;
+          default:
+            break;
+        }
+
+        result.rows[i].creado = getCreado(result.rows[i].creado.toString());
+        result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
+
+      }
+      res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
+
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(400);
+    }
+  }
 });
 
 
