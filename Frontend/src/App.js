@@ -6,7 +6,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Start from "views/Start.jsx";
 import Searching from "views/Searching.jsx";
 import Acerca from "views/Acerca.jsx";
-import Search from "views/Search.jsx";
+import Search from "layouts/Search.jsx";
 
 // import Login from "components/login/Login.jsx";
 // import GetBill from "components/GetBill.jsx";

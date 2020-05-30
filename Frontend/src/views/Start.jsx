@@ -1,6 +1,6 @@
 import React from "react";
 // import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
-import Footer from "components/Footer/Footer.jsx";
+import Footer from "components/Footer.jsx";
 
 import { Redirect } from "react-router-dom";
 

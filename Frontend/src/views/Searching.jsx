@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 
 // import { Link } from "react-router-dom";
-import Footer from "components/Footer/Footer.jsx";
+import Footer from "components/Footer.jsx";
 
 import SNavBar from "components/SNavBar.jsx";
 import CustomFilters from "components/CustomFilters.jsx";

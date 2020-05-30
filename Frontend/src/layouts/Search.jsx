@@ -7,40 +7,18 @@ import {
 } from 'reactstrap';
 
 import { Router, Route, Switch, NavLink } from "react-router-dom";
-import Footer from "components/Footer/Footer.jsx";
+import Footer from "components/Footer.jsx";
 
 import SNavBar from "components/SNavBar.jsx";
 
-import Clave from "./Clave.jsx";
-import Propiedad from "./Propiedad.jsx";
+import Clave from "views/Clave.jsx";
+import Propiedad from "views/Propiedad.jsx";
 
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
-  }
-
-  // HANDELRS SOBRE LOS DIFERENTES TIPOS DE BUSQUEDA
-
-  showTypeSearch = type => {
-    // this.setState({ reloadFilters: true }, () => {
-    this.setState({ changedLink: false })
-    var types = { ...this.state.search_types };
-    for (let i in types) {
-      types[i] = false;
-    }
-    types[type] = true;
-    this.setState({
-      search_types: types,
-      words: "",
-    })
-    // console.log(this.state.results);
-    // })
-  }
-
-  componentDidMount() {
-    // this.newBasicSearch();
   }
 
   render() {
@@ -101,8 +79,8 @@ class Search extends React.Component {
             <Switch>
               <Route path="/search/clave" component={Clave} />
               <Route path="/search/propiedad" component={Propiedad} />
-              <Route path="/search/mapa" component={() => (<h1>C3</h1>)} />
-              <Route path="/search/diagrama" component={() => (<h1>C4</h1>)} />
+              <Route path="/search/mapa" component={() => (<h1>Mapa</h1>)} />
+              <Route path="/search/diagrama" component={() => (<h1>Diagrama</h1>)} />
             </Switch>
           </Router>
         </Container>
