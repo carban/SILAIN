@@ -23,12 +23,7 @@ class Start extends React.Component {
             redirect: false,
             redirect_by_searchType: false,
             words: "",
-            search_types: {
-                clave: true,
-                propiedad: false,
-                mapa: false,
-                diagrama: false
-            },
+            search_type: "/search/clave",
         }
     }
 
@@ -48,20 +43,15 @@ class Start extends React.Component {
         if (this.state.redirect) {
             const w = this.state.words;
             return <Redirect to={{
-                pathname: '/searching',
+                pathname: this.state.search_type,
                 words: w,
-                search_types: this.state.search_types
             }} />;
         }
     }
 
     setRedirect_searchType = type => {
-        var types = { ...this.state.search_types };
-        for(let i in types){
-            types[i] = false;
-        }
-        types[type] = true;
-        this.setState({ redirect: true, search_types: types })
+
+        this.setState({ redirect: true, search_type: "/search/" + type })
     }
 
     render() {

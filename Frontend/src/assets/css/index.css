@@ -92,17 +92,19 @@ thead{
 .ButtonLikeLink{
   background-color: white;
   border: none;
-  color: deepskyblue;
+  color: skyblue
 }
 
 .ButtonLikeLink:hover{
   text-decoration: underline;
+  color: blue;
 }
 
 .ButtonLikeLinkSelected{
   background-color: white;
   border: none;
   color: blue;
+  font-size: 15px;
   font-weight: bold;
 }
 
