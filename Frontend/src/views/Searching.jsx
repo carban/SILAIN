@@ -36,7 +36,8 @@ class Searching extends React.Component {
         subcategoria: "Select",
         municipio: "Select",
         tipo: "Select",
-        formato: "Select"
+        formato: "Select",
+        finca: "Select",
       },
       roladFilters: false,
       loading: false,

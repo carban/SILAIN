@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const pg = require('../db/database.js').getPool();
 
-function processCats(catsubs){
-  
+function processCats(catsubs) {
+
   var current = catsubs[0].idcategoria;
   var cats = [catsubs[0].categoria];
 
@@ -16,7 +16,7 @@ function processCats(catsubs){
   return cats;
 }
 
-function processSubs(catsubs){
+function processSubs(catsubs) {
 
   var current = catsubs[0].idcategoria;
   var subs = [];
@@ -28,7 +28,7 @@ function processSubs(catsubs){
       subs.push(aux);
       aux = [];
       aux.push(catsubs[i].subcategoria);
-    }else{
+    } else {
       aux.push(catsubs[i].subcategoria);
     }
   }
@@ -36,15 +36,43 @@ function processSubs(catsubs){
   return subs;
 }
 
+function processMunicipios(municipios) {
+
+  var muns = [];
+  for (let i in municipios) {
+    muns.push(municipios[i].municipio);
+  }
+  return muns;
+}
+
+function processFincas(fincas) {
+  var current = fincas[0].municipio_idmunicipio;
+  var fins = [];
+  var aux = [];
+
+  for (let i = 0; i < fincas.length; i++) {
+    if (fincas[i].municipio_idmunicipio != current) {
+      current = fincas[i].municipio_idmunicipio;
+      fins.push(aux);
+      aux = [];
+      aux.push(fincas[i].finca);
+    } else {
+      aux.push(fincas[i].finca);
+    }
+  }
+  fins.push(aux);
+  return fins;
+}
+
 
 router.get('/', async (req, res) => {
 
-  const catsubs  = {
+  const catsubs = {
     text: "select * from categoria inner join subcategoria on categoria_idcategoria = idcategoria order by idcategoria;",
   }
 
   const municipios = {
-    text: "select * from municipio;"
+    text: "select idmunicipio, municipio from municipio;"
   }
 
   const tipos = {
@@ -55,16 +83,25 @@ router.get('/', async (req, res) => {
     text: "select DISTINCT ON(formato) formato from metadato;"
   }
 
+  const fincas = {
+    text: "select municipio_idmunicipio, finca from finca;"
+  }
+
   try {
     const result_catsubs = await pg.query(catsubs);
-    const result_municipios =  await pg.query(municipios);
-    const result_tipos =  await pg.query(tipos);
-    const result_formatos =  await pg.query(formatos);
+    const result_municipios = await pg.query(municipios);
+    const result_tipos = await pg.query(tipos);
+    const result_formatos = await pg.query(formatos);
+    const result_fincas = await pg.query(fincas);
 
     var cats = processCats(result_catsubs.rows);
     var subs = processSubs(result_catsubs.rows);
 
-    res.status(200).send({ cats: cats, subs: subs, municipios: result_municipios.rows, tipos: result_tipos.rows, formatos: result_formatos.rows });
+    var munis = processMunicipios(result_municipios.rows);
+    var fins = processFincas(result_fincas.rows);
+    // console.log(munis, fins);
+
+    res.status(200).send({ cats: cats, subs: subs, municipios: munis, tipos: result_tipos.rows, formatos: result_formatos.rows, fincas: fins });
   } catch (e) {
     console.log(e);
     res.sendStatus(400);

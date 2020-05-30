@@ -14,13 +14,16 @@ class CustomFilters extends React.Component {
             municipios: [],
             tipos: [],
             formatos: [],
+            fincas: [],
             current_sub: [],
+            current_fin: [],
             selections: {
                 categoria: "Select",
                 subcategoria: "Select",
                 municipio: "Select",
                 tipo: "Select",
-                formato: "Select"
+                formato: "Select",
+                finca: "Select"
             }
         }
     }
@@ -30,7 +33,7 @@ class CustomFilters extends React.Component {
         sele[e.target.name] = e.target.value;
         this.props.getFilters(sele);
         this.setState({ selections: sele })
-        
+
     }
 
     handleSelectCAT = e => {
@@ -49,7 +52,25 @@ class CustomFilters extends React.Component {
         sele["subcategoria"] = "Select";
         this.props.getFilters(sele);
         this.setState({ selections: sele, current_sub: c_sub });
+
+    }
+
+    handleSelectMUNICIPIO = e => {
+        // Hago esto para guardar el municipio seleccionado y adicional cambiar current_fin
+        // con las fincas correspondientes al municipio seleccionado
+        var sele = { ...this.state.selections };
+        var val = e.target.value;
+        var c_fin = [];
         
+        if (val === "-1") {
+            sele["municipio"] = "Select";
+        } else {
+            sele["municipio"] = this.state.municipios[val];
+            c_fin = this.state.fincas[val]
+        }
+        sele["finca"] = "Select";
+        this.props.getFilters(sele);
+        this.setState({ selections: sele, current_fin: c_fin });
     }
 
     componentDidMount() {
@@ -58,9 +79,9 @@ class CustomFilters extends React.Component {
 
         axios.get(url)
             .then(res => {
-                var { cats, subs, municipios, tipos, formatos } = res.data;
+                var { cats, subs, municipios, tipos, formatos, fincas } = res.data;
                 // console.log(res.data)
-                this.setState({ cats: cats, subs: subs, municipios: municipios, tipos: tipos, formatos: formatos });
+                this.setState({ cats: cats, subs: subs, municipios: municipios, tipos: tipos, formatos: formatos, fincas: fincas });
             })
             .catch(err => {
                 console.log(err);
@@ -97,11 +118,22 @@ class CustomFilters extends React.Component {
                     </Col>
                     <Col>
                         <b>Municipios</b>
-                        <Input onChange={this.handleSelects} type="select" name="municipio" id="exampleSelect">
-                            <option>Select</option>
+                        <Input onChange={this.handleSelectMUNICIPIO} type="select" name="municipio" id="exampleSelect">
+                            <option value={-1}>Select</option>
                             {
                                 this.state.municipios.map((e, i) => (
-                                    <option key={i}>{e.municipio}</option>
+                                    <option value={i} key={i}>{e}</option>
+                                ))
+                            }
+                        </Input>
+                    </Col>
+                    <Col>
+                        <b>Finca</b>
+                        <Input onChange={this.handleSelects} value={this.state.selections.finca} type="select" name="finca" id="exampleSelect">
+                            <option>Select</option>
+                            {
+                                this.state.current_fin.map((e, i) => (
+                                    <option key={i}>{e}</option>
                                 ))
                             }
                         </Input>
