@@ -97,6 +97,9 @@ router.get('/', async (req, res) => {
     var cats = processCats(result_catsubs.rows);
     var subs = processSubs(result_catsubs.rows);
 
+    // console.log(result_municipios.rows);
+    // console.log(result_fincas.rows);
+
     var munis = processMunicipios(result_municipios.rows);
     var fins = processFincas(result_fincas.rows);
     // console.log(munis, fins);
