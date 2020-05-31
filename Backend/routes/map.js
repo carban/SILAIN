@@ -121,7 +121,7 @@ function getTextWithFilters(filters) {
         c = true
       }
     }
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria, municipio, finca from finca_muni where finca = $1";
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from finca_muni where finca = $1";
     if (s !== "") {
       text = text + " and" + s;
     }

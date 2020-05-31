@@ -85,7 +85,7 @@ class TheMap extends React.Component {
                         {
                             this.state.fincas.map((e, i) => (
                                 <LayersControl.Overlay name={e.finca} checked="true" key={i}>
-                                    <FeatureGroup color="lime">
+                                    <FeatureGroup color="red">
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
