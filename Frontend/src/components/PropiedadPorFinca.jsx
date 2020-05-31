@@ -7,24 +7,23 @@ import {
 
 import axios from "axios";
 
-import CustomFilters from "components/CustomFilters.jsx";
+import CustomFiltersPorFinca from "components/CustomFiltersPorFinca.jsx";
 
 import ReactLoading from "react-loading";
-import ResultsTable from "components/ResultsTable";
+import ResultsTablePorFinca from "components/ResultsTablePorFinca";
 
-class Propiedad extends React.Component {
+class PropiedadPorFinca extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             results: [],
             counts_tipos: {},
+            finca: "",
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
-                municipio: "Select",
                 tipo: "Select",
                 formato: "Select",
-                finca: "Select",
             },
             loading: false,
         }
@@ -50,9 +49,9 @@ class Propiedad extends React.Component {
     }
 
     getFilters = obj => {
-        const basicURL = "http://localhost:8000/basic/search_by_filter";
+        const basicURL = "http://localhost:8000/map/finca_by_filter";
         this.setState({ loading: true })
-        axios.post(basicURL, { filters: obj, word: "" })
+        axios.post(basicURL, { filters: obj, finca: this.state.finca })
             .then(res => {
 
                 this.setState({
@@ -69,12 +68,18 @@ class Propiedad extends React.Component {
 
     componentDidMount() {
         // this.newBasicSearch();
+        this.setState(
+            {
+                counts_tipos: this.props.counts_tipos,
+                results: this.props.results,
+                finca: this.props.finca,
+            })
     }
 
     render() {
         return (
             <div>
-                <CustomFilters getFilters={this.getFilters} />
+                <CustomFiltersPorFinca getFilters={this.getFilters} />
                 {
                     this.state.loading ? (
                         <center>
@@ -89,7 +94,7 @@ class Propiedad extends React.Component {
                                         this.state.results.length > 0
                                             ? (
                                                 <div>
-                                                    <h5><b>Resultados segun los filtros: </b>{this.state.results.length}</h5>
+                                                    <h5><b>Resultados: </b>{this.state.results.length}</h5>
                                                     <Row className="datsBigger">
                                                         <Col>
                                                             *Archivo crudo:  <b>{this.state.counts_tipos.AC}</b>
@@ -97,6 +102,10 @@ class Propiedad extends React.Component {
                                                         <Col>
                                                             *Archivo procesado:  <b>{this.state.counts_tipos.AP}</b>
                                                         </Col>
+                                                        <Col>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row className="datsBigger">
                                                         <Col>
                                                             *Imagen cruda:  <b>{this.state.counts_tipos.IC}</b>
                                                         </Col>
@@ -121,7 +130,7 @@ class Propiedad extends React.Component {
                             {
                                 this.state.results.length > 0 ?
                                     (
-                                        <ResultsTable results={this.state.results} />
+                                        <ResultsTablePorFinca results={this.state.results} />
                                     ) : true
                             }
                         </div>
@@ -132,4 +141,4 @@ class Propiedad extends React.Component {
     }
 };
 
-export default Propiedad;
+export default PropiedadPorFinca;

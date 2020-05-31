@@ -7,7 +7,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 
-class ResultsTable extends React.Component {
+class ResultsTablePorFinca extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +16,6 @@ class ResultsTable extends React.Component {
     }
 
     render() {
-
-        // console.log(this.state.results);
-
         return (
             <div>
                 <Table hover={true}>
@@ -30,8 +27,6 @@ class ResultsTable extends React.Component {
                             <th>Tipo</th>
                             <th>Formato</th>
                             <th>Tamano</th>
-                            <th>creado</th>
-                            <th>disponibilidad</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,12 +55,6 @@ class ResultsTable extends React.Component {
                                     <td className="centerTd">
                                         {e.tamano}
                                     </td>
-                                    <td className="centerTd">
-                                        {e.creado} <br />
-                                    </td>
-                                    <td className="centerTd">
-                                        {e.disponibilidad}
-                                    </td>
                                 </tr>
                             ))
                         }
@@ -76,4 +65,4 @@ class ResultsTable extends React.Component {
     }
 }
 
-export default ResultsTable;
+export default ResultsTablePorFinca;

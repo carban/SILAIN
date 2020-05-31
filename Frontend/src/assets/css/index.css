@@ -89,11 +89,6 @@ thead{
   font-size: 15px;
 }
 
-/* Pointer on results table */
-.trClick{
-  cursor: pointer;
-}
-
 .ButtonLikeLink{
   background-color: white;
   border: none;
@@ -115,4 +110,22 @@ thead{
 
 .ButtonLikeLinkSelected:hover{
   text-decoration: underline;
+}
+
+@media screen and (min-width: 2050px) {
+
+  .modal-dialog {
+    width: 2050px; /* New width for default modal */
+  }
+
+  .modal-sm {
+    width: 2050px; /* New width for small modal */
+  }
+}
+
+@media screen and (min-width: 2050px) {
+  .modal-lg {
+    width: 2050px; /* New width for large modal */
+  }
+
 }

@@ -111,4 +111,35 @@ router.get('/', async (req, res) => {
   }
 })
 
+
+router.get('/finca', async (req, res) => {
+
+  const catsubs = {
+    text: "select * from categoria inner join subcategoria on categoria_idcategoria = idcategoria order by idcategoria;",
+  }
+
+  const tipos = {
+    text: "select DISTINCT ON(tipo) tipo from metadato;"
+  }
+
+  const formatos = {
+    text: "select DISTINCT ON(formato) formato from metadato;"
+  }
+
+
+  try {
+    const result_catsubs = await pg.query(catsubs);
+    const result_tipos = await pg.query(tipos);
+    const result_formatos = await pg.query(formatos);
+
+    var cats = processCats(result_catsubs.rows);
+    var subs = processSubs(result_catsubs.rows);
+
+    res.status(200).send({ cats: cats, subs: subs, tipos: result_tipos.rows, formatos: result_formatos.rows});
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(400);
+  }
+})
+
 module.exports = router;

@@ -20,6 +20,7 @@ class Clave extends React.Component {
             words: this.props.location.words || "",
             word_searched: "",
             results: [],
+            counts_tipos: {},
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -165,7 +166,7 @@ class Clave extends React.Component {
                             {
                                 this.state.results.length > 0 ?
                                     (
-                                        <ResultsTable word_searched={this.state.words} results={this.state.results} counts_tipos={this.state.counts_tipos} />
+                                        <ResultsTable results={this.state.results} />
                                     ) : true
                             }
                         </div>
