@@ -14,7 +14,6 @@ function getDisponible(disponible) {
   return d;
 }
 
-
 function getTextWithFilters(filters) {
   var s = "";
   var c = false;
@@ -46,60 +45,6 @@ function getValuesFromFilters(filters, word) {
   }
   return vals;
 }
-
-router.post('/search', async (req, res) => {
-
-  const { words } = req.body;
-
-  const query = {
-    text: "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio from finca_muni where pclave iLIKE $1",
-    values: [`%${words}%`]
-  }
-
-  try {
-    const result = await pg.query(query);
-
-    var AC = 0;
-    var AP = 0;
-    var IC = 0;
-    var IP = 0;
-    var C = 0;
-
-    for (let i = 0; i < result.rows.length; i++) {
-      const tipo = result.rows[i].tipo;
-
-      switch (tipo) {
-        case "Archivo crudo":
-          AC++;
-          break;
-        case "Archivo procesado":
-          AP++;
-          break;
-        case "Imagen cruda":
-          IC++;
-          break;
-        case "Imagen procesada":
-          IP++;
-          break;
-        case "Compilación":
-          C++;
-          break;
-        default:
-          break;
-      }
-
-      result.rows[i].creado = getCreado(result.rows[i].creado.toString());
-      result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
-    }
-
-    res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(400);
-  }
-})
-
-
 
 router.post('/search_by_filter', async (req, res) => {
   const { filters, word } = req.body;
