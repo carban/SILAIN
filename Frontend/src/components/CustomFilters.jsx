@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+// import { connect } from "react-redux";
 import {
     Row, Col, Input
 } from "reactstrap";
@@ -61,7 +61,7 @@ class CustomFilters extends React.Component {
         var sele = { ...this.state.selections };
         var val = e.target.value;
         var c_fin = [];
-        
+
         if (val === "-1") {
             sele["municipio"] = "Select";
         } else {
@@ -166,6 +166,14 @@ class CustomFilters extends React.Component {
     }
 }
 
+// const mapStateToProps = state => {
+//     console.log(state)
+//     return { theFilters: state };
+//     // return {}
+// }
+
+// const mapDispatchToPros = state => ({});
+
+// export default connect(mapStateToProps, mapDispatchToPros)(CustomFilters);
+
 export default CustomFilters;
-
-

@@ -89,6 +89,11 @@ thead{
   font-size: 15px;
 }
 
+/* Pointer on results table */
+.trClick{
+  cursor: pointer;
+}
+
 .ButtonLikeLink{
   background-color: white;
   border: none;

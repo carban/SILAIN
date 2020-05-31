@@ -4,6 +4,9 @@ import {
     Table
 } from "reactstrap";
 
+import { NavLink } from "react-router-dom";
+
+
 class ResultsTable extends React.Component {
     constructor(props) {
         super(props);
@@ -36,10 +39,15 @@ class ResultsTable extends React.Component {
                     <tbody>
                         {
                             this.state.results.map((e, i) => (
-                                <tr key={i}>
+                                <tr key={i} className="trClick">
                                     <th scope="row">{i + 1}</th>
                                     <td>
-                                        <b>{e.titulo}</b> <br />
+                                        <b>
+                                        <NavLink to={"/article/"+e.idmetadato}>
+                                            {e.titulo}
+                                        </NavLink>
+                                        </b>
+                                        <br />
                                         <i>{e.resumen}</i>
                                     </td>
                                     <td className="centerTd">

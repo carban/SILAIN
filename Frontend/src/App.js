@@ -7,6 +7,7 @@ import Start from "views/Start.jsx";
 import Searching from "views/Searching.jsx";
 import Acerca from "views/Acerca.jsx";
 import Search from "layouts/Search.jsx";
+import Article from "views/Article.jsx";
 
 // import Login from "components/login/Login.jsx";
 // import GetBill from "components/GetBill.jsx";
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path="/" component={Start} />
                 <Route exact path="/searching" component={Searching} />
                 <Route exact path="/acerca" component={Acerca} />
+                <Route exact path="/article/:id" component={Article} />
                 <Route path="/search" render={props => <Search {...props} />} history={hist} />
                 {/* <Route exact path="/login" component={Login} /> */}
                 {/* <Route exact path="/getBill" component={GetBill} /> */}
