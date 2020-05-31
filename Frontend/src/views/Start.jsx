@@ -14,7 +14,9 @@ import {
     Col, Row
 } from "reactstrap";
 
-import logo from "logo.png";
+import logo from "back.png";
+import logoLetter from "lett.png";
+
 
 class Start extends React.Component {
     constructor(props) {
@@ -59,7 +61,8 @@ class Start extends React.Component {
             <div>
                 <div className="contentStart">
                     <center>
-                        <img src={logo} width="280px" height="280px" alt="description"></img>
+                        <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img>
+                        <img src={logoLetter} width="280px" height="280px" alt="description"></img>
                         <br></br>
                         <br></br>
                         <b id="logoMeans">Sistema de información del laboratorio de agricultura inteligente</b>
