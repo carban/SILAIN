@@ -2,18 +2,24 @@ const express = require('express')
 const router = express.Router()
 const pg = require('../db/database.js').getPool();
 
+// ||||||||||||||||||||||| AUXILIARES ||||||||||||||||||||||| 
+// ------------------------------------------------------------------------------------
+
+// Funcion Auxiliar que formatea la fecha de creacion
 function getCreado(creado) {
   var splitted = creado.split(" ");
   var c = splitted[1] + " " + splitted[2] + " " + splitted[3];
   return c;
 }
 
+// Funcion Auxiliar que formatea la fecha de disponibilidad
 function getDisponible(disponible) {
   var splitted2 = disponible.split(" ");
   var d = splitted2[1] + " " + splitted2[2] + " " + splitted2[3];
   return d;
 }
 
+// Funcion Auxiliar que formatea el query dependiendo de los filtros que lleguen
 function getTextWithFilters(filters) {
   var s = "";
   var c = false;
@@ -36,6 +42,7 @@ function getTextWithFilters(filters) {
   return { text: text, counter: j };
 }
 
+// Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
 function getValuesFromFilters(filters, word) {
   var vals = [`%${word}%`]
   for (let i in filters) {
@@ -45,7 +52,12 @@ function getValuesFromFilters(filters, word) {
   }
   return vals;
 }
+// ------------------------------------------------------------------------------------
 
+
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna los resutlados correspondientes a una busqueda en particular
+// Teniendo Filtros o no
 router.post('/search_by_filter', async (req, res) => {
   const { filters, word } = req.body;
 

@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const pg = require('../db/database.js').getPool();
 
+// ||||||||||||||||||||||| AUXILIARES ||||||||||||||||||||||| 
+// ------------------------------------------------------------------------------------
+
+// Funcion que formatea las categorias correspondientes separandolas en un array
 function processCats(catsubs) {
 
   var current = catsubs[0].idcategoria;
@@ -16,6 +20,8 @@ function processCats(catsubs) {
   return cats;
 }
 
+// Funcion que formatea las subcategorias correspondientes separandolas en un array
+// para que corresponda en el indice, con su categoria
 function processSubs(catsubs) {
 
   var current = catsubs[0].idcategoria;
@@ -36,6 +42,7 @@ function processSubs(catsubs) {
   return subs;
 }
 
+// Funcion que formatea los municipios correspondientes separandolas en un array
 function processMunicipios(municipios) {
 
   var muns = [];
@@ -45,6 +52,8 @@ function processMunicipios(municipios) {
   return muns;
 }
 
+// Funcion que formatea las fincas correspondientes separandolas en un array
+// para que corresponda en el indice, con su municipio
 function processFincas(fincas) {
   var current = fincas[0].municipio_idmunicipio;
   var fins = [];
@@ -63,8 +72,10 @@ function processFincas(fincas) {
   fins.push(aux);
   return fins;
 }
+// ------------------------------------------------------------------------------------
 
-
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna toda la informacion de los filtros que esten almacenados en la BD
 router.get('/', async (req, res) => {
 
   const catsubs = {
@@ -111,7 +122,10 @@ router.get('/', async (req, res) => {
   }
 })
 
-
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna toda la informacion de los filtros que esten almacenados en la BD
+// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca
+// Se omite la consulta de finca y municipio
 router.get('/finca', async (req, res) => {
 
   const catsubs = {
@@ -135,7 +149,7 @@ router.get('/finca', async (req, res) => {
     var cats = processCats(result_catsubs.rows);
     var subs = processSubs(result_catsubs.rows);
 
-    res.status(200).send({ cats: cats, subs: subs, tipos: result_tipos.rows, formatos: result_formatos.rows});
+    res.status(200).send({ cats: cats, subs: subs, tipos: result_tipos.rows, formatos: result_formatos.rows });
   } catch (e) {
     console.log(e);
     res.sendStatus(400);

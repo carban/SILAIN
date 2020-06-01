@@ -20,7 +20,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "assets/scss/paper-dashboard.scss?v=1.1.0";
+// import "assets/scss/paper-dashboard.scss?v=1.1.0";
+import "assets/css/paper-dashboard.css";
+import "assets/css/paper-dashboard.css.map";
+import "assets/css/paper-dashboard.min.css";
+
 import "assets/css/index.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import "assets/css/animate.css";

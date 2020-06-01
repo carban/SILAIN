@@ -1,94 +1,11 @@
+
+/* |||||||||||||||   COMPONENTE START   ||||||||||||||| */
 .contentStart{
     margin-top: 80px;
 }
-
-.leaflet-container {
-    height: 600px;
-    width: 100%;
-  }
-  
-.amapa{
-    /* margin-top: 85px; */
-    margin-bottom: 50px;
-    background-color: white;
-  }
-
-.creatorsMap{
-  position: fixed;
-}
-
-.removeBtn{
-  background-color: white;
-  border-style: none;
-  border-radius: 20px;
-  color: red;
-}
-
-.removeBtn:hover{
-  background-color: red;
-  color: white;
-}
-
-.inactiveBtn{
-  background-color: white;
-  border-style: none;
-  border-radius: 20px;
-  color: blueviolet;
-}
-
-.inactiveBtn:hover{
-  background-color: blueviolet;
-  color: white;
-}
-
-.newTrans{
-  background-color: blue;
-  border-style: none;
-  border-radius: 30px;
-  font-size: 20px;
-  color: white;
-}
-
-.newTrans:hover{
-  background-color: darkturquoise;
-}
-
-.newSubs{
-  background-color: firebrick;
-  border-style: none;
-  border-radius: 30px;
-  font-size: 20px;
-  color: white;
-}
-
-.newSubs:hover{
-  background-color: coral;
-}
-
 #logoMeans{
   color: gray;
 }
-
-#inputSearcher{
-  width: 10%;
-}
-
-thead{
-  text-align: center;
-}
-
-.centerTd{
-  text-align: center;
-}
-
-.icon-click{
-  cursor: pointer;
-}
-
-.datsBigger{
-  font-size: 15px;
-}
-
 .ButtonLikeLink{
   background-color: white;
   border: none;
@@ -111,8 +28,53 @@ thead{
 .ButtonLikeLinkSelected:hover{
   text-decoration: underline;
 }
+/* |||||||||||||||   COMPONENTE THEMAP   ||||||||||||||| */
+.leaflet-container {
+    height: 600px;
+    width: 100%;
+  }
+  
+.amapa{
+    margin-bottom: 50px;
+    background-color: white;
+  }
 
-/* ROTATING LOGO */
+.btn_search_map{
+  background-color: skyblue;
+  border-style: none;
+  border-radius: 30px;
+  font-size: 20px;
+  color: white;
+}
+
+.btn_search_map:hover{
+  background-color: blue;
+}
+/* |||||||||||||||   COMPONENTE RESULTS TABLE   ||||||||||||||| */
+
+thead{
+  text-align: center;
+}
+
+.centerTd{
+  text-align: center;
+}
+
+/* |||||||||||||||   VISTA CLAVE Y PROPIEDAD  ||||||||||||||| */
+
+.icon-click{
+  cursor: pointer;
+}
+
+.datsBigger{
+  font-size: 15px;
+}
+/* 
+#inputSearcher{
+  width: 10%;
+} */
+
+/* |||||||||||||||   LOGO ANIMATION  ||||||||||||||| */
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
   from {

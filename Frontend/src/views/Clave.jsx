@@ -102,7 +102,7 @@ class Clave extends React.Component {
                     <Col md="12" lg="12">
                         <form onSubmit={this.handleSubmit}>
                             <InputGroup className="no-border">
-                                <Input onChange={this.handleInput} value={this.state.words} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
+                                <Input onChange={this.handleInput} value={this.state.words} name="words" placeholder="Palabras Clave..." />
                                 <InputGroupAddon addonType="append">
                                     <InputGroupText onClick={this.handleSubmit} className="icon-click">
                                         <i className="nc-icon nc-zoom-split" />

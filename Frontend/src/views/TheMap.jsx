@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-    Button,
     Modal, ModalHeader, ModalBody
 } from "reactstrap";
 
@@ -85,13 +84,13 @@ class TheMap extends React.Component {
                         {
                             this.state.fincas.map((e, i) => (
                                 <LayersControl.Overlay name={e.finca} checked="true" key={i}>
-                                    <FeatureGroup color="red">
+                                    <FeatureGroup color="blue">
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
-                                                <Button onClick={() => this.buscarFinca(e.finca)} color="success" block>
+                                                <button onClick={() => this.buscarFinca(e.finca)} className="btn_search_map" block>
                                                     Buscar
-                                                </Button>
+                                                </button>
                                             </center>
                                         </Popup>
                                         <Polygon positions={e.st_asgeojson} />

@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const pg = require('../db/database.js').getPool();
 
+// ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
+// Retorna la informacion correspondiente a un articulo deacuerdo a su ID 
 router.get('/:id', async (req, res) => {
 
     var id = req.params.id;
