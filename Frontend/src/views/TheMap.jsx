@@ -9,6 +9,8 @@ import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'rea
 import PropiedadPorFinca from "components/PropiedadPorFinca";
 
 import axios from "axios";
+import ReactLoading from "react-loading";
+
 
 class TheMap extends React.Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class TheMap extends React.Component {
             departamentos: [],
             municipios: [],
             modal: false,
+            loading: false,
             ubication: "",
             results: [],
             counts_tipos: {}
@@ -44,11 +47,15 @@ class TheMap extends React.Component {
     }
 
     buscarUbication = ubication => {
+        this.setState({ loading: true, ubication: ubication });
+        this.openToggle();
         axios.post("http://localhost:8000/map/ubication_by_filter", { filters: {}, ubication: ubication })
             .then(res => {
-                // console.log({ ubication: ubication, results: res.data.result, counts_tipos: res.data.counts })
-                this.setState({ ubication: ubication, results: res.data.result, counts_tipos: res.data.counts });
-                this.openToggle();
+                this.setState({
+                    results: res.data.result,
+                    counts_tipos: res.data.counts,
+                    loading: false
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -58,16 +65,25 @@ class TheMap extends React.Component {
     render() {
 
         const modal = <div>
-            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modal} toggle={this.closeToggle} >
+            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modal} toggle={this.closeToggle}
+                fade={false}>
                 <ModalHeader toggle={this.closeToggle}>
                     {this.state.ubication}
                 </ModalHeader>
                 <ModalBody>
-                    {this.state.results.length > 0 ?
-                        <PropiedadPorFinca ubication={this.state.ubication}
-                            results={this.state.results}
-                            counts_tipos={this.state.counts_tipos} />
-                        : true
+                    {
+                        this.state.loading ? (
+                            <center>
+                                <ReactLoading type={"bars"} color={"#51BCDA"} />
+                            </center>
+                        ) : (
+                                this.state.results.length > 0 ?
+                                    <PropiedadPorFinca ubication={this.state.ubication}
+                                        results={this.state.results}
+                                        counts_tipos={this.state.counts_tipos} />
+                                    : true
+
+                            )
                     }
                 </ModalBody>
             </Modal>
@@ -76,7 +92,7 @@ class TheMap extends React.Component {
         return (
             <div>
                 {modal}
-                <Map className="amapa" center={this.state.position} zoom={15}>
+                <Map className="amapa" center={this.state.position} zoom={9} >
                     <LayersControl position="topright">
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
