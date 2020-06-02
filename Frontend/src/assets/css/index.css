@@ -40,7 +40,7 @@
   }
 
 .btn_search_map{
-  background-color: skyblue;
+  background-color: tomato;
   border-style: none;
   border-radius: 30px;
   font-size: 20px;
@@ -48,6 +48,30 @@
 }
 
 .btn_search_map:hover{
+  background-color: red;
+}
+
+.btn_search_map2{
+  background-color: rgb(175, 161, 37);
+  border-style: none;
+  border-radius: 30px;
+  font-size: 20px;
+  color: white;
+}
+
+.btn_search_map2:hover{
+  background-color: rgb(231, 210, 17);
+}
+
+.btn_search_map3{
+  background-color: skyblue;
+  border-style: none;
+  border-radius: 30px;
+  font-size: 20px;
+  color: white;
+}
+
+.btn_search_map3:hover{
   background-color: blue;
 }
 /* |||||||||||||||   COMPONENTE RESULTS TABLE   ||||||||||||||| */

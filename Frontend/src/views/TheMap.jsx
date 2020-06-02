@@ -124,7 +124,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.municipio}</h5>
-                                                <button onClick={() => this.buscarUbication(e.municipio)} className="btn_search_map">
+                                                <button onClick={() => this.buscarUbication(e.municipio)} className="btn_search_map2">
                                                     Buscar
                                                 </button>
                                             </center>
@@ -141,7 +141,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
-                                                <button onClick={() => this.buscarUbication(e.finca)} className="btn_search_map">
+                                                <button onClick={() => this.buscarUbication(e.finca)} className="btn_search_map3">
                                                     Buscar
                                                 </button>
                                             </center>
