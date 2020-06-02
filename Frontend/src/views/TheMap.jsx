@@ -42,7 +42,9 @@ class TheMap extends React.Component {
 
     closeToggle = () => {
         this.setState({
-            modal: false
+            modal: false,
+            results: [],
+            counts_tipos: {}
         });
     }
 
