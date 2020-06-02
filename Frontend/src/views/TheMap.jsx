@@ -16,8 +16,10 @@ class TheMap extends React.Component {
         this.state = {
             position: [3.2175377205303732, -76.53764390954167],
             fincas: [],
+            departamentos: [],
+            municipios: [],
             modal: false,
-            finca: "",
+            ubication: "",
             results: [],
             counts_tipos: {}
         }
@@ -25,8 +27,8 @@ class TheMap extends React.Component {
 
     async componentDidMount() {
         const res = await fetch("http://localhost:8000/map");
-        const { fincas } = await res.json();
-        this.setState({ fincas: fincas });
+        const { fincas, departamentos, municipios } = await res.json();
+        this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
     }
 
     openToggle = () => {
@@ -41,10 +43,11 @@ class TheMap extends React.Component {
         });
     }
 
-    buscarFinca = finca => {
-        axios.post("http://localhost:8000/map/finca_by_filter", { filters: {}, finca: finca })
+    buscarUbication = ubication => {
+        axios.post("http://localhost:8000/map/ubication_by_filter", { filters: {}, ubication: ubication })
             .then(res => {
-                this.setState({ finca: finca, results: res.data.result, counts_tipos: res.data.counts });
+                // console.log({ ubication: ubication, results: res.data.result, counts_tipos: res.data.counts })
+                this.setState({ ubication: ubication, results: res.data.result, counts_tipos: res.data.counts });
                 this.openToggle();
             })
             .catch(err => {
@@ -57,11 +60,11 @@ class TheMap extends React.Component {
         const modal = <div>
             <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modal} toggle={this.closeToggle} >
                 <ModalHeader toggle={this.closeToggle}>
-                    {this.state.finca}
+                    {this.state.ubication}
                 </ModalHeader>
                 <ModalBody>
                     {this.state.results.length > 0 ?
-                        <PropiedadPorFinca finca={this.state.finca}
+                        <PropiedadPorFinca ubication={this.state.ubication}
                             results={this.state.results}
                             counts_tipos={this.state.counts_tipos} />
                         : true
@@ -75,12 +78,44 @@ class TheMap extends React.Component {
                 {modal}
                 <Map className="amapa" center={this.state.position} zoom={15}>
                     <LayersControl position="topright">
-                        <LayersControl.BaseLayer name="MapInk" checked="true">
-                            <TileLayer
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                        </LayersControl.BaseLayer>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {
+                            this.state.departamentos.map((e, i) => (
+                                <LayersControl.Overlay name={e.departamento} checked="true" key={i}>
+                                    <FeatureGroup color="red">
+                                        <Popup>
+                                            <center>
+                                                <h5>{e.departamento}</h5>
+                                                <button onClick={() => this.buscarUbication(e.departamento)} className="btn_search_map">
+                                                    Buscar
+                                                </button>
+                                            </center>
+                                        </Popup>
+                                        <Polygon positions={e.st_asgeojson} />
+                                    </FeatureGroup>
+                                </LayersControl.Overlay>
+                            ))
+                        }
+                        {
+                            this.state.municipios.map((e, i) => (
+                                <LayersControl.Overlay name={e.municipio} checked="true" key={i}>
+                                    <FeatureGroup color="yellow">
+                                        <Popup>
+                                            <center>
+                                                <h5>{e.municipio}</h5>
+                                                <button onClick={() => this.buscarUbication(e.municipio)} className="btn_search_map">
+                                                    Buscar
+                                                </button>
+                                            </center>
+                                        </Popup>
+                                        <Polygon positions={e.st_asgeojson} />
+                                    </FeatureGroup>
+                                </LayersControl.Overlay>
+                            ))
+                        }
                         {
                             this.state.fincas.map((e, i) => (
                                 <LayersControl.Overlay name={e.finca} checked="true" key={i}>
@@ -88,7 +123,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
-                                                <button onClick={() => this.buscarFinca(e.finca)} className="btn_search_map" block>
+                                                <button onClick={() => this.buscarUbication(e.finca)} className="btn_search_map">
                                                     Buscar
                                                 </button>
                                             </center>

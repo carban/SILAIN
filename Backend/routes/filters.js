@@ -95,7 +95,7 @@ router.get('/', async (req, res) => {
   }
 
   const fincas = {
-    text: "select municipio_idmunicipio, finca from finca;"
+    text: "select municipio_idmunicipio, finca from finca order by 1;"
   }
 
   try {

@@ -35,7 +35,7 @@ function getTextWithFilters(filters) {
       c = true
     }
   }
-  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca from finca_muni where pclave iLIKE $1";
+  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca from muni_dept where pclave iLIKE $1";
   if (s !== "") {
     text = text + " and" + s;
   }

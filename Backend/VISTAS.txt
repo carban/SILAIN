@@ -25,11 +25,18 @@
 -- from mcasub_join_mhasfinca inner join finca on idfinca = finca_idfinca;
 
 -- CREATE VIEW finca_muni AS
--- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca
+-- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, departamento_iddepartamento
 -- from withfinca inner join municipio on idmunicipio = municipio_idmunicipio;
 
-select * from finca_muni;
+-- select * from finca_muni;
 
 -- DROP VIEW mcasub_join_mhasfinca ;
 -- DROP VIEW withfinca ;
+-- DROP VIEW finca_muni;
+
+-- CREATE VIEW muni_dept AS
+-- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, departamento
+-- from finca_muni inner join departamento on iddepartamento = departamento_iddepartamento;
+
+
 

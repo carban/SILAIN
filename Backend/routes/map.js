@@ -20,7 +20,7 @@ function getTextWithFilters(filters) {
       c = true
     }
   }
-  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from finca_muni where finca = $1";
+  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where pclave iLIKE $1";
   if (s !== "") {
     text = text + " and" + s;
   }
@@ -28,8 +28,8 @@ function getTextWithFilters(filters) {
 }
 
 // Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
-function getValuesFromFilters(filters, finca) {
-  var vals = [finca]
+function getValuesFromFilters(filters, ubication) {
+  var vals = [`%${ubication}%`]
   for (let i in filters) {
     if (filters[i] !== "Select") {
       vals.push(filters[i])
@@ -49,9 +49,23 @@ router.get('/', async (req, res) => {
     text: "select finca.finca, idfinca, st_asgeojson(geom) from finca inner join geofincas on finca_idfi = idfinca;",
   }
 
+  const queryDeps = {
+    text: "select departamento.departamento, st_asgeojson(geom) from departamento inner join geodeptos on iddepartamento = id_depto;",
+  }
+
+  const queryMunis = {
+    text: "select municipio.municipio, st_asgeojson(geom) from municipio inner join geomunic on idmunicipio = idmuni;",
+  }
+
   try {
     const result = await pg.query(query);
+    const resultDeps = await pg.query(queryDeps);
+    const resultMunis = await pg.query(queryMunis);
+
     const data = result.rows;
+    const dataDeps = resultDeps.rows;
+    const dataMunis = resultMunis.rows;
+
     for (let i in data) {
       var aux = JSON.parse(data[i].st_asgeojson).coordinates[0][0];
       for (let j = 0; j < aux.length; j++) {
@@ -61,8 +75,29 @@ router.get('/', async (req, res) => {
       }
       data[i].st_asgeojson = aux;
     }
+    
+    for (let i in dataDeps) {
+      var aux = JSON.parse(dataDeps[i].st_asgeojson).coordinates[0][0];
+      for (let j = 0; j < aux.length; j++) {
+        var row = aux[j];
+        var new_row = [row[1], row[0]];
+        aux[j] = new_row;
+      }
+      dataDeps[i].st_asgeojson = aux;
+    }
+
+    for (let i in dataMunis) {
+      var aux = JSON.parse(dataMunis[i].st_asgeojson).coordinates[0][0];
+      for (let j = 0; j < aux.length; j++) {
+        var row = aux[j];
+        var new_row = [row[1], row[0]];
+        aux[j] = new_row;
+      }
+      dataMunis[i].st_asgeojson = aux;
+    }
+
     // console.log(data);
-    res.status(200).send({ fincas: data });
+    res.status(200).send({ fincas: data, departamentos: dataDeps, municipios: dataMunis });
   } catch (e) {
     console.log(e);
     res.sendStatus(400);
@@ -72,12 +107,12 @@ router.get('/', async (req, res) => {
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna los resutlados correspondientes a una busqueda en particular POR FINCA
 // Teniendo Filtros o no  
-router.post('/finca_by_filter', async (req, res) => {
-  const { filters, finca } = req.body;
-  // console.log(filters, finca);
-  var { text, counter } = getTextWithFilters(filters, finca);
-  var values = getValuesFromFilters(filters, finca);
-
+router.post('/ubication_by_filter', async (req, res) => {
+  const { filters, ubication } = req.body;
+  // console.log(filters, ubication);
+  var { text, counter } = getTextWithFilters(filters);
+  var values = getValuesFromFilters(filters, ubication);
+  // console.log(text, values);
   if (counter == 1 && values[0] == "") {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
@@ -118,6 +153,7 @@ router.post('/finca_by_filter', async (req, res) => {
         }
 
       }
+      // console.log({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } })
       res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
 
     } catch (e) {
