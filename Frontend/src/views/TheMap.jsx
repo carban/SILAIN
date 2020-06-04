@@ -51,7 +51,14 @@ class TheMap extends React.Component {
     buscarUbication = ubication => {
         this.setState({ loading: true, ubication: ubication });
         this.openToggle();
-        axios.post("http://localhost:8000/map/ubication_by_filter", { filters: {}, ubication: ubication })
+        axios.post("http://localhost:8000/map/ubication_by_filter", {
+            filters: {
+                categoria: "Select",
+                subcategoria: "Select",
+                tipo: "Select",
+                formato: "Select",
+            }, ubication: ubication
+        })
             .then(res => {
                 this.setState({
                     results: res.data.result,

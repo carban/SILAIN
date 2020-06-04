@@ -4,8 +4,20 @@ const pg = require('../db/database.js').getPool();
 
 // ||||||||||||||||||||||| AUXILIARES ||||||||||||||||||||||| 
 // ------------------------------------------------------------------------------------
+
+// Funcion Auxiliar que retorna el numero de filtros SELECCIONADOS que hay 
+function getHowMany(filters) {
+  j = 0;
+  for (let i in filters) {
+    if (filters[i] !== "Select") {
+      j++;
+    }
+  }
+  return { counter: j };
+}
+
 // Funcion Auxiliar que formatea el query dependiendo de los filtros que lleguen
-function getTextWithFilters(filters) {
+function getTextWithFilters(text, filters) {
   var s = "";
   var c = false;
   j = 1;
@@ -20,11 +32,11 @@ function getTextWithFilters(filters) {
       c = true
     }
   }
-  var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where pclave iLIKE $1";
+  
   if (s !== "") {
     text = text + " and" + s;
   }
-  return { text: text, counter: j };
+  return { query_text: text };
 }
 
 // Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
@@ -75,7 +87,7 @@ router.get('/', async (req, res) => {
       }
       data[i].st_asgeojson = aux;
     }
-    
+
     for (let i in dataDeps) {
       var aux = JSON.parse(dataDeps[i].st_asgeojson).coordinates[0][0];
       for (let j = 0; j < aux.length; j++) {
@@ -108,16 +120,24 @@ router.get('/', async (req, res) => {
 // Retorna los resutlados correspondientes a una busqueda en particular POR FINCA
 // Teniendo Filtros o no  
 router.post('/ubication_by_filter', async (req, res) => {
+
   const { filters, ubication } = req.body;
   // console.log(filters, ubication);
-  var { text, counter } = getTextWithFilters(filters);
-  var values = getValuesFromFilters(filters, ubication);
-  // console.log(text, values);
-  if (counter == 1 && values[0] == "") {
+  var { counter } = getHowMany(filters);
+
+  if (counter == 0 && ubication == "") {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
+
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+
+    var { query_text } = getTextWithFilters(text, filters);
+    var values = getValuesFromFilters(filters, ubication);
+
+    // console.log(query_text, values);
+
     var query = {
-      text: text,
+      text: query_text,
       values: values
     }
 
