@@ -19,6 +19,7 @@ class PropiedadPorFinca extends React.Component {
             results: [],
             counts_tipos: {},
             ubication: "",
+            ubi_type: "",
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -51,7 +52,7 @@ class PropiedadPorFinca extends React.Component {
     getFilters = obj => {
         const basicURL = "http://localhost:8000/map/ubication_by_filter";
         this.setState({ loading: true })
-        axios.post(basicURL, { filters: obj, ubication: this.state.ubication })
+        axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
             .then(res => {
 
                 this.setState({
@@ -73,6 +74,7 @@ class PropiedadPorFinca extends React.Component {
                 counts_tipos: this.props.counts_tipos,
                 results: this.props.results,
                 ubication: this.props.ubication,
+                ubi_type: this.props.ubi_type
             })
     }
 

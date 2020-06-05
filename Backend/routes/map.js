@@ -41,7 +41,7 @@ function getTextWithFilters(text, filters) {
 
 // Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
 function getValuesFromFilters(filters, ubication) {
-  var vals = [`%${ubication}%`]
+  var vals = [ubication]
   for (let i in filters) {
     if (filters[i] !== "Select") {
       vals.push(filters[i])
@@ -121,7 +121,7 @@ router.get('/', async (req, res) => {
 // Teniendo Filtros o no  
 router.post('/ubication_by_filter', async (req, res) => {
 
-  const { filters, ubication } = req.body;
+  const { filters, ubication, ubi_type } = req.body;
   // console.log(filters, ubication);
   var { counter } = getHowMany(filters);
 
@@ -129,7 +129,7 @@ router.post('/ubication_by_filter', async (req, res) => {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
 
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where "+ubi_type+" = $1";
 
     var { query_text } = getTextWithFilters(text, filters);
     var values = getValuesFromFilters(filters, ubication);

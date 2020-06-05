@@ -23,6 +23,7 @@ class TheMap extends React.Component {
             modal: false,
             loading: false,
             ubication: "",
+            ubi_type: "",
             results: [],
             counts_tipos: {}
         }
@@ -48,8 +49,8 @@ class TheMap extends React.Component {
         });
     }
 
-    buscarUbication = ubication => {
-        this.setState({ loading: true, ubication: ubication });
+    buscarUbication = (ubi_type, ubication) => {
+        this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
         axios.post("http://localhost:8000/map/ubication_by_filter", {
             filters: {
@@ -57,13 +58,16 @@ class TheMap extends React.Component {
                 subcategoria: "Select",
                 tipo: "Select",
                 formato: "Select",
-            }, ubication: ubication
+            }, 
+            ubication: ubication,
+            ubi_type: ubi_type
         })
             .then(res => {
                 this.setState({
                     results: res.data.result,
                     counts_tipos: res.data.counts,
-                    loading: false
+                    loading: false,
+                    ubi_type: this.state.ubi_type
                 });
             })
             .catch(err => {
@@ -89,9 +93,9 @@ class TheMap extends React.Component {
                                 this.state.results.length > 0 ?
                                     <PropiedadPorFinca ubication={this.state.ubication}
                                         results={this.state.results}
-                                        counts_tipos={this.state.counts_tipos} />
+                                        counts_tipos={this.state.counts_tipos}
+                                        ubi_type={this.state.ubi_type} />
                                     : true
-
                             )
                     }
                 </ModalBody>
@@ -114,7 +118,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.departamento}</h5>
-                                                <button onClick={() => this.buscarUbication(e.departamento)} className="btn_search_map">
+                                                <button onClick={() => this.buscarUbication("departamento", e.departamento)} className="btn_search_map">
                                                     Buscar
                                                 </button>
                                             </center>
@@ -131,7 +135,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.municipio}</h5>
-                                                <button onClick={() => this.buscarUbication(e.municipio)} className="btn_search_map2">
+                                                <button onClick={() => this.buscarUbication("municipio", e.municipio)} className="btn_search_map2">
                                                     Buscar
                                                 </button>
                                             </center>
@@ -148,7 +152,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
-                                                <button onClick={() => this.buscarUbication(e.finca)} className="btn_search_map3">
+                                                <button onClick={() => this.buscarUbication("finca", e.finca)} className="btn_search_map3">
                                                     Buscar
                                                 </button>
                                             </center>
