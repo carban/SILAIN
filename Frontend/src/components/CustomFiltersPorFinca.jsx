@@ -5,6 +5,8 @@ import {
     Row, Col, Input
 } from "reactstrap";
 
+import api from "api_route.js";
+
 class CustomFiltersPorFinca extends React.Component {
     constructor(props) {
         super(props);
@@ -53,7 +55,7 @@ class CustomFiltersPorFinca extends React.Component {
 
     componentDidMount() {
 
-        const url = "http://localhost:8000/getfilters/finca";
+        const url = api.route + "/getfilters/finca";
 
         axios.get(url)
             .then(res => {

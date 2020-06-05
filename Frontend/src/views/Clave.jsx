@@ -7,11 +7,12 @@ import {
 } from 'reactstrap';
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 import CustomFilters from "components/CustomFilters.jsx";
-
-import ReactLoading from "react-loading";
 import ResultsTable from "components/ResultsTable";
+
+import api from "api_route.js";
 
 class Clave extends React.Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class Clave extends React.Component {
     newBasicSearch = e => {
 
         if (this.state.words !== "") {
-            const basicURL = "http://localhost:8000/basic/search_by_filter";
+            const basicURL = api.route + "/basic/search_by_filter";
 
             axios.post(basicURL, { filters: this.state.filters, word: this.state.words })
                 .then(res => {
@@ -67,7 +68,7 @@ class Clave extends React.Component {
 
     getFilters = obj => {
         if (this.state.word_searched !== "") {
-            const basicURL = "http://localhost:8000/basic/search_by_filter";
+            const basicURL = api.route + "/basic/search_by_filter";
             this.setState({ loading: true })
             axios.post(basicURL, { filters: obj, word: this.state.word_searched })
                 .then(res => {

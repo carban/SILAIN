@@ -11,6 +11,7 @@ import PropiedadPorFinca from "components/PropiedadPorFinca";
 import axios from "axios";
 import ReactLoading from "react-loading";
 
+import api from "api_route.js";
 
 class TheMap extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class TheMap extends React.Component {
     }
 
     async componentDidMount() {
-        const res = await fetch("http://localhost:8000/map");
+        const res = await fetch(api.route + "/map");
         const { fincas, departamentos, municipios } = await res.json();
         this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
     }
@@ -52,13 +53,13 @@ class TheMap extends React.Component {
     buscarUbication = (ubi_type, ubication) => {
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
-        axios.post("http://localhost:8000/map/ubication_by_filter", {
+        axios.post(api.route + "/map/ubication_by_filter", {
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
                 tipo: "Select",
                 formato: "Select",
-            }, 
+            },
             ubication: ubication,
             ubi_type: ubi_type
         })

@@ -7,7 +7,7 @@ import {
 
 // import axios from "axios";
 import SNavBar from "components/SNavBar.jsx";
-
+import api from "api_route.js";
 
 class Article extends React.Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Article extends React.Component {
     }
 
     async componentDidMount() {
-        const res = await fetch("http://localhost:8000/article/" + this.props.match.params.id);
+        const res = await fetch(api.route + "/article/" + this.props.match.params.id);
         const { info } = await res.json();
         this.setState({ info: info });
     }

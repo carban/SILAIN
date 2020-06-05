@@ -6,11 +6,12 @@ import {
 } from 'reactstrap';
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 import CustomFiltersPorFinca from "components/CustomFiltersPorFinca.jsx";
-
-import ReactLoading from "react-loading";
 import ResultsTablePorFinca from "components/ResultsTablePorFinca";
+
+import api from "api_route.js";
 
 class PropiedadPorFinca extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class PropiedadPorFinca extends React.Component {
     }
 
     getFilters = obj => {
-        const basicURL = "http://localhost:8000/map/ubication_by_filter";
+        const basicURL = api.route + "/map/ubication_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
             .then(res => {
