@@ -7,7 +7,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 
-class ResultsTablePorFinca extends React.Component {
+class ResultsTableByMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,4 +65,4 @@ class ResultsTablePorFinca extends React.Component {
     }
 }
 
-export default ResultsTablePorFinca;
+export default ResultsTableByMap;

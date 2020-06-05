@@ -8,12 +8,12 @@ import {
 import axios from "axios";
 import ReactLoading from "react-loading";
 
-import CustomFiltersPorFinca from "components/CustomFiltersPorFinca.jsx";
-import ResultsTablePorFinca from "components/ResultsTablePorFinca";
+import CustomFiltersByMap from "components/CustomFiltersByMap.jsx";
+import ResultsTableByMap from "components/ResultsTableByMap";
 
 import api from "api_route.js";
 
-class PropiedadPorFinca extends React.Component {
+class PropiedadByMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,7 +82,7 @@ class PropiedadPorFinca extends React.Component {
     render() {
         return (
             <div>
-                <CustomFiltersPorFinca getFilters={this.getFilters} />
+                <CustomFiltersByMap getFilters={this.getFilters} />
                 {
                     this.state.loading ? (
                         <center>
@@ -133,7 +133,7 @@ class PropiedadPorFinca extends React.Component {
                             {
                                 this.state.results.length > 0 ?
                                     (
-                                        <ResultsTablePorFinca results={this.state.results} />
+                                        <ResultsTableByMap results={this.state.results} />
                                     ) : true
                             }
                         </div>
@@ -144,4 +144,4 @@ class PropiedadPorFinca extends React.Component {
     }
 };
 
-export default PropiedadPorFinca;
+export default PropiedadByMap;

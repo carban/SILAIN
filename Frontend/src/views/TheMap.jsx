@@ -6,7 +6,7 @@ import {
 
 
 import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
-import PropiedadPorFinca from "components/PropiedadPorFinca";
+import PropiedadByMap from "components/PropiedadByMap";
 
 import axios from "axios";
 import ReactLoading from "react-loading";
@@ -92,7 +92,7 @@ class TheMap extends React.Component {
                             </center>
                         ) : (
                                 this.state.results.length > 0 ?
-                                    <PropiedadPorFinca ubication={this.state.ubication}
+                                    <PropiedadByMap ubication={this.state.ubication}
                                         results={this.state.results}
                                         counts_tipos={this.state.counts_tipos}
                                         ubi_type={this.state.ubi_type} />

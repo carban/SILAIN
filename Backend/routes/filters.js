@@ -126,7 +126,7 @@ router.get('/', async (req, res) => {
 // Retorna toda la informacion de los filtros que esten almacenados en la BD
 // CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca
 // Se omite la consulta de finca y municipio
-router.get('/finca', async (req, res) => {
+router.get('/ubication', async (req, res) => {
 
   const catsubs = {
     text: "select * from categoria inner join subcategoria on categoria_idcategoria = idcategoria order by idcategoria;",

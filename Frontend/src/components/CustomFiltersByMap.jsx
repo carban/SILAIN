@@ -7,7 +7,7 @@ import {
 
 import api from "api_route.js";
 
-class CustomFiltersPorFinca extends React.Component {
+class CustomFiltersByMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +55,7 @@ class CustomFiltersPorFinca extends React.Component {
 
     componentDidMount() {
 
-        const url = api.route + "/getfilters/finca";
+        const url = api.route + "/getfilters/ubication";
 
         axios.get(url)
             .then(res => {
@@ -134,4 +134,4 @@ class CustomFiltersPorFinca extends React.Component {
 
 // export default connect(mapStateToProps, mapDispatchToPros)(CustomFilters);
 
-export default CustomFiltersPorFinca;
+export default CustomFiltersByMap;
