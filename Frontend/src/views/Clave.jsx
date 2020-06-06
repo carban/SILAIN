@@ -3,7 +3,7 @@ import React from "react";
 // reactstrap components
 import {
     Row, Input, Col,
-    Alert, InputGroup, InputGroupAddon, InputGroupText
+    Alert, InputGroup, InputGroupAddon, InputGroupText, Badge
 } from 'reactstrap';
 
 import axios from "axios";
@@ -137,7 +137,7 @@ class Clave extends React.Component {
                                                     <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
                                                     <Row className="datsBigger">
                                                         <Col>
-                                                            *Archivo crudo:  <b>{this.state.counts_tipos.AC}</b>
+                                                            *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
                                                         </Col>
                                                         <Col>
                                                             *Archivo procesado:  <b>{this.state.counts_tipos.AP}</b>
