@@ -23,7 +23,7 @@ class Project1 extends React.Component {
                 <Accordion>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
-                            <h5>Resumen</h5>
+                            <h5 style={{"cursor": "pointer"}}>Resumen</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
@@ -31,7 +31,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="1">
-                            <h5>Metodologia</h5>
+                            <h5 style={{"cursor": "pointer"}}>Metodologia</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
                             <div>
@@ -59,7 +59,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="2">
-                            <h5>Resultados</h5>
+                            <h5 style={{"cursor": "pointer"}}>Resultados</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
                             <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
@@ -67,7 +67,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="3">
-                            <h5>Conclusiones</h5>
+                            <h5 style={{"cursor": "pointer"}}>Conclusiones</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
                             <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
