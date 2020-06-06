@@ -140,16 +140,16 @@ class Clave extends React.Component {
                                                             *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Archivo procesado:  <b>{this.state.counts_tipos.AP}</b>
+                                                            *Archivo procesado:  <Badge pill><b>{this.state.counts_tipos.AP}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Imagen cruda:  <b>{this.state.counts_tipos.IC}</b>
+                                                            *Imagen cruda:  <Badge pill><b>{this.state.counts_tipos.IC}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Imagen procesada:  <b>{this.state.counts_tipos.IP}</b>
+                                                            *Imagen procesada:  <Badge pill><b>{this.state.counts_tipos.IP}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Compilación:  <b>{this.state.counts_tipos.C}</b>
+                                                            *Compilación:  <Badge pill><b>{this.state.counts_tipos.C}</b></Badge>
                                                         </Col>
                                                     </Row>
                                                 </div>

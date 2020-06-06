@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Row, Col, Alert
+    Row, Col, Alert, Badge
 } from 'reactstrap';
 
 import axios from "axios";
@@ -93,19 +93,19 @@ class Propiedad extends React.Component {
                                                     <h5><b>Resultados segun los filtros: </b>{this.state.results.length}</h5>
                                                     <Row className="datsBigger">
                                                         <Col>
-                                                            *Archivo crudo:  <b>{this.state.counts_tipos.AC}</b>
+                                                            *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Archivo procesado:  <b>{this.state.counts_tipos.AP}</b>
+                                                            *Archivo procesado:  <Badge pill><b>{this.state.counts_tipos.AP}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Imagen cruda:  <b>{this.state.counts_tipos.IC}</b>
+                                                            *Imagen cruda:  <Badge pill><b>{this.state.counts_tipos.IC}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Imagen procesada:  <b>{this.state.counts_tipos.IP}</b>
+                                                            *Imagen procesada:  <Badge pill><b>{this.state.counts_tipos.IP}</b></Badge>
                                                         </Col>
                                                         <Col>
-                                                            *Compilación:  <b>{this.state.counts_tipos.C}</b>
+                                                            *Compilación:  <Badge pill><b>{this.state.counts_tipos.C}</b></Badge>
                                                         </Col>
                                                     </Row>
                                                 </div>
