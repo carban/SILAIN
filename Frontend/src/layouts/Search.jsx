@@ -17,6 +17,8 @@ import SNavBar from "components/SNavBar.jsx";
 import Clave from "views/Clave.jsx";
 import Propiedad from "views/Propiedad.jsx";
 import TheMap from "views/TheMap.jsx";
+import Diagramas from "views/Diagramas.jsx";
+
 
 
 class Search extends React.Component {
@@ -85,7 +87,7 @@ class Search extends React.Component {
                 <Route path="/search/clave" component={Clave} />
                 <Route path="/search/propiedad" component={Propiedad} />
                 <Route path="/search/mapa" component={TheMap} />
-                <Route path="/search/diagrama" component={() => (<h1>Diagrama</h1>)} />
+                <Route path="/search/diagrama" component={Diagramas} />
               </Switch>
             </Router>
           </Container>

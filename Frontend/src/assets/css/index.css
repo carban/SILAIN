@@ -40,7 +40,7 @@
   }
 
 .btn_search_map{
-  background-color: tomato;
+  background-color: red;
   border-style: none;
   border-radius: 30px;
   font-size: 20px;
@@ -48,7 +48,7 @@
 }
 
 .btn_search_map:hover{
-  background-color: red;
+  background-color: rgb(195, 83, 8);
 }
 
 .btn_search_map2{
