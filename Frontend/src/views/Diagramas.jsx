@@ -3,12 +3,12 @@ import React from "react";
 // reactstrap components
 import {
     Row, Col,
-    Button
 } from 'reactstrap';
 
 import { Router, Route, Switch, NavLink } from "react-router-dom";
 
 import Project1 from "components/Project1.jsx";
+import P1Obj1 from "components/P1Obj1.jsx";
 
 class Diagramas extends React.Component {
     constructor(props) {
@@ -32,7 +32,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p1">Explorar</NavLink>
+                                        <NavLink to="/search/diagrama/p1" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -42,7 +42,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p2">Explorar</NavLink>
+                                        <NavLink to="/search/diagrama/p2" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -52,7 +52,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p3">Explorar</NavLink>
+                                        <NavLink to="/search/diagrama/p3" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -62,7 +62,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p4">Explorar</NavLink>
+                                        <NavLink to="/search/diagrama/p4" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                             </Col>
@@ -73,10 +73,9 @@ class Diagramas extends React.Component {
                     <Route exact path="/search/diagrama/p3" component={() => <h1>P3</h1>} />
                     <Route exact path="/search/diagrama/p4" component={() => <h1>P4</h1>} />
                     
-                    <Route exact path="/search/diagrama/p1/meto" component={() => <h1>gfhhfghf</h1>} />
-                    <Route exact path="/search/diagrama/p1/meto2" component={() => <h1>fghfg</h1>} />
-                    <Route exact path="/search/diagrama/p1/meto3" component={() => <h1>fhgfg</h1>} />
-                    <Route exact path="/search/diagrama/p1/meto4" component={() => <h1>fghgf</h1>} />
+                    <Route exact path="/search/diagrama/p1/obj1" component={P1Obj1} />
+                    <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} />
+                    <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} />
 
                 </Switch>
             </Router>

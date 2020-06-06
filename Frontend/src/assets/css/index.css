@@ -136,3 +136,16 @@ thead{
   animation: rotating 16s linear infinite;
   position: absolute;
 }
+
+/* |||||||||||||||   NAVLINKS FOR PROJECTS  ||||||||||||||| */
+
+.proLink{
+  text-decoration: none;
+  background-color: #343A40;
+  color: white;
+  font-size: 22px;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
