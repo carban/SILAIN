@@ -1,8 +1,8 @@
 import React from "react";
 
-import {
-    Row, Col,
-} from 'reactstrap';// used for making the prop types of this component
+// import {
+//     Row, Col,
+// } from 'reactstrap';// used for making the prop types of this component
 
 import { ReactDiagram } from "gojs-react";
 import * as go from "gojs";
@@ -39,6 +39,10 @@ class P1Obj1 extends React.Component {
 
         diagram.layout = $(go.TreeLayout, { angle: 90 });
 
+        diagram.addDiagramListener("ObjectSingleClicked", e => {
+            console.log(e.subject.ge);
+        })
+
         return diagram;
     }
 
@@ -51,15 +55,15 @@ class P1Obj1 extends React.Component {
                         divClassName='diagram-component'
                         initDiagram={this.initDiagram}
                         nodeDataArray={[
-                            { key: 1, text: "Caracterizacion del manejo y uso del agua en la unidad agricola", color: 'lightblue' },
+                            { key: 771, text: "Caracterizacion del manejo y uso del agua en la unidad agricola", color: 'lightblue' },
                             { key: 2, text: "Manejo del agua", color: 'orange' },
                             { key: 3, text: "Uso del agua", color: 'lightgreen' },
                             { key: 4, text: "Aspectos culturales", color: 'pink' }
                         ]}
                         linkDataArray={[
-                            { key: 1, from: 1, to: 2 },
-                            { key: 2, from: 1, to: 3 },
-                            { key: 3, from: 1, to: 4 },
+                            { key: 1, from: 771, to: 2 },
+                            { key: 2, from: 771, to: 3 },
+                            { key: 3, from: 771, to: 4 },
                         ]}
                     />
                 </center>
