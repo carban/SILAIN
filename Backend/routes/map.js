@@ -49,6 +49,21 @@ function getValuesFromFilters(filters, ubication) {
   }
   return vals;
 }
+
+// Funcion auxiliar para invertir la latitud y la longitud cuando se realiza la consulta
+function swapCoors(data){
+  for (let i in data) {
+    var aux = JSON.parse(data[i].st_asgeojson).coordinates[0][0];
+    for (let j = 0; j < aux.length; j++) {
+      var row = aux[j];
+      var new_row = [row[1], row[0]];
+      aux[j] = new_row;
+    }
+    data[i].st_asgeojson = aux;
+  }
+  return data;
+}
+
 // ------------------------------------------------------------------------------------
 
 
@@ -74,39 +89,13 @@ router.get('/', async (req, res) => {
     const resultDeps = await pg.query(queryDeps);
     const resultMunis = await pg.query(queryMunis);
 
-    const data = result.rows;
-    const dataDeps = resultDeps.rows;
-    const dataMunis = resultMunis.rows;
+    var data = result.rows;
+    var dataDeps = resultDeps.rows;
+    var dataMunis = resultMunis.rows;
 
-    for (let i in data) {
-      var aux = JSON.parse(data[i].st_asgeojson).coordinates[0][0];
-      for (let j = 0; j < aux.length; j++) {
-        var row = aux[j];
-        var new_row = [row[1], row[0]];
-        aux[j] = new_row;
-      }
-      data[i].st_asgeojson = aux;
-    }
-
-    for (let i in dataDeps) {
-      var aux = JSON.parse(dataDeps[i].st_asgeojson).coordinates[0][0];
-      for (let j = 0; j < aux.length; j++) {
-        var row = aux[j];
-        var new_row = [row[1], row[0]];
-        aux[j] = new_row;
-      }
-      dataDeps[i].st_asgeojson = aux;
-    }
-
-    for (let i in dataMunis) {
-      var aux = JSON.parse(dataMunis[i].st_asgeojson).coordinates[0][0];
-      for (let j = 0; j < aux.length; j++) {
-        var row = aux[j];
-        var new_row = [row[1], row[0]];
-        aux[j] = new_row;
-      }
-      dataMunis[i].st_asgeojson = aux;
-    }
+    data = swapCoors(data);
+    dataDeps = swapCoors(dataDeps);
+    dataMunis = swapCoors(dataMunis);
 
     // console.log(data);
     res.status(200).send({ fincas: data, departamentos: dataDeps, municipios: dataMunis });
@@ -182,57 +171,5 @@ router.post('/ubication_by_filter', async (req, res) => {
     }
   }
 });
-
-
-// router.post('/getFinca', async (req, res) => {
-
-//     const { finca } = req.body;
-
-//     const query = {
-//         text: "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria, municipio, finca from finca_muni where finca = $1",
-//         values: [finca]
-//     }
-
-//     try {
-//         const result = await pg.query(query);
-
-//         var AC = 0;
-//         var AP = 0;
-//         var IC = 0;
-//         var IP = 0;
-//         var C = 0;
-
-//         for (let i = 0; i < result.rows.length; i++) {
-//             const tipo = result.rows[i].tipo;
-//             switch (tipo) {
-//                 case "Archivo crudo":
-//                     AC++;
-//                     break;
-//                 case "Archivo procesado":
-//                     AP++;
-//                     break;
-//                 case "Imagen cruda":
-//                     IC++;
-//                     break;
-//                 case "Imagen procesada":
-//                     IP++;
-//                     break;
-//                 case "Compilación":
-//                     C++;
-//                     break;
-//                 default:
-//                     break;
-//             }
-//         }
-
-//         res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
-
-//     } catch (error) {
-//         console.log(e);
-//         res.sendStatus(400);
-//     }
-// })
-
-
 
 module.exports = router;

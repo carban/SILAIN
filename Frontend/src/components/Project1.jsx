@@ -26,7 +26,10 @@ class Project1 extends React.Component {
                             <h5 style={{"cursor": "pointer"}}>Resumen</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
-                            <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, accusamus aliquid. Veritatis beatae porro ducimus adipisci, eligendi sint, voluptas animi nam inventore, vero magnam quisquam possimus ab sequi iste enim!
+                            </div>
+                            {/* <NavLink to="/search/diagrama/p1/">Explorar</NavLink> */}
                         </Accordion.Collapse>
                     </div>
                     <div>
