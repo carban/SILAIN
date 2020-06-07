@@ -149,3 +149,13 @@ thead{
   text-decoration: none;
   display: inline-block;
 }
+
+
+
+
+
+.diagram-component {
+  width: 1000px;
+  height: 500px;
+  border: 1px solid black;
+}
