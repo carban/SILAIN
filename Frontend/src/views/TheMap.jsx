@@ -21,6 +21,7 @@ class TheMap extends React.Component {
             fincas: [],
             departamentos: [],
             municipios: [],
+            draw: [],
             modal: false,
             loading: false,
             ubication: "",
@@ -76,6 +77,10 @@ class TheMap extends React.Component {
             })
     }
 
+    draw = e => {
+        // this.setState({ draw: [...this.state.draw, [e.latlng.lat, e.latlng.lng]] })
+    }
+
     render() {
 
         const modal = <div>
@@ -106,12 +111,22 @@ class TheMap extends React.Component {
         return (
             <div>
                 {modal}
-                <Map className="amapa" center={this.state.position} zoom={9} >
+                <Map className="amapa" center={this.state.position} zoom={9} onClick={this.draw}>
                     <LayersControl position="topright">
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
+                        <LayersControl.Overlay name="DRAW" checked="true">
+                            <FeatureGroup color="pink">
+                                <Popup>
+                                    <center>
+                                        <h5>DRAW</h5>
+                                    </center>
+                                </Popup>
+                                <Polygon positions={this.state.draw} />
+                            </FeatureGroup>
+                        </LayersControl.Overlay>
                         {
                             this.state.departamentos.map((e, i) => (
                                 <LayersControl.Overlay name={e.departamento} checked="true" key={i}>

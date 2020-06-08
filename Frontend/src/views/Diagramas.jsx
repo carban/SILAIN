@@ -74,8 +74,8 @@ class Diagramas extends React.Component {
                     <Route exact path="/search/diagrama/p4" component={() => <h1>P4</h1>} />
                     
                     <Route exact path="/search/diagrama/p1/obj1" component={P1Obj1} />
-                    <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} />
-                    <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} />
+                    {/* <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} /> */}
+                    {/* <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} /> */}
 
                 </Switch>
             </Router>
