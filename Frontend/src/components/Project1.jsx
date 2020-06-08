@@ -13,6 +13,7 @@ import mermaid from 'mermaid';
 import Eimage from "./Eimage.png";
 import Fimage from "./Fimage.png";
 import Gimage from "./Gimage.png";
+import O2 from "./O2.png";
 
 
 class Project1 extends React.Component {
@@ -20,18 +21,20 @@ class Project1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: ""
+            obj: "",
+            showObj: "",
         }
     }
 
     diagramEvent = e => {
-        this.setState({ show: e });
+        this.setState({ showObj: e });
     }
 
-    componentDidMount() {
-        var output = document.getElementById('output');
-        // var output2 = document.getElementById('output2');
+    showDiagram = d => {
 
+        this.setState({ "obj": d });
+
+        var output = document.getElementById('output');
 
         var config = {
             startOnLoad: true,
@@ -45,32 +48,56 @@ class Project1 extends React.Component {
 
         mermaid.initialize(config);
 
-        window.foo = e => { this.diagramEvent(e); }
+        var graphDefinition;
 
-        var graphDefinition = `
-        graph TD
-        A["Caracterizacion del manejo y uso del agua en la unidad agricola"];
-        A-->B["Manejo del Agua"];
-        A-->C["Uso del Agua"];
-        A-->D["Aspectos culturales"];
+        switch (d) {
+            case "1":
+                graphDefinition = `
+                graph TD
+                A["Caracterizacion del manejo y uso del agua en la unidad agricola"];
+                A-->B["Manejo del Agua"];
+                A-->C["Uso del Agua"];
+                A-->D["Aspectos culturales"];
+        
+                B-->E["Identificacion y descripcion de las</br> practicas agricolas de regadiio</br><b><i>Click para mas detalles</i></b>"];
+                C-->F["Calculo del volumen de agua</br> superficial que ingresa a la</br> parcela eperimental</br><b><i>Click para mas detalles</i></b>"];
+                D-->G["Descripcion de significados</br> culturales que definen el</br> manejo y uso del agua en el</br> cultivo de arroz</br><b><i>Click para mas detalles</i></b>"];
+                click E foo
+                click F foo
+                click G foo
+                `;
+                break;
+            case "2":
+                graphDefinition = `
+                graph TD
+                TO2["Cuantificacion de la HHverde, HHazul, HHgris"];
+                TO2-->ST1O2["Cuantificacion de la HHverde y HHazul"];
+                TO2-->ST1O3["Cuantificacion de la HHgris"];
+                ST1O2-->SS1O2["Metodo CROPWAT"];
+                ST1O3-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul>"];
 
-        B-->E["Identificacion y descripcion de las</br> practicas agricolas de regadiio</br><b><i>Click para mas detalles</i></b>"];
-        C-->F["Calculo del volumen de agua</br> superficial que ingresa a la</br> parcela eperimental</br><b><i>Click para mas detalles</i></b>"];
-        D-->G["Descripcion de significados</br> culturales que definen el</br> manejo y uso del agua en el</br> cultivo de arroz</br><b><i>Click para mas detalles</i></b>"];
-        click E foo
-        click F foo
-        click G foo
-        `;
+                click SS1O2 foo
+                click SS2O2 foo
+                `;
+                break;
+
+            case "3":
+
+                break;
+            default:
+                break;
+        }
+
+
 
         mermaid.render('theGraph', graphDefinition, (svgCode, bindFunctions) => {
             output.innerHTML = svgCode;
             bindFunctions()
         });
+    }
 
-        // mermaid.render('theGraph2', graphDefinition, (svgCode, bindFunctions) => {
-        //     output2.innerHTML = svgCode;
-        //     bindFunctions()
-        // });
+    componentDidMount() {
+        window.foo = e => { this.diagramEvent(e); }
     }
 
     render() {
@@ -86,6 +113,14 @@ class Project1 extends React.Component {
                         Magister en Desarrollo Sustentable con énfasis en Ecosistemas Acuáticos
                     </b>
                 </center>
+                <b>Realizado por:</b> <br />
+                    Claudia Patricia Vidal Puerta <br />
+                <b>Director:</b> <br />
+                    MAURICIO EDILBERTO RINCÓN ROMERO <br />
+                    Ingeniero Catastral y Geodesta M.Sc. Ph.D. <br />
+                <b>Codirector:</b> <br />
+                    OSCAR BUITRAGO BERMÚDEZ <br />
+                    Ingeniero Agrícola M.Sc. Ph.D. <br />
                 <hr />
                 <br />
                 <Accordion>
@@ -109,35 +144,71 @@ class Project1 extends React.Component {
                                 <h6>Objetivos</h6>
                                 <ul>
                                     <li>
-                                        {/* <NavLink to="/search/diagrama/p1/obj1"> */}
+                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("1") }}>
                                             Caracterizacion del manejo y uso del agua en la unidad agricola
-                                        {/* </NavLink> */}
+                                        </button>
                                     </li>
                                     <li>
-                                        {/* <NavLink to="/search/diagrama/p1/obj2"> */}
+                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("2") }}>
                                             Cuantificacion de la HHverde, HHazul, HHgris
-                                        {/* </NavLink> */}
+                                        </button>
                                     </li>
                                     <li>
-                                        {/* <NavLink to="/search/diagrama/p1/obj3"> */}
+                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("3") }}>
                                             Definir los efectos ambientales de la HHverde, HHazul, HHgris
-                                        {/* </NavLink> */}
+                                        </button>
                                     </li>
                                 </ul>
                                 <center>
-                                    <div id="output" />
-                                    <br />
-                                    <hr />
+                                    < div id="output" />
                                     {
-                                        this.state.show === "E" ? <img width="700px" height="480px" src={Eimage} alt=""/> : true
+                                        this.state.obj === "1" ?
+                                            <div>
+                                                < div id="output" />
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "E" ? <img width="700px" height="480px" src={Eimage} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "F" ? <img width="700px" height="480px" src={Fimage} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "G" ? <img width="700px" height="480px" src={Gimage} alt="" /> : true
+                                                }
+                                            </div>
+                                            : true
                                     }
                                     {
-                                        this.state.show === "F" ? <img width="700px" height="480px" src={Fimage} alt=""/> : true
+                                        this.state.obj === "2" ?
+                                            <div>
+                                                < div id="output" />
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "SS1O2" || this.state.showObj === "SS2O2" ? <img width="700px" height="480px" src={O2} alt="" /> : true
+                                                }
+                                            </div>
+                                            : true
                                     }
                                     {
-                                        this.state.show === "G" ? <img width="700px" height="480px" src={Gimage} alt=""/> : true
+                                        this.state.obj === "3" ?
+                                            <div>
+                                                < div id="output" />
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "E" ? <img width="700px" height="480px" src={Eimage} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "F" ? <img width="700px" height="480px" src={Fimage} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "G" ? <img width="700px" height="480px" src={Gimage} alt="" /> : true
+                                                }
+                                            </div>
+                                            : true
                                     }
-                                    {/* <div id="output2" /> */}
                                 </center>
                             </div>
 

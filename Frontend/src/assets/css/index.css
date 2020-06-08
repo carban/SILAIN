@@ -150,8 +150,18 @@ thead{
   display: inline-block;
 }
 
+/* ||||||||||||||| TRAVEL BETWEEN OBJETIVES ON PROJECT ||||||||||||||| */ 
 
+.ButtonLikeLink{
+  background-color: white;
+  border: none;
+  color:  #8282FF ;
+}
 
+.ButtonLikeLink:hover{
+  text-decoration: underline;
+  color: blue;
+}
 
 
 .diagram-component {
