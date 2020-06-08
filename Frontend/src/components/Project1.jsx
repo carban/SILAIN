@@ -73,8 +73,8 @@ class Project1 extends React.Component {
                 TO2["Cuantificacion de la HHverde, HHazul, HHgris"];
                 TO2-->ST1O2["Cuantificacion de la HHverde y HHazul"];
                 TO2-->ST1O3["Cuantificacion de la HHgris"];
-                ST1O2-->SS1O2["Metodo CROPWAT"];
-                ST1O3-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul>"];
+                ST1O2-->SS1O2["Metodo CROPWAT</br><b><i>Click para mas detalles</i></b>"];
+                ST1O3-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
 
                 click SS1O2 foo
                 click SS2O2 foo
@@ -188,6 +188,7 @@ class Project1 extends React.Component {
                                                 {
                                                     this.state.showObj === "SS1O2" || this.state.showObj === "SS2O2" ? <img width="700px" height="480px" src={O2} alt="" /> : true
                                                 }
+                                                <br />
                                             </div>
                                             : true
                                     }
@@ -206,6 +207,7 @@ class Project1 extends React.Component {
                                                 {
                                                     this.state.showObj === "G" ? <img width="700px" height="480px" src={Gimage} alt="" /> : true
                                                 }
+                                                <br />
                                             </div>
                                             : true
                                     }
