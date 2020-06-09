@@ -17,9 +17,7 @@ import SNavBar from "components/SNavBar.jsx";
 import Clave from "views/Clave.jsx";
 import Propiedad from "views/Propiedad.jsx";
 import TheMap from "views/TheMap.jsx";
-import Diagramas from "views/Diagramas.jsx";
-
-
+import Proyectos from "views/Proyectos.jsx";
 
 class Search extends React.Component {
   constructor(props) {
@@ -68,13 +66,13 @@ class Search extends React.Component {
                     </NavLink>
                     </Col>
                     <Col sm="3" md="3" lg="3">
-                      <NavLink to="/search/diagrama"
+                      <NavLink to="/search/proyecto"
                         activeStyle={{
                           fontWeight: "bold",
                           color: "blue",
                           fontSize: "15px"
-                        }} title="Realiza busquedas explorando diagramas">
-                        Diagramas
+                        }} title="Realiza busquedas explorando proyectos">
+                        Proyectos
                     </NavLink>
                     </Col>
                   </Row>
@@ -87,7 +85,7 @@ class Search extends React.Component {
                 <Route path="/search/clave" component={Clave} />
                 <Route path="/search/propiedad" component={Propiedad} />
                 <Route path="/search/mapa" component={TheMap} />
-                <Route path="/search/diagrama" component={Diagramas} />
+                <Route path="/search/proyecto" component={Proyectos} />
               </Switch>
             </Router>
           </Container>

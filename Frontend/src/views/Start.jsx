@@ -86,8 +86,8 @@ class Start extends React.Component {
                                     </button>
                                 </Col>
                                 <Col sm="3" md="3" lg="3">
-                                    <button onClick={() => this.setRedirect_searchType("diagrama")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando diagramas">
-                                        Diagramas
+                                    <button onClick={() => this.setRedirect_searchType("proyecto")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando proyectos">
+                                        Proyectos
                                     </button>
                                 </Col>
                             </Row>

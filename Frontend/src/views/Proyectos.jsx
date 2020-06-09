@@ -9,7 +9,7 @@ import { Router, Route, Switch, NavLink } from "react-router-dom";
 
 import Project1 from "components/Project1.jsx";
 
-class Diagramas extends React.Component {
+class Proyectos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -20,7 +20,7 @@ class Diagramas extends React.Component {
 
             <Router history={this.props.history}>
                 <Switch>
-                    <Route exact path="/search/diagrama" render={props =>
+                    <Route exact path="/search/proyecto" render={props =>
                         <div>
                             <center>
                                 <i>La informacion presentada fue suministrada por las personas involucradas</i>
@@ -34,7 +34,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p1" className="proLink">Explorar</NavLink>
+                                        <NavLink to="/search/proyecto/p1" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -44,7 +44,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p2" className="proLink">Explorar</NavLink>
+                                        <NavLink to="/search/proyecto/p2" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -54,7 +54,7 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p3" className="proLink">Explorar</NavLink>
+                                        <NavLink to="/search/proyecto/p3" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -64,16 +64,16 @@ class Diagramas extends React.Component {
                                         </h5>
                                     </Col>
                                     <Col md="2">
-                                        <NavLink to="/search/diagrama/p4" className="proLink">Explorar</NavLink>
+                                        <NavLink to="/search/proyecto/p4" className="proLink">Explorar</NavLink>
                                     </Col>
                                 </Row>
                             </Col>
                         </div>
                     } />
-                    <Route exact path="/search/diagrama/p1" component={Project1} />
-                    <Route exact path="/search/diagrama/p2" component={() => <h1>P2</h1>} />
-                    <Route exact path="/search/diagrama/p3" component={() => <h1>P3</h1>} />
-                    <Route exact path="/search/diagrama/p4" component={() => <h1>P4</h1>} />
+                    <Route exact path="/search/proyecto/p1" component={Project1} />
+                    <Route exact path="/search/proyecto/p2" component={() => <h1>P2</h1>} />
+                    <Route exact path="/search/proyecto/p3" component={() => <h1>P3</h1>} />
+                    <Route exact path="/search/proyecto/p4" component={() => <h1>P4</h1>} />
 
                     {/* <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} /> */}
                     {/* <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} /> */}
@@ -84,4 +84,4 @@ class Diagramas extends React.Component {
     }
 };
 
-export default Diagramas;
+export default Proyectos;
