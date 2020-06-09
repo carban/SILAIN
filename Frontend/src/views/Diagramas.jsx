@@ -8,7 +8,6 @@ import {
 import { Router, Route, Switch, NavLink } from "react-router-dom";
 
 import Project1 from "components/Project1.jsx";
-import P1Obj1 from "components/P1Obj1.jsx";
 
 class Diagramas extends React.Component {
     constructor(props) {
@@ -23,6 +22,9 @@ class Diagramas extends React.Component {
                 <Switch>
                     <Route exact path="/search/diagrama" render={props =>
                         <div>
+                            <center>
+                                <i>La informacion presentada fue suministrada por las personas involucradas</i>
+                            </center>
                             <br />
                             <Col size="sm">
                                 <Row>
@@ -72,8 +74,7 @@ class Diagramas extends React.Component {
                     <Route exact path="/search/diagrama/p2" component={() => <h1>P2</h1>} />
                     <Route exact path="/search/diagrama/p3" component={() => <h1>P3</h1>} />
                     <Route exact path="/search/diagrama/p4" component={() => <h1>P4</h1>} />
-                    
-                    <Route exact path="/search/diagrama/p1/obj1" component={P1Obj1} />
+
                     {/* <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} /> */}
                     {/* <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} /> */}
 
