@@ -72,9 +72,9 @@ class Project1 extends React.Component {
                 graph TD
                 TO2["Cuantificacion de la HHverde, HHazul, HHgris"];
                 TO2-->ST1O2["Cuantificacion de la HHverde y HHazul"];
-                TO2-->ST1O3["Cuantificacion de la HHgris"];
+                TO2-->ST2O2["Cuantificacion de la HHgris"];
                 ST1O2-->SS1O2["Metodo CROPWAT</br><b><i>Click para mas detalles</i></b>"];
-                ST1O3-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
+                ST2O2-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
 
                 click SS1O2 foo
                 click SS2O2 foo
@@ -82,13 +82,24 @@ class Project1 extends React.Component {
                 break;
 
             case "3":
+                graphDefinition = `
+                graph TD
+                TO3["Definir los efectos ambientales de la HHverde, HHazul, HHgris"];
+                TO3-->ST1O3["Sustentabilidad hidrica de la HHverde"];
+                TO3-->ST2O3["Sustentabilidad hidrica de la HHazul"];
+                TO3-->ST3O3["Sustentabilidad hidrica de la HHgris"];
+                ST1O3-->SS1O3["Calculo del inidice de presion </br> a los ecosistemas (IPHE) a traves de: </br><b><i>Click para mas detalles</i></b>"];
+                ST2O3-->SS2O3["<ul><li>Calculo del indice de agua</br>no retomada a la cuenca</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
+                ST3O3-->SS303["<ul><li>Calculo del indices de calidad</br>de agua ICA ......</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"]
 
+                click SS1O3 foo
+                click SS2O3 foo
+                click SS303 foo
+                `;
                 break;
             default:
                 break;
         }
-
-
 
         mermaid.render('theGraph', graphDefinition, (svgCode, bindFunctions) => {
             output.innerHTML = svgCode;
@@ -109,7 +120,7 @@ class Project1 extends React.Component {
                         SUSTENTABILIDAD AMBIENTAL DEL MANEJO Y USO DEL AGUA EN CULTIVOS DE ARROZ DE RIEGO. CASO ESTUDIO: FINCA ARROCERA SAN JOSÉ, MUNICIPIO DE SANTANDER DE QUILICHAO, DEPARTAMENTO DEL CAUCA.
                     </h5>
                     <b>
-                        Trabajo de Grado presentado como requisito parcial para optar por el título de
+                        Trabajo de Grado presentado como requisito parcial para optar por el título de <br></br>
                         Magister en Desarrollo Sustentable con énfasis en Ecosistemas Acuáticos
                     </b>
                 </center>
