@@ -54,17 +54,27 @@ class Project1 extends React.Component {
             case "1":
                 graphDefinition = `
                 graph TD
-                A["Caracterizacion del manejo y uso del agua en la unidad agricola"];
-                A-->B["Manejo del Agua"];
-                A-->C["Uso del Agua"];
-                A-->D["Aspectos culturales"];
+                TO1["Caracterizacion del manejo y uso del agua en la unidad agricola"];
+                TO1-->ST1O1["Manejo del Agua"];
+                TO1-->ST2O1["Uso del Agua"];
+                TO1-->ST3O1["Aspectos culturales"];
         
-                B-->E["Identificacion y descripcion de las</br> practicas agricolas de regadiio</br><b><i>Click para mas detalles</i></b>"];
-                C-->F["Calculo del volumen de agua</br> superficial que ingresa a la</br> parcela eperimental</br><b><i>Click para mas detalles</i></b>"];
-                D-->G["Descripcion de significados</br> culturales que definen el</br> manejo y uso del agua en el</br> cultivo de arroz</br><b><i>Click para mas detalles</i></b>"];
-                click E foo
-                click F foo
-                click G foo
+                ST1O1-->SS1O1["Identificacion y descripcion de las</br> practicas agricolas de regadio:
+                </br></br>
+                    <li>Preparacion de la tierra</li>
+                    <li>Proceso de siembra</li>
+                    <li>Metodo de riego</li>
+                    <li>Programa de riego</li>
+                    <li>Aplicacion de agroquimicos y bioinsumos</li>
+                    <li>Proceso de cosecha</li>
+                
+                <b><i>Click para mas detalles</i></b>"];
+                
+                ST2O1-->SS2O1["Calculo del volumen de agua</br> superficial que ingresa a la</br> parcela eperimental</br><b><i>Click para mas detalles</i></b>"];
+                ST3O1-->SS3O1["Descripcion de significados</br> culturales que definen el</br> manejo y uso del agua en el</br> cultivo de arroz</br><b><i>Click para mas detalles</i></b>"];
+                click SS1O1 foo
+                click SS2O1 foo
+                click SS3O1 foo
                 `;
                 break;
             case "2":
@@ -143,7 +153,6 @@ class Project1 extends React.Component {
                             <div style={{ "textAlign": "justify" }}>
                                 El cultivo de arroz inundado es uno de los agroecosistemas que ejerce mayor presión sobre el bien hídrico. Por ello, la evaluación de la sustentabilidad ambiental a partir del concepto de huella hídrica es importante ya que permite determinar cómo el manejo y uso del agua en el cultivo puede afectar la disponibilidad tanto en cantidad como en calidad. De ahí que, esta investigación parte de caracterizar el manejo y uso del agua en la producción primaria del arroz, el cual se define por las dimensiones culturales de los agricultores; posteriormente, se cuantifican los tres (3) componentes del indicador biofísico de sustentabilidad Huella Hídrica y, finalmente, se determinan los efectos ambientales mediante índices de sustentabilidad e indicadores de calidad y contaminación del agua. El estudio se centró en la finca San José perteneciente a la arrocera La Esmeralda S.A.S., ubicada en la zona plana del municipio de Santander de Quilichao – Departamento del Cauca durante el periodo comprendido entre septiembre de 2018 - febrero de 2019. Los resultados evidencian que el manejo y uso del agua está determinado por la percepción de abundancia del bien hídrico que tiene el agricultor, hecho que conlleva a su excesivo uso para mantener altos rendimientos y disminuir la aplicación de agroquímicos. Por otro lado, la cuantificación de la huella hídrica en el periodo indicado fue de  referida a  de , cero (0) de  y  de , mostrando que las aguas verdes, en la temporada de alto régimen pluviométrico, satisfacen las necesidades hídricas de la planta de arroz, por lo cual no es necesario el riego. No obstante, a partir del diseño e implementación de la estación automática medidora de caudal se encontró que se incorporaron  de agua de riego extraídos de los ríos y drenajes próximos para establecer la inundación permanente y garantizar el control residual de malezas; de este volumen  retornaron a las fuentes hídricas naturales. Finalmente, la evaluación de la sustentabilidad ambiental del manejo y uso del agua verde, azul y gris muestra una condición crítica de contaminación por agentes microbiológicos, compuestos químicos y un estado hipertrófico por el alto contenido de nutrientes, con lo cual se contribuye al deterioro progresivo de la calidad del agua cuando se reintegran a los ríos.
                             </div>
-                            {/* <NavLink to="/search/diagrama/p1/">Explorar</NavLink> */}
                         </Accordion.Collapse>
                     </div>
                     <div>
@@ -179,13 +188,13 @@ class Project1 extends React.Component {
                                                 <br />
                                                 <hr />
                                                 {
-                                                    this.state.showObj === "E" ? <img width="700px" height="480px" src={Eimage} alt="" /> : true
+                                                    this.state.showObj === "SS1O1" ? <img width="800px" height="480px" src={Eimage} alt="" /> : true
                                                 }
                                                 {
-                                                    this.state.showObj === "F" ? <img width="700px" height="480px" src={Fimage} alt="" /> : true
+                                                    this.state.showObj === "SS2O1" ? <img width="800px" height="480px" src={Fimage} alt="" /> : true
                                                 }
                                                 {
-                                                    this.state.showObj === "G" ? <img width="700px" height="480px" src={Gimage} alt="" /> : true
+                                                    this.state.showObj === "SS3O1" ? <img width="800px" height="480px" src={Gimage} alt="" /> : true
                                                 }
                                             </div>
                                             : true
