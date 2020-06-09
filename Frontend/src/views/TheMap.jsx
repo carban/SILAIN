@@ -6,7 +6,7 @@ import {
 
 
 import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
-import PropiedadByMap from "components/PropiedadByMap";
+import PropiedadByMap from "components/Map/PropiedadByMap";
 
 import axios from "axios";
 import ReactLoading from "react-loading";

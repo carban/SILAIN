@@ -8,8 +8,8 @@ import {
 import axios from "axios";
 import ReactLoading from "react-loading";
 
-import CustomFiltersByMap from "components/CustomFiltersByMap.jsx";
-import ResultsTableByMap from "components/ResultsTableByMap";
+import CustomFiltersByMap from "components/Map/CustomFiltersByMap.jsx";
+import ResultsTableByMap from "components/Map/ResultsTableByMap";
 
 import api from "api_route.js";
 
