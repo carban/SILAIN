@@ -7,7 +7,7 @@ import {
 
 import { Router, Route, Switch, NavLink } from "react-router-dom";
 
-import Project1 from "components/Project1.jsx";
+import Project1 from "components/P1/Project1.jsx";
 
 class Proyectos extends React.Component {
     constructor(props) {
