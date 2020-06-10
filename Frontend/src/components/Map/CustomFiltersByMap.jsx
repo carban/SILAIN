@@ -26,7 +26,7 @@ class CustomFiltersByMap extends React.Component {
         }
     }
 
-    handleSelects = e => {
+    handleSelects(e){
         var sele = { ...this.state.selections };
         sele[e.target.name] = e.target.value;
         this.props.getFilters(sele);
@@ -34,7 +34,7 @@ class CustomFiltersByMap extends React.Component {
 
     }
 
-    handleSelectCAT = e => {
+    handleSelectCAT(e){
         // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
         // con las subcategorias correspondientes a la categoria seleccionada
         var sele = { ...this.state.selections };
@@ -76,7 +76,7 @@ class CustomFiltersByMap extends React.Component {
                 <Row>
                     <Col>
                         <b>Categoria</b>
-                        <Input onChange={this.handleSelectCAT} type="select" name="cat" id="exampleSelect">
+                        <Input onChange={this.handleSelectCAT.bind(this)} type="select" name="cat" id="exampleSelect">
                             <option value={-1}>Select</option>
                             {
                                 this.state.cats.map((e, i) => (
@@ -87,7 +87,7 @@ class CustomFiltersByMap extends React.Component {
                     </Col>
                     <Col>
                         <b>Subcategoria</b>
-                        <Input onChange={this.handleSelects} value={this.state.selections.subcategoria} type="select" name="subcategoria" id="exampleSelect">
+                        <Input onChange={this.handleSelects.bind(this)} value={this.state.selections.subcategoria} type="select" name="subcategoria" id="exampleSelect">
                             <option>Select</option>
                             {
                                 this.state.current_sub.map((e, i) => (
@@ -98,7 +98,7 @@ class CustomFiltersByMap extends React.Component {
                     </Col>
                     <Col>
                         <b>Tipo</b>
-                        <Input onChange={this.handleSelects} type="select" name="tipo" id="exampleSelect">
+                        <Input onChange={this.handleSelects.bind(this)} type="select" name="tipo" id="exampleSelect">
                             <option>Select</option>
                             {
                                 this.state.tipos.map((e, i) => (
@@ -109,7 +109,7 @@ class CustomFiltersByMap extends React.Component {
                     </Col>
                     <Col>
                         <b>Formato</b>
-                        <Input onChange={this.handleSelects} type="select" name="formato" id="exampleSelect">
+                        <Input onChange={this.handleSelects.bind(this)} type="select" name="formato" id="exampleSelect">
                             <option>Select</option>
                             {
                                 this.state.formatos.map((e, i) => (

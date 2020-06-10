@@ -16,9 +16,6 @@ class ResultsTable extends React.Component {
     }
 
     render() {
-
-        // console.log(this.state.results);
-
         return (
             <div>
                 <Table hover={true}>

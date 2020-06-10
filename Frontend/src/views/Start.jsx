@@ -29,19 +29,19 @@ class Start extends React.Component {
         }
     }
 
-    handleInput = e => {
+    handleInput(e){
         this.setState({
             [e.target.name]: e.target.value
         });
     }
 
-    setRedirect = () => {
+    setRedirect(){
         if (this.state.words !== "") {
             this.setState({ redirect: true });
         }
     }
 
-    renderRedirect = () => {
+    renderRedirect(){
         if (this.state.redirect) {
             const w = this.state.words;
             return <Redirect to={{
@@ -51,8 +51,8 @@ class Start extends React.Component {
         }
     }
 
-    setRedirect_searchType = type => {
-
+    setRedirect_searchType(type){
+        console.log(type);
         this.setState({ redirect: true, search_type: "/search/" + type })
     }
 
@@ -76,17 +76,17 @@ class Start extends React.Component {
                                     </button>
                                 </Col>
                                 <Col sm="3" md="3" lg="3">
-                                    <button onClick={() => this.setRedirect_searchType("propiedad")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas seleccionando una propiedad">
+                                    <button onClick={this.setRedirect_searchType.bind(this, "propiedad")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas seleccionando una propiedad">
                                         Propiedades
                                     </button>
                                 </Col>
                                 <Col sm="3" md="3" lg="3">
-                                    <button onClick={() => this.setRedirect_searchType("mapa")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando un mapa">
+                                    <button onClick={this.setRedirect_searchType.bind(this, "mapa")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando un mapa">
                                         Mapa
                                     </button>
                                 </Col>
                                 <Col sm="3" md="3" lg="3">
-                                    <button onClick={() => this.setRedirect_searchType("proyecto")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando proyectos">
+                                    <button onClick={this.setRedirect_searchType.bind(this, "proyecto")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando proyectos">
                                         Proyectos
                                     </button>
                                 </Col>
@@ -95,9 +95,9 @@ class Start extends React.Component {
                         <br></br>
                         <Container>
                             <Col md="7" sm="12" xs="12">
-                                <form onSubmit={this.setRedirect}>
+                                <form onSubmit={this.setRedirect.bind(this)}>
                                     <InputGroup className="no-border">
-                                        <Input value={this.state.words} onChange={this.handleInput} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
+                                        <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
                                         <InputGroupAddon addonType="append">
                                             <InputGroupText>
                                                 <i className="nc-icon nc-zoom-split" />
@@ -107,7 +107,7 @@ class Start extends React.Component {
                                 </form>
                             </Col>
                         </Container>
-                        <Button color="info" onClick={this.setRedirect}>Buscar</Button>
+                        <Button color="info" onClick={this.setRedirect.bind(this)}>Buscar</Button>
                         {this.state.redirect ? this.renderRedirect() : true}
                     </center>
                 </div>

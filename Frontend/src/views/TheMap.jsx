@@ -51,7 +51,7 @@ class TheMap extends React.Component {
         });
     }
 
-    buscarUbication = (ubi_type, ubication) => {
+    buscarUbication(ubi_type, ubication){
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
@@ -77,7 +77,7 @@ class TheMap extends React.Component {
             })
     }
 
-    draw = e => {
+    draw(e){
         // this.setState({ draw: [...this.state.draw, [e.latlng.lat, e.latlng.lng]] })
     }
 
@@ -111,7 +111,7 @@ class TheMap extends React.Component {
         return (
             <div>
                 {modal}
-                <Map className="amapa" center={this.state.position} zoom={9} onClick={this.draw}>
+                <Map className="amapa" center={this.state.position} zoom={9} onClick={this.draw.bind(this)}>
                     <LayersControl position="topright">
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -134,7 +134,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.departamento}</h5>
-                                                <button onClick={() => this.buscarUbication("departamento", e.departamento)} className="btn_search_map">
+                                                <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
                                                     Buscar
                                                 </button>
                                             </center>
@@ -151,7 +151,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.municipio}</h5>
-                                                <button onClick={() => this.buscarUbication("municipio", e.municipio)} className="btn_search_map2">
+                                                <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
                                                     Buscar
                                                 </button>
                                             </center>
@@ -168,7 +168,7 @@ class TheMap extends React.Component {
                                         <Popup>
                                             <center>
                                                 <h5>{e.finca}</h5>
-                                                <button onClick={() => this.buscarUbication("finca", e.finca)} className="btn_search_map3">
+                                                <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
                                                     Buscar
                                                 </button>
                                             </center>

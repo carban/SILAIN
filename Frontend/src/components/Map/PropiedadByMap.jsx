@@ -31,7 +31,7 @@ class PropiedadByMap extends React.Component {
         }
     }
 
-    allSelect = () => {
+    allSelect(){
         for (let i in this.state.filters) {
             if (this.state.filters[i] !== "Select") {
                 return false;
@@ -40,17 +40,7 @@ class PropiedadByMap extends React.Component {
         return true;
     }
 
-
-    handleInput = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    handleSubmit = e => {
-        e.preventDefault();
-        this.newBasicSearch();
-    }
-
-    getFilters = obj => {
+    getFilters(obj){
         const basicURL = api.route + "/map/ubication_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
@@ -82,7 +72,7 @@ class PropiedadByMap extends React.Component {
     render() {
         return (
             <div>
-                <CustomFiltersByMap getFilters={this.getFilters} />
+                <CustomFiltersByMap getFilters={this.getFilters.bind(this)} />
                 {
                     this.state.loading ? (
                         <center>

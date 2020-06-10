@@ -34,17 +34,16 @@ class Clave extends React.Component {
         }
     }
 
-
     handleInput(e){
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleSubmit = e => {
+    handleSubmit(e){
         e.preventDefault();
         this.newBasicSearch();
     }
 
-    newBasicSearch = e => {
+    newBasicSearch(e){
 
         if (this.state.words !== "") {
             const basicURL = api.route + "/basic/search_by_filter";
@@ -66,7 +65,7 @@ class Clave extends React.Component {
     }
 
 
-    getFilters = obj => {
+    getFilters(obj){
         if (this.state.word_searched !== "") {
             const basicURL = api.route + "/basic/search_by_filter";
             this.setState({ loading: true })
@@ -101,11 +100,11 @@ class Clave extends React.Component {
             <Col md="12" lg="12">
                 <Row>
                     <Col md="12" lg="12">
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
                             <InputGroup className="no-border">
                                 <Input onChange={this.handleInput.bind(this)} value={this.state.words} name="words" placeholder="Palabras Clave..." />
                                 <InputGroupAddon addonType="append">
-                                    <InputGroupText onClick={this.handleSubmit} className="icon-click">
+                                    <InputGroupText onClick={this.handleSubmit.bind(this)} className="icon-click">
                                         <i className="nc-icon nc-zoom-split" />
                                     </InputGroupText>
                                 </InputGroupAddon>
@@ -119,7 +118,7 @@ class Clave extends React.Component {
         return (
             <div>
                 {keyWord}
-                <CustomFilters getFilters={this.getFilters} />
+                <CustomFilters getFilters={this.getFilters.bind(this)} />
                 {
                     this.state.loading ? (
                         <center>

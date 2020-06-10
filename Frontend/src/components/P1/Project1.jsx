@@ -26,11 +26,11 @@ class Project1 extends React.Component {
         }
     }
 
-    diagramEvent = e => {
+    diagramEvent(e){
         this.setState({ showObj: e });
     }
 
-    showDiagram = d => {
+    showDiagram(d){
 
         this.setState({ "obj": d });
 
@@ -164,17 +164,17 @@ class Project1 extends React.Component {
                                 <h6>Objetivos</h6>
                                 <ul>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("1") }}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "1")}>
                                             Caracterizacion del manejo y uso del agua en la unidad agricola
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("2") }}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "2")}>
                                             Cuantificacion de la HHverde, HHazul, HHgris
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={() => { this.showDiagram("3") }}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "3")}>
                                             Definir los efectos ambientales de la HHverde, HHazul, HHgris
                                         </button>
                                     </li>

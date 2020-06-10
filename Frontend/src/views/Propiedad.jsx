@@ -31,7 +31,7 @@ class Propiedad extends React.Component {
         }
     }
 
-    allSelect = () => {
+    allSelect(){
         for (let i in this.state.filters) {
             if (this.state.filters[i] !== "Select") {
                 return false;
@@ -40,17 +40,7 @@ class Propiedad extends React.Component {
         return true;
     }
 
-
-    handleInput = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    handleSubmit = e => {
-        e.preventDefault();
-        this.newBasicSearch();
-    }
-
-    getFilters = obj => {
+    getFilters(obj){
         const basicURL = api.route + "/basic/search_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, { filters: obj, word: "" })
@@ -68,14 +58,10 @@ class Propiedad extends React.Component {
             })
     }
 
-    componentDidMount() {
-        // this.newBasicSearch();
-    }
-
     render() {
         return (
             <div>
-                <CustomFilters getFilters={this.getFilters} />
+                <CustomFilters getFilters={this.getFilters.bind(this)} />
                 {
                     this.state.loading ? (
                         <center>
