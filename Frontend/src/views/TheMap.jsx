@@ -1,17 +1,15 @@
 import React from "react";
 
 import {
-    Modal, ModalHeader, ModalBody
+    Modal, ModalHeader, ModalBody, Input
 } from "reactstrap";
-
 
 import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
 import PropiedadByMap from "components/Map/PropiedadByMap";
-import Legend from "components/Map/Legend";
-
 
 import axios from "axios";
 import ReactLoading from "react-loading";
+import Control from 'react-leaflet-control';
 
 import api from "api_route.js";
 
@@ -131,10 +129,36 @@ class TheMap extends React.Component {
                                 />
                             </LayersControl.BaseLayer>
                             {/* End Layers */}
-                            <Legend />
-                            {
+                            <Control position="topright">
+                                <div className="info legend">
+                                    <i style={{ "backgroundColor": "purple" }} ></i>
+                                    Departamentos
+                                    <br/>
+                                    <i style={{ "backgroundColor": "cyan" }} ></i>
+                                    Municipios
+                                    <br/>
+                                    <i style={{ "backgroundColor": "blue" }} ></i>
+                                    Fincas
+                                </div>
+                            </Control>
+                            <Control position="topright">
+                                <Input type="select">
+                                    <option value="">Departamentos</option>
+                                    <option value="">Valle del Cauca</option>
+                                    <option value="">Cauca</option>
+                                </Input>
+                                <br />
+                                <Input type="select">
+                                    <option value="">Municipios</option>
+                                </Input>
+                                <br />
+                                <Input type="select">
+                                    <option value="">Fincas</option>
+                                </Input>
+                            </Control>
+                            {/* {
                                 this.state.departamentos.map((e, i) => (
-                                    <LayersControl.Overlay name={e.departamento} checked="true" key={i}>
+                                    <LayersControl.Overlay name={e.departamento} key={i}>
                                         <FeatureGroup color="purple">
                                             <Popup>
                                                 <center>
@@ -151,7 +175,7 @@ class TheMap extends React.Component {
                             }
                             {
                                 this.state.municipios.map((e, i) => (
-                                    <LayersControl.Overlay name={e.municipio} checked="true" key={i}>
+                                    <LayersControl.Overlay name={e.municipio} key={i}>
                                         <FeatureGroup color="cyan">
                                             <Popup>
                                                 <center>
@@ -168,7 +192,7 @@ class TheMap extends React.Component {
                             }
                             {
                                 this.state.fincas.map((e, i) => (
-                                    <LayersControl.Overlay name={e.finca} checked="true" key={i}>
+                                    <LayersControl.Overlay name={e.finca} key={i}>
                                         <FeatureGroup color="blue">
                                             <Popup>
                                                 <center>
@@ -182,8 +206,53 @@ class TheMap extends React.Component {
                                         </FeatureGroup>
                                     </LayersControl.Overlay>
                                 ))
-                            }
+                            } */}
                         </LayersControl>
+                        {
+                            this.state.departamentos.map((e, i) => (
+                                <FeatureGroup color="purple" key={i}>
+                                    <Popup>
+                                        <center>
+                                            <h5>{e.departamento}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
+                                                Buscar
+                                                </button>
+                                        </center>
+                                    </Popup>
+                                    <Polygon positions={e.st_asgeojson} />
+                                </FeatureGroup>
+                            ))
+                        }
+                        {
+                            this.state.municipios.map((e, i) => (
+                                <FeatureGroup color="cyan" key={i}>
+                                    <Popup>
+                                        <center>
+                                            <h5>{e.municipio}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
+                                                Buscar
+                                                </button>
+                                        </center>
+                                    </Popup>
+                                    <Polygon positions={e.st_asgeojson} />
+                                </FeatureGroup>
+                            ))
+                        }
+                        {
+                            this.state.fincas.map((e, i) => (
+                                <FeatureGroup color="blue" key={i}>
+                                    <Popup>
+                                        <center>
+                                            <h5>{e.finca}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
+                                                Buscar
+                                                </button>
+                                        </center>
+                                    </Popup>
+                                    <Polygon positions={e.st_asgeojson} />
+                                </FeatureGroup>
+                            ))
+                        }
                     </Map>
                 </center>
             </div >
