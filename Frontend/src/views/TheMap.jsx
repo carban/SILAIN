@@ -7,6 +7,8 @@ import {
 
 import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
 import PropiedadByMap from "components/Map/PropiedadByMap";
+import Legend from "components/Map/Legend";
+
 
 import axios from "axios";
 import ReactLoading from "react-loading";
@@ -21,7 +23,6 @@ class TheMap extends React.Component {
             fincas: [],
             departamentos: [],
             municipios: [],
-            draw: [],
             modal: false,
             loading: false,
             ubication: "",
@@ -51,7 +52,7 @@ class TheMap extends React.Component {
         });
     }
 
-    buscarUbication(ubi_type, ubication){
+    buscarUbication(ubi_type, ubication) {
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
@@ -75,10 +76,6 @@ class TheMap extends React.Component {
             .catch(err => {
                 console.log(err);
             })
-    }
-
-    draw(e){
-        // this.setState({ draw: [...this.state.draw, [e.latlng.lat, e.latlng.lng]] })
     }
 
     render() {
@@ -110,76 +107,85 @@ class TheMap extends React.Component {
 
         return (
             <div>
-                {modal}
-                <Map className="amapa" center={this.state.position} zoom={9} onClick={this.draw.bind(this)}>
-                    <LayersControl position="topright">
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <LayersControl.Overlay name="DRAW" checked="true">
-                            <FeatureGroup color="pink">
-                                <Popup>
-                                    <center>
-                                        <h5>DRAW</h5>
-                                    </center>
-                                </Popup>
-                                <Polygon positions={this.state.draw} />
-                            </FeatureGroup>
-                        </LayersControl.Overlay>
-                        {
-                            this.state.departamentos.map((e, i) => (
-                                <LayersControl.Overlay name={e.departamento} checked="true" key={i}>
-                                    <FeatureGroup color="red">
-                                        <Popup>
-                                            <center>
-                                                <h5>{e.departamento}</h5>
-                                                <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
-                                                    Buscar
+                <center>
+                    {modal}
+                    <Map className="amapa" center={this.state.position} zoom={9}>
+                        <LayersControl position="topright">
+                            <LayersControl.BaseLayer name="Normal" checked="true">
+                                <TileLayer
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                            </LayersControl.BaseLayer>
+                            <LayersControl.BaseLayer name="Blanco y Negro">
+                                <TileLayer
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+                                />
+                            </LayersControl.BaseLayer>
+
+                            <LayersControl.BaseLayer name="Transport">
+                                <TileLayer
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png"
+                                />
+                            </LayersControl.BaseLayer>
+                            {/* End Layers */}
+                            <Legend />
+                            {
+                                this.state.departamentos.map((e, i) => (
+                                    <LayersControl.Overlay name={e.departamento} checked="true" key={i}>
+                                        <FeatureGroup color="purple">
+                                            <Popup>
+                                                <center>
+                                                    <h5>{e.departamento}</h5>
+                                                    <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
+                                                        Buscar
                                                 </button>
-                                            </center>
-                                        </Popup>
-                                        <Polygon positions={e.st_asgeojson} />
-                                    </FeatureGroup>
-                                </LayersControl.Overlay>
-                            ))
-                        }
-                        {
-                            this.state.municipios.map((e, i) => (
-                                <LayersControl.Overlay name={e.municipio} checked="true" key={i}>
-                                    <FeatureGroup color="yellow">
-                                        <Popup>
-                                            <center>
-                                                <h5>{e.municipio}</h5>
-                                                <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
-                                                    Buscar
+                                                </center>
+                                            </Popup>
+                                            <Polygon positions={e.st_asgeojson} />
+                                        </FeatureGroup>
+                                    </LayersControl.Overlay>
+                                ))
+                            }
+                            {
+                                this.state.municipios.map((e, i) => (
+                                    <LayersControl.Overlay name={e.municipio} checked="true" key={i}>
+                                        <FeatureGroup color="cyan">
+                                            <Popup>
+                                                <center>
+                                                    <h5>{e.municipio}</h5>
+                                                    <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
+                                                        Buscar
                                                 </button>
-                                            </center>
-                                        </Popup>
-                                        <Polygon positions={e.st_asgeojson} />
-                                    </FeatureGroup>
-                                </LayersControl.Overlay>
-                            ))
-                        }
-                        {
-                            this.state.fincas.map((e, i) => (
-                                <LayersControl.Overlay name={e.finca} checked="true" key={i}>
-                                    <FeatureGroup color="blue">
-                                        <Popup>
-                                            <center>
-                                                <h5>{e.finca}</h5>
-                                                <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
-                                                    Buscar
+                                                </center>
+                                            </Popup>
+                                            <Polygon positions={e.st_asgeojson} />
+                                        </FeatureGroup>
+                                    </LayersControl.Overlay>
+                                ))
+                            }
+                            {
+                                this.state.fincas.map((e, i) => (
+                                    <LayersControl.Overlay name={e.finca} checked="true" key={i}>
+                                        <FeatureGroup color="blue">
+                                            <Popup>
+                                                <center>
+                                                    <h5>{e.finca}</h5>
+                                                    <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
+                                                        Buscar
                                                 </button>
-                                            </center>
-                                        </Popup>
-                                        <Polygon positions={e.st_asgeojson} />
-                                    </FeatureGroup>
-                                </LayersControl.Overlay>
-                            ))
-                        }
-                    </LayersControl>
-                </Map>
+                                                </center>
+                                            </Popup>
+                                            <Polygon positions={e.st_asgeojson} />
+                                        </FeatureGroup>
+                                    </LayersControl.Overlay>
+                                ))
+                            }
+                        </LayersControl>
+                    </Map>
+                </center>
             </div >
         )
     }
