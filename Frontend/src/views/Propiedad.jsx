@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Row, Col, Alert, Badge
+    Row, Col, Alert, Badge, Container
 } from 'reactstrap';
 
 import axios from "axios";
@@ -31,7 +31,7 @@ class Propiedad extends React.Component {
         }
     }
 
-    allSelect(){
+    allSelect() {
         for (let i in this.state.filters) {
             if (this.state.filters[i] !== "Select") {
                 return false;
@@ -40,7 +40,7 @@ class Propiedad extends React.Component {
         return true;
     }
 
-    getFilters(obj){
+    getFilters(obj) {
         const basicURL = api.route + "/basic/search_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, { filters: obj, word: "" })
@@ -60,61 +60,63 @@ class Propiedad extends React.Component {
 
     render() {
         return (
-            <div>
-                <CustomFilters getFilters={this.getFilters.bind(this)} />
-                {
-                    this.state.loading ? (
-                        <center>
-                            <ReactLoading type={"bars"} color={"#51BCDA"} />
-                        </center>
-                    ) :
-                        <div>
-                            <br />
+            <Container>
+                <div>
+                    <CustomFilters getFilters={this.getFilters.bind(this)} />
+                    {
+                        this.state.loading ? (
+                            <center>
+                                <ReactLoading type={"bars"} color={"#51BCDA"} />
+                            </center>
+                        ) :
                             <div>
-                                <Alert color={this.state.results.length > 0 || this.allSelect() ? "info" : "danger"}>
-                                    {
-                                        this.state.results.length > 0
-                                            ? (
-                                                <div>
-                                                    <h5><b>Resultados segun los filtros: </b>{this.state.results.length}</h5>
-                                                    <Row className="datsBigger">
-                                                        <Col>
-                                                            *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
-                                                        </Col>
-                                                        <Col>
-                                                            *Archivo procesado:  <Badge pill><b>{this.state.counts_tipos.AP}</b></Badge>
-                                                        </Col>
-                                                        <Col>
-                                                            *Imagen cruda:  <Badge pill><b>{this.state.counts_tipos.IC}</b></Badge>
-                                                        </Col>
-                                                        <Col>
-                                                            *Imagen procesada:  <Badge pill><b>{this.state.counts_tipos.IP}</b></Badge>
-                                                        </Col>
-                                                        <Col>
-                                                            *Compilación:  <Badge pill><b>{this.state.counts_tipos.C}</b></Badge>
-                                                        </Col>
-                                                    </Row>
-                                                </div>
-                                            )
-                                            : (
-                                                this.allSelect() ?
-                                                    <h5> <b>Selecciona un atributo de busqueda</b></h5>
-                                                    : <h5><b>No hay datos relacionados</b></h5>
-                                            )
+                                <br />
+                                <div>
+                                    <Alert color={this.state.results.length > 0 || this.allSelect() ? "info" : "danger"}>
+                                        {
+                                            this.state.results.length > 0
+                                                ? (
+                                                    <div>
+                                                        <h5><b>Resultados segun los filtros: </b>{this.state.results.length}</h5>
+                                                        <Row className="datsBigger">
+                                                            <Col>
+                                                                *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
+                                                            </Col>
+                                                            <Col>
+                                                                *Archivo procesado:  <Badge pill><b>{this.state.counts_tipos.AP}</b></Badge>
+                                                            </Col>
+                                                            <Col>
+                                                                *Imagen cruda:  <Badge pill><b>{this.state.counts_tipos.IC}</b></Badge>
+                                                            </Col>
+                                                            <Col>
+                                                                *Imagen procesada:  <Badge pill><b>{this.state.counts_tipos.IP}</b></Badge>
+                                                            </Col>
+                                                            <Col>
+                                                                *Compilación:  <Badge pill><b>{this.state.counts_tipos.C}</b></Badge>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                )
+                                                : (
+                                                    this.allSelect() ?
+                                                        <h5> <b>Selecciona un atributo de busqueda</b></h5>
+                                                        : <h5><b>No hay datos relacionados</b></h5>
+                                                )
 
-                                    }
-                                </Alert>
+                                        }
+                                    </Alert>
+                                </div>
+                                {
+                                    this.state.results.length > 0 ?
+                                        (
+                                            <ResultsTable results={this.state.results} />
+                                        ) : true
+                                }
                             </div>
-                            {
-                                this.state.results.length > 0 ?
-                                    (
-                                        <ResultsTable results={this.state.results} />
-                                    ) : true
-                            }
-                        </div>
-                }
+                    }
 
-            </div>
+                </div>
+            </Container>
         )
     }
 };

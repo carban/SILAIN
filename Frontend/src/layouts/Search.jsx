@@ -2,8 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-  Row, Col,
-  Container
+  Row, Col
 } from 'reactstrap';
 
 import { Provider } from "react-redux";
@@ -30,7 +29,6 @@ class Search extends React.Component {
       <Provider store={store}>
         <div>
           <SNavBar />
-          <Container>
             <div>
               <center>
                 <Col md="12">
@@ -88,7 +86,6 @@ class Search extends React.Component {
                 <Route path="/search/proyecto" component={Proyectos} />
               </Switch>
             </Router>
-          </Container>
           <Footer />
         </div>
       </Provider>
