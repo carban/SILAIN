@@ -19,6 +19,8 @@ class TheMap extends React.Component {
         super(props);
         this.state = {
             position: [3.2175377205303732, -76.53764390954167],
+            zoom: 7,
+
             fincas: [],
             departamentos: [],
             municipios: [],
@@ -84,22 +86,37 @@ class TheMap extends React.Component {
     }
 
     getFilters(obj) {
-        console.log(obj);
-        // const basicURL = api.route + "/map/ubication_by_filter";
-        // this.setState({ loading: true })
-        // axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
-        //     .then(res => {
+        // console.log(obj);
+        const basicURL = api.route + "/map/getpoly";
+        // console.log(obj)
+        axios.post(basicURL, { filters: obj })
+            .then(res => {
+                var { departamentos, municipios, fincas } = res.data;
 
-        //         this.setState({
-        //             results: res.data.result,
-        //             counts_tipos: res.data.counts,
-        //             loading: false,
-        //             filters: obj
-        //         });
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+                this.setState({
+                    departamentos: departamentos,
+                    municipios: municipios,
+                    fincas: fincas
+                });
+
+                var middle = 0;
+                if (departamentos.length === 0) {
+                    this.setState({ position: [3.2175377205303732, -76.53764390954167], zoom: 7 });
+                } else if (municipios.length === 0) {
+                    middle = departamentos[0].st_asgeojson[Math.floor(departamentos[0].st_asgeojson.length / 2)];
+                    this.setState({ position: middle, zoom: 8 });
+                } else if (fincas.length === 0) {
+                    middle = municipios[0].st_asgeojson[Math.floor(municipios[0].st_asgeojson.length / 2)];
+                    this.setState({ position: middle, zoom: 10 });
+                } else {
+                    middle = fincas[0].st_asgeojson[Math.floor(fincas[0].st_asgeojson.length / 2)];
+                    this.setState({ position: middle, zoom: 16 });
+                }
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -133,7 +150,7 @@ class TheMap extends React.Component {
             <div>
                 <center>
                     {modal}
-                    <Map className="amapa" center={this.state.position} zoom={9}>
+                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer

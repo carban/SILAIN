@@ -32,7 +32,7 @@ function getTextWithFilters(text, filters) {
       c = true
     }
   }
-  
+
   if (s !== "") {
     text = text + " and" + s;
   }
@@ -51,7 +51,7 @@ function getValuesFromFilters(filters, ubication) {
 }
 
 // Funcion auxiliar para invertir la latitud y la longitud cuando se realiza la consulta
-function swapCoors(data){
+function swapCoors(data) {
   for (let i in data) {
     var aux = JSON.parse(data[i].st_asgeojson).coordinates[0][0];
     for (let j = 0; j < aux.length; j++) {
@@ -118,7 +118,7 @@ router.post('/ubication_by_filter', async (req, res) => {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
 
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where "+ubi_type+" = $1";
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where " + ubi_type + " = $1";
 
     var { query_text } = getTextWithFilters(text, filters);
     var values = getValuesFromFilters(filters, ubication);
@@ -174,64 +174,58 @@ router.post('/ubication_by_filter', async (req, res) => {
 
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
-// Retorna la informacion espacial de un elemento en particular
+// Retorna la informacion espacial (poligono) de un elemento en particular
 // Departamento, Municipio, Finca
-router.get('/getPoly', async (req, res) => {
+router.post('/getpoly', async (req, res) => {
 
-  const { filters, ubication, ubi_type } = req.body;
-  // console.log(filters, ubication);
+  const { filters } = req.body;
+
   var { counter } = getHowMany(filters);
 
-  if (counter == 0 && ubication == "") {
-    res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
+  if (counter == 0) {
+    res.status(200).send({ departamentos: [], municipios: [], fincas: [] });
   } else {
 
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where "+ubi_type+" = $1";
-
-    var { query_text } = getTextWithFilters(text, filters);
-    var values = getValuesFromFilters(filters, ubication);
-
-    // console.log(query_text, values);
-
-    var query = {
-      text: query_text,
-      values: values
-    }
+    const { departamento, municipio, finca } = filters;
 
     try {
-      const result = await pg.query(query);
 
-      var AC = 0;
-      var AP = 0;
-      var IC = 0;
-      var IP = 0;
-      var C = 0;
+      var dataDept = [];
+      var dataMuni = [];
+      var dataFin = [];
 
-      for (let i = 0; i < result.rows.length; i++) {
-        const tipo = result.rows[i].tipo;
-        switch (tipo) {
-          case "Archivo crudo":
-            AC++;
-            break;
-          case "Archivo procesado":
-            AP++;
-            break;
-          case "Imagen cruda":
-            IC++;
-            break;
-          case "Imagen procesada":
-            IP++;
-            break;
-          case "Compilación":
-            C++;
-            break;
-          default:
-            break;
+      if (departamento !== 'Select') {
+        var query = {
+          text: "select * from (select departamento.departamento, st_asgeojson(geom) from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
+          values: [departamento]
         }
-
+        dataDept = await pg.query(query);
+        dataDept = swapCoors(dataDept.rows);
       }
-      // console.log({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } })
-      res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
+
+      if (municipio !== 'Select') {
+        var query = {
+          text: "select * from (select municipio.municipio, st_asgeojson(geom) from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
+          values: [municipio]
+        }
+        dataMuni = await pg.query(query);
+        dataMuni = swapCoors(dataMuni.rows);
+      }
+
+      if (finca !== 'Select') {
+        var queryFin = {
+          text: "select * from (select finca.finca, idfinca, st_asgeojson(geom) from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+          values: [finca]
+        }
+        dataFin = await pg.query(queryFin);
+        dataFin = swapCoors(dataFin.rows);
+      }
+
+      res.status(200).send({
+        departamentos: dataDept,
+        municipios: dataMuni,
+        fincas: dataFin
+      });
 
     } catch (e) {
       console.log(e);

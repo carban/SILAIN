@@ -52,7 +52,6 @@ class Start extends React.Component {
     }
 
     setRedirect_searchType(type){
-        console.log(type);
         this.setState({ redirect: true, search_type: "/search/" + type })
     }
 

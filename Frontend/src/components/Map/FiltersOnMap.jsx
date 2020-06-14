@@ -53,26 +53,30 @@ class FiltersOnMap extends React.Component {
     handleSelectMUNI(e) {
         // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
         // con las subcategorias correspondientes a la categoria seleccionada
-        var sele = { ...this.state.selections };
-        var val = e.target.value;
+
         // Esto fue usado de emergencia para el funcionamiento
         // CUALQUIER PROBLEMA ATENCION AQUI
-        val = this.findYourFinca(val);
+        var sele = { ...this.state.selections };
+
+        var val = this.findYourFinca(e.target.value);
+        var position = this.findYourPos(e.target.value);
         // ---------------------
         var c_fin = [];
 
         if (val === "-1") {
             sele["municipio"] = "Select";
         } else {
-            sele["municipio"] = this.state.current_mun[val];
+            sele["municipio"] = this.state.current_mun[position];
             c_fin = this.state.fins[val]
         }
-
+        // console.log(sele.municipio)
         sele["finca"] = "Select";
         this.props.getFilters(sele);
         this.setState({ selections: sele, current_fin: c_fin });
     }
 
+    // Funcion que formatea los municipios para asociarlos con las fincas
+    // REVISAR ESTO SI PUEDE LLEGAR A TRAER INCONSISTENCIAS
     findYourFinca(municipio) {
 
         if (municipio === "-1") {
@@ -93,6 +97,14 @@ class FiltersOnMap extends React.Component {
             }
 
             return c;
+        }
+    }
+
+    findYourPos(municipio){
+        for(let i in this.state.current_mun){
+            if (municipio === this.state.current_mun[i]) {
+                return i;
+            }
         }
     }
 

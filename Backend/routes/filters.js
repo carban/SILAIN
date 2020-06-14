@@ -74,7 +74,8 @@ function processFincas(fincas) {
 }
 
 
-
+// Funcion que formatea los departamentos, los municipios y las fincas
+// Para que se puedan filtrar los poligonos en el mapa
 function extractFiltersOnMap(array) {
 
   var currentDept = array[0].departamento;
@@ -172,8 +173,8 @@ router.get('/', async (req, res) => {
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna toda la informacion de los filtros que esten almacenados en la BD
-// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca
-// Se omite la consulta de finca y municipio
+// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca.
+// En este caso se omite la consulta de finca y municipio
 router.get('/ubication', async (req, res) => {
 
   const catsubs = {
@@ -206,9 +207,8 @@ router.get('/ubication', async (req, res) => {
 
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
-// Retorna toda la informacion de los filtros que esten almacenados en la BD
-// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca
-// Se omite la consulta de finca y municipio
+// Retorna la informacion de departamentos, municipios y fincas correspondies,
+// para los filtros de poligonos en el mapa
 router.get('/onmap', async (req, res) => {
 
   const query = "select departamento, municipio, finca from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento_iddepartamento;";
