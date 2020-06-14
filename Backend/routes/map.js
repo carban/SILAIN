@@ -172,4 +172,73 @@ router.post('/ubication_by_filter', async (req, res) => {
   }
 });
 
+
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna la informacion espacial de un elemento en particular
+// Departamento, Municipio, Finca
+router.get('/getPoly', async (req, res) => {
+
+  const { filters, ubication, ubi_type } = req.body;
+  // console.log(filters, ubication);
+  var { counter } = getHowMany(filters);
+
+  if (counter == 0 && ubication == "") {
+    res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
+  } else {
+
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where "+ubi_type+" = $1";
+
+    var { query_text } = getTextWithFilters(text, filters);
+    var values = getValuesFromFilters(filters, ubication);
+
+    // console.log(query_text, values);
+
+    var query = {
+      text: query_text,
+      values: values
+    }
+
+    try {
+      const result = await pg.query(query);
+
+      var AC = 0;
+      var AP = 0;
+      var IC = 0;
+      var IP = 0;
+      var C = 0;
+
+      for (let i = 0; i < result.rows.length; i++) {
+        const tipo = result.rows[i].tipo;
+        switch (tipo) {
+          case "Archivo crudo":
+            AC++;
+            break;
+          case "Archivo procesado":
+            AP++;
+            break;
+          case "Imagen cruda":
+            IC++;
+            break;
+          case "Imagen procesada":
+            IP++;
+            break;
+          case "Compilación":
+            C++;
+            break;
+          default:
+            break;
+        }
+
+      }
+      // console.log({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } })
+      res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
+
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(400);
+    }
+  }
+})
+
+
 module.exports = router;

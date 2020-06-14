@@ -72,6 +72,54 @@ function processFincas(fincas) {
   fins.push(aux);
   return fins;
 }
+
+
+
+function extractFiltersOnMap(array) {
+
+  var currentDept = array[0].departamento;
+  var currentMuni = array[0].municipio;
+  var currentFin = array[0].finca;
+
+  var departamentos = [currentDept];
+  var municipios = [];
+  var fincas = [];
+
+  var munis_for_dept = [currentMuni];
+  var fins_for_munis = [currentFin];
+
+  for (let i = 0; i < array.length; i++) {
+
+    if (currentDept !== array[i].departamento) {
+      currentDept = array[i].departamento;
+      departamentos.push(array[i].departamento);
+
+      municipios.push(munis_for_dept);
+      munis_for_dept = [];
+    }
+
+    if (currentMuni !== array[i].municipio) {
+      currentMuni = array[i].municipio;
+      munis_for_dept.push(array[i].municipio);
+
+      fincas.push(fins_for_munis);
+      fins_for_munis = [];
+    }
+
+    if (currentFin !== array[i].finca) {
+      currentFin = array[i].finca;
+      fins_for_munis.push(array[i].finca);
+    }
+  }
+
+  municipios.push(munis_for_dept);
+  fincas.push(fins_for_munis);
+
+  return { departamentos, municipios, fincas };
+}
+
+
+
 // ------------------------------------------------------------------------------------
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
@@ -154,6 +202,20 @@ router.get('/ubication', async (req, res) => {
     console.log(e);
     res.sendStatus(400);
   }
+})
+
+
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna toda la informacion de los filtros que esten almacenados en la BD
+// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca
+// Se omite la consulta de finca y municipio
+router.get('/onmap', async (req, res) => {
+
+  const query = "select departamento, municipio, finca from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento_iddepartamento;";
+  const result = await pg.query(query);
+
+  var { departamentos, municipios, fincas } = extractFiltersOnMap(result.rows);
+  res.json({ departamentos, municipios, fincas });
 })
 
 module.exports = router;

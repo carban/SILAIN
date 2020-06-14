@@ -1,11 +1,12 @@
 import React from "react";
 
 import {
-    Modal, ModalHeader, ModalBody, Input
+    Modal, ModalHeader, ModalBody
 } from "reactstrap";
 
 import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
 import PropiedadByMap from "components/Map/PropiedadByMap";
+import FiltersOnMap from "components/Map/FiltersOnMap";
 
 import axios from "axios";
 import ReactLoading from "react-loading";
@@ -26,15 +27,21 @@ class TheMap extends React.Component {
             ubication: "",
             ubi_type: "",
             results: [],
-            counts_tipos: {}
+            counts_tipos: {},
+
+            selections: {
+                departamento: "Select",
+                municipio: "Select",
+                finca: "Select",
+            }
         }
     }
 
-    async componentDidMount() {
-        const res = await fetch(api.route + "/map");
-        const { fincas, departamentos, municipios } = await res.json();
-        this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
-    }
+    // async componentDidMount() {
+    //     const res = await fetch(api.route + "/map");
+    //     const { fincas, departamentos, municipios } = await res.json();
+    //     this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
+    // }
 
     openToggle = () => {
         this.setState({
@@ -74,6 +81,25 @@ class TheMap extends React.Component {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    getFilters(obj) {
+        console.log(obj);
+        // const basicURL = api.route + "/map/ubication_by_filter";
+        // this.setState({ loading: true })
+        // axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
+        //     .then(res => {
+
+        //         this.setState({
+        //             results: res.data.result,
+        //             counts_tipos: res.data.counts,
+        //             loading: false,
+        //             filters: obj
+        //         });
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
     }
 
     render() {
@@ -133,28 +159,16 @@ class TheMap extends React.Component {
                                 <div className="info legend">
                                     <i style={{ "backgroundColor": "purple" }} ></i>
                                     Departamentos
-                                    <br/>
+                                    <br />
                                     <i style={{ "backgroundColor": "cyan" }} ></i>
                                     Municipios
-                                    <br/>
+                                    <br />
                                     <i style={{ "backgroundColor": "blue" }} ></i>
                                     Fincas
                                 </div>
                             </Control>
                             <Control position="topright">
-                                <Input type="select">
-                                    <option value="">Departamentos</option>
-                                    <option value="">Valle del Cauca</option>
-                                    <option value="">Cauca</option>
-                                </Input>
-                                <br />
-                                <Input type="select">
-                                    <option value="">Municipios</option>
-                                </Input>
-                                <br />
-                                <Input type="select">
-                                    <option value="">Fincas</option>
-                                </Input>
+                                <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
                             {/* {
                                 this.state.departamentos.map((e, i) => (
