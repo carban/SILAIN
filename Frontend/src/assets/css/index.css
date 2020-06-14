@@ -70,7 +70,7 @@
 
 
 .btn_search_map{
-  background-color: red;
+  background-color: rgb(199, 4, 118);
   border-style: none;
   border-radius: 30px;
   font-size: 20px;
@@ -78,11 +78,11 @@
 }
 
 .btn_search_map:hover{
-  background-color: rgb(195, 83, 8);
+  background-color: rgb(113, 1, 133);
 }
 
 .btn_search_map2{
-  background-color: rgb(175, 161, 37);
+  background-color: rgb(0, 191, 224);
   border-style: none;
   border-radius: 30px;
   font-size: 20px;
@@ -90,7 +90,7 @@
 }
 
 .btn_search_map2:hover{
-  background-color: rgb(231, 210, 17);
+  background-color: rgb(0, 118, 139);
 }
 
 .btn_search_map3{
