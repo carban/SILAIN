@@ -39,11 +39,11 @@ class TheMap extends React.Component {
         }
     }
 
-    // async componentDidMount() {
-    //     const res = await fetch(api.route + "/map");
-    //     const { fincas, departamentos, municipios } = await res.json();
-    //     this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
-    // }
+    async componentDidMount() {
+        const res = await fetch(api.route + "/map");
+        const { fincas, departamentos, municipios } = await res.json();
+        this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
+    }
 
     openToggle = () => {
         this.setState({
@@ -187,24 +187,26 @@ class TheMap extends React.Component {
                             <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
+                            <LayersControl.Overlay name="departamento">
+                                <FeatureGroup color="purple">
+                                    {
+                                        this.state.departamentos.map((e, i) => (
+                                            <div key={i}>
+                                                <Popup>
+                                                    <center>
+                                                        <h5>{e.departamento}</h5>
+                                                        <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
+                                                            Buscar
+                                                        </button>
+                                                    </center>
+                                                </Popup>
+                                                <Polygon positions={e.st_asgeojson} />
+                                            </div>
+                                        ))
+                                    }
+                                </FeatureGroup>
+                            </LayersControl.Overlay>
                             {/* {
-                                this.state.departamentos.map((e, i) => (
-                                    <LayersControl.Overlay name={e.departamento} key={i}>
-                                        <FeatureGroup color="purple">
-                                            <Popup>
-                                                <center>
-                                                    <h5>{e.departamento}</h5>
-                                                    <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
-                                                        Buscar
-                                                </button>
-                                                </center>
-                                            </Popup>
-                                            <Polygon positions={e.st_asgeojson} />
-                                        </FeatureGroup>
-                                    </LayersControl.Overlay>
-                                ))
-                            }
-                            {
                                 this.state.municipios.map((e, i) => (
                                     <LayersControl.Overlay name={e.municipio} key={i}>
                                         <FeatureGroup color="cyan">
@@ -239,7 +241,7 @@ class TheMap extends React.Component {
                                 ))
                             } */}
                         </LayersControl>
-                        {
+                        {/* {
                             this.state.departamentos.map((e, i) => (
                                 <FeatureGroup color="purple" key={i}>
                                     <Popup>
@@ -283,7 +285,7 @@ class TheMap extends React.Component {
                                     <Polygon positions={e.st_asgeojson} />
                                 </FeatureGroup>
                             ))
-                        }
+                        } */}
                     </Map>
                 </center>
             </div >

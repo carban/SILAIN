@@ -100,8 +100,8 @@ class FiltersOnMap extends React.Component {
         }
     }
 
-    findYourPos(municipio){
-        for(let i in this.state.current_mun){
+    findYourPos(municipio) {
+        for (let i in this.state.current_mun) {
             if (municipio === this.state.current_mun[i]) {
                 return i;
             }
@@ -117,7 +117,7 @@ class FiltersOnMap extends React.Component {
 
     render() {
         return (
-            <div style={{ "width": "160px" }}>
+            <div style={{ "width": "155px", "fontSize": "14px" }}>
 
                 <b>Departamentos</b>
                 <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
