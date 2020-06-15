@@ -39,11 +39,11 @@ class TheMap extends React.Component {
         }
     }
 
-    async componentDidMount() {
-        const res = await fetch(api.route + "/map");
-        const { fincas, departamentos, municipios } = await res.json();
-        this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
-    }
+    // async componentDidMount() {
+    //     const res = await fetch(api.route + "/map");
+    //     const { fincas, departamentos, municipios } = await res.json();
+    //     this.setState({ fincas: fincas, departamentos: departamentos, municipios: municipios });
+    // }
 
     openToggle = () => {
         this.setState({
@@ -187,7 +187,7 @@ class TheMap extends React.Component {
                             <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
-                            <LayersControl.Overlay name="departamento">
+                            {/* <LayersControl.Overlay name="departamento">
                                 <FeatureGroup color="purple">
                                     {
                                         this.state.departamentos.map((e, i) => (
@@ -205,7 +205,7 @@ class TheMap extends React.Component {
                                         ))
                                     }
                                 </FeatureGroup>
-                            </LayersControl.Overlay>
+                            </LayersControl.Overlay> */}
                             {/* {
                                 this.state.municipios.map((e, i) => (
                                     <LayersControl.Overlay name={e.municipio} key={i}>
@@ -241,7 +241,7 @@ class TheMap extends React.Component {
                                 ))
                             } */}
                         </LayersControl>
-                        {/* {
+                        {
                             this.state.departamentos.map((e, i) => (
                                 <FeatureGroup color="purple" key={i}>
                                     <Popup>
@@ -285,7 +285,7 @@ class TheMap extends React.Component {
                                     <Polygon positions={e.st_asgeojson} />
                                 </FeatureGroup>
                             ))
-                        } */}
+                        }
                     </Map>
                 </center>
             </div >
