@@ -183,59 +183,6 @@ class TheMap extends React.Component {
                             <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
-                            {/* <LayersControl.Overlay name="departamento">
-                                <FeatureGroup color="purple">
-                                    {
-                                        this.state.departamentos.map((e, i) => (
-                                            <div key={i}>
-                                                <Popup>
-                                                    <center>
-                                                        <h5>{e.departamento}</h5>
-                                                        <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
-                                                            Buscar
-                                                        </button>
-                                                    </center>
-                                                </Popup>
-                                                <Polygon positions={e.st_asgeojson} />
-                                            </div>
-                                        ))
-                                    }
-                                </FeatureGroup>
-                            </LayersControl.Overlay> */}
-                            {/* {
-                                this.state.municipios.map((e, i) => (
-                                    <LayersControl.Overlay name={e.municipio} key={i}>
-                                        <FeatureGroup color="cyan">
-                                            <Popup>
-                                                <center>
-                                                    <h5>{e.municipio}</h5>
-                                                    <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
-                                                        Buscar
-                                                </button>
-                                                </center>
-                                            </Popup>
-                                            <Polygon positions={e.st_asgeojson} />
-                                        </FeatureGroup>
-                                    </LayersControl.Overlay>
-                                ))
-                            }
-                            {
-                                this.state.fincas.map((e, i) => (
-                                    <LayersControl.Overlay name={e.finca} key={i}>
-                                        <FeatureGroup color="blue">
-                                            <Popup>
-                                                <center>
-                                                    <h5>{e.finca}</h5>
-                                                    <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
-                                                        Buscar
-                                                </button>
-                                                </center>
-                                            </Popup>
-                                            <Polygon positions={e.st_asgeojson} />
-                                        </FeatureGroup>
-                                    </LayersControl.Overlay>
-                                ))
-                            } */}
                         </LayersControl>
                         {
                             this.state.departamento.length === 1 ? (
