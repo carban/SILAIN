@@ -53,13 +53,13 @@ function getValuesFromFilters(filters, ubication) {
 // Funcion auxiliar para invertir la latitud y la longitud cuando se realiza la consulta
 function swapCoors(data) {
   for (let i in data) {
-    var aux = JSON.parse(data[i].st_asgeojson).coordinates[0][0];
+    var aux = JSON.parse(data[i].poly).coordinates[0][0];
     for (let j = 0; j < aux.length; j++) {
       var row = aux[j];
       var new_row = [row[1], row[0]];
       aux[j] = new_row;
     }
-    data[i].st_asgeojson = aux;
+    data[i].poly = aux;
   }
   return data;
 }
@@ -70,40 +70,40 @@ function swapCoors(data) {
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna toda la informacion espacial de cada finca que este almacenada
 // Aqui se consultan los POLIGONOS de las fincas
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res) => {
 
-  const query = {
-    text: "select finca.finca, idfinca, st_asgeojson(geom) from finca inner join geofincas on finca_idfi = idfinca;",
-  }
+//   const query = {
+//     text: "select finca.finca, idfinca, st_asgeojson(geom) from finca inner join geofincas on finca_idfi = idfinca;",
+//   }
 
-  const queryDeps = {
-    text: "select departamento.departamento, st_asgeojson(geom) from departamento inner join geodeptos on iddepartamento = id_depto;",
-  }
+//   const queryDeps = {
+//     text: "select departamento.departamento, st_asgeojson(geom) from departamento inner join geodeptos on iddepartamento = id_depto;",
+//   }
 
-  const queryMunis = {
-    text: "select municipio.municipio, st_asgeojson(geom) from municipio inner join geomunic on idmunicipio = idmuni;",
-  }
+//   const queryMunis = {
+//     text: "select municipio.municipio, st_asgeojson(geom) from municipio inner join geomunic on idmunicipio = idmuni;",
+//   }
 
-  try {
-    const result = await pg.query(query);
-    const resultDeps = await pg.query(queryDeps);
-    const resultMunis = await pg.query(queryMunis);
+//   try {
+//     const result = await pg.query(query);
+//     const resultDeps = await pg.query(queryDeps);
+//     const resultMunis = await pg.query(queryMunis);
 
-    var data = result.rows;
-    var dataDeps = resultDeps.rows;
-    var dataMunis = resultMunis.rows;
+//     var data = result.rows;
+//     var dataDeps = resultDeps.rows;
+//     var dataMunis = resultMunis.rows;
 
-    data = swapCoors(data);
-    dataDeps = swapCoors(dataDeps);
-    dataMunis = swapCoors(dataMunis);
+//     data = swapCoors(data);
+//     dataDeps = swapCoors(dataDeps);
+//     dataMunis = swapCoors(dataMunis);
 
-    // console.log(data);
-    res.status(200).send({ fincas: data, departamentos: dataDeps, municipios: dataMunis });
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(400);
-  }
-})
+//     // console.log(data);
+//     res.status(200).send({ fincas: data, departamentos: dataDeps, municipios: dataMunis });
+//   } catch (e) {
+//     console.log(e);
+//     res.sendStatus(400);
+//   }
+// })
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna los resutlados correspondientes a una busqueda en particular POR FINCA
@@ -196,7 +196,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (departamento !== 'Select') {
         var query = {
-          text: "select * from (select departamento.departamento, st_asgeojson(geom) from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
+          text: "select departamento, poly, st_astext(st_centroid(geom)) from (select departamento.departamento, st_asgeojson(geom) as poly, geom from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
           values: [departamento]
         }
         dataDept = await pg.query(query);
@@ -205,7 +205,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (municipio !== 'Select') {
         var query = {
-          text: "select * from (select municipio.municipio, st_asgeojson(geom) from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
+          text: "select municipio, poly, st_astext(st_centroid(geom)) from (select municipio.municipio, st_asgeojson(geom) as poly, geom from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
           values: [municipio]
         }
         dataMuni = await pg.query(query);
@@ -214,7 +214,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (finca !== 'Select') {
         var queryFin = {
-          text: "select * from (select finca.finca, idfinca, st_asgeojson(geom) from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+          text: "select finca, poly, st_astext(st_centroid(geom)) from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
           values: [finca]
         }
         dataFin = await pg.query(queryFin);

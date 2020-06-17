@@ -165,7 +165,7 @@ class TheMap extends React.Component {
                                 />
                             </LayersControl.BaseLayer>
 
-                            <LayersControl.BaseLayer name="Transport">
+                            <LayersControl.BaseLayer name="Transporte">
                                 <TileLayer
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png"
