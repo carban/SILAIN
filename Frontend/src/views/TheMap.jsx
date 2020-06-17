@@ -21,9 +21,9 @@ class TheMap extends React.Component {
             position: [3.2175377205303732, -76.53764390954167],
             zoom: 7,
 
-            fincas: [],
-            departamentos: [],
-            municipios: [],
+            finca: [],
+            departamento: [],
+            municipio: [],
             modal: false,
             loading: false,
             ubication: "",
@@ -91,26 +91,22 @@ class TheMap extends React.Component {
         // console.log(obj)
         axios.post(basicURL, { filters: obj })
             .then(res => {
-                var { departamentos, municipios, fincas } = res.data;
-
+                var { departamento, municipio, finca } = res.data;
+                console.log(departamento);
                 this.setState({
-                    departamentos: departamentos,
-                    municipios: municipios,
-                    fincas: fincas
+                    departamento: departamento,
+                    municipio: municipio,
+                    finca: finca
                 });
 
-                var middle = 0;
-                if (departamentos.length === 0) {
+                if (departamento.length === 0) {
                     this.setState({ position: [3.2175377205303732, -76.53764390954167], zoom: 7 });
-                } else if (municipios.length === 0) {
-                    middle = departamentos[0].st_asgeojson[Math.floor(departamentos[0].st_asgeojson.length / 2)];
-                    this.setState({ position: middle, zoom: 8 });
-                } else if (fincas.length === 0) {
-                    middle = municipios[0].st_asgeojson[Math.floor(municipios[0].st_asgeojson.length / 2)];
-                    this.setState({ position: middle, zoom: 10 });
+                } else if (municipio.length === 0) {
+                    this.setState({ position: departamento[0].centroid, zoom: 8 });
+                } else if (finca.length === 0) {
+                    this.setState({ position: municipio[0].centroid, zoom: 10 });
                 } else {
-                    middle = fincas[0].st_asgeojson[Math.floor(fincas[0].st_asgeojson.length / 2)];
-                    this.setState({ position: middle, zoom: 16 });
+                    this.setState({ position: finca[0].centroid, zoom: 16 });
                 }
 
             })
@@ -242,49 +238,49 @@ class TheMap extends React.Component {
                             } */}
                         </LayersControl>
                         {
-                            this.state.departamentos.map((e, i) => (
-                                <FeatureGroup color="purple" key={i}>
+                            this.state.departamento.length === 1 ? (
+                                <FeatureGroup color="purple">
                                     <Popup>
                                         <center>
-                                            <h5>{e.departamento}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "departamento", e.departamento)} className="btn_search_map">
+                                            <h5>{this.state.departamento[0].departamento}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "departamento", this.state.departamento.departamento)} className="btn_search_map">
                                                 Buscar
                                                 </button>
                                         </center>
                                     </Popup>
-                                    <Polygon positions={e.st_asgeojson} />
+                                    <Polygon positions={this.state.departamento[0].poly} />
                                 </FeatureGroup>
-                            ))
+                            ) : true
                         }
                         {
-                            this.state.municipios.map((e, i) => (
-                                <FeatureGroup color="cyan" key={i}>
+                            this.state.municipio.length === 1 ? (
+                                <FeatureGroup color="cyan">
                                     <Popup>
                                         <center>
-                                            <h5>{e.municipio}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "municipio", e.municipio)} className="btn_search_map2">
+                                            <h5>{this.state.municipio[0].municipio}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "municipio", this.state.municipio.municipio)} className="btn_search_map2">
                                                 Buscar
                                                 </button>
                                         </center>
                                     </Popup>
-                                    <Polygon positions={e.st_asgeojson} />
+                                    <Polygon positions={this.state.municipio[0].poly} />
                                 </FeatureGroup>
-                            ))
+                            ) : true
                         }
                         {
-                            this.state.fincas.map((e, i) => (
-                                <FeatureGroup color="blue" key={i}>
+                            this.state.finca.length === 1 ? (
+                                <FeatureGroup color="blue">
                                     <Popup>
                                         <center>
-                                            <h5>{e.finca}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "finca", e.finca)} className="btn_search_map3">
+                                            <h5>{this.state.finca[0].finca}</h5>
+                                            <button onClick={this.buscarUbication.bind(this, "finca", this.state.finca.finca)} className="btn_search_map3">
                                                 Buscar
                                                 </button>
                                         </center>
                                     </Popup>
-                                    <Polygon positions={e.st_asgeojson} />
+                                    <Polygon positions={this.state.finca[0].poly} />
                                 </FeatureGroup>
-                            ))
+                            ) : true
                         }
                     </Map>
                 </center>

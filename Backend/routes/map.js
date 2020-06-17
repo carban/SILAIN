@@ -64,6 +64,19 @@ function swapCoors(data) {
   return data;
 }
 
+// FUncion axiliar que formatea el centroide que viene de la consulta,
+// ya que viene en un string 'POINT(-76.5186596676343 3.85885075589076)'
+function formatCentroidPoint(data) {
+  var { centroid } = data[0];
+  var s = centroid.split(" ");
+  var s2 = s[0].split("(");
+  var c = [parseFloat(s[1]), parseFloat(s2[1])];
+  data[0].centroid = c;
+
+  return data;
+}
+
+
 // ------------------------------------------------------------------------------------
 
 
@@ -196,35 +209,38 @@ router.post('/getpoly', async (req, res) => {
 
       if (departamento !== 'Select') {
         var query = {
-          text: "select departamento, poly, st_astext(st_centroid(geom)) from (select departamento.departamento, st_asgeojson(geom) as poly, geom from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
+          text: "select departamento, poly, st_astext(st_centroid(geom)) as centroid from (select departamento.departamento, st_asgeojson(geom) as poly, geom from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
           values: [departamento]
         }
         dataDept = await pg.query(query);
-        dataDept = swapCoors(dataDept.rows);
+        dataDept = await swapCoors(dataDept.rows);
+        dataDept = await formatCentroidPoint(dataDept);
       }
 
       if (municipio !== 'Select') {
         var query = {
-          text: "select municipio, poly, st_astext(st_centroid(geom)) from (select municipio.municipio, st_asgeojson(geom) as poly, geom from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
+          text: "select municipio, poly, st_astext(st_centroid(geom)) as centroid from (select municipio.municipio, st_asgeojson(geom) as poly, geom from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
           values: [municipio]
         }
         dataMuni = await pg.query(query);
-        dataMuni = swapCoors(dataMuni.rows);
+        dataMuni = await swapCoors(dataMuni.rows);
+        dataMuni = await formatCentroidPoint(dataMuni);
       }
 
       if (finca !== 'Select') {
         var queryFin = {
-          text: "select finca, poly, st_astext(st_centroid(geom)) from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+          text: "select finca, poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
           values: [finca]
         }
         dataFin = await pg.query(queryFin);
-        dataFin = swapCoors(dataFin.rows);
+        dataFin = await swapCoors(dataFin.rows);
+        dataFin = await formatCentroidPoint(dataFin);
       }
 
       res.status(200).send({
-        departamentos: dataDept,
-        municipios: dataMuni,
-        fincas: dataFin
+        departamento: dataDept,
+        municipio: dataMuni,
+        finca: dataFin
       });
 
     } catch (e) {
