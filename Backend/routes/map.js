@@ -195,8 +195,8 @@ router.post('/getpoly', async (req, res) => {
 
   var { counter } = getHowMany(filters);
 
-  if (counter == 0) {
-    res.status(200).send({ departamentos: [], municipios: [], fincas: [] });
+  if (counter === 0) {
+    res.status(200).send({ departamento: [], municipio: [], finca: [] });
   } else {
 
     const { departamento, municipio, finca } = filters;
@@ -236,7 +236,7 @@ router.post('/getpoly', async (req, res) => {
         dataFin = await swapCoors(dataFin.rows);
         dataFin = await formatCentroidPoint(dataFin);
       }
-
+      
       res.status(200).send({
         departamento: dataDept,
         municipio: dataMuni,

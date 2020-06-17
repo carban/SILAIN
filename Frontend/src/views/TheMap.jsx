@@ -60,6 +60,7 @@ class TheMap extends React.Component {
     }
 
     buscarUbication(ubi_type, ubication) {
+        console.log(ubication);
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
@@ -92,7 +93,7 @@ class TheMap extends React.Component {
         axios.post(basicURL, { filters: obj })
             .then(res => {
                 var { departamento, municipio, finca } = res.data;
-                console.log(departamento);
+                // console.log(departamento);
                 this.setState({
                     departamento: departamento,
                     municipio: municipio,
@@ -108,7 +109,6 @@ class TheMap extends React.Component {
                 } else {
                     this.setState({ position: finca[0].centroid, zoom: 16 });
                 }
-
             })
             .catch(err => {
                 console.log(err);
@@ -190,7 +190,7 @@ class TheMap extends React.Component {
                                     <Popup>
                                         <center>
                                             <h5>{this.state.departamento[0].departamento}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "departamento", this.state.departamento.departamento)} className="btn_search_map">
+                                            <button onClick={this.buscarUbication.bind(this, "departamento", this.state.departamento[0].departamento)} className="btn_search_map">
                                                 Buscar
                                                 </button>
                                         </center>
@@ -205,7 +205,7 @@ class TheMap extends React.Component {
                                     <Popup>
                                         <center>
                                             <h5>{this.state.municipio[0].municipio}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "municipio", this.state.municipio.municipio)} className="btn_search_map2">
+                                            <button onClick={this.buscarUbication.bind(this, "municipio", this.state.municipio[0].municipio)} className="btn_search_map2">
                                                 Buscar
                                                 </button>
                                         </center>
@@ -220,7 +220,7 @@ class TheMap extends React.Component {
                                     <Popup>
                                         <center>
                                             <h5>{this.state.finca[0].finca}</h5>
-                                            <button onClick={this.buscarUbication.bind(this, "finca", this.state.finca.finca)} className="btn_search_map3">
+                                            <button onClick={this.buscarUbication.bind(this, "finca", this.state.finca[0].finca)} className="btn_search_map3">
                                                 Buscar
                                                 </button>
                                         </center>
