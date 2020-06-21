@@ -80,11 +80,34 @@ class Project1 extends React.Component {
             case "2":
                 graphDefinition = `
                 graph TD
-                TO2["Cuantificacion de la HHverde, HHazul, HHgris"];
-                TO2-->ST1O2["Cuantificacion de la HHverde y HHazul"];
+                TO2["Cuantificacion de la </br> HHverde, HHazul, HHgris"];
+                TO2-->ST1O2["Cuantificacion de la </br> HHverde y HHazul"];
                 TO2-->ST2O2["Cuantificacion de la HHgris"];
-                ST1O2-->SS1O2["Metodo CROPWAT</br><b><i>Click para mas detalles</i></b>"];
-                ST2O2-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
+                ST1O2-->SS1O2["<b>Metodo CROPWAT</b></br>
+                <b>Datos Climaticos</b>
+                </br>
+                <ul>
+                    <li>Precipitacion</li>
+                    <li>Temperatura Maxima</li>
+                    <li>Temperatura Minima</li>
+                    <li>Humedad relativa</li>
+                    <li>velocidad del viento</li>
+                    <li>Radiacion solar</li>
+                    <li>Datos del suelo</li>
+                    <li>Programa de rirgo</li>
+                    <li>Datos del cultivo</li>
+                </ul>
+                <b><i>Click para mas detalles</i></b>"];
+                ST2O2-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos </br> y microbiologicos del agua</li></ul>
+                </br>
+                <ul>
+                    <li>Nitrogeno total</li>
+                    <li>Fosforo total</li>
+                    <li>Cloruro</li>
+                    <li>Alcanilidad total</li>
+                    <li>Pesticidas, entre otros</li>   
+                </ul>
+                </br><b><i>Click para mas detalles</i></b>"];
 
                 click SS1O2 foo
                 click SS2O2 foo
