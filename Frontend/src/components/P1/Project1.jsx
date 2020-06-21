@@ -5,7 +5,6 @@ import React from "react";
 //     Button
 // } from 'reactstrap';// used for making the prop types of this component
 
-import { NavLink } from "react-router-dom";
 import { Accordion, Card } from "react-bootstrap";
 
 import diagrams from "./diagrams.js";
@@ -238,7 +237,9 @@ class Project1 extends React.Component {
                             <h5 style={{ "cursor": "pointer" }}>Conclusiones</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
-                            <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
+                            <div>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti suscipit ea modi porro iste ut, optio placeat harum eius exercitationem, veniam aperiam! Autem, eaque animi voluptates sed praesentium reprehenderit natus.
+                            </div>
                         </Accordion.Collapse>
                     </div>
                 </Accordion>
@@ -246,6 +247,5 @@ class Project1 extends React.Component {
         )
     }
 }
-
 
 export default Project1;
