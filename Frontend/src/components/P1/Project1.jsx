@@ -26,15 +26,21 @@ class Project1 extends React.Component {
         }
     }
 
-    diagramEvent(e){
+    diagramEvent(e) {
         this.setState({ showObj: e });
     }
 
-    showDiagram(d){
+    showDiagram(d) {
 
         this.setState({ "obj": d });
-
-        var output = document.getElementById('output');
+        
+        var output;
+        
+        if (d[0] === "O") {
+            output = document.getElementById('output');
+        }else {
+            output = document.getElementById('outputResults');
+        }
 
         var config = {
             startOnLoad: true,
@@ -51,7 +57,7 @@ class Project1 extends React.Component {
         var graphDefinition;
 
         switch (d) {
-            case "1":
+            case "O1":
                 graphDefinition = `
                 graph TD
                 TO1["Caracterizacion del manejo y uso del agua en la unidad agricola"];
@@ -77,7 +83,7 @@ class Project1 extends React.Component {
                 click SS3O1 foo
                 `;
                 break;
-            case "2":
+            case "O2":
                 graphDefinition = `
                 graph TD
                 TO2["Cuantificacion de la </br> HHverde, HHazul, HHgris"];
@@ -114,7 +120,7 @@ class Project1 extends React.Component {
                 `;
                 break;
 
-            case "3":
+            case "O3":
                 graphDefinition = `
                 graph TD
                 TO3["Definir los efectos ambientales de la HHverde, HHazul, HHgris"];
@@ -142,6 +148,34 @@ class Project1 extends React.Component {
                 click SS1O3 foo
                 click SS2O3 foo
                 click SS303 foo
+                `;
+                break;
+            case "R1":
+                graphDefinition = `
+                graph TD
+                TR1["Caracterizacion del manejo y uso del agua en la unidad agricola"];
+                TR1-->ST1R1["Manejo del Agua"];
+                TR1-->ST2R1["Uso del Agua"];
+                TR1-->ST3R1["Aspectos culturales"];
+                `;
+                break;
+            case "R2":
+                graphDefinition = `
+                graph TD
+                TR2["Cuantificacion de la </br> HHverde, HHazul, HHgris"];
+                TR2-->ST1R2["Huella hidrica verde"];
+                TR2-->ST2R2["Huella hidrica azul"];
+                TR2-->ST3R2["Huella hidrica gris"];
+                TR2-->ST4R2["Huella hidrica total"];
+                `;
+                break;
+            case "R3":
+                graphDefinition = `
+                graph TD
+                TR3["Definir los efectos ambientales de la HHverde, HHazul, HHgris"];
+                TR3-->ST1R3["Sustentabilidad Huella hidrica verde"];
+                TR3-->ST2R3["Sustentabilidad Huella hidrica azul"];
+                TR3-->ST3R3["Sustentabilidad Huella hidrica gris"];
                 `;
                 break;
             default:
@@ -201,17 +235,17 @@ class Project1 extends React.Component {
                                 <h6>Objetivos</h6>
                                 <ul>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "1")}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O1")}>
                                             Caracterizacion del manejo y uso del agua en la unidad agricola
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "2")}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O2")}>
                                             Cuantificacion de la HHverde, HHazul, HHgris
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "3")}>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O3")}>
                                             Definir los efectos ambientales de la HHverde, HHazul, HHgris
                                         </button>
                                     </li>
@@ -219,9 +253,8 @@ class Project1 extends React.Component {
                                 <center>
                                     < div id="output" />
                                     {
-                                        this.state.obj === "1" ?
+                                        this.state.obj === "O1" ?
                                             <div>
-                                                < div id="output" />
                                                 <br />
                                                 <hr />
                                                 {
@@ -237,9 +270,8 @@ class Project1 extends React.Component {
                                             : true
                                     }
                                     {
-                                        this.state.obj === "2" ?
+                                        this.state.obj === "O2" ?
                                             <div>
-                                                < div id="output" />
                                                 <br />
                                                 <hr />
                                                 {
@@ -250,9 +282,8 @@ class Project1 extends React.Component {
                                             : true
                                     }
                                     {
-                                        this.state.obj === "3" ?
+                                        this.state.obj === "O3" ?
                                             <div>
-                                                < div id="output" />
                                                 <br />
                                                 <hr />
                                                 {
@@ -278,7 +309,29 @@ class Project1 extends React.Component {
                             <h5 style={{ "cursor": "pointer" }}>Resultados</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
-                            <NavLink to="/search/diagrama/p1/">Explorar</NavLink>
+                            <div>
+                                <h6>Resultados Por onjetivo</h6>
+                                <ul>
+                                    <li>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R1")}>
+                                            Caracterizacion del manejo y uso del agua en la unidad agricola
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R2")}>
+                                            Cuantificacion de la HHverde, HHazul, HHgris
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R3")}>
+                                            Definir los efectos ambientales de la HHverde, HHazul, HHgris
+                                        </button>
+                                    </li>
+                                </ul>
+                                <center>
+                                    < div id="outputResults" />
+                                </center>
+                            </div>
                         </Accordion.Collapse>
                     </div>
                     <div>
