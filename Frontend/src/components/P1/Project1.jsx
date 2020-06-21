@@ -121,9 +121,23 @@ class Project1 extends React.Component {
                 TO3-->ST1O3["Sustentabilidad hidrica de la HHverde"];
                 TO3-->ST2O3["Sustentabilidad hidrica de la HHazul"];
                 TO3-->ST3O3["Sustentabilidad hidrica de la HHgris"];
-                ST1O3-->SS1O3["Calculo del inidice de presion </br> a los ecosistemas (IPHE) a traves de: </br><b><i>Click para mas detalles</i></b>"];
-                ST2O3-->SS2O3["<ul><li>Calculo del indice de agua</br>no retomada a la cuenca</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"];
-                ST3O3-->SS303["<ul><li>Calculo del indices de calidad</br>de agua ICA ......</li><li>Parametros fisicoquimicos</li></ul></br><b><i>Click para mas detalles</i></b>"]
+                ST1O3-->SS1O3["Calculo del inidice de presion </br> a los ecosistemas (IPHE) a traves de: 
+                <ul>
+                    <li>Coberturas y usos del suelo de la microcuenca</li>
+                    <li>Imagenes MODIS MYD16</li>
+                </ul>
+                </br><b><i>Click para mas detalles</i></b>"];
+                ST2O3-->SS2O3["
+                <ul>
+                    <li>Calculo del indice de agua</br>no retomada a la cuenca (IARC)</li>
+                    <li>Caracterizacion fisicoquimica microbiologica </br> de las aguas que retoman las fuentes naturales</li>
+                </ul>
+                </br><b><i>Click para mas detalles</i></b>"];
+                ST3O3-->SS303["
+                <ul>
+                    <li>Calculo del indices de calidad</br>de agua: ICA-IDEAM, ICA-DENIUS</li>
+                    <li>Calculo de indices de contaminacion ICO: </br> ICOMI, ICOSUS, ICOMO e ICOTRO</li>
+                </ul></br><b><i>Click para mas detalles</i></b>"]
 
                 click SS1O3 foo
                 click SS2O3 foo
