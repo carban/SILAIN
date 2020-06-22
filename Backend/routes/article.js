@@ -9,7 +9,7 @@ router.get('/:id', async (req, res) => {
     var id = req.params.id;
 
     const query = {
-        text: "select * from metadato inner join finca_muni on metadato.idmetadato = finca_muni.idmetadato where metadato.idmetadato=$1",
+        text: "select * from metadato inner join muni_dept on metadato.idmetadato = muni_dept.idmetadato where metadato.idmetadato=$1",
         values: [id]
     }
 

@@ -31,29 +31,17 @@ class Article extends React.Component {
                     <h3>{this.state.info.titulo}</h3>
                     <hr />
                     <Row>
-                        <Col md="7" lg="7">
-                            <Row>
-                                <b>Resumen: </b>
-                            </Row>
-                            <Row>
-                                {this.state.info.resumen}
-                            </Row>
-                            <Row>
-                                <b>Descripcion: </b>
-                            </Row>
-                            <Row>
-                                {this.state.info.descripcion}
-                            </Row>
-
-                        </Col>
-                        <Col md="5" lg="5">
+                        <Col md="6" lg="6">
                             <Row>
                                 <Col lg="1">
                                     <b>
                                         <i className="nc-icon nc-pin-3" style={{ "fontSize": "25px" }}></i>
                                     </b>
                                 </Col>
-                                <Col lg="5">
+                                <Col lg="6">
+                                    <b>Departamento: </b>
+                                    {this.state.info.departamento}
+                                    <br />
                                     <b>Municipio: </b>
                                     {this.state.info.municipio}
                                     {/* &nbsp;&nbsp; */}
@@ -62,43 +50,37 @@ class Article extends React.Component {
                                     {this.state.info.finca}
                                 </Col>
                             </Row>
+                            <br />
+                            <ul style={{ "textAlign": "left" }}>
+                                <h5>Caracteristicas</h5>
+                                <li><b>Categoria: </b>{this.state.info.categoria}</li>
+                                <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
+                                <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
+                                <li><b>Fecha de disponibilidad: </b>{this.state.info.disponibilidad}</li>
+                                <li><b>Derechos: </b>{this.state.info.derechos}</li>
+                                <li><b>Publicador: </b>{this.state.info.publicador}</li>
+                            </ul>
+                            <ul style={{ "textAlign": "left" }}>
+                                <h5>Datos de descarga</h5>
+                                <li><b>Tipo: </b>{this.state.info.tipo}</li>
+                                <li><b>Formato: </b>{this.state.info.formato}</li>
+                                <li><b>Tamano: </b>{this.state.info.tamano}</li>
+                                <Button color="info">Descargar</Button>
+                            </ul>
+                        </Col>
+
+                        <Col md="6" lg="6">
+                            <b>Resumen: </b>
+                            <br/>
+                            {this.state.info.resumen}
+                            <br/>
+                            <b>Descripcion: </b>
+                            <br/>
+                            {this.state.info.descripcion}
+
+                            <div id="minimap"></div>
                         </Col>
                     </Row>
-
-                    <br />
-                    <br />
-
-                    <center>
-                        <Row lg="12" md="12" >
-                            <Col lg="6" md="6">
-
-                                <h5>Caracteristicas</h5>
-                                <div >
-                                    <ul style={{ "textAlign": "left" }}>
-                                        <li><b>Categoria: </b>{this.state.info.categoria}</li>
-                                        <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
-                                        <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
-                                        <li><b>Fecha de disponibilidad: </b>{this.state.info.disponibilidad}</li>
-                                        <li><b>Derechos: </b>{this.state.info.derechos}</li>
-                                        <li><b>Publicador: </b>{this.state.info.publicador}</li>
-                                    </ul>
-                                </div>
-                            </Col>
-                            <Col lg="6" md="6">
-                                <h5>Datos de descarga</h5>
-                                <div>
-                                    <ul style={{ "textAlign": "left" }}>
-                                        <li><b>Tipo: </b>{this.state.info.tipo}</li>
-                                        <li><b>Formato: </b>{this.state.info.formato}</li>
-                                        <li><b>Tamano: </b>{this.state.info.tamano}</li>
-                                        <Button color="info">Descargar</Button>
-                                    </ul>
-                                    {/* <a href={this.state.info.url}>DESCARGA</a> */}
-                                </div>
-                            </Col>
-                        </Row>
-                    </center>
-
                 </Container >
             </div >
         )

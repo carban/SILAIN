@@ -119,7 +119,7 @@ function formatCentroidPoint(data) {
 // })
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
-// Retorna los resutlados correspondientes a una busqueda en particular POR FINCA
+// Retorna los resutlados correspondientes a una busqueda en particular POR DEPARTAMENTO, MUNICIPIO O FINCA
 // Teniendo Filtros o no  
 router.post('/ubication_by_filter', async (req, res) => {
 

@@ -199,3 +199,10 @@ thead{
   height: 500px;
   border: 1px solid black;
 }
+
+#minimap{
+  margin-top: 15px;
+  height: 300px;
+  width: 100%;
+  background-color: red;
+}
