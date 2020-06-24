@@ -119,6 +119,20 @@ class FiltersOnMap extends React.Component {
         return (
             <div style={{ "width": "155px", "fontSize": "14px" }}>
 
+                <b>Cultivo</b>
+                {/* <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
+                    <option value={-1}>Select</option>
+                    {
+                        this.state.depts.map((e, i) => (
+                            <option value={i} key={i}>{e}</option>
+                        ))
+                    }
+                </Input> */}
+                <Input type="select">
+                    <option value="Select">Select</option>
+                    <option value="">Arroz</option>
+                    <option value="">Aji</option>
+                </Input>
                 <b>Departamentos</b>
                 <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
                     <option value={-1}>Select</option>
