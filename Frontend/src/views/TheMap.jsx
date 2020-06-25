@@ -146,8 +146,6 @@ class TheMap extends React.Component {
             <div>
                 <center>
                     {modal}
-                    <FiltersOnMap getFilters={this.getFilters.bind(this)} />
-
                     <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
