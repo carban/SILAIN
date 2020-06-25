@@ -89,30 +89,30 @@ class TheMap extends React.Component {
     getFilters(obj) {
         // console.log(obj);
         const basicURL = api.route + "/map/getpoly";
-        console.log(obj)
-        // axios.post(basicURL, { filters: obj })
-        //     .then(res => {
-        //         var { departamento, municipio, finca } = res.data;
-        //         // console.log(departamento);
-        //         this.setState({
-        //             departamento: departamento,
-        //             municipio: municipio,
-        //             finca: finca
-        //         });
+        // console.log(obj)
+        axios.post(basicURL, { filters: obj })
+            .then(res => {
+                var { departamento, municipio, finca } = res.data;
+                // console.log(departamento);
+                this.setState({
+                    departamento: departamento,
+                    municipio: municipio,
+                    finca: finca
+                });
 
-        //         if (departamento.length === 0) {
-        //             this.setState({ position: [3.2175377205303732, -76.53764390954167], zoom: 7 });
-        //         } else if (municipio.length === 0) {
-        //             this.setState({ position: departamento[0].centroid, zoom: 8 });
-        //         } else if (finca.length === 0) {
-        //             this.setState({ position: municipio[0].centroid, zoom: 10 });
-        //         } else {
-        //             this.setState({ position: finca[0].centroid, zoom: 16 });
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+                if (departamento.length === 0) {
+                    this.setState({ position: [3.2175377205303732, -76.53764390954167], zoom: 7 });
+                } else if (municipio.length === 0) {
+                    this.setState({ position: departamento[0].centroid, zoom: 8 });
+                } else if (finca.length === 0) {
+                    this.setState({ position: municipio[0].centroid, zoom: 10 });
+                } else {
+                    this.setState({ position: finca[0].centroid, zoom: 16 });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -147,8 +147,8 @@ class TheMap extends React.Component {
                 <center>
                     {modal}
                     <FiltersOnMap getFilters={this.getFilters.bind(this)} />
-                    
-                    {/* <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
+
+                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer
@@ -168,9 +168,9 @@ class TheMap extends React.Component {
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png"
                                 />
-                            </LayersControl.BaseLayer> */}
+                            </LayersControl.BaseLayer>
                             {/* End Layers */}
-                            {/* <Control position="topright">
+                            <Control position="topright">
                                 <div className="info legend">
                                     <i style={{ "backgroundColor": "purple" }} ></i>
                                     Departamentos
@@ -181,11 +181,11 @@ class TheMap extends React.Component {
                                     <i style={{ "backgroundColor": "blue" }} ></i>
                                     Fincas
                                 </div>
-                            </Control> */}
-                            {/* <Control position="topright">
+                            </Control>
+                            <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
-                            </Control> */}
-                        {/* </LayersControl> */}
+                            </Control>
+                        </LayersControl>
                         {
                             this.state.departamento.length === 1 ? (
                                 <FeatureGroup color="purple">
@@ -231,7 +231,7 @@ class TheMap extends React.Component {
                                 </FeatureGroup>
                             ) : true
                         }
-                    {/* </Map> */}
+                    </Map>
                 </center>
             </div >
         )
