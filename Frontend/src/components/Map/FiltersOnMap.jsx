@@ -17,9 +17,9 @@ class FiltersOnMap extends React.Component {
             current_dept: [],
             current_mun: [],
             current_fin: [],
-            val_dept: null,
-            val_muni: null,
-            val_fin: null,
+            val_dept: -1,
+            val_muni: -1,
+            val_fin: -1,
             selections: {
                 cultivo: "Select",
                 departamento: "Select",
@@ -31,9 +31,16 @@ class FiltersOnMap extends React.Component {
 
     handleSelects(e) {
         var sele = { ...this.state.selections };
-        sele[e.target.name] = e.target.value;
+        var val = e.target.value;
+        console.log(val);
+        if (val === "-1") {
+            val = -1;
+            sele["finca"] = "Select";
+        } else {
+            sele["finca"] = this.state.current_fin[val];
+        }
         this.props.getFilters(sele);
-        this.setState({ selections: sele })
+        this.setState({ selections: sele, val_fin: val })
     }
 
     handleSelectCULT(e) {
@@ -54,7 +61,15 @@ class FiltersOnMap extends React.Component {
         sele["finca"] = "Select";
 
         this.props.getFilters(sele);
-        this.setState({ selections: sele, current_dept: c_dept, val_dept: -1, val_muni: -1, val_fin: -1 });
+        this.setState({
+            selections: sele,
+            current_dept: c_dept,
+            current_mun: [],
+            current_fin: [],
+            val_dept: -1,
+            val_muni: -1,
+            val_fin: -1
+        });
     }
 
     handleSelectDEPT(e) {
@@ -74,7 +89,14 @@ class FiltersOnMap extends React.Component {
         sele["municipio"] = "Select";
         sele["finca"] = "Select";
         this.props.getFilters(sele);
-        this.setState({ selections: sele, current_mun: c_mun, val_dept: val, val_muni: -1, val_fin: -1 });
+        this.setState({
+            selections: sele,
+            current_mun: c_mun,
+            current_fin: [],
+            val_dept: val,
+            val_muni: -1,
+            val_fin: -1
+        });
     }
 
 
@@ -94,7 +116,12 @@ class FiltersOnMap extends React.Component {
         sele["finca"] = "Select";
         // console.log(sele.municipio)
         this.props.getFilters(sele);
-        this.setState({ selections: sele, current_fin: c_fin, val_muni: val, val_fin: -1 });
+        this.setState({
+            selections: sele,
+            current_fin: c_fin,
+            val_muni: val,
+            val_fin: -1
+        });
     }
 
     async componentDidMount() {
@@ -124,6 +151,7 @@ class FiltersOnMap extends React.Component {
                     }
                 </Input>
                 <b>Departamentos</b>
+                {/* SE HACE USO DE this.state.val_dept PARA QUE SE SETEE EL VALOR Y CAMBIE */}
                 <Input onChange={this.handleSelectDEPT.bind(this)} type="select" value={this.state.val_dept} id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
@@ -133,6 +161,7 @@ class FiltersOnMap extends React.Component {
                     }
                 </Input>
                 <b>Municipios</b>
+                {/* SE HACE USO DE this.state.val_dept PARA QUE SE SETEE EL VALOR Y CAMBIE */}
                 <Input onChange={this.handleSelectMUNI.bind(this)} value={this.state.val_muni} type="select" id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
@@ -142,11 +171,12 @@ class FiltersOnMap extends React.Component {
                     }
                 </Input>
                 <b>Fincas</b>
-                <Input onChange={this.handleSelects.bind(this)} value={this.state.selections.finca} type="select" name="finca" id="exampleSelect">
-                    <option>Select</option>
+                {/* SE HACE USO DE this.state.val_dept PARA QUE SE SETEE EL VALOR Y CAMBIE */}
+                <Input onChange={this.handleSelects.bind(this)} value={this.state.val_fin} type="select" name="finca" id="exampleSelect">
+                    <option value={-1}>Select</option>
                     {
                         this.state.current_fin.map((e, i) => (
-                            <option key={i}>{e}</option>
+                            <option value={i} key={i}>{e}</option>
                         ))
                     }
                 </Input>
