@@ -10,9 +10,10 @@ class FiltersOnMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            depts: [],
-            munis: [],
-            fins: [],
+            cult: [],
+            depts: {},
+            munis: {},
+            fins: {},
             current_mun: [],
             current_fin: [],
             selections: {
@@ -111,9 +112,9 @@ class FiltersOnMap extends React.Component {
     async componentDidMount() {
 
         const res = await fetch(api.route + "/getfilters/onmap");
-        var { departamentos, municipios, fincas } = await res.json();
-        console.log({ departamentos, municipios, fincas } );
-        this.setState({ depts: departamentos, munis: municipios, fins: fincas });
+        var { departamentos, municipios, fincas, cultivos } = await res.json();
+        // console.log({ departamentos, municipios, fincas } );
+        this.setState({ depts: departamentos, munis: municipios, fins: fincas, cult: cultivos });
     }
 
     render() {
@@ -121,20 +122,15 @@ class FiltersOnMap extends React.Component {
             <div style={{ "width": "155px", "fontSize": "14px" }}>
 
                 <b>Cultivo</b>
-                {/* <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
+                <Input type="select" name="cul" id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
-                        this.state.depts.map((e, i) => (
+                        this.state.cult.map((e, i) => (
                             <option value={i} key={i}>{e}</option>
                         ))
                     }
-                </Input> */}
-                <Input type="select">
-                    <option value="Select">Select</option>
-                    <option value="">Arroz</option>
-                    <option value="">Aji</option>
                 </Input>
-                <b>Departamentos</b>
+                {/* <b>Departamentos</b>
                 <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
@@ -160,7 +156,7 @@ class FiltersOnMap extends React.Component {
                             <option key={i}>{e}</option>
                         ))
                     }
-                </Input>
+                </Input> */}
             </div>
         )
     }

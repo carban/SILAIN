@@ -207,16 +207,118 @@ router.get('/ubication', async (req, res) => {
 })
 
 
+function getHashCultivo_Departamento(array) {
+
+  hash = {};
+
+  var c_cul = array[0].cultivo;
+  var c_dep = array[0].departamento;
+  var deptos = [c_dep];
+
+  for (let i = 0; i < array.length; i++) {
+
+    if (c_cul !== array[i].cultivo) {
+      c_cul = array[i].cultivo;
+      deptos = [];
+    }
+
+    if (c_dep !== array[i].departamento) {
+      c_dep = array[i].departamento;
+      deptos.push(c_dep);
+    }
+    hash[c_cul] = deptos;
+
+  }
+
+  return hash;
+}
+
+function getHashDepartamento_Municipio(array) {
+
+  hash = {};
+
+  var c_dep = array[0].departamento;
+  var c_mun = array[0].municipio;
+  var munis = [c_mun];
+
+  for (let i = 0; i < array.length; i++) {
+
+    if (c_dep !== array[i].departamento) {
+      c_dep = array[i].departamento;
+      munis = [];
+    }
+
+    if (c_mun !== array[i].municipio) {
+      c_mun = array[i].municipio;
+      munis.push(c_mun);
+    }
+
+    hash[c_dep] = munis;
+
+  }
+
+  return hash;
+}
+
+function getHashMunicipio_Finca(array) {
+
+  hash = {};
+
+  var c_mun = array[0].municipio;
+  var c_fin = array[0].finca;
+  var fins = [c_fin];
+
+  for (let i = 0; i < array.length; i++) {
+
+    if (c_mun !== array[i].municipio) {
+      c_mun = array[i].municipio;
+      fins = [];
+    }
+
+    if (c_fin !== array[i].finca) {
+      c_fin = array[i].finca;
+      fins.push(c_fin);
+    }
+
+    hash[c_mun] = fins;
+
+  }
+
+  return hash;
+}
+
+function getCultivoList(obj) {
+  var array = [];
+  for (let i in obj) {
+    array.push(i);
+  }
+  return array;
+}
+
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna la informacion de departamentos, municipios y fincas correspondies,
 // para los filtros de poligonos en el mapa
 router.get('/onmap', async (req, res) => {
 
-  const query = "select departamento, municipio, finca, cultivo from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento_iddepartamento;";
+  const query = "select cultivo, departamento from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by cultivo;";
   const result = await pg.query(query);
+
+  const query2 = "select departamento, municipio from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento;";
+  const result2 = await pg.query(query2);
+
+  const query3 = "select municipio, finca from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by municipio;";
+  const result3 = await pg.query(query3);
   // console.log(result.rows);
-  var { departamentos, municipios, fincas } = extractFiltersOnMap(result.rows);
-  res.json({ departamentos, municipios, fincas });
+  var hash_Dept = getHashCultivo_Departamento(result.rows);
+  var hash_Muni = getHashDepartamento_Municipio(result2.rows);
+  var hash_Fin = getHashMunicipio_Finca(result3.rows);
+  var cultivo_list = getCultivoList(hash_Dept);
+  res.json({
+    cultivos: cultivo_list,
+    departamentos: hash_Dept,
+    municipios: hash_Muni,
+    fincas: hash_Fin,
+  });
 })
 
 module.exports = router;
