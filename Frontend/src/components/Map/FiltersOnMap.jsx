@@ -14,9 +14,14 @@ class FiltersOnMap extends React.Component {
             depts: {},
             munis: {},
             fins: {},
+            current_dept: [],
             current_mun: [],
             current_fin: [],
+            val_dept: null,
+            val_muni: null,
+            val_fin: null,
             selections: {
+                cultivo: "Select",
                 departamento: "Select",
                 municipio: "Select",
                 finca: "Select",
@@ -31,6 +36,27 @@ class FiltersOnMap extends React.Component {
         this.setState({ selections: sele })
     }
 
+    handleSelectCULT(e) {
+        // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
+        // con las subcategorias correspondientes a la categoria seleccionada
+        var sele = { ...this.state.selections };
+        var val = e.target.value;
+        var c_dept = [];
+
+        if (val === "-1") {
+            sele["cultivo"] = "Select";
+        } else {
+            sele["cultivo"] = this.state.cult[val];
+            c_dept = this.state.depts[sele["cultivo"]];
+        }
+        sele["departamento"] = "Select";
+        sele["municipio"] = "Select";
+        sele["finca"] = "Select";
+
+        this.props.getFilters(sele);
+        this.setState({ selections: sele, current_dept: c_dept, val_dept: -1, val_muni: -1, val_fin: -1 });
+    }
+
     handleSelectDEPT(e) {
         // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
         // con las subcategorias correspondientes a la categoria seleccionada
@@ -39,74 +65,36 @@ class FiltersOnMap extends React.Component {
         var c_mun = [];
 
         if (val === "-1") {
+            val = -1;
             sele["departamento"] = "Select";
         } else {
-            sele["departamento"] = this.state.depts[val];
-            c_mun = this.state.munis[val]
+            sele["departamento"] = this.state.current_dept[val];
+            c_mun = this.state.munis[sele["departamento"]];
         }
         sele["municipio"] = "Select";
         sele["finca"] = "Select";
         this.props.getFilters(sele);
-        this.setState({ selections: sele, current_mun: c_mun });
+        this.setState({ selections: sele, current_mun: c_mun, val_dept: val, val_muni: -1, val_fin: -1 });
     }
 
 
     handleSelectMUNI(e) {
-        // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
-        // con las subcategorias correspondientes a la categoria seleccionada
 
-        // Esto fue usado de emergencia para el funcionamiento
-        // CUALQUIER PROBLEMA ATENCION AQUI
         var sele = { ...this.state.selections };
-
-        var val = this.findYourFinca(e.target.value);
-        var position = this.findYourPos(e.target.value);
-        // ---------------------
+        var val = e.target.value;
         var c_fin = [];
 
         if (val === "-1") {
+            val = -1
             sele["municipio"] = "Select";
         } else {
-            sele["municipio"] = this.state.current_mun[position];
-            c_fin = this.state.fins[val]
+            sele["municipio"] = this.state.current_mun[val];
+            c_fin = this.state.fins[sele["municipio"]];
         }
-        // console.log(sele.municipio)
         sele["finca"] = "Select";
+        // console.log(sele.municipio)
         this.props.getFilters(sele);
-        this.setState({ selections: sele, current_fin: c_fin });
-    }
-
-    // Funcion que formatea los municipios para asociarlos con las fincas
-    // REVISAR ESTO SI PUEDE LLEGAR A TRAER INCONSISTENCIAS
-    findYourFinca(municipio) {
-
-        if (municipio === "-1") {
-            return "-1";
-        } else {
-
-            var aux = [];
-            var c = 0;
-
-            for (let i in this.state.munis) {
-                aux = aux.concat(this.state.munis[i]);
-            }
-
-            for (let i in aux) {
-                if (aux[i] === municipio) {
-                    c = i;
-                }
-            }
-
-            return c;
-        }
-    }
-
-    findYourPos(municipio) {
-        for (let i in this.state.current_mun) {
-            if (municipio === this.state.current_mun[i]) {
-                return i;
-            }
-        }
+        this.setState({ selections: sele, current_fin: c_fin, val_muni: val, val_fin: -1 });
     }
 
     async componentDidMount() {
@@ -114,7 +102,12 @@ class FiltersOnMap extends React.Component {
         const res = await fetch(api.route + "/getfilters/onmap");
         var { departamentos, municipios, fincas, cultivos } = await res.json();
         // console.log({ departamentos, municipios, fincas } );
-        this.setState({ depts: departamentos, munis: municipios, fins: fincas, cult: cultivos });
+        this.setState({
+            depts: departamentos,
+            munis: municipios,
+            fins: fincas,
+            cult: cultivos
+        });
     }
 
     render() {
@@ -122,7 +115,7 @@ class FiltersOnMap extends React.Component {
             <div style={{ "width": "155px", "fontSize": "14px" }}>
 
                 <b>Cultivo</b>
-                <Input type="select" name="cul" id="exampleSelect">
+                <Input onChange={this.handleSelectCULT.bind(this)} type="select" id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
                         this.state.cult.map((e, i) => (
@@ -130,21 +123,21 @@ class FiltersOnMap extends React.Component {
                         ))
                     }
                 </Input>
-                {/* <b>Departamentos</b>
-                <Input onChange={this.handleSelectDEPT.bind(this)} type="select" name="cat" id="exampleSelect">
+                <b>Departamentos</b>
+                <Input onChange={this.handleSelectDEPT.bind(this)} type="select" value={this.state.val_dept} id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
-                        this.state.depts.map((e, i) => (
+                        this.state.current_dept.map((e, i) => (
                             <option value={i} key={i}>{e}</option>
                         ))
                     }
                 </Input>
                 <b>Municipios</b>
-                <Input onChange={this.handleSelectMUNI.bind(this)} value={this.state.selections.municipio} type="select" name="subcategoria" id="exampleSelect">
+                <Input onChange={this.handleSelectMUNI.bind(this)} value={this.state.val_muni} type="select" id="exampleSelect">
                     <option value={-1}>Select</option>
                     {
                         this.state.current_mun.map((e, i) => (
-                            <option value={e} key={i}>{e}</option>
+                            <option value={i} key={i}>{e}</option>
                         ))
                     }
                 </Input>
@@ -156,7 +149,7 @@ class FiltersOnMap extends React.Component {
                             <option key={i}>{e}</option>
                         ))
                     }
-                </Input> */}
+                </Input>
             </div>
         )
     }
