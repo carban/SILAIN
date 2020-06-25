@@ -173,7 +173,8 @@ router.get('/', async (req, res) => {
 
 // ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
 // Retorna toda la informacion de los filtros que esten almacenados en la BD
-// CORRESPONDIENTES a la hora de consultar en el mapa, seleccionando una finca.
+// CORRESPONDIENTES a la hora de consultar en el mapa, 
+// seleccionando y buscando al dar click en un elemento del mapa.
 // En este caso se omite la consulta de finca y municipio
 router.get('/ubication', async (req, res) => {
 
@@ -211,9 +212,9 @@ router.get('/ubication', async (req, res) => {
 // para los filtros de poligonos en el mapa
 router.get('/onmap', async (req, res) => {
 
-  const query = "select departamento, municipio, finca from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento_iddepartamento;";
+  const query = "select departamento, municipio, finca, cultivo from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento_iddepartamento;";
   const result = await pg.query(query);
-
+  // console.log(result.rows);
   var { departamentos, municipios, fincas } = extractFiltersOnMap(result.rows);
   res.json({ departamentos, municipios, fincas });
 })

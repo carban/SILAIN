@@ -112,6 +112,7 @@ class FiltersOnMap extends React.Component {
 
         const res = await fetch(api.route + "/getfilters/onmap");
         var { departamentos, municipios, fincas } = await res.json();
+        console.log({ departamentos, municipios, fincas } );
         this.setState({ depts: departamentos, munis: municipios, fins: fincas });
     }
 

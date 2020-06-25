@@ -146,7 +146,9 @@ class TheMap extends React.Component {
             <div>
                 <center>
                     {modal}
-                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
+                    <FiltersOnMap getFilters={this.getFilters.bind(this)} />
+                    
+                    {/* <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer
@@ -166,9 +168,9 @@ class TheMap extends React.Component {
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png"
                                 />
-                            </LayersControl.BaseLayer>
+                            </LayersControl.BaseLayer> */}
                             {/* End Layers */}
-                            <Control position="topright">
+                            {/* <Control position="topright">
                                 <div className="info legend">
                                     <i style={{ "backgroundColor": "purple" }} ></i>
                                     Departamentos
@@ -179,11 +181,11 @@ class TheMap extends React.Component {
                                     <i style={{ "backgroundColor": "blue" }} ></i>
                                     Fincas
                                 </div>
-                            </Control>
-                            <Control position="topright">
+                            </Control> */}
+                            {/* <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
-                            </Control>
-                        </LayersControl>
+                            </Control> */}
+                        {/* </LayersControl> */}
                         {
                             this.state.departamento.length === 1 ? (
                                 <FeatureGroup color="purple">
@@ -229,7 +231,7 @@ class TheMap extends React.Component {
                                 </FeatureGroup>
                             ) : true
                         }
-                    </Map>
+                    {/* </Map> */}
                 </center>
             </div >
         )
