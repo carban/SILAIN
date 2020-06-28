@@ -18,7 +18,7 @@ class Proyectos extends React.Component {
     render() {
         return (
 
-            <Container>
+            <Container style={{ "marginBottom": "220px" }}>
                 <Router history={this.props.history}>
                     <Switch>
                         <Route exact path="/search/proyecto" render={props =>

@@ -30,6 +30,8 @@ class Footer extends React.Component {
     return (
       <footer
         className={"footer" + (this.props.default ? " footer-default" : "")}
+        // style={{"backgroundColor": "white"}}
+        // style={{"marginTop": "300px"}}
       >
         <Container fluid={this.props.fluid ? true : false}>
           <Row>
@@ -49,7 +51,7 @@ class Footer extends React.Component {
               </div>
             </nav>
             <div className="credits ml-auto">
-              <img width="300px" src={silainLogo} alt="" />
+              <img width="260px" src={silainLogo} alt="" />
             </div>
           </Row>
         </Container>

@@ -61,7 +61,9 @@ class Propiedad extends React.Component {
     render() {
         return (
             <Container>
-                <div>
+                <div
+                    style={{ "marginBottom": "350px" }}
+                >
                     <CustomFilters getFilters={this.getFilters.bind(this)} />
                     {
                         this.state.loading ? (
@@ -72,8 +74,8 @@ class Propiedad extends React.Component {
                             <div>
                                 <br />
                                 <div>
-                                    <Alert 
-                                    color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}
+                                    <Alert
+                                        color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}
                                     // className="silain_green"
                                     >
                                         {

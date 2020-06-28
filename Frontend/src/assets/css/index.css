@@ -30,17 +30,33 @@
   font-weight: bold;
 }
 
+.bgForest{
+  background-image: url("forest3.jpg");
+  /* min-height: 100px; */
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bgGradient{
+  background: rgb(255,255,255);
+  background: -moz-radial-gradient(circle, rgba(255,255,255,1) 43%, rgba(141,230,185,1) 77%, rgba(10,200,145,1) 100%);
+  background: -webkit-radial-gradient(circle, rgba(255,255,255,1) 43%, rgba(141,230,185,1) 77%, rgba(10,200,145,1) 100%);
+  background: radial-gradient(circle, rgba(255,255,255,1) 43%, rgba(141,230,185,1) 77%, rgba(10,200,145,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#0ac891",GradientType=1); }
+
 .ButtonLikeLinkSelected:hover{
   text-decoration: underline;
 }
 
 /* |||||||||||||||   COMPONENTE Search   ||||||||||||||| */
 
-/* .silain_yellow_links{
-  color: #FECB00;
-  font-weight: bold; 
+.silain_yellow_links{
+  /* color: #FECB00; */
+  /* font-weight: bold;  */
+  margin-left: 15px;
 }
-
+/*
 .silain_yellow_links:hover{
   color: #F47C00;
   font-weight: bold; 

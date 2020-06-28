@@ -14,6 +14,8 @@ import {
     Col, Row
 } from "reactstrap";
 
+import SNavBar from "components/SNavBar.jsx";
+
 import logo from "back.png";
 import logoLetter from "lett.png";
 
@@ -57,8 +59,9 @@ class Start extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="contentStart">
+            <div className="bgForest"> 
+                <SNavBar />
+                <div style={{ "marginBottom": "65px" }}>
                     <center>
                         <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img>
                         <img src={logoLetter} width="280px" height="280px" alt="description"></img>
@@ -67,7 +70,7 @@ class Start extends React.Component {
                         <b id="logoMeans">Sistema de información del laboratorio de agricultura inteligente</b>
                         <br></br>
                         <br></br>
-                        <Col md="6">
+                        {/* <Col md="6">
                             <Row>
                                 <Col sm="3" md="3" lg="3">
                                     <button className="ButtonLikeLinkSelected" data-toggle="tooltip" title="Realiza busquedas escribiendo palabras clave">
@@ -90,13 +93,13 @@ class Start extends React.Component {
                                     </button>
                                 </Col>
                             </Row>
-                        </Col>
+                        </Col> */}
                         <br></br>
                         <Container>
                             <Col md="7" sm="12" xs="12">
-                                <form onSubmit={this.setRedirect.bind(this)}>
+                                <form onSubmit={this.setRedirect.bind(this)} style={{"backgroundColor": "white"}}>
                                     <InputGroup className="no-border">
-                                        <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" className="inputSearcher" placeholder="Palabras Clave..." />
+                                        <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" placeholder="Palabras Clave..." />
                                         <InputGroupAddon addonType="append">
                                             <InputGroupText>
                                                 <i className="nc-icon nc-zoom-split" />
@@ -110,7 +113,7 @@ class Start extends React.Component {
                         {this.state.redirect ? this.renderRedirect() : true}
                     </center>
                 </div>
-                <br/><br/>
+                {/* <br/><br/> */}
                 <Footer />
             </div>
         )

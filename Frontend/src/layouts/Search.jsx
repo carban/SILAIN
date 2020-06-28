@@ -22,7 +22,7 @@ class Search extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="animated fadeIn fast">
+        <div className="bgForest">
           <SNavBar />
           <div>
             <center>
