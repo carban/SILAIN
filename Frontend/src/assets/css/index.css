@@ -36,7 +36,7 @@
 
 /* |||||||||||||||   COMPONENTE Search   ||||||||||||||| */
 
-.silain_yellow_links{
+/* .silain_yellow_links{
   color: #FECB00;
   font-weight: bold; 
 }
@@ -44,7 +44,7 @@
 .silain_yellow_links:hover{
   color: #F47C00;
   font-weight: bold; 
-}
+} */
 
 /* |||||||||||||||   COMPONENTE THEMAP   ||||||||||||||| */
 .leaflet-container {

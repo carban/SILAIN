@@ -27,59 +27,11 @@ class Search extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <div className="animated fadeIn fast">
           <SNavBar />
           <div>
             <center>
-              <Col md="12">
-                <Row>
-                  <Col sm="3" md="3" lg="3">
 
-                    <NavLink to="/search/clave"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas escribiendo palabras clave">
-                      Palabras Clave
-                      </NavLink>
-                  </Col>
-                  <Col sm="3" md="3" lg="3">
-                    <NavLink to="/search/propiedad"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas seleccionando una propiedad">
-                      Propiedades
-                    </NavLink>
-                  </Col>
-                  <Col sm="3" md="3" lg="3">
-                    <NavLink to="/search/mapa"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas explorando un mapa">
-                      Mapa
-                    </NavLink>
-                  </Col>
-                  <Col sm="3" md="3" lg="3">
-                    <NavLink to="/search/proyecto"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas explorando proyectos">
-                      Proyectos
-                    </NavLink>
-                  </Col>
-                </Row>
-              </Col>
             </center>
           </div>
           <br />
