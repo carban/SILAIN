@@ -31,7 +31,7 @@ class PropiedadByMap extends React.Component {
         }
     }
 
-    allSelect(){
+    allSelect() {
         for (let i in this.state.filters) {
             if (this.state.filters[i] !== "Select") {
                 return false;
@@ -40,7 +40,7 @@ class PropiedadByMap extends React.Component {
         return true;
     }
 
-    getFilters(obj){
+    getFilters(obj) {
         const basicURL = api.route + "/map/ubication_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, { filters: obj, ubication: this.state.ubication, ubi_type: this.state.ubi_type })
@@ -76,7 +76,7 @@ class PropiedadByMap extends React.Component {
                 {
                     this.state.loading ? (
                         <center>
-                            <ReactLoading type={"bars"} color={"#51BCDA"} />
+                            <ReactLoading type={"bars"} color={"#A5C80A"} />
                         </center>
                     ) :
                         <div>

@@ -106,7 +106,7 @@ class Start extends React.Component {
                                 </form>
                             </Col>
                         </Container>
-                        <Button color="info" onClick={this.setRedirect.bind(this)}>Buscar</Button>
+                        <Button className="silain_green" onClick={this.setRedirect.bind(this)}>Buscar</Button>
                         {this.state.redirect ? this.renderRedirect() : true}
                     </center>
                 </div>

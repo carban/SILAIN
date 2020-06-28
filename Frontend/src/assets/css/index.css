@@ -6,21 +6,31 @@
 #logoMeans{
   color: gray;
 }
+
+.silain_green{
+  background-color: #A5C80A;
+}
+
+.silain_yellow_links{
+  color: #FECB00;
+  font-weight: bold; 
+}
+
 .ButtonLikeLink{
   background-color: white;
   border: none;
-  color: skyblue
+  color: #FECB00
 }
 
 .ButtonLikeLink:hover{
   text-decoration: underline;
-  color: blue;
+  color: #F47C00;
 }
 
 .ButtonLikeLinkSelected{
   background-color: white;
   border: none;
-  color: blue;
+  color: #F47C00;
   font-size: 15px;
   font-weight: bold;
 }
@@ -181,17 +191,6 @@ thead{
 }
 
 /* ||||||||||||||| TRAVEL BETWEEN OBJETIVES ON PROJECT ||||||||||||||| */ 
-
-.ButtonLikeLink{
-  background-color: white;
-  border: none;
-  color:  #8282FF ;
-}
-
-.ButtonLikeLink:hover{
-  text-decoration: underline;
-  color: blue;
-}
 
 
 .diagram-component {

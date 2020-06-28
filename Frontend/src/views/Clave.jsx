@@ -123,13 +123,13 @@ class Clave extends React.Component {
                     {
                         this.state.loading ? (
                             <center>
-                                <ReactLoading type={"bars"} color={"#51BCDA"} />
+                                <ReactLoading type={"bars"} color={"#A5C80A"} />
                             </center>
                         ) :
                             <div>
                                 <br />
                                 <div>
-                                    <Alert color={this.state.results.length > 0 || this.state.word_searched === "" ? "info" : "danger"}>
+                                    <Alert color={this.state.results.length > 0 || this.state.word_searched === "" ? "success" : "danger"}>
                                         {
                                             this.state.results.length > 0
                                                 ? (

@@ -66,13 +66,16 @@ class Propiedad extends React.Component {
                     {
                         this.state.loading ? (
                             <center>
-                                <ReactLoading type={"bars"} color={"#51BCDA"} />
+                                <ReactLoading type={"bars"} color={"#A5C80A"} />
                             </center>
                         ) :
                             <div>
                                 <br />
                                 <div>
-                                    <Alert color={this.state.results.length > 0 || this.allSelect() ? "info" : "danger"}>
+                                    <Alert 
+                                    color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}
+                                    // className="silain_green"
+                                    >
                                         {
                                             this.state.results.length > 0
                                                 ? (
