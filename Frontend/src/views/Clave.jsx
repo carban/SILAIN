@@ -117,9 +117,7 @@ class Clave extends React.Component {
 
         return (
             <Container>
-                <div
-                    style={{"backgroundColor": "white", "opacity": "0.95", "marginBottom": "300px"}}
-                >
+                <div className="searchBody" style={{"marginBottom": "280px"}}>
                     {keyWord}
                     <CustomFilters getFilters={this.getFilters.bind(this)} />
                     {

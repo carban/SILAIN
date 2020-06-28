@@ -59,7 +59,7 @@ class Start extends React.Component {
 
     render() {
         return (
-            <div className="bgForest"> 
+            <div className="bgForest_top"> 
                 <SNavBar />
                 <div style={{ "marginBottom": "65px" }}>
                     <center>

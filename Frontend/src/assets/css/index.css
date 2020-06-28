@@ -30,10 +30,18 @@
   font-weight: bold;
 }
 
-.bgForest{
-  background-image: url("forest3.jpg");
+.bgForest_top{
+  background-image: url("forest3crop.jpg");
   /* min-height: 100px; */
   background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bgForest_center{
+  background-image: url("forest3.jpg");
+  /* min-height: 100px; */
+  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -61,6 +69,17 @@
   color: #F47C00;
   font-weight: bold; 
 } */
+
+/* |||||||||||||||   COMPONENTE Clave y Propiedad   ||||||||||||||| */
+.searchBody{
+  background-color: white;
+  opacity: 0.96;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  padding-bottom: 1px;
+}
 
 /* |||||||||||||||   COMPONENTE THEMAP   ||||||||||||||| */
 .leaflet-container {

@@ -22,7 +22,7 @@ class Search extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="bgForest">
+        <div className="bgForest_center">
           <SNavBar />
           <div>
             <center>
