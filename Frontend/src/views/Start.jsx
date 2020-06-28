@@ -11,7 +11,7 @@ import {
     InputGroupText,
     Container,
     Button,
-    Col, Row
+    Col
 } from "reactstrap";
 
 import SNavBar from "components/SNavBar.jsx";
