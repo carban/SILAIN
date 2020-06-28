@@ -11,11 +11,6 @@
   background-color: #A5C80A;
 }
 
-.silain_yellow_links{
-  color: #FECB00;
-  font-weight: bold; 
-}
-
 .ButtonLikeLink{
   background-color: white;
   border: none;
@@ -38,6 +33,19 @@
 .ButtonLikeLinkSelected:hover{
   text-decoration: underline;
 }
+
+/* |||||||||||||||   COMPONENTE Search   ||||||||||||||| */
+
+.silain_yellow_links{
+  color: #FECB00;
+  font-weight: bold; 
+}
+
+.silain_yellow_links:hover{
+  color: #F47C00;
+  font-weight: bold; 
+}
+
 /* |||||||||||||||   COMPONENTE THEMAP   ||||||||||||||| */
 .leaflet-container {
     height: 600px;
@@ -122,6 +130,16 @@ thead{
 
 .centerTd{
   text-align: center;
+}
+
+.silain_green_links{
+  color: #A5C80A;
+  font-weight: bold; 
+}
+
+.silain_green_links:hover{
+  color: #7ED6A5;
+  font-weight: bold; 
 }
 
 /* |||||||||||||||   VISTA CLAVE Y PROPIEDAD  ||||||||||||||| */

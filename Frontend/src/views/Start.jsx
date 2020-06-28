@@ -110,6 +110,7 @@ class Start extends React.Component {
                         {this.state.redirect ? this.renderRedirect() : true}
                     </center>
                 </div>
+                <br/><br/>
                 <Footer />
             </div>
         )

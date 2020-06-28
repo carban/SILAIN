@@ -23,7 +23,7 @@ import { Container, Row } from "reactstrap";
 import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
-
+import silainLogo from "./silainLogo.jpg";
 
 class Footer extends React.Component {
   render() {
@@ -40,12 +40,16 @@ class Footer extends React.Component {
                   {/* <a href="/acerca"></a> */}
                 </li>
               </ul>
+              <div className="credits ml-auto">
+                <br />
+                <div className="copyright">
+                  &copy; {1900 + new Date().getYear()}, made with{" "}
+                  <i className="fa fa-heart heart" /> by Creative Tim
+              </div>
+              </div>
             </nav>
             <div className="credits ml-auto">
-              <div className="copyright">
-                &copy; {1900 + new Date().getYear()}, made with{" "}
-                <i className="fa fa-heart heart" /> by Creative Tim
-              </div>
+              <img width="300px" src={silainLogo} alt="" />
             </div>
           </Row>
         </Container>

@@ -38,7 +38,9 @@ class ResultsTable extends React.Component {
                                     <th scope="row">{i + 1}</th>
                                     <td>
                                         <b>
-                                        <NavLink to={"/article/"+e.idmetadato}>
+                                        <NavLink to={"/article/"+e.idmetadato}
+                                            className="silain_green_links"
+                                        >
                                             {e.titulo}
                                         </NavLink>
                                         </b>
