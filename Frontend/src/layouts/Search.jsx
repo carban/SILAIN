@@ -1,14 +1,9 @@
 import React from "react";
 
-// reactstrap components
-import {
-  Row, Col
-} from 'reactstrap';
-
 import { Provider } from "react-redux";
 import store from "../store";
 
-import { Router, Route, Switch, NavLink } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import Footer from "components/Footer.jsx";
 
 import SNavBar from "components/SNavBar.jsx";

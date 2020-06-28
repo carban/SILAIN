@@ -2,7 +2,6 @@ import React from "react";
 
 import {
     Navbar,
-    NavbarToggler,
     NavbarBrand,
     Row, Col
 } from "reactstrap";
