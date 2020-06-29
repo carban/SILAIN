@@ -85,7 +85,7 @@ class CustomFiltersByMap extends React.Component {
                     <Col>
                         <b>Cultivo</b>
                         <Input onChange={this.handleSelects.bind(this)} type="select" name="cultivo" id="exampleSelect">
-                            <option value={-1}>Select</option>
+                            <option>Select</option>
                             {
                                 this.state.cultivos.map((e, i) => (
                                     <option key={i}>{e.cultivo}</option>

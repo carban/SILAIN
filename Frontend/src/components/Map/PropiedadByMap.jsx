@@ -22,6 +22,7 @@ class PropiedadByMap extends React.Component {
             ubication: "",
             ubi_type: "",
             filters: {
+                cultivo: "Select",
                 categoria: "Select",
                 subcategoria: "Select",
                 tipo: "Select",

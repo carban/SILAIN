@@ -60,11 +60,12 @@ class TheMap extends React.Component {
     }
 
     buscarUbication(ubi_type, ubication) {
-        console.log(ubication);
+        // console.log(ubication);
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
             filters: {
+                cultivo: "Select",
                 categoria: "Select",
                 subcategoria: "Select",
                 tipo: "Select",

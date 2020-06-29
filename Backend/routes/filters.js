@@ -315,8 +315,6 @@ router.get('/onmap', async (req, res) => {
   const result2 = await pg.query(query2);
   const result3 = await pg.query(query3);
   
-  console.log(result.rows);
-  
   var hash_Dept = getDepartamentoList(result.rows);
   var hash_Muni = getHashDepartamento_Municipio(result2.rows);
   var hash_Fin = getHashMunicipio_Finca(result3.rows);
