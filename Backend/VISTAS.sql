@@ -21,11 +21,11 @@
 -- from meta_cats_subs inner join metadatos_has_finca on idmetadato = metadato_idmetadato;
 
 -- CREATE VIEW withfinca AS
--- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, idfinca, municipio_idmunicipio, finca
+-- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, -disponibilidad, categoria, subcategoria, idfinca, municipio_idmunicipio, cultivo, finca
 -- from mcasub_join_mhasfinca inner join finca on idfinca = finca_idfinca;
 
 -- CREATE VIEW finca_muni AS
--- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, departamento_iddepartamento
+-- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, cultivo, departamento_iddepartamento
 -- from withfinca inner join municipio on idmunicipio = municipio_idmunicipio;
 
 -- select * from finca_muni;
@@ -35,7 +35,7 @@
 -- DROP VIEW finca_muni;
 
 -- CREATE VIEW muni_dept AS
--- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, departamento
+-- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, cultivo, departamento
 -- from finca_muni inner join departamento on iddepartamento = departamento_iddepartamento;
 
 

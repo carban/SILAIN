@@ -11,6 +11,7 @@ class CustomFiltersByMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cultivos: [],
             cats: [],
             subs: [],
             tipos: [],
@@ -18,6 +19,7 @@ class CustomFiltersByMap extends React.Component {
             current_sub: [],
             current_fin: [],
             selections: {
+                cultivo: "Select",
                 categoria: "Select",
                 subcategoria: "Select",
                 tipo: "Select",
@@ -26,7 +28,7 @@ class CustomFiltersByMap extends React.Component {
         }
     }
 
-    handleSelects(e){
+    handleSelects(e) {
         var sele = { ...this.state.selections };
         sele[e.target.name] = e.target.value;
         this.props.getFilters(sele);
@@ -34,7 +36,7 @@ class CustomFiltersByMap extends React.Component {
 
     }
 
-    handleSelectCAT(e){
+    handleSelectCAT(e) {
         // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
         // con las subcategorias correspondientes a la categoria seleccionada
         var sele = { ...this.state.selections };
@@ -59,9 +61,15 @@ class CustomFiltersByMap extends React.Component {
 
         axios.get(url)
             .then(res => {
-                var { cats, subs, tipos, formatos } = res.data;
+                var { cultivos, cats, subs, tipos, formatos } = res.data;
                 // console.log(res.data)
-                this.setState({ cats: cats, subs: subs, tipos: tipos, formatos: formatos });
+                this.setState({
+                    cultivos: cultivos,
+                    cats: cats,
+                    subs: subs,
+                    tipos: tipos,
+                    formatos: formatos
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -74,6 +82,17 @@ class CustomFiltersByMap extends React.Component {
             <div>
 
                 <Row>
+                    <Col>
+                        <b>Cultivo</b>
+                        <Input onChange={this.handleSelects.bind(this)} type="select" name="cultivo" id="exampleSelect">
+                            <option value={-1}>Select</option>
+                            {
+                                this.state.cultivos.map((e, i) => (
+                                    <option key={i}>{e.cultivo}</option>
+                                ))
+                            }
+                        </Input>
+                    </Col>
                     <Col>
                         <b>Categoria</b>
                         <Input onChange={this.handleSelectCAT.bind(this)} type="select" name="cat" id="exampleSelect">

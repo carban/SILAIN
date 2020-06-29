@@ -199,10 +199,11 @@ function getHashMunicipio_Finca(array) {
   return hash;
 }
 
-function getCultivoList(obj) {
+function getDepartamentoList(list) {
+  console.log(list)
   var array = [];
-  for (let i in obj) {
-    array.push(i);
+  for (let i = 0; i < list.length; i++) {
+    array.push(list[i].departamento);
   }
   return array;
 }
@@ -266,6 +267,10 @@ router.get('/', async (req, res) => {
 // En este caso se omite la consulta de finca y municipio
 router.get('/ubication', async (req, res) => {
 
+  const cults = {
+    text: "select distinct on(cultivo) cultivo from finca;"
+  }
+
   const catsubs = {
     text: "select * from categoria inner join subcategoria on categoria_idcategoria = idcategoria order by idcategoria;",
   }
@@ -280,6 +285,7 @@ router.get('/ubication', async (req, res) => {
 
 
   try {
+    const result_cults = await pg.query(cults);
     const result_catsubs = await pg.query(catsubs);
     const result_tipos = await pg.query(tipos);
     const result_formatos = await pg.query(formatos);
@@ -287,7 +293,7 @@ router.get('/ubication', async (req, res) => {
     var cats = processCats(result_catsubs.rows);
     var subs = processSubs(result_catsubs.rows);
 
-    res.status(200).send({ cats: cats, subs: subs, tipos: result_tipos.rows, formatos: result_formatos.rows });
+    res.status(200).send({ cultivos: result_cults.rows, cats: cats, subs: subs, tipos: result_tipos.rows, formatos: result_formatos.rows });
   } catch (e) {
     console.log(e);
     res.sendStatus(400);
@@ -299,22 +305,29 @@ router.get('/ubication', async (req, res) => {
 // para los filtros de poligonos en el mapa
 router.get('/onmap', async (req, res) => {
 
-  const query = "select cultivo, departamento from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by cultivo;";
-  const result = await pg.query(query);
-
+  const query = "select departamento from departamento";
+  
   const query2 = "select departamento, municipio from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by departamento;";
-  const result2 = await pg.query(query2);
-
+  
   const query3 = "select municipio, finca from (select * from departamento inner join municipio on iddepartamento = departamento_iddepartamento) AS foo inner join finca on foo.idmunicipio = municipio_idmunicipio order by municipio;";
+  
+  const result = await pg.query(query);
+  const result2 = await pg.query(query2);
   const result3 = await pg.query(query3);
-  // console.log(result.rows);
-  var hash_Dept = getHashCultivo_Departamento(result.rows);
+  
+  console.log(result.rows);
+  
+  var hash_Dept = getDepartamentoList(result.rows);
   var hash_Muni = getHashDepartamento_Municipio(result2.rows);
   var hash_Fin = getHashMunicipio_Finca(result3.rows);
-  var cultivo_list = getCultivoList(hash_Dept);
+
+  // console.log({
+  //   departamentos: hash_Dept,
+  //   municipios: hash_Muni,
+  //   fincas: hash_Fin,
+  // })
 
   res.json({
-    cultivos: cultivo_list,
     departamentos: hash_Dept,
     municipios: hash_Muni,
     fincas: hash_Fin,

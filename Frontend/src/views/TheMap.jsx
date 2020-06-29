@@ -127,7 +127,7 @@ class TheMap extends React.Component {
                     {
                         this.state.loading ? (
                             <center>
-                                <ReactLoading type={"bars"} color={"#51BCDA"} />
+                                <ReactLoading type={"bars"} color={"#A5C80A"} />
                             </center>
                         ) : (
                                 this.state.results.length > 0 ?
