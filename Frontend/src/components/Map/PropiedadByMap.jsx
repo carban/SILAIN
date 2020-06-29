@@ -82,7 +82,7 @@ class PropiedadByMap extends React.Component {
                         <div>
                             <br />
                             <div>
-                                <Alert color={this.state.results.length > 0 || this.allSelect() ? "info" : "danger"}>
+                                <Alert color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}>
                                     {
                                         this.state.results.length > 0
                                             ? (
