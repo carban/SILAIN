@@ -25,8 +25,10 @@ router.get('/:id', async (req, res) => {
 
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 router.get('/download/:id', async (req, res) => {
-    res.download("example.cpp", "example.cpp", err => {
-        console.log(err);
+    res.download("example.txt", err => {
+        if (err) {
+            console.log(err);
+        }
     });
 })
 

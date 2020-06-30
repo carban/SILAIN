@@ -5,7 +5,10 @@ import {
     Col, Container, Row, Button
 } from 'reactstrap';
 
-// import axios from "axios";
+import axios from "axios";
+import ReactLoading from "react-loading";
+import download from "downloadjs"
+
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
 
@@ -13,75 +16,97 @@ class Article extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            info: {}
+            info: {},
+            loading: true
         }
+    }
+
+    async getFile() {
+        const res = await fetch(api.route + "/article/download/" + this.props.match.params.id);
+        console.log(res)
+        axios.get(api.route + "/article/download/" + this.props.match.params.id, {
+            responseType: "blob"
+        }).then(res => {
+            let blob = new Blob([res.data])
+            download(blob, "file" + this.props.match.params.id + ".txt", "text/plain");
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     async componentDidMount() {
         const res = await fetch(api.route + "/article/" + this.props.match.params.id);
         const { info } = await res.json();
-        this.setState({ info: info });
+        this.setState({ info: info, loading: false });
     }
 
     render() {
         return (
             <div>
                 <SNavBar />
-                <Container>
-                    <h3>{this.state.info.titulo}</h3>
-                    <hr />
-                    <Row>
-                        <Col md="6" lg="6">
+                {
+                    this.state.loading ? (
+                        <center>
+                            <ReactLoading type={"bars"} color={"#A5C80A"} />
+                        </center>
+                    ) :
+                        <Container>
+                            <h3>{this.state.info.titulo}</h3>
+                            <hr />
                             <Row>
-                                <Col lg="1">
-                                    <b>
-                                        <i className="nc-icon nc-pin-3" style={{ "fontSize": "25px" }}></i>
-                                    </b>
+                                <Col md="6" lg="6">
+                                    <Row>
+                                        <Col lg="1">
+                                            <b>
+                                                <i className="nc-icon nc-pin-3" style={{ "fontSize": "25px" }}></i>
+                                            </b>
+                                        </Col>
+                                        <Col lg="6">
+                                            <b>Departamento: </b>
+                                            {this.state.info.departamento}
+                                            <br />
+                                            <b>Municipio: </b>
+                                            {this.state.info.municipio}
+                                            {/* &nbsp;&nbsp; */}
+                                            <br />
+                                            <b>Finca: </b>
+                                            {this.state.info.finca}
+                                        </Col>
+                                    </Row>
+                                    <br />
+                                    <ul style={{ "textAlign": "left" }}>
+                                        <h5>Caracteristicas</h5>
+                                        <li><b>Categoria: </b>{this.state.info.categoria}</li>
+                                        <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
+                                        <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
+                                        <li><b>Fecha de disponibilidad: </b>{this.state.info.disponibilidad}</li>
+                                        <li><b>Derechos: </b>{this.state.info.derechos}</li>
+                                        <li><b>Publicador: </b>{this.state.info.publicador}</li>
+                                    </ul>
+                                    <ul style={{ "textAlign": "left" }}>
+                                        <h5>Datos de descarga</h5>
+                                        <li><b>Tipo: </b>{this.state.info.tipo}</li>
+                                        <li><b>Formato: </b>{this.state.info.formato}</li>
+                                        <li><b>Tamano: </b>{this.state.info.tamano}</li>
+                                        <Button onClick={this.getFile.bind(this)} color="success">Descargar</Button>
+                                    </ul>
                                 </Col>
-                                <Col lg="6">
-                                    <b>Departamento: </b>
-                                    {this.state.info.departamento}
+
+                                <Col md="6" lg="6">
+                                    <b>Resumen: </b>
                                     <br />
-                                    <b>Municipio: </b>
-                                    {this.state.info.municipio}
-                                    {/* &nbsp;&nbsp; */}
+                                    {this.state.info.resumen}
                                     <br />
-                                    <b>Finca: </b>
-                                    {this.state.info.finca}
+                                    <b>Descripcion: </b>
+                                    <br />
+                                    {this.state.info.descripcion}
+
+                                    <div id="minimap"></div>
                                 </Col>
                             </Row>
-                            <br />
-                            <ul style={{ "textAlign": "left" }}>
-                                <h5>Caracteristicas</h5>
-                                <li><b>Categoria: </b>{this.state.info.categoria}</li>
-                                <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
-                                <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
-                                <li><b>Fecha de disponibilidad: </b>{this.state.info.disponibilidad}</li>
-                                <li><b>Derechos: </b>{this.state.info.derechos}</li>
-                                <li><b>Publicador: </b>{this.state.info.publicador}</li>
-                            </ul>
-                            <ul style={{ "textAlign": "left" }}>
-                                <h5>Datos de descarga</h5>
-                                <li><b>Tipo: </b>{this.state.info.tipo}</li>
-                                <li><b>Formato: </b>{this.state.info.formato}</li>
-                                <li><b>Tamano: </b>{this.state.info.tamano}</li>
-                                <Button color="info">Descargar</Button>
-                            </ul>
-                        </Col>
+                        </Container >
 
-                        <Col md="6" lg="6">
-                            <b>Resumen: </b>
-                            <br/>
-                            {this.state.info.resumen}
-                            <br/>
-                            <b>Descripcion: </b>
-                            <br/>
-                            {this.state.info.descripcion}
-
-                            <div id="minimap"></div>
-                        </Col>
-                    </Row>
-                </Container >
+                }
             </div >
         )
     }
