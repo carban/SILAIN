@@ -119,9 +119,6 @@
 }
 /*  */
 
-
-
-
 .btn_search_map{
   background-color: rgb(199, 4, 118);
   border-style: none;
@@ -157,6 +154,21 @@
 .btn_search_map3:hover{
   background-color: blue;
 }
+
+/* |||||||||||||||   COMPONENTE ARTICLE minimap   ||||||||||||||| */
+.leaflet-container-minimap {
+  margin-top: 15px;
+  height: 300px;
+  width: 100%;
+}
+
+.amapa-minimap{
+  margin-bottom: 50px;
+  background-color: white;
+}
+
+
+
 /* |||||||||||||||   COMPONENTE RESULTS TABLE   ||||||||||||||| */
 
 thead{
@@ -253,8 +265,5 @@ thead{
 }
 
 #minimap{
-  margin-top: 15px;
-  height: 300px;
-  width: 100%;
-  background-color: red;
+
 }

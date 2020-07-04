@@ -5,6 +5,7 @@ import {
     Col, Container, Row, Button
 } from 'reactstrap';
 
+import { Map, TileLayer, LayersControl } from 'react-leaflet';
 import axios from "axios";
 import ReactLoading from "react-loading";
 import download from "downloadjs"
@@ -101,7 +102,16 @@ class Article extends React.Component {
                                     <br />
                                     {this.state.info.descripcion}
 
-                                    <div id="minimap"></div>
+                                    <Map className="amapa-minimap leaflet-container-minimap" center={[3.2175377205303732, -76.53764390954167]} zoom="9">
+                                        <LayersControl position="topright">
+                                            <LayersControl.BaseLayer name="Normal" checked="true">
+                                                <TileLayer
+                                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                />
+                                            </LayersControl.BaseLayer>
+                                        </LayersControl>
+                                    </Map>
                                 </Col>
                             </Row>
                         </Container >
