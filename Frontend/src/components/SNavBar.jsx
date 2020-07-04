@@ -21,8 +21,7 @@ class SNavBar extends React.Component {
                 <NavbarBrand href="/">SILAIN | search</NavbarBrand>
                 <Col md="12">
                 <Row>
-                  <Col sm="3" md="3" lg="3">
-
+                  <Col>
                     <NavLink to="/search/clave"
                       className="silain_yellow_links"
                       activeStyle={{
@@ -34,7 +33,7 @@ class SNavBar extends React.Component {
                       Palabras Clave
                       </NavLink>
                   </Col>
-                  <Col sm="3" md="3" lg="3">
+                  <Col>
                     <NavLink to="/search/propiedad"
                       className="silain_yellow_links"
                       activeStyle={{
@@ -46,7 +45,7 @@ class SNavBar extends React.Component {
                       Propiedades
                     </NavLink>
                   </Col>
-                  <Col sm="3" md="3" lg="3">
+                  <Col>
                     <NavLink to="/search/mapa"
                       className="silain_yellow_links"
                       activeStyle={{
@@ -58,7 +57,7 @@ class SNavBar extends React.Component {
                       Mapa
                     </NavLink>
                   </Col>
-                  <Col sm="3" md="3" lg="3">
+                  <Col>
                     <NavLink to="/search/proyecto"
                       className="silain_yellow_links"
                       activeStyle={{
@@ -68,6 +67,17 @@ class SNavBar extends React.Component {
                       }} title="Realiza busquedas explorando proyectos">
                       <i className="nc-icon nc-bulb-63" style={{ "fontSize": "20px" }}></i>
                       Proyectos
+                    </NavLink>
+                  </Col>
+                  <Col>
+                    <NavLink to="/search/"
+                      className="silain_yellow_links"
+                      activeStyle={{
+                        fontWeight: "bold",
+                        color: "#F47C00",
+                        fontSize: "15px"
+                      }} title="Logueate en la plataforma">
+                      <i className="nc-icon nc-circle-10" style={{ "fontSize": "20px" }}></i>
                     </NavLink>
                   </Col>
                 </Row>
