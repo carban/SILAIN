@@ -200,7 +200,7 @@ function getHashMunicipio_Finca(array) {
 }
 
 function getDepartamentoList(list) {
-  console.log(list)
+  // console.log(list)
   var array = [];
   for (let i = 0; i < list.length; i++) {
     array.push(list[i].departamento);

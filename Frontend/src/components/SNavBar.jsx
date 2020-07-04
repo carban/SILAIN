@@ -18,7 +18,11 @@ class SNavBar extends React.Component {
     render() {
         return (
             <Navbar color="dark" expand="md">
-                <NavbarBrand href="/">SILAIN | search</NavbarBrand>
+                <NavbarBrand>
+                  <NavLink to="/">
+                    SILAIN | search
+                  </NavLink>
+                </NavbarBrand>
                 <Col md="12">
                 <Row>
                   <Col>
@@ -70,7 +74,7 @@ class SNavBar extends React.Component {
                     </NavLink>
                   </Col>
                   <Col>
-                    <NavLink to="/search/"
+                    <NavLink to="/search/holi"
                       className="silain_yellow_links"
                       activeStyle={{
                         fontWeight: "bold",
@@ -78,6 +82,7 @@ class SNavBar extends React.Component {
                         fontSize: "15px"
                       }} title="Logueate en la plataforma">
                       <i className="nc-icon nc-circle-10" style={{ "fontSize": "20px" }}></i>
+                      Login
                     </NavLink>
                   </Col>
                 </Row>

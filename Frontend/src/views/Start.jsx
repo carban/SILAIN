@@ -61,7 +61,7 @@ class Start extends React.Component {
         return (
             <div className="bgForest_top"> 
                 <SNavBar />
-                <div style={{ "marginBottom": "65px" }}>
+                <div style={{"paddingBottom": "65px"}}>
                     <center>
                         <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img>
                         <img src={logoLetter} width="280px" height="280px" alt="description"></img>

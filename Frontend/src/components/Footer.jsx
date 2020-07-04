@@ -30,8 +30,11 @@ class Footer extends React.Component {
     return (
       <footer
         className={"footer" + (this.props.default ? " footer-default" : "")}
-        style={{"backgroundColor": "white", "opacity": "0.9"}}
-        // style={{"marginTop": "300px"}}
+        style={{
+          "backgroundColor": "white", "opacity": "0.9",
+          "bottom": "0px"
+        }}
+      // style={{"marginTop": "300px"}}
       >
         <Container fluid={this.props.fluid ? true : false}>
           <Row>
