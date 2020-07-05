@@ -1,10 +1,7 @@
 import React from "react";
 
-import logo from "logo.png";
-
 // import auth from "components/auth/auth.js";
 import axios from 'axios';
-
 
 import { Link } from "react-router-dom";
 
@@ -21,7 +18,6 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            disabledLoginBtn: true,
             username: '',
             password: '',
             doAnime: false,
@@ -31,9 +27,6 @@ class Login extends React.Component {
     }
 
     onChange = params => {
-        this.setState({
-            disabledLoginBtn: false
-        });
     };
 
     handleInput = e => {
@@ -69,7 +62,7 @@ class Login extends React.Component {
                     <Card id="cardLogin" className={this.state.doAnime ? "animated zoomOutUp" : " "}>
                         <CardHeader>
                             <center>
-                                <img src={logo} width="210px" height="210px" alt="description"></img>
+                                <h2>Crear Cuenta</h2>
                             </center>
                         </CardHeader>
                         <CardBody>
@@ -77,16 +70,21 @@ class Login extends React.Component {
                                 <FormGroup>
                                     <Label for="exampleEmail">email</Label>
                                     <Input onChange={this.handleInput} type="email" name="username" id="exampleEmail" requiered />
-                                </FormGroup>
-                                <FormGroup>
+                                    <Label>Nombres</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label>Apellidos</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
                                     <Label for="examplePassword">Contrasena</Label>
                                     <Input onChange={this.handleInput} type="password" name="password" id="examplePassword" required />
+                                    <Label for="examplePassword">Confirmar Contrasena</Label>
+                                    <Input onChange={this.handleInput} type="password" name="password" id="examplePassword" required />
+
                                 </FormGroup>
                                 <center>
-                                    <Button color="success" type="submit" disabled={this.state.disabledLoginBtn}>ENTRAR</Button>
+                                    <Button color="success" type="submit">REGISTRAR</Button>
                                     <br />
                                     <b>
-                                        <Link to="/">Crea una cuenta</Link>
+                                        <Link to="/login">Iniciar Sesión</Link>
                                     </b>
                                     <br />
                                     <b>

@@ -131,7 +131,7 @@ router.post('/ubication_by_filter', async (req, res) => {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
 
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, categoria, subcategoria from muni_dept where " + ubi_type + " = $1";
+    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo from muni_dept where " + ubi_type + " = $1";
 
     var { query_text } = getTextWithFilters(text, filters);
     var values = getValuesFromFilters(filters, ubication);
