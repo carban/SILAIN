@@ -2,9 +2,9 @@ import React from "react";
 
 import logo from "logo.png";
 
-// import auth from "components/auth/auth.js";
+import auth from "components/auth/auth.js";
 import ReCAPTCHA from "react-google-recaptcha";
-import axios from 'axios';
+// import axios from 'axios';
 
 
 import { Link } from "react-router-dom";
@@ -14,7 +14,6 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    CardTitle,
     Col, Form, FormGroup, Label, Input, Button, Alert
 } from "reactstrap";
 
@@ -48,23 +47,21 @@ class Login extends React.Component {
 
         const delay = 800;
 
-        let data = { id_user: this.state.username, password: this.state.password };
+        // let data = { id_user: this.state.username, password: this.state.password };
 
-        let obj, given;
+        let obj;
 
         // dummy
-        /*obj = {
-            "token": "asdasdsa",
-            "user_id": "awqweqweqw",
-            "user_type": 1,
-            "user_type_name": "admin"
+        obj = {
+            "token": "123",
+            "user_id": "abc",
         };
-        auth.login(obj, rou => {
+        auth.login(obj, () => {
             this.setState({ doAnime: true });
             window.setTimeout(() => {
-                this.props.history.push("/" + rou)
+                this.props.history.push("/perfil")
             }, delay);
-        });*/
+        });
 
         // axios.post("https://energycorp.herokuapp.com/api/user/login/", data)
         //     .then(res => {

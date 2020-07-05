@@ -9,6 +9,8 @@ import Acerca from "views/Acerca.jsx";
 import Article from "views/Article.jsx";
 import Login from "views/Login.jsx";
 import Registro from "views/Registro.jsx";
+import Perfil from "views/Perfil.jsx";
+
 
 import Search from "layouts/Search.jsx";
 
@@ -20,7 +22,7 @@ import Search from "layouts/Search.jsx";
 // import routesOperator from "routes/operatorRoutes.js";
 // import routesManager from "routes/managerRoutes.js";
 
-// import { ProtectedRoute, ProtectedLoginRoute } from "components/auth/ProtectedRoute.js";
+import { ProtectedRoute, ProtectedLoginRoute } from "components/auth/ProtectedRoute.js";
 
 const hist = createBrowserHistory();
 
@@ -35,8 +37,10 @@ function App() {
                 <Route exact path="/searching" component={Searching} />
                 <Route exact path="/acerca" component={Acerca} />
                 <Route exact path="/article/:id" component={Article} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registro" component={Registro} />
+
+                <ProtectedLoginRoute exact path="/login" component={Login} />
+                <ProtectedLoginRoute exact path="/registro" component={Registro} />
+                <ProtectedRoute exact path="/perfil" component={Perfil} />
 
                 <Route path="/search" render={props => <Search {...props} />} history={hist} />
                 {/* <Route exact path="/login" component={Login} /> */}

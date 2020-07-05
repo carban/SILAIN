@@ -1,7 +1,7 @@
 import React from "react";
 
 // import auth from "components/auth/auth.js";
-import axios from 'axios';
+// import axios from 'axios';
 
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,6 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    CardTitle,
     Col, Form, FormGroup, Label, Input, Button, Alert
 } from "reactstrap";
 
