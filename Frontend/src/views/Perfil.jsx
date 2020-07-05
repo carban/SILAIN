@@ -1,39 +1,47 @@
 import React from "react";
 
-// import logo from "logo.png";
+// reactstrap components
+import {
+    Container, Button
+} from 'reactstrap';
 
-// import axios from 'axios';
+// import axios from "axios";
+// import ReactLoading from "react-loading";
+import auth from "components/auth/auth.js";
 
-// import { Link } from "react-router-dom";
-
-// import {
-//     Card,
-//     CardHeader,
-//     CardBody,
-//     CardFooter,
-//     Col, Form, FormGroup, Label, Input, Button, Alert
-// } from "reactstrap";
+import SNavBar from "components/SNavBar.jsx";
+// import api from "api_route.js";
 
 class Perfil extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            disabledLoginBtn: true,
-            username: '',
-            password: '',
-            doAnime: false,
-            errorLogin: false,
-            messageError: "",
-        };
+            info: {},
+            loading: true
+        }
+    }
+
+    async componentDidMount() {
+        // const res = await fetch(api.route + "/article/" + this.props.match.params.id);
+        // const { info } = await res.json();
+        // this.setState({ info: info, loading: false });
+    }
+
+    logout(){
+        auth.logout(() => this.props.history.push("/"));
     }
 
     render() {
         return (
             <div>
-                <h1>PERFIL</h1>
-            </div>
+                <SNavBar />
+                <Container>
+                    <h2>Bienvenido Foo!</h2>
+                    <Button onClick={this.logout.bind(this)}>Salir</Button>
+                </Container>
+            </div >
         )
     }
-}
+};
 
 export default Perfil;

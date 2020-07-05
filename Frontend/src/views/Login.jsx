@@ -124,7 +124,7 @@ class Login extends React.Component {
             <div>
                 <Col md="4" id="login">
                     {alert}
-                    <Card id="cardLogin" className={this.state.doAnime ? "animated zoomOutUp" : " "}>
+                    <Card id="cardLogin" className={this.state.doAnime ? "animated rotateOut fast" : " "}>
                         <CardHeader>
                             <center>
                                 <img src={logo} width="210px" height="210px" alt="description"></img>

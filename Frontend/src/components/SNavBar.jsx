@@ -74,7 +74,7 @@ class SNavBar extends React.Component {
                     </NavLink>
                   </Col>
                   <Col>
-                    <NavLink to="/login"
+                    <NavLink to="/perfil"
                       className="silain_yellow_links"
                       activeStyle={{
                         fontWeight: "bold",
