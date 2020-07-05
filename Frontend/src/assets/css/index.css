@@ -158,7 +158,9 @@
 /* |||||||||||||||   COMPONENTE ARTICLE minimap   ||||||||||||||| */
 .leaflet-container-minimap {
   margin-top: 15px;
-  height: 300px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  height: 350px;
   width: 100%;
 }
 
