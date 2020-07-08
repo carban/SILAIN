@@ -84,7 +84,7 @@ router.post('/search_by_filter', async (req, res) => {
       // Entra si hay al menos un filtro. Y si la palabra esta vacia
       // AQUI DEBE ENTRAR CUANDO EN LA APP SOLO SE BUSCA FILTRAR POR PROPIEDAD SIN INCLUIR PALABRA CLAVE
       // Este query se deja asi, para que sobre todos los resultados se haga el filtro (Alex pidio cambios y quiero reutilizar las cosas que tenia xd)
-      
+
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
       var { query_text } = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
@@ -96,22 +96,19 @@ router.post('/search_by_filter', async (req, res) => {
       var { query_text } = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
     }
-    
+
     // console.log(query_text, values)
 
-    var query = {
-      text: query_text,
-      values: values
-    }
+    var query = { text: query_text, values: values }
 
     try {
       const result = await pg.query(query);
 
-      var AC = 0;
-      var AP = 0;
-      var IC = 0;
-      var IP = 0;
-      var C = 0;
+      let AC = 0;
+      let AP = 0;
+      let IC = 0;
+      let IP = 0;
+      let C = 0;
 
       for (let i = 0; i < result.rows.length; i++) {
         const tipo = result.rows[i].tipo;
