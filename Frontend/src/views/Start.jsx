@@ -16,8 +16,8 @@ import {
 
 import SNavBar from "components/SNavBar.jsx";
 
-import logo from "back.png";
-import logoLetter from "lett.png";
+import logo from "back2.png";
+import logoLetter from "lett2.png";
 
 
 class Start extends React.Component {
