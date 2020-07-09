@@ -116,20 +116,20 @@ class Project1 extends React.Component {
                 <Accordion>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
-                            <h5 style={{ "cursor": "pointer" }}>Resumen</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Resumen</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
-                            <div style={{ "textAlign": "justify" }}>
+                            <div className="projectBody" style={{ "textAlign": "justify" }}>
                                 El cultivo de arroz inundado es uno de los agroecosistemas que ejerce mayor presión sobre el bien hídrico. Por ello, la evaluación de la sustentabilidad ambiental a partir del concepto de huella hídrica es importante ya que permite determinar cómo el manejo y uso del agua en el cultivo puede afectar la disponibilidad tanto en cantidad como en calidad. De ahí que, esta investigación parte de caracterizar el manejo y uso del agua en la producción primaria del arroz, el cual se define por las dimensiones culturales de los agricultores; posteriormente, se cuantifican los tres (3) componentes del indicador biofísico de sustentabilidad Huella Hídrica y, finalmente, se determinan los efectos ambientales mediante índices de sustentabilidad e indicadores de calidad y contaminación del agua. El estudio se centró en la finca San José perteneciente a la arrocera La Esmeralda S.A.S., ubicada en la zona plana del municipio de Santander de Quilichao – Departamento del Cauca durante el periodo comprendido entre septiembre de 2018 - febrero de 2019. Los resultados evidencian que el manejo y uso del agua está determinado por la percepción de abundancia del bien hídrico que tiene el agricultor, hecho que conlleva a su excesivo uso para mantener altos rendimientos y disminuir la aplicación de agroquímicos. Por otro lado, la cuantificación de la huella hídrica en el periodo indicado fue de  referida a  de , cero (0) de  y  de , mostrando que las aguas verdes, en la temporada de alto régimen pluviométrico, satisfacen las necesidades hídricas de la planta de arroz, por lo cual no es necesario el riego. No obstante, a partir del diseño e implementación de la estación automática medidora de caudal se encontró que se incorporaron  de agua de riego extraídos de los ríos y drenajes próximos para establecer la inundación permanente y garantizar el control residual de malezas; de este volumen  retornaron a las fuentes hídricas naturales. Finalmente, la evaluación de la sustentabilidad ambiental del manejo y uso del agua verde, azul y gris muestra una condición crítica de contaminación por agentes microbiológicos, compuestos químicos y un estado hipertrófico por el alto contenido de nutrientes, con lo cual se contribuye al deterioro progresivo de la calidad del agua cuando se reintegran a los ríos.
                             </div>
                         </Accordion.Collapse>
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="1">
-                            <h5 style={{ "cursor": "pointer" }}>Metodologia</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Metodologia</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
-                            <div>
+                            <div className="projectBody">
                                 <h6>Objetivos</h6>
                                 <ul>
                                     <li>
@@ -204,10 +204,10 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="2">
-                            <h5 style={{ "cursor": "pointer" }}>Resultados</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Resultados</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
-                            <div>
+                            <div className="projectBody">
                                 <h6>Resultados Por onjetivo</h6>
                                 <ul>
                                     <li>
@@ -234,10 +234,10 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="3">
-                            <h5 style={{ "cursor": "pointer" }}>Conclusiones</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Conclusiones</h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
-                            <div>
+                            <div className="projectBody">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti suscipit ea modi porro iste ut, optio placeat harum eius exercitationem, veniam aperiam! Autem, eaque animi voluptates sed praesentium reprehenderit natus.
                             </div>
                         </Accordion.Collapse>

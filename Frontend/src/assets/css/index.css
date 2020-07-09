@@ -248,9 +248,10 @@ thead{
 
 .proLink{
   text-decoration: none;
+  border-radius: 15px;
   background-color: #343A40;
   color: white;
-  font-size: 22px;
+  font-size: 17px;
   padding: 14px 25px;
   text-align: center;
   text-decoration: none;
@@ -266,6 +267,11 @@ thead{
   border: 1px solid black;
 }
 
-#minimap{
-
+/* |||||||||||||||   COMPONENTES de proyectos   ||||||||||||||| */
+.projectBody{
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 5px;
 }

@@ -70,30 +70,6 @@ class Start extends React.Component {
                         <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura inteligente</b>
                         <br></br>
                         <br></br>
-                        {/* <Col md="6">
-                            <Row>
-                                <Col sm="3" md="3" lg="3">
-                                    <button className="ButtonLikeLinkSelected" data-toggle="tooltip" title="Realiza busquedas escribiendo palabras clave">
-                                        Palabras Clave
-                                    </button>
-                                </Col>
-                                <Col sm="3" md="3" lg="3">
-                                    <button onClick={this.setRedirect_searchType.bind(this, "propiedad")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas seleccionando una propiedad">
-                                        Propiedades
-                                    </button>
-                                </Col>
-                                <Col sm="3" md="3" lg="3">
-                                    <button onClick={this.setRedirect_searchType.bind(this, "mapa")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando un mapa">
-                                        Mapa
-                                    </button>
-                                </Col>
-                                <Col sm="3" md="3" lg="3">
-                                    <button onClick={this.setRedirect_searchType.bind(this, "proyecto")} className="ButtonLikeLink" data-toggle="tooltip" title="Realiza busquedas explorando proyectos">
-                                        Proyectos
-                                    </button>
-                                </Col>
-                            </Row>
-                        </Col> */}
                         <br></br>
                         <Container>
                             <Col md="7" sm="12" xs="12">
