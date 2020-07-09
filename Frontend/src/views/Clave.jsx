@@ -102,7 +102,7 @@ class Clave extends React.Component {
                     <Col md="12" lg="12">
                         <form onSubmit={this.handleSubmit.bind(this)}>
                             <InputGroup className="no-border">
-                                <Input onChange={this.handleInput.bind(this)} value={this.state.words} name="words" placeholder="Palabras Clave..." />
+                                <Input onChange={this.handleInput.bind(this)} value={this.state.words} name="words" placeholder="Escriba una palabra clave..." />
                                 <InputGroupAddon addonType="append">
                                     <InputGroupText onClick={this.handleSubmit.bind(this)} className="icon-click">
                                         <i className="nc-icon nc-zoom-split" />
@@ -117,7 +117,7 @@ class Clave extends React.Component {
 
         return (
             <Container>
-                <div className="searchBody" style={{"marginBottom": "280px"}}>
+                <div className="searchBody" style={{"marginBottom": "323px"}}>
                     {keyWord}
                     <CustomFilters getFilters={this.getFilters.bind(this)} />
                     {

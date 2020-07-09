@@ -61,7 +61,7 @@ class Propiedad extends React.Component {
     render() {
         return (
             <Container>
-                <div className="searchBody" style={{"marginBottom": "325px" }}>
+                <div className="searchBody" style={{"marginBottom": "372px" }}>
                     <CustomFilters getFilters={this.getFilters.bind(this)} />
                     {
                         this.state.loading ? (

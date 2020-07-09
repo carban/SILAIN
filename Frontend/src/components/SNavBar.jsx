@@ -20,7 +20,7 @@ class SNavBar extends React.Component {
             <Navbar color="dark" expand="md">
                 <NavbarBrand>
                   <NavLink to="/">
-                    SILAIN | search
+                    SILAIN
                   </NavLink>
                 </NavbarBrand>
                 <Col md="12">
@@ -34,7 +34,7 @@ class SNavBar extends React.Component {
                         fontSize: "15px"
                       }} title="Realiza busquedas escribiendo palabras clave">
                       <i className="nc-icon nc-align-left-2" style={{ "fontSize": "18px" }}></i>
-                      Palabras Clave
+                      Busqueda por palabras Clave
                       </NavLink>
                   </Col>
                   <Col>
@@ -46,7 +46,7 @@ class SNavBar extends React.Component {
                         fontSize: "15px"
                       }} title="Realiza busquedas seleccionando una propiedad">
                       <i className="nc-icon nc-bullet-list-67" style={{ "fontSize": "18px" }}></i>
-                      Propiedades
+                      Exploracion de datos
                     </NavLink>
                   </Col>
                   <Col>
@@ -58,7 +58,7 @@ class SNavBar extends React.Component {
                         fontSize: "15px"
                       }} title="Realiza busquedas explorando un mapa">
                       <i className="nc-icon nc-pin-3" style={{ "fontSize": "20px" }}></i>
-                      Mapa
+                      Buscador geografico
                     </NavLink>
                   </Col>
                   <Col>
@@ -70,7 +70,7 @@ class SNavBar extends React.Component {
                         fontSize: "15px"
                       }} title="Realiza busquedas explorando proyectos">
                       <i className="nc-icon nc-bulb-63" style={{ "fontSize": "20px" }}></i>
-                      Proyectos
+                      Proyectos de Investigacion
                     </NavLink>
                   </Col>
                   <Col>

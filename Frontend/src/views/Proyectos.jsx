@@ -18,7 +18,7 @@ class Proyectos extends React.Component {
     render() {
         return (
 
-            <Container style={{ "backgroundColor":"white", "marginBottom": "225px", "paddingBottom": "20px" }}>
+            <Container style={{ "backgroundColor":"white", "marginBottom": "255px", "paddingBottom": "20px" }}>
                 <Router history={this.props.history}>
                     <Switch>
                         <Route exact path="/search/proyecto" render={props =>

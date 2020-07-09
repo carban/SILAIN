@@ -61,13 +61,13 @@ class Start extends React.Component {
         return (
             <div className="bgForest_top"> 
                 <SNavBar />
-                <div style={{"paddingBottom": "65px"}}>
+                <div style={{"paddingBottom": "110px"}}>
                     <center>
                         <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img>
                         <img src={logoLetter} width="280px" height="280px" alt="description"></img>
                         <br></br>
                         <br></br>
-                        <b id="logoMeans">Sistema de información del laboratorio de agricultura inteligente</b>
+                        <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura inteligente</b>
                         <br></br>
                         <br></br>
                         {/* <Col md="6">
@@ -99,7 +99,7 @@ class Start extends React.Component {
                             <Col md="7" sm="12" xs="12">
                                 <form onSubmit={this.setRedirect.bind(this)} style={{"backgroundColor": "white"}}>
                                     <InputGroup className="no-border">
-                                        <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" placeholder="Palabras Clave..." />
+                                        <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" placeholder="Escriba una palabra clave..." />
                                         <InputGroupAddon addonType="append">
                                             <InputGroupText>
                                                 <i className="nc-icon nc-zoom-split" />

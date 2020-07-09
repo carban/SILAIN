@@ -30,14 +30,14 @@ class CustomFilters extends React.Component {
         }
     }
 
-    handleSelects(e){
+    handleSelects(e) {
         var sele = { ...this.state.selections };
         sele[e.target.name] = e.target.value;
         this.props.getFilters(sele);
         this.setState({ selections: sele })
     }
 
-    handleSelectCAT(e){
+    handleSelectCAT(e) {
         // Hago esto para guardar la categoria seleccionada y adicional cambiat current_sub
         // con las subcategorias correspondientes a la categoria seleccionada
         var sele = { ...this.state.selections };
@@ -56,7 +56,7 @@ class CustomFilters extends React.Component {
 
     }
 
-    handleSelectMUNICIPIO(e){
+    handleSelectMUNICIPIO(e) {
         // Hago esto para guardar el municipio seleccionado y adicional cambiar current_fin
         // con las fincas correspondientes al municipio seleccionado
         var sele = { ...this.state.selections };
@@ -96,7 +96,9 @@ class CustomFilters extends React.Component {
 
                 <Row>
                     <Col>
-                        <b>Categoria</b>
+                        <center>
+                            <b>Categoria</b>
+                        </center>
                         <Input onChange={this.handleSelectCAT.bind(this)} type="select" name="cat" id="exampleSelect">
                             <option value={-1}>Select</option>
                             {
@@ -107,7 +109,9 @@ class CustomFilters extends React.Component {
                         </Input>
                     </Col>
                     <Col>
-                        <b>Subcategoria</b>
+                        <center>
+                            <b>Subcategoria</b>
+                        </center>
                         <Input onChange={this.handleSelects.bind(this)} value={this.state.selections.subcategoria} type="select" name="subcategoria" id="exampleSelect">
                             <option>Select</option>
                             {
@@ -118,7 +122,9 @@ class CustomFilters extends React.Component {
                         </Input>
                     </Col>
                     <Col>
-                        <b>Municipios</b>
+                        <center>
+                            <b>Municipios</b>
+                        </center>
                         <Input onChange={this.handleSelectMUNICIPIO.bind(this)} type="select" name="municipio" id="exampleSelect">
                             <option value={-1}>Select</option>
                             {
@@ -129,7 +135,9 @@ class CustomFilters extends React.Component {
                         </Input>
                     </Col>
                     <Col>
-                        <b>Finca</b>
+                        <center>
+                            <b>Finca</b>
+                        </center>
                         <Input onChange={this.handleSelects.bind(this)} value={this.state.selections.finca} type="select" name="finca" id="exampleSelect">
                             <option>Select</option>
                             {
@@ -140,7 +148,9 @@ class CustomFilters extends React.Component {
                         </Input>
                     </Col>
                     <Col>
-                        <b>Tipo</b>
+                        <center>
+                            <b>Tipo</b>
+                        </center>
                         <Input onChange={this.handleSelects.bind(this)} type="select" name="tipo" id="exampleSelect">
                             <option>Select</option>
                             {
@@ -151,7 +161,9 @@ class CustomFilters extends React.Component {
                         </Input>
                     </Col>
                     <Col>
-                        <b>Formato</b>
+                        <center>
+                            <b>Formato</b>
+                        </center>
                         <Input onChange={this.handleSelects.bind(this)} type="select" name="formato" id="exampleSelect">
                             <option>Select</option>
                             {

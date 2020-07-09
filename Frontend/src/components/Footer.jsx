@@ -29,24 +29,18 @@ class Footer extends React.Component {
   render() {
     return (
       <footer
-        className={"footer" + (this.props.default ? " footer-default" : "")}
+        // className={"footer" + (this.props.default ? " footer-default" : "")}
         style={{
           "backgroundColor": "white", "opacity": "0.9",
-          "bottom": "0px"
+          "bottom": "0px", "paddingTop": "10px"
         }}
       // style={{"marginTop": "300px"}}
       >
         <Container fluid={this.props.fluid ? true : false}>
           <Row>
             <nav className="footer-nav">
-              <ul>
-                <li>
-                  <Link to="/acerca">Acerca de SILAIN</Link>
-                  {/* <a href="/acerca"></a> */}
-                </li>
-              </ul>
+              <Link to="/acerca">Acerca de SILAIN</Link>
               <div className="credits ml-auto">
-                <br />
                 <div className="copyright">
                   &copy; {1900 + new Date().getYear()}, made with{" "}
                   <i className="fa fa-heart heart" /> by Creative Tim
@@ -54,7 +48,7 @@ class Footer extends React.Component {
               </div>
             </nav>
             <div className="credits ml-auto">
-              <img width="260px" src={silainLogo} alt="" />
+              <img width="230px" src={silainLogo} alt="" />
             </div>
           </Row>
         </Container>

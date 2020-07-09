@@ -67,11 +67,21 @@ class Login extends React.Component {
                         <CardBody>
                             <Form onSubmit={this.signin} id="loginForm">
                                 <FormGroup>
-                                    <Label for="exampleEmail">email</Label>
-                                    <Input onChange={this.handleInput} type="email" name="username" id="exampleEmail" requiered />
                                     <Label>Nombres</Label>
                                     <Input onChange={this.handleInput} name="text" id="examplePassword" required />
                                     <Label>Apellidos</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label for="exampleEmail">email</Label>
+                                    <Input onChange={this.handleInput} type="email" name="username" id="exampleEmail" requiered />
+                                    <Label>Pais</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label>Departamento</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label>Ciudad</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label>Institucion</Label>
+                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Label>Ocupacion</Label>
                                     <Input onChange={this.handleInput} name="text" id="examplePassword" required />
                                     <Label for="examplePassword">Contrasena</Label>
                                     <Input onChange={this.handleInput} type="password" name="password" id="examplePassword" required />
