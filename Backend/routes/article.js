@@ -37,7 +37,6 @@ router.get('/download/:id', async (req, res) => {
     try {
         const result = await pg.query(query);
         var url = result.rows[0].url;
-        console.log(url);
     } catch (e) {
         console.log(e);
         res.sendStatus(400);
@@ -64,10 +63,8 @@ router.get('/download/filename/:id', async (req, res) => {
     try {
         const result = await pg.query(query);
         var url = result.rows[0].url;
-        // console.log("--->", url);
         var splitted = url.split("/");
         var filename = splitted[splitted.length - 1];
-        // console.log("-->", filename);
         res.status(200).send({ filename: filename });
     } catch (e) {
         console.log(e);

@@ -32,6 +32,7 @@ class Article extends React.Component {
         }).then(res => {
             let blob = new Blob([res.data])
             download(blob, filename);
+            console.log(download);
         }).catch(err => {
             console.log(err);
         });
