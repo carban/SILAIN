@@ -25,11 +25,54 @@ router.get('/:id', async (req, res) => {
 
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 router.get('/download/:id', async (req, res) => {
-    res.download("example.txt", err => {
+
+    var id = req.params.id;
+    var path = "/home/carban/Downloads";
+
+    const query = {
+        text: "select url from metadato where idmetadato = $1",
+        values: [id]
+    }
+
+    try {
+        const result = await pg.query(query);
+        var url = result.rows[0].url;
+        console.log(url);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(400);
+    }
+
+    res.download(path + url, err => {
         if (err) {
             console.log(err);
         }
     });
+})
+
+
+// ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
+router.get('/download/filename/:id', async (req, res) => {
+
+    var id = req.params.id;
+
+    const query = {
+        text: "select url from metadato where idmetadato = $1",
+        values: [id]
+    }
+
+    try {
+        const result = await pg.query(query);
+        var url = result.rows[0].url;
+        // console.log("--->", url);
+        var splitted = url.split("/");
+        var filename = splitted[splitted.length - 1];
+        // console.log("-->", filename);
+        res.status(200).send({ filename: filename });
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(400);
+    }
 })
 
 module.exports = router;

@@ -23,13 +23,15 @@ class Article extends React.Component {
     }
 
     async getFile() {
-        const res = await fetch(api.route + "/article/download/" + this.props.match.params.id);
-        console.log(res)
+        // Conseguir el nombre del archivo
+        const res = await fetch(api.route + "/article/download/filename/" + this.props.match.params.id);
+        const { filename } = await res.json();
+        // Conseguir el archivo a descargar
         axios.get(api.route + "/article/download/" + this.props.match.params.id, {
-            responseType: "blob"
+        responseType: "blob"
         }).then(res => {
             let blob = new Blob([res.data])
-            download(blob, "file" + this.props.match.params.id + ".txt", "text/plain");
+            download(blob, filename);
         }).catch(err => {
             console.log(err);
         });

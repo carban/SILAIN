@@ -18,7 +18,7 @@ import SNavBar from "components/SNavBar.jsx";
 
 import logo from "back2.png";
 import logoLetter from "lett2.png";
-
+// import logo from "mini.png";
 
 class Start extends React.Component {
     constructor(props) {
@@ -31,19 +31,19 @@ class Start extends React.Component {
         }
     }
 
-    handleInput(e){
+    handleInput(e) {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
 
-    setRedirect(){
+    setRedirect() {
         if (this.state.words !== "") {
             this.setState({ redirect: true });
         }
     }
 
-    renderRedirect(){
+    renderRedirect() {
         if (this.state.redirect) {
             const w = this.state.words;
             return <Redirect to={{
@@ -53,18 +53,19 @@ class Start extends React.Component {
         }
     }
 
-    setRedirect_searchType(type){
+    setRedirect_searchType(type) {
         this.setState({ redirect: true, search_type: "/search/" + type })
     }
 
     render() {
         return (
-            <div className="bgForest_top"> 
+            <div className="bgForest_top">
                 <SNavBar />
-                <div style={{"paddingBottom": "110px"}}>
+                <div style={{ "paddingBottom": "110px" }}>
                     <center>
                         <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img>
                         <img src={logoLetter} width="280px" height="280px" alt="description"></img>
+                        {/* <img src={logo} width="280px" height="280px" alt="description"></img> */}
                         <br></br>
                         <br></br>
                         <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura inteligente</b>
@@ -73,7 +74,7 @@ class Start extends React.Component {
                         <br></br>
                         <Container>
                             <Col md="7" sm="12" xs="12">
-                                <form onSubmit={this.setRedirect.bind(this)} style={{"backgroundColor": "white"}}>
+                                <form onSubmit={this.setRedirect.bind(this)} style={{ "backgroundColor": "white" }}>
                                     <InputGroup className="no-border">
                                         <Input value={this.state.words} onChange={this.handleInput.bind(this)} name="words" placeholder="Escriba una palabra clave..." />
                                         <InputGroupAddon addonType="append">
