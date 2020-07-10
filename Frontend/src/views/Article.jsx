@@ -26,15 +26,16 @@ class Article extends React.Component {
         // Conseguir el nombre del archivo
         const res = await fetch(api.route + "/article/download/filename/" + this.props.match.params.id);
         const { filename } = await res.json();
+        
         // Conseguir el archivo a descargar
         axios.get(api.route + "/article/download/" + this.props.match.params.id, {
         responseType: "blob"
         }).then(res => {
             let blob = new Blob([res.data])
             download(blob, filename);
-            console.log(download);
         }).catch(err => {
             console.log(err);
+            alert("No se encontro el recurso");
         });
     }
 

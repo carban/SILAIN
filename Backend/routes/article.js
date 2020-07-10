@@ -45,6 +45,7 @@ router.get('/download/:id', async (req, res) => {
     res.download(path + url, err => {
         if (err) {
             console.log(err);
+            res.sendStatus(400);
         }
     });
 })
