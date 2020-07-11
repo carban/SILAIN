@@ -117,7 +117,7 @@ class Clave extends React.Component {
 
         return (
             <Container>
-                <div className="searchBody" style={{"marginBottom": "323px"}}>
+                <div className="searchBody" style={{ "marginBottom": "323px" }}>
                     {keyWord}
                     <CustomFilters getFilters={this.getFilters.bind(this)} />
                     {
@@ -172,7 +172,6 @@ class Clave extends React.Component {
                                 }
                             </div>
                     }
-
                 </div>
             </Container>
         )

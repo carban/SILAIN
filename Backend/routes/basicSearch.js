@@ -49,7 +49,7 @@ function getTextWithFilters(text, filters) {
   if (s !== "") {
     text = text + " and" + s;
   }
-  return { query_text: text };
+  return text;
 }
 
 // Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
@@ -86,20 +86,20 @@ router.post('/search_by_filter', async (req, res) => {
       // Este query se deja asi, para que sobre todos los resultados se haga el filtro (Alex pidio cambios y quiero reutilizar las cosas que tenia xd)
 
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
-      var { query_text } = getTextWithFilters(text, filters);
+      var query_text = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
 
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
-      var { query_text } = getTextWithFilters(text, filters);
+      var query_text = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
     }
 
     // console.log(query_text, values)
 
-    var query = { text: query_text, values: values }
+    var query = { text: query_text, values: values };
 
     try {
       const result = await pg.query(query);
@@ -131,12 +131,14 @@ router.post('/search_by_filter', async (req, res) => {
           default:
             break;
         }
-
         result.rows[i].creado = getCreado(result.rows[i].creado.toString());
         result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
-
       }
-      res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
+
+      res.status(200).send({
+        result: result.rows,
+        counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C }
+      });
 
     } catch (e) {
       console.log(e);
