@@ -116,7 +116,7 @@ class Project1 extends React.Component {
                 <Accordion>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
-                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Resumen</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resumen</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <div className="projectBody" style={{ "textAlign": "justify" }}>
@@ -126,7 +126,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="1">
-                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Metodologia</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Metodologia</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
                             <div className="projectBody">
@@ -204,11 +204,11 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="2">
-                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Resultados</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resultados</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
                             <div className="projectBody">
-                                <h6>Resultados Por onjetivo</h6>
+                                <h6>Resultados Por objetivo</h6>
                                 <ul>
                                     <li>
                                         <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R1")}>
@@ -234,7 +234,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="3">
-                            <h5 style={{ "cursor": "pointer", "textAlign":"center" }}>Conclusiones</h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Conclusiones</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
                             <div className="projectBody">
