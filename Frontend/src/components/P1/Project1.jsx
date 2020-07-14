@@ -11,12 +11,29 @@ import diagrams from "./diagrams.js";
 
 import mermaid from 'mermaid';
 
+// Objetivos 
 import Eimage from "./Eimage.png";
 import Fimage from "./Fimage.png";
 import Gimage from "./Gimage.png";
 import O2 from "./O2.png";
 import O3 from "./O3.png";
 
+// Resultados
+import R11 from "./R1.1.png";
+import R12 from "./R1.2.png";
+import R122 from "./R1.2.2.png";
+import R13 from "./R1.3.png";
+
+import R21 from "./R2.1.png";
+import R22 from "./R2.2.png";
+import R23 from "./R2.3.png";
+import R24 from "./R2.4.png";
+
+import R31 from "./R3.1.png";
+import R312 from "./R3.1.2.png";
+import R32 from "./R3.2.png";
+import R33 from "./R3.3.png";
+import R332 from "./R3.3.2.png";
 
 class Project1 extends React.Component {
 
@@ -185,7 +202,7 @@ class Project1 extends React.Component {
                                             <div>
                                                 <br />
                                                 <hr />
-                                                {this.state.showObj === "SS1O3" || this.state.showObj === "SS2O3" || this.state.showObj === "SS3O3" ? <img width="700px" height="480px" src={O3} alt="" /> : true }
+                                                {this.state.showObj === "SS1O3" || this.state.showObj === "SS2O3" || this.state.showObj === "SS3O3" ? <img width="700px" height="480px" src={O3} alt="" /> : true}
 
                                                 <br />
                                             </div>
@@ -222,6 +239,78 @@ class Project1 extends React.Component {
                                 </ul>
                                 <center>
                                     < div id="outputResults" />
+                                    {
+                                        this.state.obj === "R1" ?
+                                            <div>
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "ST1R1" ? <img width="800px" height="480px" src={R11} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST2R1" ?
+                                                        <div>
+                                                            <img width="800px" height="480px" src={R12} alt="" />
+                                                            <br />
+                                                            <img width="800px" height="480px" src={R122} alt="" />
+                                                        </div>
+                                                        : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST3R1" ? <img width="800px" height="480px" src={R13} alt="" /> : true
+                                                }
+                                            </div>
+                                            : true
+                                    }
+                                    {
+                                        this.state.obj === "R2" ?
+                                            <div>
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "ST1R2" ? <img width="800px" height="480px" src={R21} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST2R2" ? <img width="800px" height="480px" src={R22} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST3R2" ? <img width="800px" height="480px" src={R23} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST4R2" ? <img width="800px" height="480px" src={R24} alt="" /> : true
+                                                }
+                                            </div>
+                                            : true
+                                    }
+                                    {
+                                        this.state.obj === "R3" ?
+                                            <div>
+                                                <br />
+                                                <hr />
+                                                {
+                                                    this.state.showObj === "ST1R3" ? 
+                                                    <div>
+                                                        <img width="800px" height="480px" src={R31} alt="" /> 
+                                                        <br/>
+                                                        <img width="800px" height="480px" src={R312} alt="" /> 
+                                                    </div>
+                                                    : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST2R3" ? <img width="800px" height="480px" src={R32} alt="" /> : true
+                                                }
+                                                {
+                                                    this.state.showObj === "ST3R3" ? 
+                                                    <div>
+                                                        <img width="800px" height="480px" src={R33} alt="" /> 
+                                                        <br/>
+                                                        <img width="800px" height="480px" src={R332} alt="" /> 
+                                                    </div>
+                                                    : true
+                                                }
+                                            </div>
+                                            : true
+                                    }
                                 </center>
                             </div>
                         </Accordion.Collapse>

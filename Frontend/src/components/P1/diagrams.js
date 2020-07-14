@@ -91,6 +91,10 @@ const diagrams = {
     TR1-->ST1R1["Manejo del Agua"];
     TR1-->ST2R1["Uso del Agua"];
     TR1-->ST3R1["Aspectos culturales"];
+    
+    click ST1R1 foo
+    click ST2R1 foo
+    click ST3R1 foo
     `,
     r2: `
     graph TD
@@ -99,6 +103,11 @@ const diagrams = {
     TR2-->ST2R2["Huella hidrica azul"];
     TR2-->ST3R2["Huella hidrica gris"];
     TR2-->ST4R2["Huella hidrica total"];
+
+    click ST1R2 foo
+    click ST2R2 foo
+    click ST3R2 foo
+    click ST4R2 foo
     `,
     r3: `
     graph TD
@@ -106,6 +115,10 @@ const diagrams = {
     TR3-->ST1R3["Sustentabilidad Huella hidrica verde"];
     TR3-->ST2R3["Sustentabilidad Huella hidrica azul"];
     TR3-->ST3R3["Sustentabilidad Huella hidrica gris"];
+
+    click ST1R3 foo
+    click ST2R3 foo
+    click ST3R3 foo
     `
 }
 
