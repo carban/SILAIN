@@ -35,6 +35,11 @@ import R32 from "./R3.2.png";
 import R33 from "./R3.3.png";
 import R332 from "./R3.3.2.png";
 
+// Conclusiones
+import C1 from "./C1.png";
+import C2 from "./C2.png";
+
+
 class Project1 extends React.Component {
 
     constructor(props) {
@@ -288,25 +293,25 @@ class Project1 extends React.Component {
                                                 <br />
                                                 <hr />
                                                 {
-                                                    this.state.showObj === "ST1R3" ? 
-                                                    <div>
-                                                        <img width="800px" height="480px" src={R31} alt="" /> 
-                                                        <br/>
-                                                        <img width="800px" height="480px" src={R312} alt="" /> 
-                                                    </div>
-                                                    : true
+                                                    this.state.showObj === "ST1R3" ?
+                                                        <div>
+                                                            <img width="800px" height="480px" src={R31} alt="" />
+                                                            <br />
+                                                            <img width="800px" height="480px" src={R312} alt="" />
+                                                        </div>
+                                                        : true
                                                 }
                                                 {
                                                     this.state.showObj === "ST2R3" ? <img width="800px" height="480px" src={R32} alt="" /> : true
                                                 }
                                                 {
-                                                    this.state.showObj === "ST3R3" ? 
-                                                    <div>
-                                                        <img width="800px" height="480px" src={R33} alt="" /> 
-                                                        <br/>
-                                                        <img width="800px" height="480px" src={R332} alt="" /> 
-                                                    </div>
-                                                    : true
+                                                    this.state.showObj === "ST3R3" ?
+                                                        <div>
+                                                            <img width="800px" height="480px" src={R33} alt="" />
+                                                            <br />
+                                                            <img width="800px" height="480px" src={R332} alt="" />
+                                                        </div>
+                                                        : true
                                                 }
                                             </div>
                                             : true
@@ -320,9 +325,13 @@ class Project1 extends React.Component {
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Conclusiones</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
-                            <div className="projectBody">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti suscipit ea modi porro iste ut, optio placeat harum eius exercitationem, veniam aperiam! Autem, eaque animi voluptates sed praesentium reprehenderit natus.
-                            </div>
+                            <center>
+                                <div className="projectBody">
+                                    <img width="800px" height="380px" src={C1} alt="" />
+                                    <br />
+                                    <img width="800px" height="380px" src={C2} alt="" />
+                                </div>
+                            </center>
                         </Accordion.Collapse>
                     </div>
                 </Accordion>
