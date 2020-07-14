@@ -15,6 +15,7 @@ import Eimage from "./Eimage.png";
 import Fimage from "./Fimage.png";
 import Gimage from "./Gimage.png";
 import O2 from "./O2.png";
+import O3 from "./O3.png";
 
 
 class Project1 extends React.Component {
@@ -184,15 +185,8 @@ class Project1 extends React.Component {
                                             <div>
                                                 <br />
                                                 <hr />
-                                                {
-                                                    this.state.showObj === "E" ? <img width="700px" height="480px" src={Eimage} alt="" /> : true
-                                                }
-                                                {
-                                                    this.state.showObj === "F" ? <img width="700px" height="480px" src={Fimage} alt="" /> : true
-                                                }
-                                                {
-                                                    this.state.showObj === "G" ? <img width="700px" height="480px" src={Gimage} alt="" /> : true
-                                                }
+                                                {this.state.showObj === "SS1O3" || this.state.showObj === "SS2O3" || this.state.showObj === "SS3O3" ? <img width="700px" height="480px" src={O3} alt="" /> : true }
+
                                                 <br />
                                             </div>
                                             : true

@@ -75,7 +75,7 @@ const diagrams = {
         <li>Caracterizacion fisicoquimica microbiologica </br> de las aguas que retoman las fuentes naturales</li>
     </ul>
     </br><b><i>Click para mas detalles</i></b>"];
-    ST3O3-->SS303["
+    ST3O3-->SS3O3["
     <ul>
         <li>Calculo del indices de calidad</br>de agua: ICA-IDEAM, ICA-DENIUS</li>
         <li>Calculo de indices de contaminacion ICO: </br> ICOMI, ICOSUS, ICOMO e ICOTRO</li>
@@ -83,7 +83,7 @@ const diagrams = {
 
     click SS1O3 foo
     click SS2O3 foo
-    click SS303 foo
+    click SS3O3 foo
     `,
     r1: `
     graph TD
