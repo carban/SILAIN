@@ -138,7 +138,7 @@ class Project1 extends React.Component {
                 <br />
                 <Accordion>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="0">
+                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{"backgroundColor": "#65A357"}}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resumen</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
@@ -148,7 +148,7 @@ class Project1 extends React.Component {
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="1">
+                        <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor": "#98B503"}}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Metodologia</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
@@ -219,7 +219,7 @@ class Project1 extends React.Component {
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="2">
+                        <Accordion.Toggle as={Card.Header} eventKey="2" style={{"backgroundColor": "#EBC038"}}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resultados</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
@@ -321,7 +321,7 @@ class Project1 extends React.Component {
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="3">
+                        <Accordion.Toggle as={Card.Header} eventKey="3" style={{"backgroundColor": "#E7B107"}}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Conclusiones</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
