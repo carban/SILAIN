@@ -1,95 +1,117 @@
 import React from "react";
 
 import {
-    Navbar,
-    NavbarBrand,
-    Row, Col
+  Navbar,
+  NavbarBrand,
+  Row, Col
 } from "reactstrap";
 
 import { NavLink } from "react-router-dom";
 
+import lupa from "../lupa.png";
+
 
 class SNavBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-    render() {
-        return (
-            <Navbar color="dark" expand="md">
-                <NavbarBrand>
-                  <NavLink to="/">
-                    SILAIN
-                  </NavLink>
-                </NavbarBrand>
-                <Col md="12">
-                <Row>
-                  <Col>
-                    <NavLink to="/search/clave"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas escribiendo palabras clave">
-                      <i className="nc-icon nc-align-left-2" style={{ "fontSize": "18px" }}></i>
+  render() {
+    return (
+      <Navbar color="dark" expand="md" className="navbar_silain_links">
+        <NavbarBrand>
+          <NavLink to="/">
+            SILAIN
+
+        </NavLink>
+        </NavbarBrand>
+        {/* <NavLink href="/"> */}
+        {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+        {/* <img src={lupa} width="400px" height="40px" alt="description"></img> */}
+        {/* </NavLink> */}
+        <Col md="12">
+          <Row >
+            <Col className="silain_link silain_link_green">
+              <center>
+                <NavLink to="/search/clave"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#65A357",
+                    fontSize: "14px",
+
+                  }}
+                  title="Realiza busquedas escribiendo palabras clave">
+                  <i className="nc-icon nc-align-left-2" style={{ "fontSize": "18px" }}></i>
                       Busqueda por palabras Clave
                       </NavLink>
-                  </Col>
-                  <Col>
-                    <NavLink to="/search/propiedad"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas seleccionando una propiedad">
-                      <i className="nc-icon nc-bullet-list-67" style={{ "fontSize": "18px" }}></i>
+              </center>
+            </Col>
+            <Col className="silain_link silain_link_greenorange">
+              <center>
+                <NavLink to="/search/propiedad"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#98B503",
+                    fontSize: "14px",
+
+                  }}
+                  title="Realiza busquedas seleccionando una propiedad">
+                  <i className="nc-icon nc-bullet-list-67" style={{ "fontSize": "18px" }}></i>
                       Exploracion de datos
                     </NavLink>
-                  </Col>
-                  <Col>
-                    <NavLink to="/search/mapa"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas explorando un mapa">
-                      <i className="nc-icon nc-pin-3" style={{ "fontSize": "20px" }}></i>
+              </center>
+            </Col>
+            <Col className="silain_link silain_link_orange">
+              <center>
+
+                <NavLink to="/search/mapa"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#EBC038",
+                    fontSize: "14px",
+
+                  }}
+                  title="Realiza busquedas explorando un mapa">
+                  <i className="nc-icon nc-pin-3" style={{ "fontSize": "20px" }}></i>
                       Buscador geografico
                     </NavLink>
-                  </Col>
-                  <Col>
-                    <NavLink to="/search/proyecto"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Realiza busquedas explorando proyectos">
-                      <i className="nc-icon nc-bulb-63" style={{ "fontSize": "20px" }}></i>
+              </center>
+            </Col>
+            <Col className="silain_link silain_link_yellow">
+              <center>
+                <NavLink to="/search/proyecto"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "#E7B107",
+                    fontSize: "14px",
+
+                  }}
+                  title="Realiza busquedas explorando proyectos">
+                  <i className="nc-icon nc-bulb-63" style={{ "fontSize": "20px" }}></i>
                       Proyectos de Investigacion
                     </NavLink>
-                  </Col>
-                  <Col>
-                    <NavLink to="/perfil"
-                      className="silain_yellow_links"
-                      activeStyle={{
-                        fontWeight: "bold",
-                        color: "#F47C00",
-                        fontSize: "15px"
-                      }} title="Logueate en la plataforma">
-                      <i className="nc-icon nc-circle-10" style={{ "fontSize": "20px" }}></i>
-                      {/* Login */}
-                    </NavLink>
-                  </Col>
-                </Row>
-              </Col>
-            </Navbar>
-        )
-    }
+              </center>
+            </Col>
+            <Col className="silain_link">
+              <center>
+                <NavLink to="/perfil"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "E7B107",
+                    fontSize: "14px",
+                  }}
+                  title="Logueate en la plataforma">
+                  <i className="nc-icon nc-circle-10" style={{ "fontSize": "20px" }}></i>
+                  {/* Login */}
+                </NavLink>
+              </center>
+            </Col>
+          </Row>
+        </Col>
+      </Navbar>
+    )
+  }
 }
 
 export default SNavBar;

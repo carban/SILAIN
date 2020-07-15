@@ -4,7 +4,7 @@
     margin-top: 80px;
 }
 #logoMeans{
-  color: gray;
+  color: white;
 }
 
 .silain_green{
@@ -31,19 +31,21 @@
 }
 
 .bgForest_top{
-  background-image: url("forest3crop.jpg");
-  /* min-height: 100px; */
-  background-position: top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-.bgForest_center{
   background-image: url("forest3.jpg");
   /* min-height: 100px; */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: 1920px 1080px;
+}
+
+.bgForest_center{
+  background-image: url("bird.jpg");
+  /* min-height: 100px; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 1920px 1080px;
 }
 
 .bgGradient{
@@ -59,16 +61,32 @@
 
 /* |||||||||||||||   COMPONENTE Search   ||||||||||||||| */
 
-.silain_yellow_links{
-  /* color: #FECB00; */
-  /* font-weight: bold;  */
-  margin-left: 15px;
+.navbar_silain_links{
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
-/*
-.silain_yellow_links:hover{
-  color: #F47C00;
-  font-weight: bold; 
-} */
+
+.silain_link{
+  top: 0px;
+  bottom: 0px;
+  height: 50px;
+  padding-top:10px ;
+}
+
+.silain_link_green:hover{
+  background-color: #65A357;
+}
+.silain_link_greenorange:hover{
+  background-color: #98B503;
+}
+.silain_link_orange:hover{
+  background-color: #EBC038;
+}
+.silain_link_yellow:hover{
+  background-color: #E7B107;
+}
+
+
 
 /* |||||||||||||||   COMPONENTE Clave y Propiedad   ||||||||||||||| */
 .searchBody{
