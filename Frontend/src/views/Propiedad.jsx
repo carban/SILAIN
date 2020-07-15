@@ -74,7 +74,7 @@ class Propiedad extends React.Component {
                                 <div>
                                     <Alert
                                         color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}
-                                    // className="silain_green"
+                                        style={{paddingLeft: "10px"}}
                                     >
                                         {
                                             this.state.results.length > 0

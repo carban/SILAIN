@@ -129,7 +129,9 @@ class Clave extends React.Component {
                             <div>
                                 <br />
                                 <div>
-                                    <Alert color={this.state.results.length > 0 || this.state.word_searched === "" ? "success" : "danger"}>
+                                    <Alert color={this.state.results.length > 0 || this.state.word_searched === "" ? "success" : "danger"}
+                                        style={{paddingLeft: "10px"}}
+                                    >
                                         {
                                             this.state.results.length > 0
                                                 ? (
