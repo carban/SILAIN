@@ -8,7 +8,7 @@ import {
 
 import { NavLink } from "react-router-dom";
 
-import lupa from "../lupa.png";
+// import lupa from "../lupa.png";
 
 
 class SNavBar extends React.Component {
