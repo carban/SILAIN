@@ -48,7 +48,9 @@ class Footer extends React.Component {
               </div>
             </nav>
             <div className="credits ml-auto">
-              <img width="230px" src={silainLogo} alt="" />
+              <a href="http://cibiofi.univalle.edu.co/index.php/es/inicio/">
+                <img width="230px" src={silainLogo} alt="" />
+              </a>
             </div>
           </Row>
         </Container>

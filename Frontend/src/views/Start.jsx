@@ -61,18 +61,18 @@ class Start extends React.Component {
         return (
             <div className="bgForest_top">
                 <SNavBar />
-                <div style={{ "paddingBottom": "110px" }}>
+                <div style={{ "paddingBottom": "110px" }} >
                     <center>
                         {/* <img src={logo} width="280px" height="280px" alt="description" className="rotating"></img> */}
                         {/* <img src={logoLetter} width="280px" height="280px" alt="description"></img> */}
-                        <img src={logo} width="280px" height="280px" alt="description"></img>
+                        <img src={logo} width="280px" height="280px" alt="description" className="animated fadeInDown fast"></img>
                         <br></br>
                         <br></br>
                         <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura inteligente</b>
                         <br></br>
                         <br></br>
                         <br></br>
-                        <Container>
+                        <Container className="animated fadeIn">
                             <Col md="7" sm="12" xs="12">
                                 <form onSubmit={this.setRedirect.bind(this)} style={{ "backgroundColor": "white" }}>
                                     <InputGroup className="no-border">

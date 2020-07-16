@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "logo.png";
+import logo from "s.png";
 
 import auth from "components/auth/auth.js";
 import ReCAPTCHA from "react-google-recaptcha";
