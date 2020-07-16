@@ -40,7 +40,7 @@
 }
 
 .bgForest_center{
-  background-image: url("bird.jpg");
+  background-image: url("rice.jpg");
   /* min-height: 100px; */
   background-position: center;
   background-repeat: no-repeat;
@@ -91,7 +91,7 @@
 /* |||||||||||||||   COMPONENTE Clave y Propiedad   ||||||||||||||| */
 .searchBody{
   background-color: white;
-  opacity: 0.96;
+  opacity: 0.94;
   border-radius: 15px;
   padding-top: 5px;
   padding-right: 8.5px;
