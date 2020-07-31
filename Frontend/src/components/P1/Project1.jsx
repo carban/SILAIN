@@ -6,6 +6,7 @@ import React from "react";
 // } from 'reactstrap';// used for making the prop types of this component
 
 import { Accordion, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import diagrams from "./diagrams.js";
 
@@ -116,7 +117,7 @@ class Project1 extends React.Component {
     render() {
         // console.log(this.props.history)
         return (
-            <div className="animated bounceInLeft fast">
+            <div className="animated bounceIn fast">
                 <center>
                     <h5>
                         SUSTENTABILIDAD AMBIENTAL DEL MANEJO Y USO DEL AGUA EN CULTIVOS DE ARROZ DE RIEGO. CASO ESTUDIO: FINCA ARROCERA SAN JOSÉ, MUNICIPIO DE SANTANDER DE QUILICHAO, DEPARTAMENTO DEL CAUCA.
@@ -138,7 +139,7 @@ class Project1 extends React.Component {
                 <br />
                 <Accordion>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{"backgroundColor": "#65A357"}}>
+                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{ "backgroundColor": "#65A357" }}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resumen</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
@@ -148,7 +149,7 @@ class Project1 extends React.Component {
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor": "#98B503"}}>
+                        <Accordion.Toggle as={Card.Header} eventKey="1" style={{ "backgroundColor": "#98B503" }}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Metodología</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
@@ -187,6 +188,17 @@ class Project1 extends React.Component {
                                                 {
                                                     this.state.showObj === "SS3O1" ? <img width="800px" height="480px" src={Gimage} alt="" /> : true
                                                 }
+                                                <div style={{ "textAlign": "left" }}>
+                                                    <h6>Articulos Relacionados:</h6>
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/article/407" style={{ "color": "green" }}>
+                                                                Caudales promedio diarios en cultivos de arroz
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
                                             </div>
                                             : true
                                     }
@@ -199,6 +211,26 @@ class Project1 extends React.Component {
                                                     this.state.showObj === "SS1O2" || this.state.showObj === "SS2O2" ? <img width="700px" height="480px" src={O2} alt="" /> : true
                                                 }
                                                 <br />
+                                                <div style={{ "textAlign": "left" }}>
+                                                    <h6>Articulos Relacionados:</h6>
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/article/406" style={{ "color": "green" }}>
+                                                                Datos climáticos finca arrocera San José para el cálculo de las necesidades hídricas del cultivo
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/408" style={{ "color": "green" }}>
+                                                                Análisis de los parámetros del agua en finca San José
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/409" style={{ "color": "green" }}>
+                                                                Análisis de los parámetros del suelo en finca San José
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             : true
                                     }
@@ -208,18 +240,63 @@ class Project1 extends React.Component {
                                                 <br />
                                                 <hr />
                                                 {this.state.showObj === "SS1O3" || this.state.showObj === "SS2O3" || this.state.showObj === "SS3O3" ? <img width="700px" height="480px" src={O3} alt="" /> : true}
-
+                                                <div style={{ "textAlign": "left" }}>
+                                                    <h6>Articulos Relacionados:</h6>
+                                                    <ul>
+                                                        <li>
+                                                            <Link to="/article/417" style={{ "color": "green" }}>
+                                                                Polígonos de Coberturas Vegetales, finca San José
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/410" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Enero 2018
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/411" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Febrero 2018
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/412" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Septiembre 2017
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/413" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Octubre 2017
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/414" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Noviembre 2017
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/415" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Diciembre 2017
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link to="/article/416" style={{ "color": "green" }}>
+                                                                Imagen MODIS Evapotranspiración finca San José, Periodo Septiembre 2017 - Febrero 2018
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                                 <br />
                                             </div>
                                             : true
                                     }
                                 </center>
+
                             </div>
 
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="2" style={{"backgroundColor": "#EBC038"}}>
+                        <Accordion.Toggle as={Card.Header} eventKey="2" style={{ "backgroundColor": "#EBC038" }}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Resultados</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="2">
@@ -321,7 +398,7 @@ class Project1 extends React.Component {
                         </Accordion.Collapse>
                     </div>
                     <div>
-                        <Accordion.Toggle as={Card.Header} eventKey="3" style={{"backgroundColor": "#E7B107"}}>
+                        <Accordion.Toggle as={Card.Header} eventKey="3" style={{ "backgroundColor": "#E7B107" }}>
                             <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Conclusiones</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
