@@ -30,6 +30,17 @@
   font-weight: bold;
 }
 
+.ButtonLikeLink2{
+  background-color: white;
+  border: none;
+  color: #98B503
+}
+
+.ButtonLikeLink2:hover{
+  text-decoration: underline;
+  color: #F47C00;
+}
+
 .bgForest_top{
   background-image: url("forest3.jpg");
   /* min-height: 100px; */

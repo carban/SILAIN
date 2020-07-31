@@ -8,7 +8,9 @@ import {
 import { Map, TileLayer, LayersControl } from 'react-leaflet';
 import axios from "axios";
 import ReactLoading from "react-loading";
-import download from "downloadjs"
+import download from "downloadjs";
+import { Redirect } from "react-router-dom";
+
 
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
@@ -18,7 +20,9 @@ class Article extends React.Component {
         super(props);
         this.state = {
             info: {},
-            loading: true
+            loading: true,
+            redirect: false,
+            redirect_word: ""
         }
     }
 
@@ -26,10 +30,10 @@ class Article extends React.Component {
         // Conseguir el nombre del archivo
         const res = await fetch(api.route + "/article/download/filename/" + this.props.match.params.id);
         const { filename } = await res.json();
-        
+
         // Conseguir el archivo a descargar
         axios.get(api.route + "/article/download/" + this.props.match.params.id, {
-        responseType: "blob"
+            responseType: "blob"
         }).then(res => {
             let blob = new Blob([res.data])
             download(blob, filename);
@@ -43,6 +47,19 @@ class Article extends React.Component {
         const res = await fetch(api.route + "/article/" + this.props.match.params.id);
         const { info } = await res.json();
         this.setState({ info: info, loading: false });
+    }
+
+    redirectPclave(w) {
+        this.setState({ redirect: true, redirect_word: w });
+    }
+
+    renderRedirect() {
+        if (this.state.redirect) {
+            return <Redirect to={{
+                pathname: "/search/clave",
+                words: this.state.redirect_word,
+            }} />;
+        }
     }
 
     render() {
@@ -95,6 +112,17 @@ class Article extends React.Component {
                                         <li><b>Tamano: </b>{this.state.info.tamano}</li>
                                         <Button onClick={this.getFile.bind(this)} color="success">Descargar</Button>
                                     </ul>
+                                    <ul style={{ "textAlign": "left" }}>
+                                        <h5>Palabras clave</h5>
+                                        {
+                                            this.state.info.pclave.split(",").map((e, i) => (
+                                                <button onClick={this.redirectPclave.bind(this, e)} className="ButtonLikeLink2">{e}</button>
+                                            ))
+                                        }
+                                    </ul>
+                                    {this.state.redirect ? this.renderRedirect() : true}
+
+
                                 </Col>
 
                                 <Col md="6" lg="6">
