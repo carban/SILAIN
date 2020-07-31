@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 router.get('/download/:id', async (req, res) => {
 
     var id = req.params.id;
-    var path = "/home/carban/Downloads";
+    var path = "/home/carban/Stuffs";
 
     const query = {
         text: "select url from metadato where idmetadato = $1",
