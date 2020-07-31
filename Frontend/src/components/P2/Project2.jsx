@@ -10,7 +10,7 @@ import { Accordion, Card } from "react-bootstrap";
 
 // import diagrams from "./diagrams.js";
 
-import mermaid from 'mermaid';
+// import mermaid from 'mermaid';
 
 
 class Project2 extends React.Component {

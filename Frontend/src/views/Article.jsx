@@ -5,7 +5,7 @@ import {
     Col, Container, Row, Button
 } from 'reactstrap';
 
-import { Map, TileLayer, LayersControl } from 'react-leaflet';
+import { Map, TileLayer, LayersControl, FeatureGroup, Polygon, Tooltip } from 'react-leaflet';
 import axios from "axios";
 import ReactLoading from "react-loading";
 import download from "downloadjs";
@@ -21,6 +21,8 @@ class Article extends React.Component {
         this.state = {
             info: {},
             loading: true,
+            finca: [],
+            centroid: [],
             redirect: false,
             redirect_word: ""
         }
@@ -45,8 +47,8 @@ class Article extends React.Component {
 
     async componentDidMount() {
         const res = await fetch(api.route + "/article/" + this.props.match.params.id);
-        const { info } = await res.json();
-        this.setState({ info: info, loading: false });
+        const { info, finca } = await res.json();
+        this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid });
     }
 
     redirectPclave(w) {
@@ -134,15 +136,26 @@ class Article extends React.Component {
                                     <br />
                                     {this.state.info.descripcion}
 
-                                    <Map className="amapa-minimap leaflet-container-minimap" center={[3.2175377205303732, -76.53764390954167]} zoom="9">
-                                        <LayersControl position="topright">
-                                            <LayersControl.BaseLayer name="Normal" checked="true">
-                                                <TileLayer
-                                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                />
-                                            </LayersControl.BaseLayer>
-                                        </LayersControl>
+                                    <Map className="amapa-minimap leaflet-container-minimap" center={this.state.centroid} zoom={16}>
+                                        <TileLayer
+                                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        />
+                                        {
+                                            this.state.finca.length === 1 ? (
+                                                <FeatureGroup color="blue">
+                                                    <Tooltip direction="top">
+                                                        <center>
+                                                            <h5>Finca: {this.state.info.finca}</h5>
+                                                            <b>Lat: {this.state.centroid[0]}</b>
+                                                            <br />
+                                                            <b>Lng: {this.state.centroid[1]}</b>
+                                                        </center>
+                                                    </Tooltip>
+                                                    <Polygon positions={this.state.finca[0].poly} />
+                                                </FeatureGroup>
+                                            ) : true
+                                        }
                                     </Map>
                                 </Col>
                             </Row>
