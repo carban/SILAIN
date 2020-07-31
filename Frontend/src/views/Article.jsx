@@ -5,7 +5,7 @@ import {
     Col, Container, Row, Button
 } from 'reactstrap';
 
-import { Map, TileLayer, LayersControl, FeatureGroup, Polygon, Tooltip } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, Polygon, Tooltip } from 'react-leaflet';
 import axios from "axios";
 import ReactLoading from "react-loading";
 import download from "downloadjs";
