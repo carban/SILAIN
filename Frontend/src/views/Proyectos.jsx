@@ -33,9 +33,11 @@ class Proyectos extends React.Component {
                                     <Col size="sm">
                                         <Row>
                                             <Col md="11">
-                                                <h6>
-                                                    Sustentabilidad ambiental del manejo y uso del agua en cultivos de arroz de riego. caso estudio: finca arrocera san Jose, municipio Santander de Quilichao, Departamento del Cauca
-                                        </h6>
+                                                <center>
+                                                    <h5>
+                                                        Sustentabilidad ambiental del manejo y uso del agua en cultivos de arroz de riego. caso estudio: finca arrocera san Jose, municipio Santander de Quilichao, Departamento del Cauca
+                                                    </h5>
+                                                </center>
                                             </Col>
                                             <Col md="1">
                                                 <NavLink to="/search/proyecto/p1" className="proLink">
@@ -47,9 +49,11 @@ class Proyectos extends React.Component {
                                         <hr />
                                         <Row>
                                             <Col md="11">
-                                                <h6>
-                                                    Proyecto de Duvan, Macronutrientes arroz
-                                        </h6>
+                                                <center>
+                                                    <h5>
+                                                        Análisis del efecto del grosor de la lámina de agua en el cultivo de arroz a partir del análisis de respuestas espectrales.
+                                                    </h5>
+                                                </center>
                                             </Col>
                                             <Col md="1">
                                                 <NavLink to="/search/proyecto/p2" className="proLink">
@@ -62,7 +66,7 @@ class Proyectos extends React.Component {
                                         <Row>
                                             <Col md="11">
                                                 <h6>
-                                                    Proyecto de Nelson, Efecto de la lamina del agua
+                                                    Proyecto de Duvan, Macronutrientes arroz
                                         </h6>
                                             </Col>
                                             <Col md="1">
