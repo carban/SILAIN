@@ -8,6 +8,8 @@ import {
 import { Router, Route, Switch, NavLink } from "react-router-dom";
 
 import Project1 from "components/P1/Project1.jsx";
+import Project2 from "components/P2/Project2.jsx";
+
 
 class Proyectos extends React.Component {
     constructor(props) {
@@ -87,7 +89,7 @@ class Proyectos extends React.Component {
                                 </div>
                             } />
                             <Route exact path="/search/proyecto/p1" component={Project1} />
-                            <Route exact path="/search/proyecto/p2" component={() => <h1>P2</h1>} />
+                            <Route exact path="/search/proyecto/p2" component={Project2} />
                             <Route exact path="/search/proyecto/p3" component={() => <h1>P3</h1>} />
                             <Route exact path="/search/proyecto/p4" component={() => <h1>P4</h1>} />
 
