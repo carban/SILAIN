@@ -143,7 +143,7 @@ class Article extends React.Component {
                                         />
                                         {
                                             this.state.finca.length === 1 ? (
-                                                <FeatureGroup color="blue">
+                                                <FeatureGroup color="green">
                                                     <Tooltip direction="top">
                                                         <center>
                                                             <h5>Finca: {this.state.info.finca}</h5>
