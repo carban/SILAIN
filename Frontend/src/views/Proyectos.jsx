@@ -25,7 +25,7 @@ class Proyectos extends React.Component {
                             <Route exact path="/search/proyecto" render={props =>
                                 <div>
                                     <center>
-                                        <i>La informacion presentada fue suministrada por las personas involucradas</i>
+                                        <i>La Información presentada fue suministrada por las personas involucradas</i>
                                     </center>
                                     <br />
                                     <Col size="sm">

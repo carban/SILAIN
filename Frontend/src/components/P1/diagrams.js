@@ -43,14 +43,14 @@ const diagrams = {
         <li>Datos del cultivo</li>
     </ul>
     <b><i>Click para mas detalles</i></b>"];
-    ST2O2-->SS2O2["<ul><li>Programa de riego</li><li>Parametros fisicoquimicos </br> y microbiologicos del agua</li></ul>
-    </br>
-    <ul>
-        <li>Nitrogeno total</li>
-        <li>Fosforo total</li>
-        <li>Cloruro</li>
-        <li>Alcanilidad total</li>
-        <li>Pesticidas, entre otros</li>   
+    ST2O2-->SS2O2["<ul>
+    <li><b>Programa de riego</b></li>
+    <li><b>Parametros fisicoquimicos </br> y microbiologicos del agua</b></li>
+    <li>Nitrogeno total</li>
+    <li>Fosforo total</li>
+    <li>Cloruro</li>
+    <li>Alcanilidad total</li>
+    <li>Pesticidas, entre otros</li> 
     </ul>
     </br><b><i>Click para mas detalles</i></b>"];
 
@@ -88,9 +88,9 @@ const diagrams = {
     r1: `
     graph TD
     TR1["Caracterizacion del manejo y uso del agua en la unidad agricola"];
-    TR1-->ST1R1["Manejo del Agua"];
-    TR1-->ST2R1["Uso del Agua"];
-    TR1-->ST3R1["Aspectos culturales"];
+    TR1-->ST1R1["Manejo del Agua</br><b><i>Click para mas detalles</i></b>"];
+    TR1-->ST2R1["Uso del Agua</br><b><i>Click para mas detalles</i></b>"];
+    TR1-->ST3R1["Aspectos culturales</br><b><i>Click para mas detalles</i></b>"];
     
     click ST1R1 foo
     click ST2R1 foo
@@ -99,10 +99,10 @@ const diagrams = {
     r2: `
     graph TD
     TR2["Cuantificacion de la </br> HHverde, HHazul, HHgris"];
-    TR2-->ST1R2["Huella hidrica verde"];
-    TR2-->ST2R2["Huella hidrica azul"];
-    TR2-->ST3R2["Huella hidrica gris"];
-    TR2-->ST4R2["Huella hidrica total"];
+    TR2-->ST1R2["Huella hidrica verde</br><b><i>Click para mas detalles</i></b>"];
+    TR2-->ST2R2["Huella hidrica azul</br><b><i>Click para mas detalles</i></b>"];
+    TR2-->ST3R2["Huella hidrica gris</br><b><i>Click para mas detalles</i></b>"];
+    TR2-->ST4R2["Huella hidrica total</br><b><i>Click para mas detalles</i></b>"];
 
     click ST1R2 foo
     click ST2R2 foo
@@ -112,9 +112,9 @@ const diagrams = {
     r3: `
     graph TD
     TR3["Definir los efectos ambientales de la HHverde, HHazul, HHgris"];
-    TR3-->ST1R3["Sustentabilidad Huella hidrica verde"];
-    TR3-->ST2R3["Sustentabilidad Huella hidrica azul"];
-    TR3-->ST3R3["Sustentabilidad Huella hidrica gris"];
+    TR3-->ST1R3["Sustentabilidad Huella hidrica verde</br><b><i>Click para mas detalles</i></b>"];
+    TR3-->ST2R3["Sustentabilidad Huella hidrica azul</br><b><i>Click para mas detalles</i></b>"];
+    TR3-->ST3R3["Sustentabilidad Huella hidrica gris</br><b><i>Click para mas detalles</i></b>"];
 
     click ST1R3 foo
     click ST2R3 foo

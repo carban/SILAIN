@@ -116,7 +116,7 @@ class Article extends React.Component {
                                         <h5>Palabras clave</h5>
                                         {
                                             this.state.info.pclave.split(",").map((e, i) => (
-                                                <button onClick={this.redirectPclave.bind(this, e)} className="ButtonLikeLink2">{e}</button>
+                                                <button onClick={this.redirectPclave.bind(this, e)} className="ButtonLikeLink">{e}</button>
                                             ))
                                         }
                                     </ul>

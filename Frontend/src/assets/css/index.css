@@ -11,7 +11,7 @@
   background-color: #A5C80A;
 }
 
-.ButtonLikeLink{
+/* .ButtonLikeLink{
   background-color: white;
   border: none;
   color: #FECB00
@@ -20,7 +20,7 @@
 .ButtonLikeLink:hover{
   text-decoration: underline;
   color: #F47C00;
-}
+} */
 
 .ButtonLikeLinkSelected{
   background-color: white;
@@ -30,13 +30,13 @@
   font-weight: bold;
 }
 
-.ButtonLikeLink2{
+.ButtonLikeLink{
   background-color: white;
   border: none;
   color: #98B503
 }
 
-.ButtonLikeLink2:hover{
+.ButtonLikeLink:hover{
   text-decoration: underline;
   color: #F47C00;
 }

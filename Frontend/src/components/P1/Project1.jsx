@@ -149,7 +149,7 @@ class Project1 extends React.Component {
                     </div>
                     <div>
                         <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor": "#98B503"}}>
-                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Metodologia</b></h5>
+                            <h5 style={{ "cursor": "pointer", "textAlign": "center" }}><b>Metodología</b></h5>
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
                             <div className="projectBody">
