@@ -11,7 +11,13 @@ import { Accordion, Card } from "react-bootstrap";
 // import diagrams from "./diagrams.js";
 
 // import mermaid from 'mermaid';
-
+import metodo from "./metodo.png";
+import R1 from "./R1.png";
+import R12 from "./R1.2.png";
+import R2 from "./R2.png";
+import R22 from "./R2.2.png";
+import R23 from "./R2.3.png";
+import R3 from "./R3.png";
 
 class Project2 extends React.Component {
 
@@ -19,71 +25,11 @@ class Project2 extends React.Component {
         super(props);
         this.state = {
             obj: "",
-            showObj: "",
         }
     }
 
     diagramEvent(e) {
-        this.setState({ showObj: e });
-    }
-
-    showDiagram(d) {
-
-        // this.setState({ "obj": d });
-
-        // var output;
-
-        // if (d[0] === "O") {
-        //     output = document.getElementById('output');
-        // } else {
-        //     output = document.getElementById('outputResults');
-        // }
-
-        // var config = {
-        //     startOnLoad: true,
-        //     flowchart: {
-        //         useMaxWidth: true,
-        //         htmlLabels: true,
-        //         curve: 'cardinal',
-        //     },
-        //     securityLevel: 'loose',
-        // };
-
-        // mermaid.initialize(config);
-
-        // var graphDefinition;
-
-        // switch (d) {
-        //     case "O1":
-        //         graphDefinition = diagrams.o1;
-        //         break;
-        //     case "O2":
-        //         graphDefinition = diagrams.o2;
-        //         break;
-        //     case "O3":
-        //         graphDefinition = diagrams.o3;
-        //         break;
-        //     case "R1":
-        //         graphDefinition = diagrams.r1;
-        //         break;
-        //     case "R2":
-        //         graphDefinition = diagrams.r2;
-        //         break;
-        //     case "R3":
-        //         graphDefinition = diagrams.r3;
-        //         break;
-        //     default:
-        //         break;
-        // }
-
-        // mermaid.render('theGraph', graphDefinition, (svgCode, bindFunctions) => {
-        //     output.innerHTML = svgCode;
-        //     bindFunctions()
-        // });
-    }
-
-    componentDidMount() {
-        window.foo = e => { this.diagramEvent(e); }
+        this.setState({ obj: e });
     }
 
     render() {
@@ -123,38 +69,7 @@ class Project2 extends React.Component {
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="1">
                             <div className="projectBody">
-                                <h6>Objetivos</h6>
-                                <ul>
-                                    <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O1")}>
-                                            Caracterizacion del manejo y uso del agua en la unidad agricola
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O2")}>
-                                            Cuantificacion de la HHverde, HHazul, HHgris
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "O3")}>
-                                            Definir los efectos ambientales de la HHverde, HHazul, HHgris
-                                        </button>
-                                    </li>
-                                </ul>
-                                <center>
-                                    {
-
-                                    }
-
-                                    {
-
-
-                                    }
-                                    {
-
-                                    }
-                                </center>
-
+                                <img src={metodo} alt="" />
                             </div>
 
                         </Accordion.Collapse>
@@ -168,26 +83,78 @@ class Project2 extends React.Component {
                                 <h6>Resultados Por objetivo</h6>
                                 <ul>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R1")}>
-                                            Caracterizacion del manejo y uso del agua en la unidad agricola
+                                        <button className="ButtonLikeLink" onClick={this.diagramEvent.bind(this, "R1")}>
+                                            Sanidad Física
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R2")}>
-                                            Cuantificacion de la HHverde, HHazul, HHgris
+                                        <button className="ButtonLikeLink" onClick={this.diagramEvent.bind(this, "R2")}>
+                                            Sanidad Espectral
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="ButtonLikeLink" onClick={this.showDiagram.bind(this, "R3")}>
-                                            Definir los efectos ambientales de la HHverde, HHazul, HHgris
+                                        <button className="ButtonLikeLink" onClick={this.diagramEvent.bind(this, "R3")}>
+                                            Análisis CWP
                                         </button>
                                     </li>
                                 </ul>
-                                <center>
-                                    {
+                                {
+                                    (this.state.obj === "R1") ? (
+                                        <div>
+                                            <p>
+                                                La altura promedio final para las plantas de arroz presentes en la parcela Testigo fue de 101,9 cm con una desviación del 6,4% y una altura final para las plantas en la parcela Réplica de 103 cm con una desviación del 6,6%. En el caso de este estudio las plantas de las parcelas Testigo y Réplica en su característica de altura presentan valores acordes a una planta de arroz sana, a pesar de estar en láminas de agua diferentes.
+                                            </p>
+                                            <center><img src={R1} alt="" width="400px" height="160px" /></center>
+                                            <br />
+                                            <p>
+                                                Se realizaron tres modelos de regresión con los datos de altura de la planta como variable dependiente y los días del cultivo como variable independiente y se encontró que el patrón de crecimiento presente, tanto para la parcela Testigo como para la parcela Réplica, estos se ajustan de mejor manera con el modelo de regresión polinómica, donde el coeficiente de determinación (R2) es del 0,99 en ambos casos, mostrando un crecimiento acorde con las plantas de semillas que actualmente son utilizadas en el cultivo, su crecimiento presenta un comportamiento sigmoidal.
+                                            </p>
+                                            <center><img src={R12} alt="" width="600px" height="400px" /></center>
+                                            <br />
+                                        </div>
 
-                                    }
-                                </center>
+                                    ) : true
+                                }
+                                {
+                                    (this.state.obj === "R2") ? (
+                                        <div>
+                                            <p>
+                                                Para determinar el efecto del grosor de la lámina de agua en las respuestas espectrales de las plantas se aplicó un ajuste de modelos de regresión entre las bandas espectrales y el nivel de lámina de agua, encontrando que el ajuste con mayor coeficiente de R2 fue 0.32 en la banda infrarroja.
+                                                </p>
+                                            <br />
+                                            <center><img src={R2} alt="" width="400px" height="200px" /></center>
+                                            <br />
+                                            <p>
+                                                Con el valor de las bandas espectrales en las fases estudio en ambas parcelas, se procedió a calcular el promedio de cada uno de los índices en cada fase para las dos parcelas con sus respectivas desviaciones. Para el caso del NDVI fue el índice que tuvo los valores de desviación más bajos, y para este índice los valores de referencia de un arroz sano están alrededor de 0,63 y 0,99 (García, 2010 y Saavedra et al., 2018). En el caso de los índices GNDVI y NDRE presentaron desviaciones ligeramente más grandes que el NDVI, pero igualmente son representativas para las plantas en ambas parcelas, donde para el índice GNDVI las plantas sanas suelen rondar valores de 0,6 (Candiago et al., 2015) y para el índice NDRE valores de 0,5, evidenciando un aspecto positivo en los valores nutricionales de la planta (Zhang et al., 2019).
+                                                </p>
+                                            <br />
+                                            <center><img src={R22} alt="" width="450px" height="380px" /></center>
+                                            <br />
+                                            <p>
+                                                Usando firmas espectrales de plantas de arroz sanas presentadas por autores de investigaciones relacionadas, se calculó la correlación de las firmas espectrales de referencia y las firmas espectrales observadas, se obtuvo que el comportamiento de las firmas para las parcelas experimentales las fases de muestreo es compatible en mayor medida con la firma espectral correspondiente a una planta de arroz sana con correlaciones cercanas a 0,98.
+                                                </p>
+                                            <br />
+                                            <center><img src={R23} alt="" width="400px" height="160px" /></center>
+                                            <br />
+                                            <p>
+                                                Teniendo en cuenta los resultados de correlación anterior, se observa que tanto las correlaciones de las firmas de referencia para las plantas de arroz sanas como las firmas de referencia para las plantas de arroz enferma y ligeramente sana, obtuvieron valores altos.
+                                                </p>
+                                        </div>
+                                    ) : true
+                                }
+                                {
+                                    (this.state.obj === "R3") ? (
+                                        <div>
+                                            <p>
+                                                Se calculó el índice CWP para medir la eficiencia del uso del recurso hídrico en la productividad del cultivo. Para esto se usaron los valores de rendimiento para la parcela Testigo que fue de 59,09 kg con un volumen de agua azul de 187,85 m3 y un volumen de agua verde 43,67 m3 para un uso total de 231,54 m3, para la parcela Réplica el rendimiento fue de 39,53 kg con un volumen de agua azul de 160,25 m3 y un volumen de agua verde 28,03 m3 para un uso total de 188,28 m3.
+                                                El índice CWP para la parcela Testigo fue de 0,255, siendo este bajo para los valores estándar de los cultivos de arroz (Gonzáles y Alonso, 2016), pero el rendimiento presenta un indicador de 5,5 Ton/Ha que es un valor aceptable para los cultivos de arroz según los valores estudiados por Gonzáles y Alonso (2016), mostrando así que el problema que presenta el índice CWP tiene mayor peso en el uso ineficiente del recurso hídrico más que en el rendimiento que la parcela presentó.
+                                                Para la parcela Réplica el índice CWP fue similar a la otra parcela, pues presentó un valor de 0,21, que como fue explicado anteriormente es bajo, pero de igual forma su rendimiento tiene un indicador de 5,7 Ton/Ha que es admisible según lo estudiado por Gonzáles y Alonso (2016), y contrastando con el resultado anterior, se evidencia el problema sobre el uso del recurso hídrico excesivo y que este no está influyendo de manera óptima para el mejoramiento de la productividad del cultivo.
+                                            </p>
+                                            <br />
+                                            <center><img src={R3} alt="" width="400px" height="160px" /></center>
+                                        </div>
+                                    ) : true
+                                }
                             </div>
                         </Accordion.Collapse>
                     </div>
