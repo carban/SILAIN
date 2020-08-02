@@ -4,7 +4,8 @@ import logo from "s.png";
 
 import auth from "components/auth/auth.js";
 import ReCAPTCHA from "react-google-recaptcha";
-// import axios from 'axios';
+import axios from 'axios';
+import api from "api_route.js";
 
 
 import { Link } from "react-router-dom";
@@ -47,69 +48,42 @@ class Login extends React.Component {
 
         const delay = 800;
 
-        // let data = { id_user: this.state.username, password: this.state.password };
-
+        let data = { user: this.state.username, password: this.state.password };
         let obj;
 
         // dummy
-        obj = {
-            "token": "123",
-            "user_id": "abc",
-        };
-        auth.login(obj, () => {
-            this.setState({ doAnime: true });
-            window.setTimeout(() => {
-                this.props.history.push("/perfil")
-            }, delay);
-        });
+        // obj = {
+        //     "token": "123",
+        //     "user_id": "abc",
+        // };
+        // auth.login(obj, () => {
+        //     this.setState({ doAnime: true });
+        //     window.setTimeout(() => {
+        //         this.props.history.push("/perfil")
+        //     }, delay);
+        // });
 
-        // axios.post("https://energycorp.herokuapp.com/api/user/login/", data)
-        //     .then(res => {
-        //         given = res.data;
-        //         if (given.code === 200) {
+        axios.post(api.route + "/users/login", data)
+            .then(res => {
+                obj = {
+                    "id": res.data.id
+                };
 
-        //             let user_type_name;
-
-        //             switch (given.data.user_type) {
-        //                 case 1:
-        //                     user_type_name = "admin";
-        //                     break;
-        //                 case 2:
-        //                     user_type_name = "manager"
-        //                     break;
-        //                 case 3:
-        //                     user_type_name = "operator";
-        //                     break
-        //                 default:
-        //                     break;
-        //             }
-
-        //             obj = {
-        //                 "token": given.token,
-        //                 "user_id": given.data.user__id_user,
-        //                 "user_type": given.data.user_type,
-        //                 "user_type_name": user_type_name,
-        //                 "id": given.data.id
-        //             };
-
-        //             auth.login(obj, rou => {
-        //                 this.setState({ doAnime: true });
-        //                 window.setTimeout(() => {
-        //                     this.props.history.push("/" + rou)
-        //                 }, delay);
-        //             });
-
-        //         } else {
-        //             document.getElementById("loginForm").reset();
-        //             this.setState({ errorLogin: true, messageError: given.message });
-        //             window.setTimeout(() => {
-        //                 this.setState({ errorLogin: false });
-        //             }, 2000);
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+                auth.login(obj, () => {
+                    this.setState({ doAnime: true });
+                    window.setTimeout(() => {
+                        this.props.history.push("/perfil")
+                    }, delay);
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                document.getElementById("loginForm").reset();
+                this.setState({ errorLogin: true, messageError: "Revisar datos de entrada" });
+                window.setTimeout(() => {
+                    this.setState({ errorLogin: false });
+                }, 2000);
+            })
     }
 
     render() {

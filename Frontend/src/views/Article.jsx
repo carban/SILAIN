@@ -10,6 +10,7 @@ import axios from "axios";
 import ReactLoading from "react-loading";
 import download from "downloadjs";
 import { Redirect } from "react-router-dom";
+import auth from "components/auth/auth.js";
 
 
 import SNavBar from "components/SNavBar.jsx";
@@ -77,6 +78,15 @@ class Article extends React.Component {
                         <Container>
                             <h3>{this.state.info.titulo}</h3>
                             <hr />
+                            {
+                                !auth.isAuthenticated() ? (
+                                    <center>
+                                        <p style={{ "backgroundColor": "yellow", "color": "red" }}>
+                                            Para descargar debes iniciar sesión
+                                        </p>
+                                    </center>
+                                ) : true
+                            }
                             <Row>
                                 <Col md="6" lg="6">
                                     <Row>
@@ -112,7 +122,9 @@ class Article extends React.Component {
                                         <li><b>Tipo: </b>{this.state.info.tipo}</li>
                                         <li><b>Formato: </b>{this.state.info.formato}</li>
                                         <li><b>Tamano: </b>{this.state.info.tamano}</li>
-                                        <Button onClick={this.getFile.bind(this)} color="success">Descargar</Button>
+                                        <Button onClick={this.getFile.bind(this)} color="success" disabled={!auth.isAuthenticated()}>
+                                            Descargar
+                                        </Button>
                                     </ul>
                                     <ul style={{ "textAlign": "left" }}>
                                         <h5>Palabras clave</h5>
