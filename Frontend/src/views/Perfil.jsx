@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Container, Button
+    Container, Button, Row, Col
 } from 'reactstrap';
 
 // import axios from "axios";
@@ -45,9 +45,12 @@ class Perfil extends React.Component {
             <div>
                 <SNavBar />
                 <Container>
-                    <h2>Bienvenido {this.state.user.nombres} {this.state.user.apellidos}</h2>
+                    <Row>
+                        <img src="https://image.flaticon.com/icons/svg/929/929422.svg" alt="" width="50px" height="50px" />
+                        <h2>Bienvenido {this.state.user.nombres} {this.state.user.apellidos}</h2>
+                    </Row>
                     <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
-
+                    <hr/>
                     <h4>Historial de descargas</h4>
                     <ul>
                         {
@@ -60,9 +63,8 @@ class Perfil extends React.Component {
                                 : <b>No has hecho ninguna descarga todavía</b>
                         }
                     </ul>
-
-
-                    <Button onClick={this.logout.bind(this)}>Salir</Button>
+                    <hr/>
+                    <Button onClick={this.logout.bind(this)} color="danger">Salir</Button>
                 </Container>
             </div >
         )
