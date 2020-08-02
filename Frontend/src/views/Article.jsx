@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Col, Container, Row, Button
+    Col, Container, Row, Button, Modal, ModalBody, ModalHeader
 } from 'reactstrap';
 
 import { Map, TileLayer, FeatureGroup, Polygon, Tooltip } from 'react-leaflet';
@@ -25,25 +25,41 @@ class Article extends React.Component {
             finca: [],
             centroid: [],
             redirect: false,
-            redirect_word: ""
+            redirect_word: "",
+            toggleModal: false,
+            textarea: ""
         }
     }
 
+    sendPurpose() {
+        var data = {
+            id_usuario: auth.getSession().id,
+            id_metadato: this.props.match.params.id,
+            proposito: this.state.textarea
+        };
+        axios.post(api.route + "/article/proposito", data)
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     async getFile() {
+        this.toggleModal();
         // Conseguir el nombre del archivo
         const res = await fetch(api.route + "/article/download/filename/" + this.props.match.params.id);
         const { filename } = await res.json();
-
         // Conseguir el archivo a descargar
         axios.get(api.route + "/article/download/" + this.props.match.params.id, {
             responseType: "blob"
         }).then(res => {
             let blob = new Blob([res.data])
             download(blob, filename);
+            this.sendPurpose();
         }).catch(err => {
             console.log(err);
             alert("No se encontro el recurso");
         });
+        this.setState({ textarea: "" });
     }
 
     async componentDidMount() {
@@ -65,6 +81,14 @@ class Article extends React.Component {
         }
     }
 
+    toggleModal() {
+        this.setState({ toggleModal: !this.state.toggleModal });
+    }
+
+    handleInput(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
     render() {
         return (
             <div>
@@ -76,6 +100,21 @@ class Article extends React.Component {
                         </center>
                     ) :
                         <Container>
+
+                            {/* Modal */}
+                            <Modal toggle={this.toggleModal.bind(this)} isOpen={this.state.toggleModal} >
+                                <ModalHeader>Datos para descarga</ModalHeader>
+                                <ModalBody>
+                                    <textarea onChange={this.handleInput.bind(this)} name="textarea" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
+                                    </textarea>
+                                </ModalBody>
+                                <center>
+                                    <Button onClick={this.getFile.bind(this)} color="success" disabled={this.state.textarea === ""}>
+                                        Descargar
+                                    </Button>
+                                </center>
+                            </Modal>
+
                             <h3>{this.state.info.titulo}</h3>
                             <hr />
                             {
@@ -122,7 +161,7 @@ class Article extends React.Component {
                                         <li><b>Tipo: </b>{this.state.info.tipo}</li>
                                         <li><b>Formato: </b>{this.state.info.formato}</li>
                                         <li><b>Tamano: </b>{this.state.info.tamano}</li>
-                                        <Button onClick={this.getFile.bind(this)} color="success" disabled={!auth.isAuthenticated()}>
+                                        <Button onClick={this.toggleModal.bind(this)} color="success" disabled={!auth.isAuthenticated()}>
                                             Descargar
                                         </Button>
                                     </ul>

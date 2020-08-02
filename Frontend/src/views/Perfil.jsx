@@ -25,7 +25,6 @@ class Perfil extends React.Component {
     }
 
     async componentDidMount() {
-        console.log(auth.getSession())
         const res = await fetch(api.route + "/users/user/" + auth.getSession().id);
         const { user } = await res.json();
         console.log(user)
