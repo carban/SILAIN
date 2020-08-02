@@ -1,7 +1,8 @@
 import React from "react";
 
 // import auth from "components/auth/auth.js";
-// import axios from 'axios';
+import axios from 'axios';
+import api from "api_route.js";
 
 import { Link } from "react-router-dom";
 
@@ -10,23 +11,29 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    Col, Form, FormGroup, Label, Input, Button, Alert
+    Col, Row, Form, FormGroup, Label, Input, Button, Alert
 } from "reactstrap";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            nombres: '',
+            apellidos: '',
+            email: '',
+            pais: '',
+            departamento: '',
+            ciudad: '',
+            institucion: '',
+            ocupacion: '',
             password: '',
+            confirm: '',
             doAnime: false,
-            errorLogin: false,
+            errorRegistro: false,
+            registroSuccess: false,
             messageError: "",
         };
     }
-
-    onChange = params => {
-    };
 
     handleInput = e => {
         this.setState({
@@ -34,30 +41,54 @@ class Login extends React.Component {
         });
     };
 
-    signin = e => {
+    signup = e => {
         e.preventDefault();
-
-        // const delay = 800;
-
-        // let data = { id_user: this.state.username, password: this.state.password };
-
-        // let obj, given;
-
-    
+        const data = {
+            nombres: this.state.nombres,
+            apellidos: this.state.apellidos,
+            email: this.state.email,
+            pais: this.state.pais,
+            departamento: this.state.departamento,
+            ciudad: this.state.ciudad,
+            institucion: this.state.institucion,
+            ocupacion: this.state.ocupacion,
+            password: this.state.password
+        }
+        axios.post(api.route + "/users/register", data)
+            .then(res => {
+                this.setState({ registroSuccess: true });
+                document.getElementById("registerForm").reset();
+                window.setTimeout(() => {
+                    this.setState({ registroSuccess: false });
+                }, 2000);
+            })
+            .catch(err => {
+                this.setState({ errorRegistro: true });
+                window.setTimeout(() => {
+                    this.setState({ errorRegistro: false });
+                }, 2000);
+            })
     }
 
     render() {
 
-        const alert = (this.state.errorLogin) ? <Alert className="animated rubberBand" color="danger">
+        const alert = (this.state.errorRegistro) ? <Alert className="animated rubberBand" color="danger">
             <center>
                 <h6>{this.state.messageError}</h6>
             </center>
         </Alert> : true;
 
+        const alertSuccess = (this.state.registroSuccess) ? <Alert className="animated rubberBand" color="success">
+            <center>
+                <h6>Registrado Exitosamente!</h6>
+            </center>
+        </Alert> : true;
+
         return (
             <div>
-                <Col md="4" id="login">
+                <Col md="6" id="login">
                     {alert}
+                    {alertSuccess}
                     <Card id="cardLogin" className={this.state.doAnime ? "animated zoomOutUp" : " "}>
                         <CardHeader>
                             <center>
@@ -65,32 +96,52 @@ class Login extends React.Component {
                             </center>
                         </CardHeader>
                         <CardBody>
-                            <Form onSubmit={this.signin} id="loginForm">
+                            <Form onSubmit={this.signin} id="registerForm">
                                 <FormGroup>
-                                    <Label>Nombres</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
-                                    <Label>Apellidos</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
-                                    <Label for="exampleEmail">email</Label>
-                                    <Input onChange={this.handleInput} type="email" name="username" id="exampleEmail" requiered />
-                                    <Label>Pais</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
-                                    <Label>Departamento</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
-                                    <Label>Ciudad</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
-                                    <Label>Institucion</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Row>
+                                        <Col>
+                                            <Label>Nombres</Label>
+                                            <Input onChange={this.handleInput} name="nombres" type="text" required />
+                                        </Col>
+                                        <Col>
+                                            <Label>Apellidos</Label>
+                                            <Input onChange={this.handleInput} name="apellidos" type="text" required />
+                                        </Col>
+                                    </Row>
+                                    <Label>email</Label>
+                                    <Input onChange={this.handleInput} name="email" type="email" requiered />
+                                    <Row>
+                                        <Col>
+                                            <Label>Pais</Label>
+                                            <Input onChange={this.handleInput} name="pais" type="text" required />
+                                        </Col>
+                                        <Col>
+                                            <Label>Departamento</Label>
+                                            <Input onChange={this.handleInput} name="departamento" type="text" required />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Label>Ciudad</Label>
+                                            <Input onChange={this.handleInput} name="ciudad" type="text" required />
+                                        </Col>
+                                        <Col>
+                                            <Label>Institucion</Label>
+                                            <Input onChange={this.handleInput} name="institucion" type="text" required />
+                                        </Col>
+                                    </Row>
                                     <Label>Ocupacion</Label>
-                                    <Input onChange={this.handleInput} name="text" id="examplePassword" required />
+                                    <Input onChange={this.handleInput} name="ocupacion" type="text" required />
                                     <Label for="examplePassword">Contrasena</Label>
-                                    <Input onChange={this.handleInput} type="password" name="password" id="examplePassword" required />
+                                    <Input onChange={this.handleInput} type="password" name="password" required />
                                     <Label for="examplePassword">Confirmar Contrasena</Label>
-                                    <Input onChange={this.handleInput} type="password" name="password" id="examplePassword" required />
+                                    <Input onChange={this.handleInput}
+                                        style={this.state.confirm === this.state.password && this.state.confirm !== '' && this.state.password !== '' ? { "backgroundColor": "#a7eb77" } : { "backgroundColor": "pink" }}
+                                        type="password" name="confirm" required />
 
                                 </FormGroup>
                                 <center>
-                                    <Button color="success" type="submit">REGISTRAR</Button>
+                                    <Button color="success" type="submit" disabled={this.state.confirm === this.state.password && this.state.confirm !== '' && this.state.password !== '' ? false : true} onClick={this.signup}>REGISTRAR</Button>
                                     <br />
                                     <b>
                                         <Link to="/login">Iniciar Sesión</Link>
