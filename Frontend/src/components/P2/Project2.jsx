@@ -6,7 +6,7 @@ import React from "react";
 // } from 'reactstrap';// used for making the prop types of this component
 
 import { Accordion, Card } from "react-bootstrap";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import diagrams from "./diagrams.js";
 
@@ -70,6 +70,30 @@ class Project2 extends React.Component {
                         <Accordion.Collapse eventKey="1">
                             <div className="projectBody">
                                 <img src={metodo} alt="" />
+                                <div style={{ "textAlign": "left" }}>
+                                    <h6>Articulos Relacionados:</h6>
+                                    <ul>
+                                        <li>
+                                            <Link to="/article/407" style={{ "color": "green" }}>
+                                                Caudales promedio diarios en cultivos de arroz, finca San José                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/article/418" style={{ "color": "green" }}>
+                                                No Titulo
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/article/419" style={{ "color": "green" }}>
+                                                No Titulo
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/article/420" style={{ "color": "green" }}>
+                                                No Titulo
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
 
                         </Accordion.Collapse>

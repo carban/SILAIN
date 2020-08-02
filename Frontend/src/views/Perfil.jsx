@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Container, Button, Row, Col
+    Container, Button, Row
 } from 'reactstrap';
 
 // import axios from "axios";
