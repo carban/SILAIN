@@ -68,4 +68,24 @@ router.get("/user/:id", async (req, res) => {
 
 })
 
+router.get("/user/des_hist/:id", async (req, res) => {
+
+    var id = req.params.id;
+
+    const query = {
+        text: "select titulo, idmetadato from descargas inner join metadato on id_metadato=idmetadato where id_usuario=$1;",
+        values: [id]
+    }
+    try {
+        var hist = []
+        const result = await pg.query(query);
+        hist = result.rows;
+        res.status(200).send({ hist: hist });
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(400);
+    }
+
+})
+
 module.exports = router;

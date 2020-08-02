@@ -7,6 +7,8 @@ import {
 
 // import axios from "axios";
 // import ReactLoading from "react-loading";
+import { Link } from "react-router-dom";
+
 import auth from "components/auth/auth.js";
 
 import SNavBar from "components/SNavBar.jsx";
@@ -16,23 +18,20 @@ class Perfil extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nombres: '',
-            apellidos: '',
-            email: '',
-            pais: '',
+            user: {},
+            hist: [],
             loading: true
         }
     }
 
     async componentDidMount() {
         const res = await fetch(api.route + "/users/user/" + auth.getSession().id);
+        const res_hist = await fetch(api.route + "/users/user/des_hist/" + auth.getSession().id);
         const { user } = await res.json();
-        console.log(user)
+        const { hist } = await res_hist.json();
         this.setState({
-            nombres: user.nombres,
-            apellidos: user.apellidos,
-            email: user.email,
-            pais: user.pais,
+            user: user,
+            hist: hist,
             loading: false
         });
     }
@@ -46,10 +45,21 @@ class Perfil extends React.Component {
             <div>
                 <SNavBar />
                 <Container>
-                    <h2>Bienvenido {this.state.nombres} {this.state.apellidos}</h2>
-                    <b>{this.state.email}</b> | <b>{this.state.pais}</b>
-                    
+                    <h2>Bienvenido {this.state.user.nombres} {this.state.user.apellidos}</h2>
+                    <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
+
                     <h4>Historial de descargas</h4>
+                    <ul>
+                        {
+                            this.state.hist.length !== 0 ?
+                                this.state.hist.map((ele, i) => (
+                                    <li key={i}>
+                                        <Link to={"/article/" + ele.idmetadato}>{ele.titulo}</Link>
+                                    </li>
+                                ))
+                                : <b>No has hecho ninguna descarga todavía</b>
+                        }
+                    </ul>
 
 
                     <Button onClick={this.logout.bind(this)}>Salir</Button>
