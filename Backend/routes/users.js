@@ -44,4 +44,28 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.get("/user/:id", async (req, res) => {
+
+    var id = req.params.id;
+
+    const query = {
+        text: "SELECT nombres, apellidos, email, pais from usuario where id=$1",
+        values: [id]
+    }
+    try {
+        const result = await pg.query(query);
+        var id = result.rows[0];
+        if (id) {
+            res.status(200).send({ user: result.rows[0] });
+        } else {
+            res.sendStatus(400);
+        }
+
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(400);
+    }
+
+})
+
 module.exports = router;
