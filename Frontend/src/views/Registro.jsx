@@ -31,7 +31,6 @@ class Login extends React.Component {
             doAnime: false,
             errorRegistro: false,
             registroSuccess: false,
-            messageError: "",
         };
     }
 
@@ -43,6 +42,13 @@ class Login extends React.Component {
 
     signup = e => {
         e.preventDefault();
+        if (!this.validation()) {
+            this.setState({ errorRegistro: true });
+            window.setTimeout(() => {
+                this.setState({ errorRegistro: false });
+            }, 2000);
+            return ;
+        }
         const data = {
             nombres: this.state.nombres,
             apellidos: this.state.apellidos,
@@ -56,7 +62,7 @@ class Login extends React.Component {
         }
         axios.post(api.route + "/users/register", data)
             .then(res => {
-                this.setState({ registroSuccess: true });
+                this.setState({ registroSuccess: true, password: "" });
                 document.getElementById("registerForm").reset();
                 window.setTimeout(() => {
                     this.setState({ registroSuccess: false });
@@ -70,11 +76,25 @@ class Login extends React.Component {
             })
     }
 
+    validation() {
+        return this.state.nombres !== "" &&
+            this.state.apellidos !== "" &&
+            this.state.email !== "" &&
+            this.state.pais !== "" &&
+            this.state.departamento !== "" &&
+            this.state.ciudad !== "" &&
+            this.state.institucion !== "" &&
+            this.state.ocupacion !== "" &&
+            this.state.password !== "" &&
+            this.state.confirm !== "" &&
+            this.state.password === this.state.confirm
+    }
+
     render() {
 
         const alert = (this.state.errorRegistro) ? <Alert className="animated rubberBand" color="danger">
             <center>
-                <h6>{this.state.messageError}</h6>
+                <h6>Verifica la entrada</h6>
             </center>
         </Alert> : true;
 
@@ -141,7 +161,9 @@ class Login extends React.Component {
 
                                 </FormGroup>
                                 <center>
-                                    <Button color="success" type="submit" disabled={this.state.confirm === this.state.password && this.state.confirm !== '' && this.state.password !== '' ? false : true} onClick={this.signup}>REGISTRAR</Button>
+                                    <Button color="success" type="submit" onClick={this.signup.bind(this)} >REGISTRAR</Button>
+                                    {/* <Button color="success" type="submit">REGISTRAR</Button> */}
+
                                     <br />
                                     <b>
                                         <Link to="/login">Iniciar Sesión</Link>

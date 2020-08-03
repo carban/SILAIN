@@ -115,8 +115,7 @@ router.get('/download/filename/:id', async (req, res) => {
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 router.post('/proposito', async (req, res) => {
 
-    const { id_usuario, id_metadato, proposito } = req.body;
-
+    console.log(id_usuario, id_metadato, proposito);
     const query = {
         text: "insert into descargas (id_usuario, id_metadato, proposito) values ($1, $2, $3)",
         values: [id_usuario, id_metadato, proposito]

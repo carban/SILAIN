@@ -38,6 +38,9 @@ class Article extends React.Component {
             proposito: this.state.textarea
         };
         axios.post(api.route + "/article/proposito", data)
+            .then(res => {
+                this.setState({ textarea: "" });
+            })
             .catch(err => {
                 console.log(err);
             })
@@ -59,7 +62,6 @@ class Article extends React.Component {
             console.log(err);
             alert("No se encontro el recurso");
         });
-        this.setState({ textarea: "" });
     }
 
     async componentDidMount() {
