@@ -43,6 +43,7 @@ class Article extends React.Component {
             })
             .catch(err => {
                 console.log(err);
+                this.setState({ textarea: "" });
             })
     }
 
