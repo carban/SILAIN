@@ -117,7 +117,7 @@ router.post('/proposito', async (req, res) => {
 
     const { id_usuario, id_metadato, proposito } = req.body;
     const query = {
-        text: "insert into descargas (id_usuario, id_metadato, proposito) values ($1, $2, $3)",
+        text: "insert into descargas (id_usuario, id_metadato, proposito, fecha, hora) values ($1, $2, $3, current_timestamp, current_timestamp)",
         values: [id_usuario, id_metadato, proposito]
     }
 

@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Container, Button, Row
+    Container, Button, Row, Table
 } from 'reactstrap';
 
 // import axios from "axios";
@@ -50,20 +50,44 @@ class Perfil extends React.Component {
                         <h2>Bienvenido {this.state.user.nombres} {this.state.user.apellidos}</h2>
                     </Row>
                     <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
-                    <hr/>
+                    <hr />
                     <h4>Historial de descargas</h4>
                     <ul>
                         {
                             this.state.hist.length !== 0 ?
-                                this.state.hist.map((ele, i) => (
-                                    <li key={i}>
-                                        <Link to={"/article/" + ele.idmetadato}>{ele.titulo}</Link>
-                                    </li>
-                                ))
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr style={{"textAlign": "left"}}>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Fecha</th>
+                                            <th>Hora</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.hist.map((ele, i) => (
+                                                <tr key={i}>
+                                                    <th>{i + 1}</th>
+                                                    <th>
+                                                        <Link to={"/article/" + ele.idmetadato}>{ele.titulo}</Link>
+                                                    </th>
+                                                    <th>
+                                                        {ele.fecha}
+
+                                                    </th>
+                                                    <th>
+                                                        {ele.hora}
+                                                    </th>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </Table>
                                 : <b>No has hecho ninguna descarga todavía</b>
                         }
                     </ul>
-                    <hr/>
+                    <hr />
                     <Button onClick={this.logout.bind(this)} color="danger">Salir</Button>
                 </Container>
             </div >

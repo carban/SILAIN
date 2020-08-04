@@ -5,20 +5,6 @@ const pg = require('../db/database.js').getPool();
 // ||||||||||||||||||||||| AUXILIARES ||||||||||||||||||||||| 
 // ------------------------------------------------------------------------------------
 
-// Funcion Auxiliar que formatea la fecha de creacion
-function getCreado(creado) {
-  var splitted = creado.split(" ");
-  var c = splitted[1] + " " + splitted[2] + " " + splitted[3];
-  return c;
-}
-
-// Funcion Auxiliar que formatea la fecha de disponibilidad
-function getDisponible(disponible) {
-  var splitted2 = disponible.split(" ");
-  var d = splitted2[1] + " " + splitted2[2] + " " + splitted2[3];
-  return d;
-}
-
 // Funcion Auxiliar que retorna el numero de filtros SELECCIONADOS que hay 
 function getHowMany(filters) {
   j = 0;
@@ -85,14 +71,14 @@ router.post('/search_by_filter', async (req, res) => {
       // AQUI DEBE ENTRAR CUANDO EN LA APP SOLO SE BUSCA FILTRAR POR PROPIEDAD SIN INCLUIR PALABRA CLAVE
       // Este query se deja asi, para que sobre todos los resultados se haga el filtro (Alex pidio cambios y quiero reutilizar las cosas que tenia xd)
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, to_char(creado, 'DD/MM/YYYY') as creado, to_char(disponibilidad, 'DD/MM/YYYY') as disponibilidad from muni_dept where pclave iLike $1";
       var query_text = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
 
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, to_char(creado, 'DD/MM/YYYY') as creado, to_char(disponibilidad, 'DD/MM/YYYY') as disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
       var query_text = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
     }
@@ -131,8 +117,6 @@ router.post('/search_by_filter', async (req, res) => {
           default:
             break;
         }
-        result.rows[i].creado = getCreado(result.rows[i].creado.toString());
-        result.rows[i].disponibilidad = getDisponible(result.rows[i].disponibilidad.toString());
       }
 
       res.status(200).send({
