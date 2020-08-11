@@ -45,7 +45,7 @@ DROP VIEW IF EXISTS meta_cats_subs CASCADE ;
 -- DROP VIEW finca_muni;
 
  CREATE VIEW muni_dept AS
- select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, categoria, subcategoria, municipio, finca, cultivo, departamento
+ select pclave, idmetadato, titulo, publicador, formato, tamano, resumen, tipo, to_char(creado, 'DD/MM/YYYY') as creado, to_char(disponibilidad, 'DD/MM/YYYY') as disponibilidad, municipio, finca, cultivo, departamento
  from finca_muni inner join departamento on iddepartamento = departamento_iddepartamento;
 
 
