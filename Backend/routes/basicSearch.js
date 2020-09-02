@@ -78,7 +78,7 @@ router.post('/search_by_filter', async (req, res) => {
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' ')) LIMIT 20";
       var query_text = getTextWithFilters(text, filters);
       var values = getValuesFromFilters(filters, word);
     }
@@ -87,38 +87,44 @@ router.post('/search_by_filter', async (req, res) => {
 
     var query = { text: query_text, values: values };
 
+    var countText = "select tipo from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+    countText = getTextWithFilters(countText, filters);
+    var countValues = getValuesFromFilters(filters, word);
+    countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+    var countQuery = {text: countText, values: countValues};
+    
     try {
       const result = await pg.query(query);
+      const resultCounts = await pg.query(countQuery);
 
-      let AC = 0;
-      let AP = 0;
-      let IC = 0;
-      let IP = 0;
-      let C = 0;
+      let AC = 0, AP = 0, IC = 0, IP = 0, C = 0;
+      console.log(resultCounts.rows)
+      for (let i = 0; i < resultCounts.rows.length; i++) {
+        var tipo = resultCounts.rows[i].tipo;
+        var count = parseInt(resultCounts.rows[i].count);
 
-      for (let i = 0; i < result.rows.length; i++) {
-        const tipo = result.rows[i].tipo;
         switch (tipo) {
           case "Archivo crudo":
-            AC++;
+            AC = count;
             break;
           case "Archivo procesado":
-            AP++;
+            AP = count;
             break;
           case "Imagen cruda":
-            IC++;
+            IC = count;
             break;
           case "Imagen procesada":
-            IP++;
+            IP = count;
             break;
           case "Compilación":
-            C++;
+            C = count;
             break;
           default:
             break;
         }
       }
-
+      let total = AC + AP + IC + IP + C;
+      console.log(total);
       res.status(200).send({
         result: result.rows,
         counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C }

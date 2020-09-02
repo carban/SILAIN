@@ -22,6 +22,7 @@ class Clave extends React.Component {
             word_searched: "",
             results: [],
             counts_tipos: {},
+            npages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -130,7 +131,7 @@ class Clave extends React.Component {
                                 <br />
                                 <div>
                                     <Alert color={this.state.results.length > 0 || this.state.word_searched === "" ? "success" : "danger"}
-                                        style={{paddingLeft: "10px"}}
+                                        style={{ paddingLeft: "10px" }}
                                     >
                                         {
                                             this.state.results.length > 0
@@ -169,7 +170,17 @@ class Clave extends React.Component {
                                 {
                                     this.state.results.length > 0 ?
                                         (
-                                            <ResultsTable results={this.state.results} />
+                                            <div>
+                                                <ResultsTable results={this.state.results} />
+                                                <center>
+
+                                                    {
+                                                        this.state.npages.map(ele => (
+                                                            <button>{ele}</button>
+                                                        ))
+                                                    }
+                                                </center>
+                                            </div>
                                         ) : true
                                 }
                             </div>
