@@ -18,7 +18,10 @@ class Propiedad extends React.Component {
         super(props);
         this.state = {
             results: [],
+            totalResults: 0,
             counts_tipos: {},
+            pages: [],
+            currentPage: 0,
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -42,15 +45,41 @@ class Propiedad extends React.Component {
 
     getFilters(obj) {
         const basicURL = api.route + "/basic/search_by_filter";
-        this.setState({ loading: true })
-        axios.post(basicURL, { filters: obj, word: "" })
+        this.setState({ loading: true, currentPage: 0 })
+        axios.post(basicURL, { filters: obj, word: "", currentPage: 0 })
             .then(res => {
 
                 this.setState({
                     results: res.data.result,
+                    totalResults: res.data.totalResults,
+                    pages: res.data.pages,
                     counts_tipos: res.data.counts,
                     loading: false,
                     filters: obj
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    changePage(page) {
+
+        const basicURL = api.route + "/basic/search_by_filter";
+        this.setState({ loading: true })
+        axios.post(basicURL, {
+            filters: this.state.filters,
+            word: "",
+            currentPage: page
+        })
+            .then(res => {
+                this.setState({
+                    results: res.data.result,
+                    totalResults: res.data.totalResults,
+                    pages: res.data.pages,
+                    currentPage: page,
+                    counts_tipos: res.data.counts,
+                    loading: false,
                 });
             })
             .catch(err => {
@@ -74,13 +103,13 @@ class Propiedad extends React.Component {
                                 <div>
                                     <Alert
                                         color={this.state.results.length > 0 || this.allSelect() ? "success" : "danger"}
-                                        style={{paddingLeft: "10px"}}
+                                        style={{ paddingLeft: "10px" }}
                                     >
                                         {
                                             this.state.results.length > 0
                                                 ? (
                                                     <div>
-                                                        <h5><b>Resultados segun los filtros: </b>{this.state.results.length}</h5>
+                                                        <h5><b>Resultados segun los filtros: </b>{this.state.totalResults}</h5>
                                                         <Row className="datsBigger">
                                                             <Col>
                                                                 *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
@@ -112,7 +141,20 @@ class Propiedad extends React.Component {
                                 {
                                     this.state.results.length > 0 ?
                                         (
-                                            <ResultsTable results={this.state.results} />
+                                            <div>
+                                                <ResultsTable results={this.state.results} />
+                                                <center>
+
+                                                    {
+                                                        this.state.pages.map(ele => (
+                                                            <button className='ButtonLikeLinkSelected'
+                                                                key={ele}
+                                                                style={ele === this.state.currentPage ? { backgroundColor: '#F47C00', color: 'white' } : {}}
+                                                                onClick={this.changePage.bind(this, ele)}>{ele + 1}</button>
+                                                        ))
+                                                    }
+                                                </center>
+                                            </div>
                                         ) : true
                                 }
                             </div>

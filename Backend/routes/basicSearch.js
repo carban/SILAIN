@@ -75,34 +75,27 @@ router.post('/search_by_filter', async (req, res) => {
       // Este query se deja asi, para que sobre todos los resultados se haga el filtro (Alex pidio cambios y quiero reutilizar las cosas que tenia xd)
 
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
-      var query_text = getTextWithFilters(text, filters);
-      query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
-      var values = getValuesFromFilters(filters, word);
-
       var countText = "select tipo from muni_dept where pclave iLike $1";
-      countText = getTextWithFilters(countText, filters);
-      countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
-      var countValues = getValuesFromFilters(filters, word);
 
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
-      var query_text = getTextWithFilters(text, filters);
-      query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
-      var values = getValuesFromFilters(filters, word);
-
       var countText = "select tipo from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
-      countText = getTextWithFilters(countText, filters);
-      countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
-      var countValues = getValuesFromFilters(filters, word);
 
     }
+
+    var query_text = getTextWithFilters(text, filters);
+    query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
+    var values = getValuesFromFilters(filters, word);
+
+    countText = getTextWithFilters(countText, filters);
+    countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+    var countValues = getValuesFromFilters(filters, word);
 
     // console.log(query_text, values)
 
     var query = { text: query_text, values: values };
-    console.log(query_text)
     var countQuery = {text: countText, values: countValues};
     
     try {

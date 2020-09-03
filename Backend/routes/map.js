@@ -36,7 +36,7 @@ function getTextWithFilters(text, filters) {
   if (s !== "") {
     text = text + " and" + s;
   }
-  return { query_text: text };
+  return text;
 }
 
 // Funcion auxiliar que guarda los valores correspondientes a los filtros que lleguen
@@ -123,60 +123,79 @@ function formatCentroidPoint(data) {
 // Teniendo Filtros o no  
 router.post('/ubication_by_filter', async (req, res) => {
 
-  const { filters, ubication, ubi_type } = req.body;
+  const { filters, ubication, ubi_type, currentPage } = req.body;
   // console.log(filters, ubication);
   var { counter } = getHowMany(filters);
+
+  var limitResults = 20;
+  var initPage = currentPage * limitResults;
 
   if (counter == 0 && ubication == "") {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
 
     var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo from muni_dept where " + ubi_type + " = $1";
+    var countText = "select tipo from muni_dept where " + ubi_type + " = $1";
 
-    var { query_text } = getTextWithFilters(text, filters);
+    var query_text = getTextWithFilters(text, filters);
+    query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
     var values = getValuesFromFilters(filters, ubication);
 
-    // console.log(query_text, values);
+    countText = getTextWithFilters(countText, filters);
+    countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+    var countValues = getValuesFromFilters(filters, ubication);
 
-    var query = {
-      text: query_text,
-      values: values
-    }
+    // console.log(query_text, countText);
+
+    var query = { text: query_text, values: values };
+    var countQuery = { text: countText, values: countValues };
 
     try {
       const result = await pg.query(query);
+      const resultCounts = await pg.query(countQuery);
 
-      var AC = 0;
-      var AP = 0;
-      var IC = 0;
-      var IP = 0;
-      var C = 0;
+      let AC = 0, AP = 0, IC = 0, IP = 0, C = 0;
 
-      for (let i = 0; i < result.rows.length; i++) {
-        const tipo = result.rows[i].tipo;
+      for (let i in resultCounts.rows) {
+        var tipo = resultCounts.rows[i].tipo;
+        var count = parseInt(resultCounts.rows[i].count);
+
         switch (tipo) {
           case "Archivo crudo":
-            AC++;
+            AC = count;
             break;
           case "Archivo procesado":
-            AP++;
+            AP = count;
             break;
           case "Imagen cruda":
-            IC++;
+            IC = count;
             break;
           case "Imagen procesada":
-            IP++;
+            IP = count;
             break;
           case "Compilación":
-            C++;
+            C = count;
             break;
           default:
             break;
         }
-
       }
+
+      let totalResults = AC + AP + IC + IP + C;
+      let npages = totalResults / limitResults;
+
+      let pages = [];
+      for (let i = 0; i < npages; i++) {
+        pages.push(i);
+      }
+
       // console.log({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } })
-      res.status(200).send({ result: result.rows, counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C } });
+      res.status(200).send({
+        totalResults: totalResults,
+        result: result.rows,
+        pages: pages,
+        counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C }
+      });
 
     } catch (e) {
       console.log(e);
@@ -236,7 +255,7 @@ router.post('/getpoly', async (req, res) => {
         dataFin = await swapCoors(dataFin.rows);
         dataFin = await formatCentroidPoint(dataFin);
       }
-      
+
       res.status(200).send({
         departamento: dataDept,
         municipio: dataMuni,

@@ -31,6 +31,10 @@ class TheMap extends React.Component {
             results: [],
             counts_tipos: {},
 
+            totalResults: 0,
+            pages: [],
+            currentPage: 0,
+
             selections: {
                 departamento: "Select",
                 municipio: "Select",
@@ -61,7 +65,7 @@ class TheMap extends React.Component {
 
     buscarUbication(ubi_type, ubication) {
         // console.log(ubication);
-        this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type });
+        this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type, currentPage: 0 });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
             filters: {
@@ -72,14 +76,48 @@ class TheMap extends React.Component {
                 formato: "Select",
             },
             ubication: ubication,
-            ubi_type: ubi_type
+            ubi_type: ubi_type,
+            currentPage: 0
         })
             .then(res => {
                 this.setState({
                     results: res.data.result,
+                    totalResults: res.data.totalResults,
+                    pages: res.data.pages,
                     counts_tipos: res.data.counts,
                     loading: false,
-                    ubi_type: this.state.ubi_type
+                    ubi_type: this.state.ubi_type,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    changePage(page) {
+
+        this.setState({ loading: true })
+        axios.post(api.route + "/map/ubication_by_filter", {
+            filters: {
+                cultivo: "Select",
+                categoria: "Select",
+                subcategoria: "Select",
+                tipo: "Select",
+                formato: "Select",
+            },
+            ubication: this.state.ubication,
+            ubi_type: this.state.ubi_type,
+            currentPage: page
+        })
+            .then(res => {
+                this.setState({
+                    results: res.data.result,
+                    totalResults: res.data.totalResults,
+                    pages: res.data.pages,
+                    counts_tipos: res.data.counts,
+                    loading: false,
+                    ubi_type: this.state.ubi_type,
+                    currentPage: page
                 });
             })
             .catch(err => {
@@ -135,7 +173,12 @@ class TheMap extends React.Component {
                                     <PropiedadByMap ubication={this.state.ubication}
                                         results={this.state.results}
                                         counts_tipos={this.state.counts_tipos}
-                                        ubi_type={this.state.ubi_type} />
+                                        ubi_type={this.state.ubi_type}
+                                        totalResults={this.state.totalResults}
+                                        pages={this.state.pages} 
+                                        currentPage={this.state.currentPage}
+                                        changePage={this.changePage.bind(this)}
+                                        />
                                     : true
                             )
                     }
