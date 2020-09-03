@@ -22,7 +22,8 @@ class Clave extends React.Component {
             word_searched: "",
             results: [],
             counts_tipos: {},
-            npages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+            npages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+            currentPage: 1,
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -176,7 +177,7 @@ class Clave extends React.Component {
 
                                                     {
                                                         this.state.npages.map(ele => (
-                                                            <button>{ele}</button>
+                                                            <button className='ButtonLikeLinkSelected' style={ele === this.state.currentPage ? {backgroundColor: '#F47C00', color: 'white'} : {}}>{ele}</button>
                                                         ))
                                                     }
                                                 </center>
