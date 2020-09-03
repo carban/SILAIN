@@ -21,9 +21,10 @@ class Clave extends React.Component {
             words: this.props.location.words || "",
             word_searched: "",
             results: [],
+            totalResults: 0,
             counts_tipos: {},
-            npages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
-            currentPage: 1,
+            pages: [],
+            currentPage: 0,
             filters: {
                 categoria: "Select",
                 subcategoria: "Select",
@@ -49,11 +50,18 @@ class Clave extends React.Component {
 
         if (this.state.words !== "") {
             const basicURL = api.route + "/basic/search_by_filter";
+            this.setState({ loading: true, currentPage: 0 });
 
-            axios.post(basicURL, { filters: this.state.filters, word: this.state.words })
+            axios.post(basicURL, {
+                filters: this.state.filters,
+                word: this.state.words,
+                currentPage: 0
+            })
                 .then(res => {
                     this.setState({
                         results: res.data.result,
+                        totalResults: res.data.totalResults,
+                        pages: res.data.pages,
                         counts_tipos: res.data.counts,
                         word_searched: this.state.words,
                         loading: false,
@@ -62,7 +70,6 @@ class Clave extends React.Component {
                 .catch(err => {
                     console.log(err);
                 })
-            this.setState({ loading: true });
         }
     }
 
@@ -70,12 +77,19 @@ class Clave extends React.Component {
     getFilters(obj) {
         if (this.state.word_searched !== "") {
             const basicURL = api.route + "/basic/search_by_filter";
-            this.setState({ loading: true })
-            axios.post(basicURL, { filters: obj, word: this.state.word_searched })
+            this.setState({ loading: true, currentPage: 0 })
+
+            axios.post(basicURL, {
+                filters: obj,
+                word: this.state.word_searched,
+                currentPage: 0
+            })
                 .then(res => {
 
                     this.setState({
                         results: res.data.result,
+                        totalResults: res.data.totalResults,
+                        pages: res.data.pages,
                         counts_tipos: res.data.counts,
                         word_searched: this.state.words,
                         loading: false,
@@ -90,6 +104,31 @@ class Clave extends React.Component {
                 filters: obj
             });
         }
+    }
+
+    changePage(page) {
+        
+        const basicURL = api.route + "/basic/search_by_filter";
+        this.setState({ loading: true })
+        axios.post(basicURL, {
+            filters: this.state.filters,
+            word: this.state.word_searched,
+            currentPage: page
+        })
+            .then(res => {
+                this.setState({
+                    results: res.data.result,
+                    totalResults: res.data.totalResults,
+                    pages: res.data.pages,
+                    currentPage: page,
+                    counts_tipos: res.data.counts,
+                    word_searched: this.state.words,
+                    loading: false,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     componentDidMount() {
@@ -138,7 +177,7 @@ class Clave extends React.Component {
                                             this.state.results.length > 0
                                                 ? (
                                                     <div>
-                                                        <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.results.length}</h5>
+                                                        <h5><b>Resultados para "{this.state.word_searched}": </b>{this.state.totalResults}</h5>
                                                         <Row className="datsBigger">
                                                             <Col>
                                                                 *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
@@ -176,8 +215,11 @@ class Clave extends React.Component {
                                                 <center>
 
                                                     {
-                                                        this.state.npages.map(ele => (
-                                                            <button className='ButtonLikeLinkSelected' style={ele === this.state.currentPage ? {backgroundColor: '#F47C00', color: 'white'} : {}}>{ele}</button>
+                                                        this.state.pages.map(ele => (
+                                                            <button className='ButtonLikeLinkSelected'
+                                                                key={ele}
+                                                                style={ele === this.state.currentPage ? { backgroundColor: '#F47C00', color: 'white' } : {}}
+                                                                onClick={this.changePage.bind(this, ele)}>{ele + 1}</button>
                                                         ))
                                                     }
                                                 </center>

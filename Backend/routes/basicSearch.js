@@ -56,9 +56,12 @@ function getValuesFromFilters(filters, word) {
 // Teniendo Filtros o no
 router.post('/search_by_filter', async (req, res) => {
 
-  const { filters, word } = req.body;
-
+  const { filters, word, currentPage } = req.body;
+  
   var { counter } = getHowMany(filters);
+
+  var limitResults = 20;
+  var initPage = currentPage * limitResults;
 
   if (counter == 0 && word == "") {
     // ENTRA SI SOLO HAY HAY PALABRA CLAVE (SIN FILTROS) Y SI ESTA PALABRA ESTA VACIA.
@@ -73,24 +76,33 @@ router.post('/search_by_filter', async (req, res) => {
 
       var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
       var query_text = getTextWithFilters(text, filters);
+      query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
       var values = getValuesFromFilters(filters, word);
+
+      var countText = "select tipo from muni_dept where pclave iLike $1";
+      countText = getTextWithFilters(countText, filters);
+      countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+      var countValues = getValuesFromFilters(filters, word);
 
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' ')) LIMIT 20";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
       var query_text = getTextWithFilters(text, filters);
+      query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
       var values = getValuesFromFilters(filters, word);
+
+      var countText = "select tipo from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+      countText = getTextWithFilters(countText, filters);
+      countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+      var countValues = getValuesFromFilters(filters, word);
+
     }
 
     // console.log(query_text, values)
 
     var query = { text: query_text, values: values };
-
-    var countText = "select tipo from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
-    countText = getTextWithFilters(countText, filters);
-    var countValues = getValuesFromFilters(filters, word);
-    countText = "select tipo, count(*) from (" + countText + ") as foo GROUP BY foo.tipo";
+    console.log(query_text)
     var countQuery = {text: countText, values: countValues};
     
     try {
@@ -98,8 +110,8 @@ router.post('/search_by_filter', async (req, res) => {
       const resultCounts = await pg.query(countQuery);
 
       let AC = 0, AP = 0, IC = 0, IP = 0, C = 0;
-      console.log(resultCounts.rows)
-      for (let i = 0; i < resultCounts.rows.length; i++) {
+      
+      for (let i in resultCounts.rows) {
         var tipo = resultCounts.rows[i].tipo;
         var count = parseInt(resultCounts.rows[i].count);
 
@@ -123,10 +135,19 @@ router.post('/search_by_filter', async (req, res) => {
             break;
         }
       }
-      let total = AC + AP + IC + IP + C;
-      console.log(total);
+
+      let totalResults = AC + AP + IC + IP + C;
+      let npages = totalResults / limitResults ;
+
+      let pages = [];
+      for (let i = 0; i < npages; i++) {
+        pages.push(i);
+      }
+
       res.status(200).send({
+        totalResults: totalResults,
         result: result.rows,
+        pages: pages,
         counts: { AC: AC, AP: AP, IC: IC, IP: IP, C: C }
       });
 
