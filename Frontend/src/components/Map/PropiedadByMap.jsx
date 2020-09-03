@@ -24,7 +24,6 @@ class PropiedadByMap extends React.Component {
             pages: [],
             currentPage: 0,
             totalResults: 0,
-            pages: [],
             filters: {
                 cultivo: "Select",
                 categoria: "Select",
