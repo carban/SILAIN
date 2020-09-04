@@ -57,7 +57,7 @@ class Perfil extends React.Component {
                             this.state.hist.length !== 0 ?
                                 <Table striped bordered hover>
                                     <thead>
-                                        <tr style={{"textAlign": "left"}}>
+                                        <tr style={{ "textAlign": "left" }}>
                                             <th>#</th>
                                             <th>Nombre</th>
                                             <th>Fecha</th>
@@ -88,7 +88,9 @@ class Perfil extends React.Component {
                         }
                     </ul>
                     <hr />
-                    <Button onClick={this.logout.bind(this)} color="danger">Salir</Button>
+                    <center>
+                        <Button onClick={this.logout.bind(this)} color="danger">Salir</Button>
+                    </center>
                 </Container>
             </div >
         )
