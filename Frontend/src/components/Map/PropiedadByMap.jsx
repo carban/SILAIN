@@ -138,7 +138,7 @@ class PropiedadByMap extends React.Component {
                                 this.state.results.length > 0 ?
                                     (
                                         <div>
-                                            <ResultsTableByMap results={this.state.results} />
+                                            <ResultsTableByMap results={this.state.results} currentPage={this.state.currentPage} />
                                             <center>
 
                                                 {

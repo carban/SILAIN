@@ -33,7 +33,7 @@ class ResultsTableByMap extends React.Component {
                         {
                             this.state.results.map((e, i) => (
                                 <tr key={i}>
-                                    <th scope="row">{i + 1}</th>
+                                    <th scope="row">{(20 * this.props.currentPage) + i + 1}</th>
                                     <td>
                                         <b>
                                         <NavLink to={"/article/"+e.idmetadato}

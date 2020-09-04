@@ -107,7 +107,7 @@ class Clave extends React.Component {
     }
 
     changePage(page) {
-        
+
         const basicURL = api.route + "/basic/search_by_filter";
         this.setState({ loading: true })
         axios.post(basicURL, {
@@ -211,7 +211,7 @@ class Clave extends React.Component {
                                     this.state.results.length > 0 ?
                                         (
                                             <div>
-                                                <ResultsTable results={this.state.results} />
+                                                <ResultsTable results={this.state.results} currentPage={this.state.currentPage} />
                                                 <center>
 
                                                     {
