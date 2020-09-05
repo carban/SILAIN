@@ -10,6 +10,7 @@ import ReactLoading from "react-loading";
 
 import CustomFilters from "components/CustomFilters.jsx";
 import ResultsTable from "components/ResultsTable";
+import Pagination from "components/Pagination";
 
 import api from "api_route.js";
 
@@ -142,18 +143,8 @@ class Propiedad extends React.Component {
                                     this.state.results.length > 0 ?
                                         (
                                             <div>
-                                                <ResultsTable results={this.state.results} />
-                                                <center>
-
-                                                    {
-                                                        this.state.pages.map(ele => (
-                                                            <button className='ButtonLikeLinkSelected'
-                                                                key={ele}
-                                                                style={ele === this.state.currentPage ? { backgroundColor: '#F47C00', color: 'white' } : {}}
-                                                                onClick={this.changePage.bind(this, ele)}>{ele + 1}</button>
-                                                        ))
-                                                    }
-                                                </center>
+                                                <ResultsTable results={this.state.results} currentPage={this.state.currentPage} />
+                                                <Pagination pages={this.state.pages} currentPage={this.state.currentPage} changePage={this.changePage.bind(this)} />
                                             </div>
                                         ) : true
                                 }

@@ -10,6 +10,7 @@ import ReactLoading from "react-loading";
 
 import CustomFiltersByMap from "components/Map/CustomFiltersByMap.jsx";
 import ResultsTableByMap from "components/Map/ResultsTableByMap";
+import Pagination from "components/Pagination";
 
 import api from "api_route.js";
 
@@ -139,18 +140,7 @@ class PropiedadByMap extends React.Component {
                                     (
                                         <div>
                                             <ResultsTableByMap results={this.state.results} currentPage={this.state.currentPage} />
-                                            <center>
-
-                                                {
-                                                    this.state.pages.map(ele => (
-                                                        <button className='ButtonLikeLinkSelected'
-                                                            key={ele}
-                                                            style={ele === this.state.currentPage ? { backgroundColor: '#F47C00', color: 'white' } : {}}
-                                                            //Method of THIS COMPONENT PropiedadByMap
-                                                            onClick={this.changePage.bind(this, ele)}>{ele + 1}</button>
-                                                    ))
-                                                }
-                                            </center>
+                                            <Pagination pages={this.state.pages} currentPage={this.state.currentPage} changePage={this.changePage.bind(this)} />
                                         </div>
                                     ) : true
                             }
