@@ -190,7 +190,7 @@ class Article extends React.Component {
                                     <br />
                                     {this.state.info.descripcion}
 
-                                    <Map className="amapa-minimap leaflet-container-minimap" center={this.state.centroid} zoom={16}>
+                                    <Map className="amapa-minimap leaflet-container-minimap" center={this.state.centroid} zoom={16} zoomControl={false}>
                                         <TileLayer
                                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
