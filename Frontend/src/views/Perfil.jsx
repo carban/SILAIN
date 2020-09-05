@@ -59,7 +59,7 @@ class Perfil extends React.Component {
                                     <thead>
                                         <tr style={{ "textAlign": "left" }}>
                                             <th>#</th>
-                                            <th>Nombre</th>
+                                            <th>Articulo</th>
                                             <th>Fecha</th>
                                             <th>Hora</th>
                                         </tr>

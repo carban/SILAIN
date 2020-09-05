@@ -1,7 +1,8 @@
 import React from "react";
 
 import {
-    Table
+    Table, 
+    //Button
 } from "reactstrap";
 
 import { NavLink } from "react-router-dom";
@@ -12,7 +13,12 @@ class ResultsTable extends React.Component {
         super(props);
         this.state = {
             results: this.props.results,
+            label: true
         }
+    }
+
+    changeLabel() {
+        this.setState({ label: !this.state.label });
     }
 
     render() {
@@ -29,6 +35,7 @@ class ResultsTable extends React.Component {
                             <th>Tamano</th>
                             <th>creado</th>
                             <th>disponibilidad</th>
+                            {/* <th>Acciones</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -38,11 +45,11 @@ class ResultsTable extends React.Component {
                                     <th scope="row">{(20 * this.props.currentPage) + i + 1}</th>
                                     <td>
                                         <b>
-                                        <NavLink to={"/article/"+e.idmetadato}
-                                            className="silain_green_links"
-                                        >
-                                            {e.titulo}
-                                        </NavLink>
+                                            <NavLink to={"/article/" + e.idmetadato}
+                                                className="silain_green_links"
+                                            >
+                                                {e.titulo}
+                                            </NavLink>
                                         </b>
                                         <br />
                                         <i>{e.resumen}</i>
@@ -65,6 +72,11 @@ class ResultsTable extends React.Component {
                                     <td className="centerTd">
                                         {e.disponibilidad}
                                     </td>
+                                    {/* <td className="centerTd">
+                                        <Button onClick={this.changeLabel.bind(this)} color={this.state.label ? "success" : "danger"}>
+                                            {this.state.label ? "Publico" : "Privado"}
+                                            </Button>
+                                    </td> */}
                                 </tr>
                             ))
                         }
