@@ -1,12 +1,15 @@
 import React from "react";
 
 import {
-    Table, 
-    //Button
+    Table,
+    Button
 } from "reactstrap";
 
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import api from "../api_route.js";
 
+import { NavLink } from "react-router-dom";
+import auth from "components/auth/auth.js";
 
 class ResultsTable extends React.Component {
     constructor(props) {
@@ -17,8 +20,19 @@ class ResultsTable extends React.Component {
         }
     }
 
-    changeLabel() {
-        this.setState({ label: !this.state.label });
+    changeLabel(pos, id) {
+
+        var r = [...this.state.results];
+        var new_val = !r[pos].publico
+        r[pos].publico = new_val;
+
+        axios.post(api.route + "/makepublic/", {id: id, val: new_val})
+            .then(res => {
+                this.setState({ results: r });
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     render() {
@@ -35,7 +49,9 @@ class ResultsTable extends React.Component {
                             <th>Tamano</th>
                             <th>creado</th>
                             <th>disponibilidad</th>
-                            {/* <th>Acciones</th> */}
+                            {
+                                auth.isAdmin() ? <th>Acciones</th> : true
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -72,11 +88,15 @@ class ResultsTable extends React.Component {
                                     <td className="centerTd">
                                         {e.disponibilidad}
                                     </td>
-                                    {/* <td className="centerTd">
-                                        <Button onClick={this.changeLabel.bind(this)} color={this.state.label ? "success" : "danger"}>
-                                            {this.state.label ? "Publico" : "Privado"}
-                                            </Button>
-                                    </td> */}
+                                    {
+                                        auth.isAdmin() ?
+                                            <td className="centerTd">
+                                                <Button onClick={this.changeLabel.bind(this, i, e.idmetadato)} color={e.publico ? "success" : "danger"}>
+                                                    {e.publico ? "Público" : "Privado"}
+                                                </Button>
+                                            </td>
+                                            : true
+                                    }
                                 </tr>
                             ))
                         }

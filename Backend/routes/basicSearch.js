@@ -74,13 +74,13 @@ router.post('/search_by_filter', async (req, res) => {
       // AQUI DEBE ENTRAR CUANDO EN LA APP SOLO SE BUSCA FILTRAR POR PROPIEDAD SIN INCLUIR PALABRA CLAVE
       // Este query se deja asi, para que sobre todos los resultados se haga el filtro (Alex pidio cambios y quiero reutilizar las cosas que tenia xd)
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where pclave iLike $1";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, publico from muni_dept where pclave iLike $1";
       var countText = "select tipo from muni_dept where pclave iLike $1";
 
     } else {
       // Aqui entra si tiene palabra clave, algun, o ningun filtro;
 
-      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
+      var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, creado, disponibilidad, publico from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
       var countText = "select tipo from muni_dept where $1 % ANY(STRING_TO_ARRAY(pclave, ' '))";
 
     }

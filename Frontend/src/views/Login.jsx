@@ -66,7 +66,8 @@ class Login extends React.Component {
         axios.post(api.route + "/users/login", data)
             .then(res => {
                 obj = {
-                    "id": res.data.user_id
+                    "id": res.data.user_id,
+                    "role": res.data.role
                 };
 
                 auth.login(obj, () => {

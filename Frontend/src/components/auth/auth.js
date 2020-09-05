@@ -19,6 +19,10 @@ class Auth{
     isAuthenticated(){
         return this.authenticated !== null;
     }
+
+    isAdmin(){
+        return JSON.parse(this.authenticated).role === 1;
+    }
     
     getSession(){
         return JSON.parse(this.authenticated); 

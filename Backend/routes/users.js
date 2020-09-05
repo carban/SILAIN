@@ -25,15 +25,16 @@ router.post("/login", async (req, res) => {
     const { user, password } = req.body;
 
     const query = {
-        text: "SELECT id from usuario where email=$1 and password=$2",
+        text: "SELECT id, role from usuario where email=$1 and password=$2",
         values: [user, password]
     }
 
     try {
         const result = await pg.query(query);
         var id = result.rows[0].id;
+        var role = result.rows[0].role;  
         if (id) {
-            res.status(200).send({ user_id: result.rows[0].id });
+            res.status(200).send({ user_id: id, role: role});
         } else {
             res.sendStatus(400);
         }
