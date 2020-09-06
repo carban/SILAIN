@@ -27,6 +27,7 @@ class Article extends React.Component {
             redirect: false,
             redirect_word: "",
             toggleModal: false,
+            toggleModalRequest: false,
             textarea: ""
         }
     }
@@ -88,6 +89,10 @@ class Article extends React.Component {
         this.setState({ toggleModal: !this.state.toggleModal });
     }
 
+    toggleModalRequest() {
+        this.setState({ toggleModalRequest: !this.state.toggleModalRequest });
+    }
+
     handleInput(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -114,6 +119,23 @@ class Article extends React.Component {
                                 <center>
                                     <Button onClick={this.getFile.bind(this)} color="success" disabled={this.state.textarea === ""}>
                                         Descargar
+                                    </Button>
+                                </center>
+                            </Modal>
+
+                            <Modal request={this.toggleModalRequest.bind(this)} isOpen={this.state.toggleModalRequest} >
+                                <ModalHeader toggle={this.toggleModalRequest.bind(this)}>Datos para descarga</ModalHeader>
+                                <ModalBody>
+                                    <p>
+                                        El archivo se encuentra en estado privado, para descargarlo debes escribir una solicitud corta que explique la razon del uso del mismo.
+                                        El administrador pronto te respondera al correo inscrito de tu usuario
+                                </p>
+                                    <textarea onChange={this.handleInput.bind(this)} name="textarea" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
+                                    </textarea>
+                                </ModalBody>
+                                <center>
+                                    <Button color="primary" disabled={this.state.textarea === ""}>
+                                        Enviar
                                     </Button>
                                 </center>
                             </Modal>
@@ -151,7 +173,7 @@ class Article extends React.Component {
                                     </Row>
                                     <br />
                                     <ul style={{ "textAlign": "left" }}>
-                                        <h5>Caracteristicas</h5>
+                                        <h5>Características</h5>
                                         <li><b>Categoria: </b>{this.state.info.categoria}</li>
                                         <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
                                         <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
@@ -164,9 +186,27 @@ class Article extends React.Component {
                                         <li><b>Tipo: </b>{this.state.info.tipo}</li>
                                         <li><b>Formato: </b>{this.state.info.formato}</li>
                                         <li><b>Tamano: </b>{this.state.info.tamano}</li>
-                                        <Button onClick={this.toggleModal.bind(this)} color="success" disabled={!auth.isAuthenticated()}>
-                                            Descargar
-                                        </Button>
+
+                                        {
+                                            auth.isAdmin() ? (
+                                                <Button onClick={this.toggleModal.bind(this)}
+                                                    color="success">
+                                                    Descargar
+                                                </Button>
+                                            ) : (
+                                                    <Button onClick={this.state.info.publico ? this.toggleModal.bind(this) : this.toggleModalRequest.bind(this)}
+                                                        color={this.state.info.publico ? "success" : "primary"}
+                                                        disabled={!auth.isAuthenticated()}>
+                                                        {
+                                                            this.state.info.publico ? "Descargar" : "Solicitar Descarga"
+                                                        }
+                                                    </Button>
+                                                )
+
+                                        }
+
+
+
                                     </ul>
                                     <ul style={{ "textAlign": "left" }}>
                                         <h5>Palabras clave</h5>

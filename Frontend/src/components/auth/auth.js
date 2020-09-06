@@ -1,31 +1,35 @@
-class Auth{
-    constructor(){
+class Auth {
+    constructor() {
         this.authenticated = localStorage.getItem('session') || null;
     }
 
-    login(obj, cb){
+    login(obj, cb) {
         localStorage.setItem('session', JSON.stringify(obj));
         this.authenticated = localStorage.getItem('session');
         cb();
     }
 
-    logout(cb){
+    logout(cb) {
         // Debo cambiar ambos
         this.authenticated = null;
         localStorage.clear();
         cb();
     }
 
-    isAuthenticated(){
+    isAuthenticated() {
         return this.authenticated !== null;
     }
 
-    isAdmin(){
-        return JSON.parse(this.authenticated).role === 1;
+    isAdmin() {
+        if (this.isAuthenticated()) {
+            return JSON.parse(this.authenticated).role === 1;
+        } else {
+            return false
+        }
     }
-    
-    getSession(){
-        return JSON.parse(this.authenticated); 
+
+    getSession() {
+        return JSON.parse(this.authenticated);
     }
 }
 

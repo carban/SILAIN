@@ -16,7 +16,6 @@ class ResultsTable extends React.Component {
         super(props);
         this.state = {
             results: this.props.results,
-            label: true
         }
     }
 

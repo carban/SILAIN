@@ -43,7 +43,6 @@ router.get('/:id', async (req, res) => {
 
     try {
         const result = await pg.query(query);
-
         // Capturar el poligono correspondiente a la finca del dato 
         var queryFin = {
             text: "select poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
