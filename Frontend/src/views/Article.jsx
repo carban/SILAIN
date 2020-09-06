@@ -205,14 +205,12 @@ class Article extends React.Component {
 
                                         }
 
-
-
                                     </ul>
                                     <ul style={{ "textAlign": "left" }}>
                                         <h5>Palabras clave</h5>
                                         {
                                             this.state.info.pclave.split(",").map((e, i) => (
-                                                <button onClick={this.redirectPclave.bind(this, e)} className="ButtonLikeLink">{e}</button>
+                                                <button key={i} onClick={this.redirectPclave.bind(this, e)} className="ButtonLikeLink">{e}</button>
                                             ))
                                         }
                                     </ul>

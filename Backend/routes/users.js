@@ -7,7 +7,7 @@ router.post("/register", async (req, res) => {
     const { nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password } = req.body;
 
     const query = {
-        text: "INSERT INTO usuario (nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+        text: "INSERT INTO usuario (nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 2)",
         values: [nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password]
     }
     try {
