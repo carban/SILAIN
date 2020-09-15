@@ -18,6 +18,7 @@ export const ProtectedLoginRoute = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest} render={props => {
             if (auth.isAuthenticated()) {
+                // AGREGAR OTRA OPCION PARA QUE RETORNE A UNA RUTA ADMIN
                 return <Redirect to={{ pathname: "/perfil", state: { from: props.location } }} />
             } else {
                 return <Component {...props} />;

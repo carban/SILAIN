@@ -67,6 +67,8 @@ class Perfil extends React.Component {
                                 <Input type="text" placeholder="Resumen"/>
                                 <Input type="text" placeholder="Descripcion"/>
                                 <Input type="text" placeholder="Publicador"/>
+                                <Input type="text" placeholder="Palabras clave"/>
+                                <Button color="success">Publico</Button>
                                 <form method="POST" action={api.route + "/article/crear"} enctype="multipart/form-data">
                                     <input type="file" name="file" />
                                     <input type="submit" value="Upload" />
