@@ -127,6 +127,21 @@ router.post('/proposito', async (req, res) => {
         console.log(e);
         res.sendStatus(400);
     }
+})  
+
+router.post('/crear', async (req, res) => {
+    if (req.files) {
+        var file = req.files.file;
+        var filename = file.name;
+        var path = "/home/carban/Stuffs";
+        file.mv("./Uploads/" + filename, err => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send({msg: "Uploaded"});
+            }
+        })
+    }
 })
 
 

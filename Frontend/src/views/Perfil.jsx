@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import {
-    Container, Button, Row, Table
+    Container, Button, Row, Table, Input
 } from 'reactstrap';
 
 // import axios from "axios";
@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 import auth from "components/auth/auth.js";
-
+import CustomFilters from "components/CustomFilters.jsx";
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
 
@@ -46,11 +46,36 @@ class Perfil extends React.Component {
                 <SNavBar />
                 <Container>
                     <Row>
-                        <img src="https://image.flaticon.com/icons/svg/929/929422.svg" alt="" width="50px" height="50px" />
+                        {
+                            auth.isAdmin() ?
+                                (
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/3039/3039392.svg" alt="" width="80px" height="80px" />
+                                ) : (
+                                    <img src="https://image.flaticon.com/icons/svg/929/929422.svg" alt="" width="50px" height="50px" />
+                                )
+                        }
                         <h2>Bienvenido {this.state.user.nombres} {this.state.user.apellidos}</h2>
                     </Row>
                     <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
-                    <hr />
+                    {
+                        auth.isAdmin() ? (
+                            <div>
+                                <h4>creación de datos</h4>
+                                <CustomFilters />
+                                <br/>
+                                <Input type="text" placeholder="Titulo"/>
+                                <Input type="text" placeholder="Resumen"/>
+                                <Input type="text" placeholder="Descripcion"/>
+                                <Input type="text" placeholder="Publicador"/>
+                                <form method="POST" action={api.route + "/article/crear"} enctype="multipart/form-data">
+                                    <input type="file" name="file" />
+                                    <input type="submit" value="Upload" />
+                                </form>
+                                <hr />
+                            </div>
+                        ) : true
+                    }
+
                     <h4>Historial de descargas</h4>
                     <ul>
                         {

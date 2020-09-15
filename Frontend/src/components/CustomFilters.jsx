@@ -123,7 +123,7 @@ class CustomFilters extends React.Component {
                     </Col>
                     <Col>
                         <center>
-                            <b>Municipios</b>
+                            <b>Municipio</b>
                         </center>
                         <Input onChange={this.handleSelectMUNICIPIO.bind(this)} type="select" name="municipio" id="exampleSelect">
                             <option value={-1}>Select</option>
