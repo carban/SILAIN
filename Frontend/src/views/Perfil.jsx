@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 import auth from "components/auth/auth.js";
-import CustomFilters from "components/CustomFilters.jsx";
+import CreateFile from "components/CreateFile.jsx";
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
 
@@ -59,22 +59,7 @@ class Perfil extends React.Component {
                     <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
                     {
                         auth.isAdmin() ? (
-                            <div>
-                                <h4>creación de datos</h4>
-                                <CustomFilters />
-                                <br/>
-                                <Input type="text" placeholder="Titulo"/>
-                                <Input type="text" placeholder="Resumen"/>
-                                <Input type="text" placeholder="Descripcion"/>
-                                <Input type="text" placeholder="Publicador"/>
-                                <Input type="text" placeholder="Palabras clave"/>
-                                <Button color="success">Publico</Button>
-                                <form method="POST" action={api.route + "/article/crear"} enctype="multipart/form-data">
-                                    <input type="file" name="file" />
-                                    <input type="submit" value="Upload" />
-                                </form>
-                                <hr />
-                            </div>
+                            <CreateFile />
                         ) : true
                     }
 

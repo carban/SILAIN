@@ -32,7 +32,7 @@ class SNavBar extends React.Component {
         {/* </NavLink> */}
         <Col md="12">
           <Row >
-            <Col className="silain_link silain_link_green">
+            <Col className="silain_link silain_link_yellow">
               <center>
                 <NavLink to="/search/clave"
                   activeStyle={{
@@ -47,7 +47,7 @@ class SNavBar extends React.Component {
                       </NavLink>
               </center>
             </Col>
-            <Col className="silain_link silain_link_greenorange">
+            <Col className="silain_link silain_link_orange">
               <center>
                 <NavLink to="/search/propiedad"
                   activeStyle={{
@@ -62,7 +62,7 @@ class SNavBar extends React.Component {
                     </NavLink>
               </center>
             </Col>
-            <Col className="silain_link silain_link_orange">
+            <Col className="silain_link silain_link_greenorange">
               <center>
 
                 <NavLink to="/search/mapa"
@@ -78,7 +78,7 @@ class SNavBar extends React.Component {
                     </NavLink>
               </center>
             </Col>
-            <Col className="silain_link silain_link_yellow">
+            <Col className="silain_link silain_link_green">
               <center>
                 <NavLink to="/search/proyecto"
                   activeStyle={{
