@@ -70,7 +70,7 @@ router.get('/:id', async (req, res) => {
 router.get('/download/:id', async (req, res) => {
 
     var id = req.params.id;
-    var path = "/home/Stuffs";
+    var path = "/home/carban/Stuffs";
 
     const query = {
         text: "select url from metadato where idmetadato = $1",
@@ -140,7 +140,7 @@ router.post('/crear', async (req, res) => {
         var file = req.files.file;
         var filename = file.name;
 
-        console.log(req.body, file);
+        // console.log(req.body, file);
 
         let { titulo, publicador, derechos, resumen, descripcion, lote, fase, pclave, publico, filters } = req.body;
         filters = JSON.parse(filters);
@@ -175,7 +175,7 @@ router.post('/crear', async (req, res) => {
             const resultFincaID = await pg.query(queryFincaID);
             finID = parseInt(resultFincaID.rows[0].idfinca);
 
-            console.log("==============>", ID, subID, finID);
+            // console.log("==============>", ID, subID, finID);
 
         } catch (e) {
             console.log(e);
@@ -208,11 +208,11 @@ router.post('/crear', async (req, res) => {
             res.sendStatus(400);
         }
 
-        file.mv("/home/Stuffs/root/" + filename, err => {
+        file.mv("/home/carban/Stuffs/root/" + filename, err => {
             if (err) {
                 res.send(err);
             } else {
-                res.sendStatus(200).send({});
+                res.send({});
             }
         })
     }
