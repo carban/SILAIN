@@ -30,6 +30,11 @@ function formatCentroidPoint(data) {
 
 
 
+router.get('/messi', async (req, res) => {
+    res.download("./Uploads/TABULADO.pdf");
+})
+
+
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 // Retorna la informacion correspondiente a un articulo deacuerdo a su ID 
 router.get('/:id', async (req, res) => {
@@ -65,7 +70,7 @@ router.get('/:id', async (req, res) => {
 router.get('/download/:id', async (req, res) => {
 
     var id = req.params.id;
-    var path = "/home/carban/Stuffs";
+    var path = "/home/Stuffs";
 
     const query = {
         text: "select url from metadato where idmetadato = $1",
@@ -129,19 +134,20 @@ router.post('/proposito', async (req, res) => {
     }
 })
 
+// ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 router.post('/crear', async (req, res) => {
     if (req.files) {
         var file = req.files.file;
         var filename = file.name;
 
-        // console.log(req.body, file);
+        console.log(req.body, file);
 
         let { titulo, publicador, derechos, resumen, descripcion, lote, fase, pclave, publico, filters } = req.body;
         filters = JSON.parse(filters);
-        let { subcategoria, tipo, formato, finca } = filters;
+        let {   subcategoria, tipo, formato, finca } = filters;
 
         let tamano = file.size;
-        let url = "/root/calle13";
+        let url = "/root/" + filename;
 
         const queryID = {
             text: "select count(*) from metadato"
@@ -169,7 +175,7 @@ router.post('/crear', async (req, res) => {
             const resultFincaID = await pg.query(queryFincaID);
             finID = parseInt(resultFincaID.rows[0].idfinca);
 
-            // console.log("==============>", ID, subID, finID);
+            console.log("==============>", ID, subID, finID);
 
         } catch (e) {
             console.log(e);
@@ -202,7 +208,7 @@ router.post('/crear', async (req, res) => {
             res.sendStatus(400);
         }
 
-        file.mv("./Uploads/" + filename, err => {
+        file.mv("/home/Stuffs/root/" + filename, err => {
             if (err) {
                 res.send(err);
             } else {
