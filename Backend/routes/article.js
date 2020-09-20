@@ -146,7 +146,7 @@ router.post('/crear', async (req, res) => {
         filters = JSON.parse(filters);
         let {   subcategoria, tipo, formato, finca } = filters;
 
-        let tamano = file.size;
+        let tamano = file.size + " B";
         let url = "/root/" + filename;
 
         const queryID = {

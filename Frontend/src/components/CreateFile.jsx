@@ -52,46 +52,48 @@ class CreateFile extends React.Component {
     }
 
     sendForm() {
-        // if (this.validateFilters() && this.validateParameters()) {
-        var formData = new FormData();
+        if (this.validateFilters() && this.validateParameters()) {
+            var formData = new FormData();
 
-        formData.append("file", this.state.file, this.state.file.name);
-        formData.append("titulo", this.state.titulo);
-        formData.append("publicador", this.state.publicador);
-        formData.append("derechos", this.state.derechos);
-        formData.append("resumen", this.state.resumen);
-        formData.append("descripcion", this.state.descripcion);
-        formData.append("lote", this.state.lote);
-        formData.append("fase", this.state.fase);
-        formData.append("pclave", this.state.pclave);
-        formData.append("publico", this.state.publico);
-        formData.append("filters", JSON.stringify(this.state.filters));
+            formData.append("file", this.state.file, this.state.file.name);
+            formData.append("titulo", this.state.titulo);
+            formData.append("publicador", this.state.publicador);
+            formData.append("derechos", this.state.derechos);
+            formData.append("resumen", this.state.resumen);
+            formData.append("descripcion", this.state.descripcion);
+            formData.append("lote", this.state.lote);
+            formData.append("fase", this.state.fase);
+            formData.append("pclave", this.state.pclave);
+            formData.append("publico", this.state.publico);
+            formData.append("filters", JSON.stringify(this.state.filters));
 
-        axios.post(api.route + "/article/crear", formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(res => {
-                document.getElementById("createForm").reset();
-                this.setState({
-                    titulo: "",
-                    publicador: "CIBioFi-GISMODEL",
-                    derechos: "",
-                    resumen: "",
-                    descripcion: "",
-                    lote: "",
-                    fase: "",
-                    pclave: "",
-                    publico: true,
-                    file: "",
+            axios.post(api.route + "/article/crear", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(res => {
+                    document.getElementById("createForm").reset();
+                    this.setState({
+                        titulo: "",
+                        publicador: "CIBioFi-GISMODEL",
+                        derechos: "",
+                        resumen: "",
+                        descripcion: "",
+                        lote: "",
+                        fase: "",
+                        pclave: "",
+                        publico: true,
+                        file: "",
+                    })
+                    alert("Cargado exitosamente");
                 })
-                alert("Cargado exitosamente");
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        // }
+                .catch(err => {
+                    console.log(err);
+                })
+        } else {
+            alert("Debes llenar todos los campos");
+        }
     }
 
     handleInput(e) {
@@ -167,7 +169,7 @@ class CreateFile extends React.Component {
                             </Col>
                         </Row>
                     </FormGroup>
-                    <Input type="file" name="file" onChange={this.handleFile.bind(this)} required/>
+                    <Input type="file" name="file" onChange={this.handleFile.bind(this)} required />
                     <center>
                         <Button color="warning">Create</Button>
                     </center>
