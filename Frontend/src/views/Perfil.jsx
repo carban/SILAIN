@@ -13,6 +13,7 @@ import auth from "components/auth/auth.js";
 import CreateFile from "components/CreateFile.jsx";
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
+import CreateLicense from "components/CreateLicense";
 
 class Perfil extends React.Component {
     constructor(props) {
@@ -59,11 +60,16 @@ class Perfil extends React.Component {
                     <b>{this.state.user.email}</b> | <b>{this.state.user.pais}</b>
                     {
                         auth.isAdmin() ? (
-                            <CreateFile />
+                            <div>
+                                <CreateFile />
+                                <CreateLicense />
+                            </div>
                         ) : true
                     }
 
-                    <h4>Historial de descargas</h4>
+                    <center>
+                        <h4>Historial de descargas</h4>
+                    </center>
                     <ul>
                         {
                             this.state.hist.length !== 0 ?
