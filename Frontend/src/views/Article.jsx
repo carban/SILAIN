@@ -28,7 +28,8 @@ class Article extends React.Component {
             redirect_word: "",
             toggleModal: false,
             toggleModalRequest: false,
-            textarea: ""
+            textarea: "",
+            publico: false
         }
     }
 
@@ -57,6 +58,7 @@ class Article extends React.Component {
         axios.get(api.route + "/article/download/" + this.props.match.params.id, {
             responseType: "blob"
         }).then(res => {
+            console.log(res);
             let blob = new Blob([res.data])
             download(blob, filename);
             this.sendPurpose();
@@ -67,9 +69,15 @@ class Article extends React.Component {
     }
 
     async componentDidMount() {
-        const res = await fetch(api.route + "/article/" + this.props.match.params.id);
-        const { info, finca } = await res.json();
-        this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid });
+        if (auth.isAuthenticated()) {
+            const res = await fetch(api.route + "/article/get/" + this.props.match.params.id + "/" + auth.getSession().id);
+            const { info, finca, publico } = await res.json();
+            this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+        } else {
+            const res = await fetch(api.route + "/article/get/" + this.props.match.params.id);
+            const { info, finca, publico } = await res.json();
+            this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+        }
     }
 
     redirectPclave(w) {
@@ -194,11 +202,11 @@ class Article extends React.Component {
                                                     Descargar
                                                 </Button>
                                             ) : (
-                                                    <Button onClick={this.state.info.publico ? this.toggleModal.bind(this) : this.toggleModalRequest.bind(this)}
-                                                        color={this.state.info.publico ? "success" : "primary"}
+                                                    <Button onClick={this.state.publico ? this.toggleModal.bind(this) : this.toggleModalRequest.bind(this)}
+                                                        color={this.state.publico ? "success" : "primary"}
                                                         disabled={!auth.isAuthenticated()}>
                                                         {
-                                                            this.state.info.publico ? "Descargar" : "Solicitar Descarga"
+                                                            this.state.publico ? "Descargar" : "Solicitar Descarga"
                                                         }
                                                     </Button>
                                                 )

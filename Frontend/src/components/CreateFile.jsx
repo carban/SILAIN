@@ -52,7 +52,7 @@ class CreateFile extends React.Component {
     }
 
     sendForm() {
-        if (this.validateFilters() && this.validateParameters()) {
+        // if (this.validateFilters() && this.validateParameters()) {
             var formData = new FormData();
 
             formData.append("file", this.state.file, this.state.file.name);
@@ -91,9 +91,9 @@ class CreateFile extends React.Component {
                 .catch(err => {
                     console.log(err);
                 })
-        } else {
-            alert("Debes llenar todos los campos");
-        }
+        // } else {
+        //     alert("Debes llenar todos los campos");
+        // }
     }
 
     handleInput(e) {
@@ -171,7 +171,7 @@ class CreateFile extends React.Component {
                     </FormGroup>
                     <Input type="file" name="file" onChange={this.handleFile.bind(this)} required />
                     <center>
-                        <Button color="warning">Create</Button>
+                        <Button color="warning" block>Create</Button>
                     </center>
                 </Form>
 

@@ -31,6 +31,11 @@ FOREIGN KEY(id_usuario) REFERENCES usuario(id), FOREIGN KEY(id_metadato) REFEREN
 
 
 create table disponibilidad(
-    id_disponibilidad SERIAL PRIMARY KEY, id_usuario SERIAL, id_metadato INTEGER, proposito VARCHAR(200), 
+    id_usuario SERIAL, id_metadato INTEGER, proposito VARCHAR(200), 
     FOREIGN KEY(id_usuario) REFERENCES usuario(id), FOREIGN KEY(id_metadato) REFERENCES metadato(idmetadato));
+
+-------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--INSERT into disponibilidad(id_usuario, id_metadato, proposito) VALUES (1,1,'Sisas');
+
 

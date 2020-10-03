@@ -31,13 +31,17 @@ function formatCentroidPoint(data) {
 
 
 router.get('/messi', async (req, res) => {
-    res.download("./Uploads/TABULADO.pdf");
+    res.download("/home/carban/Stuffs/root/espectrometria/eucadia/27-07-17/T.rar", err => {
+        if (err) {
+            console.log(err);
+            res.sendStatus(400);
+        }
+    });
 })
-
 
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 // Retorna la informacion correspondiente a un articulo deacuerdo a su ID 
-router.get('/:id', async (req, res) => {
+router.get('/get/:id', async (req, res) => {
 
     var id = req.params.id;
 
@@ -48,10 +52,14 @@ router.get('/:id', async (req, res) => {
 
     try {
         const result = await pg.query(query);
+        var queryresults = result.rows[0];
+
+        const { publico } = queryresults;
+
         // Capturar el poligono correspondiente a la finca del dato 
         var queryFin = {
             text: "select poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
-            values: [result.rows[0].finca]
+            values: [queryresults.finca]
         }
 
         var dataFin = await pg.query(queryFin);
@@ -59,7 +67,62 @@ router.get('/:id', async (req, res) => {
         dataFin = await formatCentroidPoint(dataFin);
 
         // console.log(result.rows);
-        res.status(200).send({ info: result.rows[0], finca: dataFin });
+        res.status(200).send({ info: queryresults, finca: dataFin, publico: publico });
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(400);
+    }
+})
+
+
+// ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
+// Retorna la informacion correspondiente a un articulo deacuerdo a su ID 
+router.get('/get/:id/:userid', async (req, res) => {
+
+    var id = req.params.id;
+    var userid = req.params.userid;
+
+    const query = {
+        text: "select * from metadato inner join muni_dept on metadato.idmetadato = muni_dept.idmetadato where metadato.idmetadato=$1",
+        values: [id]
+    }
+
+    try {
+        const result = await pg.query(query);
+        var queryresults = result.rows[0];
+
+        // Verificar que el articulo este publico
+        // si lo esta envia el estado publico true
+        // si no busca en la tabla disponibilidad
+        // si lo esta envia true
+        // si no envia falso
+
+        var statePublico = true;
+        const { publico } = queryresults;
+        if (!publico) {
+            const queryConfirmDist = {
+                text: "select id_usuario, id_metadato from disponibilidad where id_usuario = $1 and id_metadato = $2",
+                values: [userid, id]
+            };
+            const confirmDist = await pg.query(queryConfirmDist);
+            if (confirmDist.rows.length == 0) {
+                statePublico = false;
+            }
+        }
+
+
+        // Capturar el poligono correspondiente a la finca del dato 
+        var queryFin = {
+            text: "select poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+            values: [queryresults.finca]
+        }
+
+        var dataFin = await pg.query(queryFin);
+        dataFin = await swapCoors(dataFin.rows);
+        dataFin = await formatCentroidPoint(dataFin);
+
+        // console.log(result.rows);
+        res.status(200).send({ info: queryresults, finca: dataFin, publico: statePublico });
     } catch (e) {
         console.log(e);
         res.sendStatus(400);
@@ -144,18 +207,18 @@ router.post('/crear', async (req, res) => {
 
         let { titulo, publicador, derechos, resumen, descripcion, lote, fase, pclave, publico, filters } = req.body;
         filters = JSON.parse(filters);
-        let {   subcategoria, tipo, formato, finca } = filters;
+        let { categoria, subcategoria, tipo, formato, finca } = filters;
 
         let tamano = file.size + " B";
-        let url = "/root/" + filename;
+        let url = "/root/" + categoria + "/" + subcategoria + "/" + filename;
 
         const queryID = {
             text: "select count(*) from metadato"
         }
 
         const querySubcategoriaID = {
-            text: "select idsubcategoria from subcategoria where subcategoria = $1",
-            values: [subcategoria]
+            text: "select idsubcategoria from categoria inner join subcategoria on idcategoria = categoria_idcategoria where categoria = $1 and subcategoria = $2",
+            values: [categoria, subcategoria]
         }
 
         const queryFincaID = {
@@ -207,8 +270,8 @@ router.post('/crear', async (req, res) => {
             console.log(e);
             res.sendStatus(400);
         }
-
-        file.mv("/home/carban/Stuffs/root/" + filename, err => {
+        console.log("/home/carban/Stuffs" + url);
+        file.mv("/home/carban/Stuffs" + url, err => {
             if (err) {
                 res.send(err);
             } else {
