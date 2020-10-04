@@ -25,16 +25,16 @@ router.post("/login", async (req, res) => {
     const { user, password } = req.body;
 
     const query = {
-        text: "SELECT id, role from usuario where email=$1 and password=$2",
+        text: "SELECT email, role from usuario where email=$1 and password=$2",
         values: [user, password]
     }
 
     try {
         const result = await pg.query(query);
-        var id = result.rows[0].id;
+        var email = result.rows[0].email;
         var role = result.rows[0].role;  
-        if (id) {
-            res.status(200).send({ user_id: id, role: role});
+        if (email) {
+            res.status(200).send({ user_id: email, role: role});
         } else {
             res.sendStatus(400);
         }
@@ -50,7 +50,7 @@ router.get("/user/:id", async (req, res) => {
     var id = req.params.id;
 
     const query = {
-        text: "SELECT nombres, apellidos, email, pais from usuario where id=$1",
+        text: "SELECT nombres, apellidos, email, pais from usuario where email=$1",
         values: [id]
     }
     try {
@@ -74,7 +74,7 @@ router.get("/user/des_hist/:id", async (req, res) => {
     var id = req.params.id;
 
     const query = {
-        text: "select titulo, idmetadato, fecha as orderfecha, hora as orderhora, to_char(fecha, 'DD/MM/YYYY') as fecha, to_char(hora, 'HH24:MI:SS') as hora from descargas inner join metadato on id_metadato=idmetadato where id_usuario=$1 order by orderfecha DESC, orderhora DESC;",
+        text: "select titulo, idmetadato, fecha as orderfecha, hora as orderhora, to_char(fecha, 'DD/MM/YYYY') as fecha, to_char(hora, 'HH24:MI:SS') as hora from descargas inner join metadato on id_metadato=idmetadato where email_usuario=$1 order by orderfecha DESC, orderhora DESC;",
         values: [id]
     }
     try {

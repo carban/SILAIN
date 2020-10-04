@@ -39,3 +39,28 @@ create table disponibilidad(
 --INSERT into disponibilidad(id_usuario, id_metadato, proposito) VALUES (1,1,'Sisas');
 
 
+/*
+create table usuario (
+    nombres VARCHAR(100), apellidos VARCHAR(100), 
+    email VARCHAR(100) PRIMARY KEY, pais VARCHAR(100), departamento VARCHAR(100), ciudad VARCHAR(100), 
+    institucion VARCHAR(100), ocupacion VARCHAR(100), password VARCHAR(100), role SERIAL, 
+    FOREIGN KEY(role) REFERENCES role(id_role)) ;
+
+INSERT INTO usuario(nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password, role) VALUES (
+    'Normal', 'Normal', 'normal@gmail.com', 'Polombia', 'Valle', 'Cali', 'Universidad del Valle', 'Estudiante', '123', 2
+);
+
+INSERT INTO usuario(nombres, apellidos, email, pais, departamento, ciudad, institucion, ocupacion, password, role) VALUES (
+    'ADMIN', 'ADMIN', 'admin@admin.com', 'Polombia', 'Valle', 'Cali', 'Universidad del Valle', 'Estudiante', '123', 1
+);
+
+create table descargas(
+    id SERIAL PRIMARY KEY, email_usuario VARCHAR(100), id_metadato INTEGER, proposito VARCHAR(200), fecha DATE, hora TIME, 
+FOREIGN KEY(email_usuario) REFERENCES usuario(email), FOREIGN KEY(id_metadato) REFERENCES metadato(idmetadato));
+
+
+create table licensias(
+    email_usuario VARCHAR(100), id_metadato INTEGER,
+    FOREIGN KEY(email_usuario) REFERENCES usuario(email), FOREIGN KEY(id_metadato) REFERENCES metadato(idmetadato));
+
+*/

@@ -10,7 +10,7 @@ class CreateLicense extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            iduser: 0,
+            iduser: "",
             idarticulo: 0,
         }
     }
@@ -42,7 +42,7 @@ class CreateLicense extends React.Component {
                         <Row>
                             <Col>
                                 <b>Id del usuario</b>
-                                <Input type="number" name="iduser" onChange={this.handleInput.bind(this)} required />
+                                <Input type="email" name="iduser" onChange={this.handleInput.bind(this)} required />
                             </Col>
                             <Col>
                                 <b>Id del articulo</b>

@@ -7,7 +7,7 @@ router.post('/add', async (req, res) => {
     var { iduser, idarticulo } = req.body;
 
     const query = {
-        text: "INSERT into disponibilidad(id_usuario, id_metadato, proposito) VALUES ($1,$2,'Sisas');",
+        text: "INSERT into licensias(email_usuario, id_metadato) VALUES ($1, $2);",
         values: [iduser, idarticulo]
     }
 

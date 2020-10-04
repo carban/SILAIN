@@ -101,7 +101,7 @@ router.get('/get/:id/:userid', async (req, res) => {
         const { publico } = queryresults;
         if (!publico) {
             const queryConfirmDist = {
-                text: "select id_usuario, id_metadato from disponibilidad where id_usuario = $1 and id_metadato = $2",
+                text: "select email_usuario, id_metadato from licensias where email_usuario = $1 and id_metadato = $2",
                 values: [userid, id]
             };
             const confirmDist = await pg.query(queryConfirmDist);
@@ -184,7 +184,7 @@ router.post('/proposito', async (req, res) => {
 
     const { id_usuario, id_metadato, proposito } = req.body;
     const query = {
-        text: "insert into descargas (id_usuario, id_metadato, proposito, fecha, hora) values ($1, $2, $3, current_timestamp, current_timestamp)",
+        text: "insert into descargas (email_usuario, id_metadato, proposito, fecha, hora) values ($1, $2, $3, current_timestamp, current_timestamp)",
         values: [id_usuario, id_metadato, proposito]
     }
 
