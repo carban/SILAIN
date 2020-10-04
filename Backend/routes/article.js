@@ -101,7 +101,7 @@ router.get('/get/:id/:userid', async (req, res) => {
         const { publico } = queryresults;
         if (!publico) {
             const queryConfirmDist = {
-                text: "select email_usuario, id_metadato from licensias where email_usuario = $1 and id_metadato = $2",
+                text: "select email_usuario, id_metadato from licencias where email_usuario = $1 and id_metadato = $2",
                 values: [userid, id]
             };
             const confirmDist = await pg.query(queryConfirmDist);

@@ -6,7 +6,7 @@ import {
     Button, Form, FormGroup, Row, Col, Input
 } from 'reactstrap';
 
-class CreateLicense extends React.Component {
+class CreateLicence extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,10 +21,10 @@ class CreateLicense extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        axios.post(api.route + "/license/add", this.state)
+        axios.post(api.route + "/licence/add", this.state)
             .then(res => {
-                document.getElementById("licenseForm").reset();
-                alert("Licensia asignada con exito");
+                document.getElementById("licenceForm").reset();
+                alert("Licencia asignada con exito");
             })
             .catch(err => {
                 alert("Error");
@@ -35,9 +35,9 @@ class CreateLicense extends React.Component {
         return (
             <div>
                 <center>
-                    <h4>Asignación de licensia</h4>
+                    <h4>Asignación de licencia</h4>
                 </center>
-                <Form onSubmit={this.handleSubmit.bind(this)} id="licenseForm">
+                <Form onSubmit={this.handleSubmit.bind(this)} id="licenceForm">
                     <FormGroup>
                         <Row>
                             <Col>
@@ -60,4 +60,4 @@ class CreateLicense extends React.Component {
     }
 }
 
-export default CreateLicense;
+export default CreateLicence;

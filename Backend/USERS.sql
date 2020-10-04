@@ -59,7 +59,7 @@ create table descargas(
 FOREIGN KEY(email_usuario) REFERENCES usuario(email), FOREIGN KEY(id_metadato) REFERENCES metadato(idmetadato));
 
 
-create table licensias(
+create table licencias(
     email_usuario VARCHAR(100), id_metadato INTEGER,
     FOREIGN KEY(email_usuario) REFERENCES usuario(email), FOREIGN KEY(id_metadato) REFERENCES metadato(idmetadato));
 

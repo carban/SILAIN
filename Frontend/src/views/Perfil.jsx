@@ -13,7 +13,7 @@ import auth from "components/auth/auth.js";
 import CreateFile from "components/CreateFile.jsx";
 import SNavBar from "components/SNavBar.jsx";
 import api from "api_route.js";
-import CreateLicense from "components/CreateLicense";
+import CreateLicence from "components/CreateLicence";
 
 class Perfil extends React.Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class Perfil extends React.Component {
                         auth.isAdmin() ? (
                             <div>
                                 <CreateFile />
-                                <CreateLicense />
+                                <CreateLicence />
                             </div>
                         ) : true
                     }

@@ -7,7 +7,7 @@ const article = require('./article.js');
 const map = require('./map.js');
 const users = require('./users.js');
 const makepublic = require('./makepublic.js');
-const license = require('./license.js');
+const licence = require('./licence.js');
 const sendmail = require('./sendmail.js');
 
 
@@ -17,7 +17,7 @@ app.use('/article', article);
 app.use('/map', map);
 app.use('/users', users);
 app.use('/makepublic', makepublic);
-app.use('/license', license);
+app.use('/licence', licence);
 app.use('/sendmail', sendmail);
 
 
