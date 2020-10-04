@@ -29,6 +29,8 @@ class Article extends React.Component {
             toggleModal: false,
             toggleModalRequest: false,
             textarea: "",
+            textarea_request: "",
+            loading_mail: false,
             publico: false
         }
     }
@@ -79,6 +81,24 @@ class Article extends React.Component {
             this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
         }
     }
+
+    sendRequestDownload() {
+        this.setState({ loading_mail: true });
+        axios.post(api.route + "/sendmail", {
+            id: auth.getSession().id,
+            textarea_request: this.state.textarea_request
+        })
+            .then(res => {
+                this.setState({ textarea_request: "", loading_mail: false })
+                this.toggleModalRequest();
+                alert("Mensaje enviado con exito");
+            })
+            .catch(err => {
+                console.log(err);
+                alert("Error");
+            })
+    }
+
 
     redirectPclave(w) {
         this.setState({ redirect: true, redirect_word: w });
@@ -138,13 +158,20 @@ class Article extends React.Component {
                                         El archivo se encuentra en estado privado, para descargarlo debes escribir una solicitud corta que explique la razon del uso del mismo.
                                         El administrador pronto te respondera al correo inscrito de tu usuario
                                 </p>
-                                    <textarea onChange={this.handleInput.bind(this)} name="textarea" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
+                                    <textarea onChange={this.handleInput.bind(this)} name="textarea_request" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
                                     </textarea>
                                 </ModalBody>
                                 <center>
-                                    <Button color="primary" disabled={this.state.textarea === ""}>
-                                        Enviar
-                                    </Button>
+                                    {
+                                        !this.state.loading_mail ?
+                                            <Button color="primary" onClick={this.sendRequestDownload.bind(this)} disabled={this.state.textarea_request === ""}>
+                                                Enviar
+                                            </Button>
+                                            :
+                                            <center>
+                                                <ReactLoading type={"bars"} color={"#51cbce"} />
+                                            </center>
+                                    }
                                 </center>
                             </Modal>
 

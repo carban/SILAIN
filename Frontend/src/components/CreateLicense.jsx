@@ -41,7 +41,7 @@ class CreateLicense extends React.Component {
                     <FormGroup>
                         <Row>
                             <Col>
-                                <b>Id del usuario</b>
+                                <b>Email del usuario</b>
                                 <Input type="email" name="iduser" onChange={this.handleInput.bind(this)} required />
                             </Col>
                             <Col>

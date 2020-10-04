@@ -8,6 +8,8 @@ const map = require('./map.js');
 const users = require('./users.js');
 const makepublic = require('./makepublic.js');
 const license = require('./license.js');
+const sendmail = require('./sendmail.js');
+
 
 app.use('/basic', basicSearch);
 app.use('/getfilters', filters);
@@ -16,6 +18,7 @@ app.use('/map', map);
 app.use('/users', users);
 app.use('/makepublic', makepublic);
 app.use('/license', license);
+app.use('/sendmail', sendmail);
 
 
 module.exports = app;
