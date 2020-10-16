@@ -269,5 +269,31 @@ router.post('/getpoly', async (req, res) => {
   }
 })
 
+// ||||||||||||||||||||||| Ruta ||||||||||||||||||||||| 
+// Retorna la lista de fincas mas cercanas a una posicion
+
+router.post('/finca_closer', async (req, res) => {
+
+  const marker = req.body.marker;
+
+  var query = {
+    text: "select finca, st_distance(st_transform(geom,3115),st_transform(st_setsrid(st_makepoint($1,$2),4326),3115)) as distancia_km from geofincas ORDER BY distancia_km",
+    values: [marker[0], marker[1]]
+  }
+
+  try {
+    var data = await pg.query(query);
+    // for (var i = 0; i < data.rows.length; i++) {
+    //   data.rows[i].distancia_km = data.rows[i].distancia_km / 1000;
+    // }
+    // console.log(data.rows);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(400);
+  }
+
+  res.json(data.rows);
+})
+
 
 module.exports = router;

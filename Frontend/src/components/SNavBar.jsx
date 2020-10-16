@@ -74,7 +74,7 @@ class SNavBar extends React.Component {
                   }}
                   title="Realiza busquedas explorando un mapa">
                   <i className="nc-icon nc-pin-3" style={{ "fontSize": "20px" }}></i>
-                    Búsquedor Geográfico
+                    Búscador Geográfico
                     </NavLink>
               </center>
             </Col>

@@ -1,10 +1,10 @@
 import React from "react";
 
 import {
-    Modal, ModalHeader, ModalBody
+    Modal, ModalHeader, ModalBody, Table, Button
 } from "reactstrap";
 
-import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
+import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon, Marker } from 'react-leaflet';
 import PropiedadByMap from "components/Map/PropiedadByMap";
 import FiltersOnMap from "components/Map/FiltersOnMap";
 
@@ -20,15 +20,19 @@ class TheMap extends React.Component {
         this.state = {
             position: [3.2175377205303732, -76.53764390954167],
             zoom: 7,
+            marker: [3.2175377205303732, -76.53764390954167],
 
             finca: [],
             departamento: [],
             municipio: [],
             modal: false,
+            modalDist: false,
+
             loading: false,
             ubication: "",
             ubi_type: "",
             results: [],
+            resultsDist: [],
             counts_tipos: {},
 
             totalResults: 0,
@@ -63,8 +67,20 @@ class TheMap extends React.Component {
         });
     }
 
+    openToggleDist = () => {
+        this.setState({
+            modalDist: true
+        });
+    }
+
+    closeToggleDist = () => {
+        this.setState({
+            modalDist: false,
+        });
+    }
+
     buscarUbication(ubi_type, ubication) {
-        // console.log(ubication);
+        console.log(ubi_type);
         this.setState({ loading: true, ubication: ubication, ubi_type: ubi_type, currentPage: 0 });
         this.openToggle();
         axios.post(api.route + "/map/ubication_by_filter", {
@@ -92,6 +108,27 @@ class TheMap extends React.Component {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    buscarFincaCercana() {
+        // console.log(this.state.marker);
+        this.setState({ loading: true, currentPage: 0 });
+        this.openToggleDist();
+        axios.post(api.route + "/map/finca_closer", { marker: this.state.marker })
+            .then(res => {
+                this.setState({
+                    resultsDist: res.data,
+                    loading: false,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    resultadosFincaCercana(nameUbication) {
+        this.closeToggleDist();
+        this.buscarUbication("finca", nameUbication);
     }
 
     changePage(page) {
@@ -154,6 +191,10 @@ class TheMap extends React.Component {
             })
     }
 
+    moveMarker(e) {
+        this.setState({ marker: [e.latlng.lat, e.latlng.lng] });
+    }
+
     render() {
 
         const modal = <div>
@@ -175,10 +216,10 @@ class TheMap extends React.Component {
                                         counts_tipos={this.state.counts_tipos}
                                         ubi_type={this.state.ubi_type}
                                         totalResults={this.state.totalResults}
-                                        pages={this.state.pages} 
+                                        pages={this.state.pages}
                                         currentPage={this.state.currentPage}
                                         changePage={this.changePage.bind(this)}
-                                        />
+                                    />
                                     : true
                             )
                     }
@@ -186,11 +227,58 @@ class TheMap extends React.Component {
             </Modal>
         </div>
 
+        const modalDist = <div>
+            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modalDist} toggle={this.closeToggleDist}
+                fade={false}>
+                <ModalHeader toggle={this.closeToggleDist}>
+                    Fincas
+                </ModalHeader>
+                <ModalBody>
+                    {
+                        this.state.loading ? (
+                            <center>
+                                <ReactLoading type={"bars"} color={"#A5C80A"} />
+                            </center>
+                        ) : (
+                                this.state.resultsDist.length > 0 ?
+                                    <Table striped bordered style={{ "textAlign": "center" }}>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre</th>
+                                                <th>Distancia</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.resultsDist.map((ele, i) => (
+                                                    <tr>
+                                                        <th key={i} scope="row">{i + 1}</th>
+                                                        <td>{ele.finca}</td>
+                                                        <td>{ele.distancia_km}</td>
+                                                        <td>
+                                                            <Button color="primary" onClick={this.resultadosFincaCercana.bind(this, ele.finca)}>Buscar</Button>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </Table>
+                                    : true
+                            )
+                    }
+
+                </ModalBody>
+            </Modal>
+        </div >
+
         return (
             <div>
                 <center>
                     {modal}
-                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom}>
+                    {modalDist}
+                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom} onClick={this.moveMarker.bind(this)}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer
@@ -228,6 +316,18 @@ class TheMap extends React.Component {
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
                         </LayersControl>
+
+
+                        <Marker position={this.state.marker}>
+                            <Popup>
+                                <center>
+                                    <h5>
+                                        Buscar Finca más cercana
+                                    </h5>
+                                    <button className="btn_search_map3" onClick={this.buscarFincaCercana.bind(this)}>Buscar</button>
+                                </center>
+                            </Popup>
+                        </Marker>
                         {
                             this.state.departamento.length === 1 ? (
                                 <FeatureGroup color="purple">
