@@ -246,8 +246,8 @@ class TheMap extends React.Component {
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nombre</th>
-                                                <th>Distancia</th>
-                                                <th>Acciones</th>
+                                                <th>Distancia en KM</th>
+                                                <th>Resultados por finca</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -255,10 +255,12 @@ class TheMap extends React.Component {
                                                 this.state.resultsDist.map((ele, i) => (
                                                     <tr>
                                                         <th key={i} scope="row">{i + 1}</th>
-                                                        <td>{ele.finca}</td>
+                                                        <td> {ele.finca}</td>
                                                         <td>{ele.distancia_km}</td>
-                                                        <td>
-                                                            <Button color="primary" onClick={this.resultadosFincaCercana.bind(this, ele.finca)}>Buscar</Button>
+                                                        <td style={{ "width": "20%" }}>
+                                                            <Button color="primary" onClick={this.resultadosFincaCercana.bind(this, ele.finca)}>
+                                                                <span role="img" aria-label=".">🔍</span>
+                                                            </Button>
                                                         </td>
                                                     </tr>
                                                 ))
