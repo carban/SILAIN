@@ -4,7 +4,7 @@ import {
     Modal, ModalHeader, ModalBody, Table, Button
 } from "reactstrap";
 
-import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon, Marker } from 'react-leaflet';
+import { Map, Popup, TileLayer, LayersControl, FeatureGroup, Polygon } from 'react-leaflet';
 import PropiedadByMap from "components/Map/PropiedadByMap";
 import FiltersOnMap from "components/Map/FiltersOnMap";
 
@@ -20,7 +20,7 @@ class TheMap extends React.Component {
         this.state = {
             position: [3.2175377205303732, -76.53764390954167],
             zoom: 7,
-            marker: [3.2175377205303732, -76.53764390954167],
+            clickMarkerState: false,
 
             finca: [],
             departamento: [],
@@ -110,11 +110,11 @@ class TheMap extends React.Component {
             })
     }
 
-    buscarFincaCercana() {
+    buscarFincaCercana(marker) {
         // console.log(this.state.marker);
-        this.setState({ loading: true, currentPage: 0 });
+        this.setState({ loading: true, currentPage: 0, clickMarkerState: false });
         this.openToggleDist();
-        axios.post(api.route + "/map/finca_closer", { marker: this.state.marker })
+        axios.post(api.route + "/map/finca_closer", { marker: marker })
             .then(res => {
                 this.setState({
                     resultsDist: res.data,
@@ -191,14 +191,20 @@ class TheMap extends React.Component {
             })
     }
 
-    moveMarker(e) {
-        this.setState({ marker: [e.latlng.lat, e.latlng.lng] });
+    clickMarkerOn() {
+        this.setState({ clickMarkerState: true });
+    }
+
+    searchByClick(e) {
+        if (this.state.clickMarkerState) {
+            this.buscarFincaCercana([e.latlng.lat, e.latlng.lng]);
+        }
     }
 
     render() {
 
         const modal = <div>
-            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modal} toggle={this.closeToggle}
+            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modal} toggle={this.closeToggle.bind(this)}
                 fade={false}>
                 <ModalHeader toggle={this.closeToggle}>
                     {this.state.ubication}
@@ -228,7 +234,7 @@ class TheMap extends React.Component {
         </div>
 
         const modalDist = <div>
-            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modalDist} toggle={this.closeToggleDist}
+            <Modal lg="12" size="modal-dialog modal-lg" className="modal-lg" isOpen={this.state.modalDist} toggle={this.closeToggleDist.bind(this)}
                 fade={false}>
                 <ModalHeader toggle={this.closeToggleDist}>
                     Fincas
@@ -280,7 +286,7 @@ class TheMap extends React.Component {
                 <center>
                     {modal}
                     {modalDist}
-                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom} onClick={this.moveMarker.bind(this)}>
+                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom} onClick={this.searchByClick.bind(this)}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer
@@ -317,19 +323,21 @@ class TheMap extends React.Component {
                             <Control position="topright">
                                 <FiltersOnMap getFilters={this.getFilters.bind(this)} />
                             </Control>
+                            <Control>
+                                <div style={{ "width": "155px", "fontSize": "14px" }}>
+                                    <b>
+                                        Capturar
+                                    </b>
+                                    <br />
+                                    <button style={{ "backgroundColor": this.state.clickMarkerState ? "cyan" : "white", "width": "100%" }} onClick={this.clickMarkerOn.bind(this)}
+                                        title="Con este boton se activara la busqueda por distancias en el mapa al dar click sobre este">
+                                        <span role="img" aria-label="." style={{ "fontSize": "20px" }}>
+                                            📌
+                                        </span>
+                                    </button>
+                                </div>
+                            </Control>
                         </LayersControl>
-
-
-                        <Marker position={this.state.marker}>
-                            <Popup>
-                                <center>
-                                    <h5>
-                                        Buscar Finca más cercana
-                                    </h5>
-                                    <button className="btn_search_map3" onClick={this.buscarFincaCercana.bind(this)}>Buscar</button>
-                                </center>
-                            </Popup>
-                        </Marker>
                         {
                             this.state.departamento.length === 1 ? (
                                 <FeatureGroup color="purple">
