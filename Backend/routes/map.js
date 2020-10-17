@@ -277,7 +277,7 @@ router.post('/finca_closer', async (req, res) => {
   const marker = req.body.marker;
   
   var query = {
-    text: "select finca, st_distance(st_transform(geom,3115),st_transform(st_setsrid(st_makepoint($1,$2),4326),3115)) / 1000 as distancia_km from geofincas ORDER BY distancia_km",
+    text: "select finca, ROUND(CAST(st_distance(st_transform(geom,3115), st_transform(st_setsrid(st_makepoint($1,$2),4326),3115)) / 1000 as numeric), 3) as distancia_km from geofincas ORDER BY distancia_km",
     values: [marker[1], marker[0]]
   }
 
