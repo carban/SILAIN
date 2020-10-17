@@ -113,6 +113,7 @@ class TheMap extends React.Component {
     buscarFincaCercana(marker) {
         // console.log(this.state.marker);
         this.setState({ loading: true, currentPage: 0, clickMarkerState: false });
+        document.getElementById("mapdiv").style.cursor = "auto";
         this.openToggleDist();
         axios.post(api.route + "/map/finca_closer", { marker: marker })
             .then(res => {
@@ -193,6 +194,7 @@ class TheMap extends React.Component {
 
     clickMarkerOn() {
         this.setState({ clickMarkerState: true });
+        document.getElementById("mapdiv").style.cursor = "crosshair";
     }
 
     searchByClick(e) {
@@ -286,7 +288,7 @@ class TheMap extends React.Component {
                 <center>
                     {modal}
                     {modalDist}
-                    <Map className="amapa" center={this.state.position} zoom={this.state.zoom} onClick={this.searchByClick.bind(this)}>
+                    <Map className="amapa" id="mapdiv" center={this.state.position} zoom={this.state.zoom} onClick={this.searchByClick.bind(this)}>
                         <LayersControl position="topright">
                             <LayersControl.BaseLayer name="Normal" checked="true">
                                 <TileLayer
