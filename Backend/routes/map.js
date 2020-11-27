@@ -134,8 +134,8 @@ router.post('/ubication_by_filter', async (req, res) => {
     res.status(200).send({ result: [], counts: { AC: 0, AP: 0, IC: 0, IP: 0, C: 0 } });
   } else {
 
-    var text = "select idmetadato, titulo, publicador, formato, tamano, resumen, tipo, publico from muni_dept where " + ubi_type + " = $1";
-    var countText = "select tipo from muni_dept where " + ubi_type + " = $1";
+    var text = "select idmetadato, titulo, formato, tamano, resumen, tipo, publico from metafull where " + ubi_type + " = $1";
+    var countText = "select tipo from metafull where " + ubi_type + " = $1";
 
     var query_text = getTextWithFilters(text, filters);
     query_text = query_text + " OFFSET " + initPage + " LIMIT " + limitResults;
@@ -228,7 +228,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (departamento !== 'Select') {
         var query = {
-          text: "select departamento, poly, st_astext(st_centroid(geom)) as centroid from (select departamento.departamento, st_asgeojson(geom) as poly, geom from departamento inner join geodeptos on iddepartamento = id_depto) AS foo where foo.departamento = $1;",
+          text: "select departamento, st_asgeojson(geom) as poly, st_astext(st_centroid(geom)) as centroid from departamento where departamento = $1;",
           values: [departamento]
         }
         dataDept = await pg.query(query);
@@ -238,7 +238,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (municipio !== 'Select') {
         var query = {
-          text: "select municipio, poly, st_astext(st_centroid(geom)) as centroid from (select municipio.municipio, st_asgeojson(geom) as poly, geom from municipio inner join geomunic on idmunicipio = idmuni) AS foo where foo.municipio = $1;",
+          text: "select municipio, st_asgeojson(geom) as poly, st_astext(st_centroid(geom)) as centroid from municipio where municipio = $1;",
           values: [municipio]
         }
         dataMuni = await pg.query(query);
@@ -248,7 +248,7 @@ router.post('/getpoly', async (req, res) => {
 
       if (finca !== 'Select') {
         var queryFin = {
-          text: "select finca, poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+          text: "select finca, st_asgeojson(geom) as poly, st_astext(st_centroid(geom)) as centroid from finca where finca = $1;",
           values: [finca]
         }
         dataFin = await pg.query(queryFin);
@@ -277,7 +277,7 @@ router.post('/finca_closer', async (req, res) => {
   const marker = req.body.marker;
   
   var query = {
-    text: "select finca, ROUND(CAST(st_distance(st_transform(geom,3115), st_transform(st_setsrid(st_makepoint($1,$2),4326),3115)) / 1000 as numeric), 3) as distancia_km from geofincas ORDER BY distancia_km",
+    text: "select finca, ROUND(CAST(st_distance(st_transform(geom,3115), st_transform(st_setsrid(st_makepoint($1,$2),4326),3115)) / 1000 as numeric), 3) as distancia_km from finca ORDER BY distancia_km",
     values: [marker[1], marker[0]]
   }
 

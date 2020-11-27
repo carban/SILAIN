@@ -30,15 +30,6 @@ function formatCentroidPoint(data) {
 
 
 
-router.get('/messi', async (req, res) => {
-    res.download("/home/carban/Stuffs/root/espectrometria/eucadia/27-07-17/T.rar", err => {
-        if (err) {
-            console.log(err);
-            res.sendStatus(400);
-        }
-    });
-})
-
 // ||||||||||||||||||||||| Ruta |||||||||||||||||||||||
 // Retorna la informacion correspondiente a un articulo deacuerdo a su ID 
 router.get('/get/:id', async (req, res) => {
@@ -46,7 +37,7 @@ router.get('/get/:id', async (req, res) => {
     var id = req.params.id;
 
     const query = {
-        text: "select * from metadato inner join muni_dept on metadato.idmetadato = muni_dept.idmetadato where metadato.idmetadato=$1",
+        text: "select * from metafull where idmetadato=$1;",
         values: [id]
     }
 
@@ -58,7 +49,7 @@ router.get('/get/:id', async (req, res) => {
 
         // Capturar el poligono correspondiente a la finca del dato 
         var queryFin = {
-            text: "select poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+            text: "select st_asgeojson(geom) as poly, st_astext(st_centroid(geom)) as centroid from finca where finca = $1;",
             values: [queryresults.finca]
         }
 
@@ -83,7 +74,7 @@ router.get('/get/:id/:userid', async (req, res) => {
     var userid = req.params.userid;
 
     const query = {
-        text: "select * from metadato inner join muni_dept on metadato.idmetadato = muni_dept.idmetadato where metadato.idmetadato=$1",
+        text: "select * from metafull where idmetadato = $1;",
         values: [id]
     }
 
@@ -101,7 +92,7 @@ router.get('/get/:id/:userid', async (req, res) => {
         const { publico } = queryresults;
         if (!publico) {
             const queryConfirmDist = {
-                text: "select email_usuario, id_metadato from licencias where email_usuario = $1 and id_metadato = $2",
+                text: "select email_usuario, id_metadato from licencias where email_usuario = $1 and id_metadato = $2;",
                 values: [userid, id]
             };
             const confirmDist = await pg.query(queryConfirmDist);
@@ -113,7 +104,7 @@ router.get('/get/:id/:userid', async (req, res) => {
 
         // Capturar el poligono correspondiente a la finca del dato 
         var queryFin = {
-            text: "select poly, st_astext(st_centroid(geom)) as centroid from (select finca.finca, st_asgeojson(geom) as poly, geom from finca inner join geofincas on finca_idfi = idfinca) AS foo where foo.finca = $1;",
+            text: "select st_asgeojson(geom) as poly, st_astext(st_centroid(geom)) as centroid from finca where finca = $1;",
             values: [queryresults.finca]
         }
 
@@ -247,9 +238,9 @@ router.post('/crear', async (req, res) => {
 
         const queryInsertMetadato = {
             text: "INSERT INTO metadato(idmetadato, titulo, pclave, creado, disponibilidad, resumen, descripcion, " +
-                "tipo, lote, fase, publicador, derechos, formato, tamano, url, publico) " +
-                "VALUES($1, $2, $3, current_timestamp, current_timestamp, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
-            values: [ID, titulo, pclave, resumen, descripcion, tipo, lote, fase, publicador, derechos, formato, tamano, url, publico,]
+                "tipo, lote, fase, publico, formato, tamano, url) " +
+                "VALUES($1, $2, $3, current_timestamp, current_timestamp, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+            values: [ID, titulo, pclave, resumen, descripcion, tipo, lote, fase, formato, tamano, url, publico,]
         }
 
         const queryInsertSub = {
