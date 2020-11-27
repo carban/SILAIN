@@ -42,7 +42,7 @@ class ResultsTable extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Titulo y resumen</th>
-                            <th>Publicador</th>
+                            <th>Estado</th>
                             <th>Tipo</th>
                             <th>Formato</th>
                             <th>Tamano</th>
@@ -70,7 +70,7 @@ class ResultsTable extends React.Component {
                                         <i>{e.resumen}</i>
                                     </td>
                                     <td className="centerTd">
-                                        {e.publicador} <br />
+                                        {e.publico ? "Público" : "Privado"} <br />
                                     </td>
                                     <td className="centerTd">
                                         {e.tipo}
