@@ -141,7 +141,7 @@ class Article extends React.Component {
                             <Modal toggle={this.toggleModal.bind(this)} isOpen={this.state.toggleModal} >
                                 <ModalHeader>Datos para descarga</ModalHeader>
                                 <ModalBody>
-                                    <textarea onChange={this.handleInput.bind(this)} name="textarea" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
+                                    <textarea onChange={this.handleInput.bind(this)} name="textarea" cols="47" rows="7" placeholder="Escriba brevemente el motivo por el cual accederá a este dato y que uso le dará a este.">
                                     </textarea>
                                 </ModalBody>
                                 <center>
@@ -155,13 +155,17 @@ class Article extends React.Component {
                                 <ModalHeader toggle={this.toggleModalRequest.bind(this)}>Datos para descarga</ModalHeader>
                                 <ModalBody>
                                     <p>
-                                        El archivo se encuentra en estado privado, para descargarlo debes escribir una solicitud corta que explique la razon del uso del mismo.
-                                        El administrador pronto te respondera al correo inscrito de tu usuario
-                                </p>
-                                    <textarea onChange={this.handleInput.bind(this)} name="textarea_request" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo">
-                                    </textarea>
+                                        Este dato se encuentra con acceso restringido, si desea contar con él póngase en
+                                        contacto con la administración del CIBioFi a través del correo electrónico
+                                        <a href="mailto: abc@example.com"> cibiofi@correounivalle.edu.co</a>, enviando una solicitud de acceso en la que se
+                                        especifique el identificador o ID del dato, el email que registró en la plataforma
+                                        SILAIN y el motivo por el cual desea contar con el dato. Una vez su solicitud sea
+                                        atendida, en caso de ser autorizada podrá continuar con la descarga del dato.
+                                    </p>
+                                    {/* <textarea onChange={this.handleInput.bind(this)} name="textarea_request" cols="47" rows="7" placeholder="Ingresa el motivo por el cual quieres descargar este archivo"> */}
+                                    {/* </textarea> */}
                                 </ModalBody>
-                                <center>
+                                {/* <center>
                                     {
                                         !this.state.loading_mail ?
                                             <Button color="primary" onClick={this.sendRequestDownload.bind(this)} disabled={this.state.textarea_request === ""}>
@@ -172,7 +176,7 @@ class Article extends React.Component {
                                                 <ReactLoading type={"bars"} color={"#51cbce"} />
                                             </center>
                                     }
-                                </center>
+                                </center> */}
                             </Modal>
 
                             <h3>{this.state.info.titulo}</h3>
@@ -213,8 +217,8 @@ class Article extends React.Component {
                                         <li><b>Subcategoria: </b>{this.state.info.subcategoria}</li>
                                         <li><b>Fecha de creacion: </b>{this.state.info.creado}</li>
                                         <li><b>Fecha de disponibilidad: </b>{this.state.info.disponibilidad}</li>
-                                        <li><b>Derechos: </b>{this.state.info.derechos}</li>
-                                        <li><b>Publicador: </b>{this.state.info.publicador}</li>
+                                        <li><b>Accesso: </b>{this.state.publico ? "Inmediato" : "Sujeto a autorización"}</li>
+
                                     </ul>
                                     <ul style={{ "textAlign": "left" }}>
                                         <h5>Datos de descarga</h5>
@@ -255,6 +259,9 @@ class Article extends React.Component {
                                 </Col>
 
                                 <Col md="6" lg="6">
+                                    <b style={{ "color": "#6bd098" }}>Identificador: </b>
+                                    {this.state.info.idmetadato}
+                                    <br />
                                     <b>Resumen: </b>
                                     <br />
                                     {this.state.info.resumen}

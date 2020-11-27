@@ -203,7 +203,7 @@ class Clave extends React.Component {
                                                         ?
                                                         <h5><b>No hay datos relacionados con: "{this.state.word_searched}"</b></h5>
                                                         :
-                                                        <h5><b>Escribe una palabra clave</b></h5>
+                                                        <h5><b>Escriba una palabra clave</b></h5>
                                                 )
                                         }
                                     </Alert>

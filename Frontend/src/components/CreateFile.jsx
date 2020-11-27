@@ -118,7 +118,7 @@ class CreateFile extends React.Component {
         return (
             <div>
                 <center>
-                    <h4>creación de datos</h4>
+                    <h4>Carga de datos y metadatos</h4>
                 </center>
                 <Form onSubmit={this.handleSubmit.bind(this)} id="createForm">
                     <FormGroup>

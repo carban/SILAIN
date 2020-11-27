@@ -68,7 +68,7 @@ class Start extends React.Component {
                         <img src={logo} width="280px" height="280px" alt="description" className="animated fadeInDown fast"></img>
                         <br></br>
                         <br></br>
-                        <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura inteligente</b>
+                        <b id="logoMeans">Sistema de Información del Laboratorio de Agricultura Inteligente</b>
                         <br></br>
                         <br></br>
                         <br></br>

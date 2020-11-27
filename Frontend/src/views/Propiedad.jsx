@@ -110,7 +110,7 @@ class Propiedad extends React.Component {
                                             this.state.results.length > 0
                                                 ? (
                                                     <div>
-                                                        <h5><b>Resultados segun los filtros: </b>{this.state.totalResults}</h5>
+                                                        <h5><b>Resultados según los filtros: </b>{this.state.totalResults}</h5>
                                                         <Row className="datsBigger">
                                                             <Col>
                                                                 *Archivo crudo:  <Badge pill><b>{this.state.counts_tipos.AC}</b></Badge>
@@ -132,7 +132,7 @@ class Propiedad extends React.Component {
                                                 )
                                                 : (
                                                     this.allSelect() ?
-                                                        <h5> <b>Selecciona un atributo de busqueda</b></h5>
+                                                        <h5> <b>Selecciona un atributo de búsqueda</b></h5>
                                                         : <h5><b>No hay datos relacionados</b></h5>
                                                 )
 

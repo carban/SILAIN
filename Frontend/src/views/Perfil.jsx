@@ -102,7 +102,7 @@ class Perfil extends React.Component {
                                         }
                                     </tbody>
                                 </Table>
-                                : <b>No has hecho ninguna descarga todavía</b>
+                                : <b>No ha hecho ninguna descarga todavía</b>
                         }
                     </ul>
                     <hr />

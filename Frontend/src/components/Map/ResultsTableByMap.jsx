@@ -42,13 +42,10 @@ class ResultsTableByMap extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Titulo y resumen</th>
-                            <th>Publicador</th>
                             <th>Tipo</th>
                             <th>Formato</th>
-                            <th>Tamano</th>
-                            {
-                                auth.isAdmin() ? <th>Acciones</th> : true
-                            }
+                            <th>Tamaño</th>
+                            <th>Acceso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,9 +65,6 @@ class ResultsTableByMap extends React.Component {
                                         <i>{e.resumen}</i>
                                     </td>
                                     <td className="centerTd">
-                                        {e.publicador} <br />
-                                    </td>
-                                    <td className="centerTd">
                                         {e.tipo}
                                     </td>
                                     <td className="centerTd">
@@ -86,7 +80,9 @@ class ResultsTableByMap extends React.Component {
                                                     {e.publico ? "Público" : "Privado"}
                                                 </Button>
                                             </td>
-                                            : true
+                                            : <td className="centerTd">
+                                                {e.publico ? "Público" : "Privado"} <br />
+                                            </td>
                                     }
                                 </tr>
                             ))

@@ -41,7 +41,7 @@ class SNavBar extends React.Component {
                     fontSize: "14px",
 
                   }}
-                  title="Realiza busquedas escribiendo palabras clave">
+                  title="Realiza búsquedas escribiendo palabras clave">
                   <i className="nc-icon nc-align-left-2" style={{ "fontSize": "18px" }}></i>
                     Búsqueda por palabras Clave
                       </NavLink>
@@ -56,7 +56,7 @@ class SNavBar extends React.Component {
                     fontSize: "14px",
 
                   }}
-                  title="Realiza busquedas seleccionando una propiedad">
+                  title="Realiza búsquedas seleccionando una propiedad">
                   <i className="nc-icon nc-bullet-list-67" style={{ "fontSize": "18px" }}></i>
                     Exploración de datos
                     </NavLink>
@@ -72,7 +72,7 @@ class SNavBar extends React.Component {
                     fontSize: "14px",
 
                   }}
-                  title="Realiza busquedas explorando un mapa">
+                  title="Realiza búsquedas explorando un mapa">
                   <i className="nc-icon nc-pin-3" style={{ "fontSize": "20px" }}></i>
                     Búscador Geográfico
                     </NavLink>
@@ -87,7 +87,7 @@ class SNavBar extends React.Component {
                     fontSize: "14px",
 
                   }}
-                  title="Realiza busquedas explorando proyectos">
+                  title="Realiza búsquedas explorando proyectos">
                   <i className="nc-icon nc-bulb-63" style={{ "fontSize": "20px" }}></i>
                       Proyectos de Investigación
                     </NavLink>

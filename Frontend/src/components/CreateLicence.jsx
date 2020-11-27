@@ -35,7 +35,7 @@ class CreateLicence extends React.Component {
         return (
             <div>
                 <center>
-                    <h4>Asignación de licencia</h4>
+                    <h4>Autorización de descargas</h4>
                 </center>
                 <Form onSubmit={this.handleSubmit.bind(this)} id="licenceForm">
                     <FormGroup>

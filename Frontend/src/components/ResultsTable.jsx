@@ -25,7 +25,7 @@ class ResultsTable extends React.Component {
         var new_val = !r[pos].publico
         r[pos].publico = new_val;
 
-        axios.post(api.route + "/makepublic/", {id: id, val: new_val})
+        axios.post(api.route + "/makepublic/", { id: id, val: new_val })
             .then(res => {
                 this.setState({ results: r });
             })
@@ -42,15 +42,12 @@ class ResultsTable extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Titulo y resumen</th>
-                            <th>Estado</th>
                             <th>Tipo</th>
                             <th>Formato</th>
-                            <th>Tamano</th>
+                            <th>Tamaño</th>
                             <th>creado</th>
                             <th>disponibilidad</th>
-                            {
-                                auth.isAdmin() ? <th>Acciones</th> : true
-                            }
+                            <th>Acceso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,9 +65,6 @@ class ResultsTable extends React.Component {
                                         </b>
                                         <br />
                                         <i>{e.resumen}</i>
-                                    </td>
-                                    <td className="centerTd">
-                                        {e.publico ? "Público" : "Privado"} <br />
                                     </td>
                                     <td className="centerTd">
                                         {e.tipo}
@@ -94,7 +88,10 @@ class ResultsTable extends React.Component {
                                                     {e.publico ? "Público" : "Privado"}
                                                 </Button>
                                             </td>
-                                            : true
+                                            :
+                                            <td className="centerTd">
+                                                {e.publico ? "Público" : "Privado"} <br />
+                                            </td>
                                     }
                                 </tr>
                             ))
