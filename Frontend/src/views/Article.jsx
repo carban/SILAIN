@@ -161,6 +161,8 @@ class Article extends React.Component {
                                     </textarea>
                                 </ModalBody>
                                 <center>
+                                    <i style={{"fontSize": "12px"}}>Si el tamaño del archivo es superior a 1 GB, la descarga podría tardar unos segundos en iniciar.</i>
+                                    <br/>
                                     <Button onClick={this.getFile.bind(this)} color="success" disabled={this.state.textarea === ""}>
                                         Descargar
                                     </Button>
