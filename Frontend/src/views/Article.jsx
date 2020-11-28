@@ -31,7 +31,8 @@ class Article extends React.Component {
             textarea: "",
             textarea_request: "",
             loading_mail: false,
-            publico: false
+            publico: false,
+            errorArticle: false
         }
     }
 
@@ -70,15 +71,27 @@ class Article extends React.Component {
         });
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         if (auth.isAuthenticated()) {
-            const res = await fetch(api.route + "/article/get/" + this.props.match.params.id + "/" + auth.getSession().id);
-            const { info, finca, publico } = await res.json();
-            this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+            // const res = await fetch(api.route + "/article/get/" + this.props.match.params.id + "/" + auth.getSession().id);
+            axios.get(api.route + "/article/get/" + this.props.match.params.id + "/" + auth.getSession().id)
+                .then(res => {
+                    const { info, finca, publico } = res.data;
+                    this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+                })
+                .catch(err => {
+                    this.setState({ errorArticle: true });
+                })
         } else {
-            const res = await fetch(api.route + "/article/get/" + this.props.match.params.id);
-            const { info, finca, publico } = await res.json();
-            this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+            // const res = await fetch(api.route + "/article/get/" + this.props.match.params.id);
+            axios.get(api.route + "/article/get/" + this.props.match.params.id)
+                .then(res => {
+                    const { info, finca, publico } = res.data;
+                    this.setState({ info: info, loading: false, finca: finca, centroid: finca[0].centroid, publico: publico });
+                })
+                .catch(err => {
+                    this.setState({ errorArticle: true });
+                })
         }
     }
 
@@ -129,6 +142,9 @@ class Article extends React.Component {
         return (
             <div>
                 <SNavBar />
+                {
+                    this.state.errorArticle ? <center><h5>No se encuentra el recurso</h5></center> : true
+                }
                 {
                     this.state.loading ? (
                         <center>
