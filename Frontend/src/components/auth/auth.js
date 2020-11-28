@@ -31,6 +31,13 @@ class Auth {
     getSession() {
         return JSON.parse(this.authenticated);
     }
+
+    getIdName(){
+        let email = this.getSession().id;
+        let arr = email.split("@");
+        let name = arr[0];
+        return name;
+    }
 }
 
 export default new Auth();

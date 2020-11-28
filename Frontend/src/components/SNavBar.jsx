@@ -9,7 +9,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 // import lupa from "../lupa.png";
-
+import auth from "components/auth/auth.js";
 
 class SNavBar extends React.Component {
   constructor(props) {
@@ -103,6 +103,10 @@ class SNavBar extends React.Component {
                   }}
                   title="Logueate en la plataforma">
                   <i className="nc-icon nc-circle-10" style={{ "fontSize": "20px" }}></i>
+                  &nbsp;&nbsp;
+                  {
+                    auth.isAuthenticated() ? auth.getIdName() : "Login"
+                  }
                   {/* Login */}
                 </NavLink>
               </center>

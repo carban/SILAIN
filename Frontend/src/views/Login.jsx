@@ -73,7 +73,7 @@ class Login extends React.Component {
                 auth.login(obj, () => {
                     this.setState({ doAnime: true });
                     window.setTimeout(() => {
-                        this.props.history.push("/perfil")
+                        this.props.history.push("/")
                     }, delay);
                 });
             })
