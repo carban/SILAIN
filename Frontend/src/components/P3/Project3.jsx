@@ -37,6 +37,9 @@ class Project3 extends React.Component {
                 <b>Director:</b> <br />
                     MAURICIO EDILBERTO RINCÓN ROMERO <br />
                     Ingeniero Catastral y Geodesta M.Sc. Ph.D. <br />
+                <Link to="/article/423" style={{ "color": "green" }}>
+                    <b>CONSULTAR TESIS</b> <span role="img" aria-label=".">📝</span>
+                </Link>
                 <hr />
                 <br />
                 <Accordion>
@@ -120,10 +123,62 @@ class Project3 extends React.Component {
                                 <div style={{ "textAlign": "left" }}>
                                     <h6>Datos Relacionados:</h6>
                                     <ul>
-                                        <li>
-                                            <Link to="/article/407" style={{ "color": "green" }}>
-                                                Caudales promedio diarios en cultivos de arroz, finca San José                                            </Link>
-                                        </li>
+                                        <li><Link to='/article/90' style={{ 'color': 'green' }}>Fisiología de plantas de arroz en finca San José Fase 1</Link></li>
+                                        <li><Link to='/article/91' style={{ 'color': 'green' }}>Fisiología de plantas de arroz en finca San José Fase 2</Link></li>
+                                        <li><Link to='/article/92' style={{ 'color': 'green' }}>Fisiología de plantas de arroz en finca San José Fase 3</Link></li>
+                                        <li><Link to='/article/93' style={{ 'color': 'green' }}>Fisiología de plantas de arroz en finca San José Fase 4</Link></li>
+
+                                        <li><Link to='/article/37' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1, fase 1</Link></li>
+                                        <li><Link to='/article/38' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2, fase 1</Link></li>
+                                        <li><Link to='/article/39' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3, fase 1</Link></li>
+                                        <li><Link to='/article/40' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T, fase 1</Link></li>
+                                        <li><Link to='/article/41' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K1, fase 2</Link></li>
+                                        <li><Link to='/article/42' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K2, fase 2</Link></li>
+                                        <li><Link to='/article/43' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K3, fase 2</Link></li>
+                                        <li><Link to='/article/44' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1-R, fase 2</Link></li>
+                                        <li><Link to='/article/45' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1, fase 2</Link></li>
+                                        <li><Link to='/article/46' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2-R, fase 2</Link></li>
+                                        <li><Link to='/article/47' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2, fase 2</Link></li>
+                                        <li><Link to='/article/48' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3-R, fase 2</Link></li>
+                                        <li><Link to='/article/49' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3, fase 2</Link></li>
+                                        <li><Link to='/article/50' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P1, fase 2</Link></li>
+                                        <li><Link to='/article/51' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P2, fase 2</Link></li>
+                                        <li><Link to='/article/52' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P3, fase 2</Link></li>
+                                        <li><Link to='/article/53' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T-R, fase 2</Link></li>
+                                        <li><Link to='/article/54' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T, fase 2</Link></li>
+                                        <li><Link to='/article/55' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K1, fase 3</Link></li>
+                                        <li><Link to='/article/56' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K2, fase 3</Link></li>
+                                        <li><Link to='/article/57' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K3, fase 3</Link></li>
+                                        <li><Link to='/article/58' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1-R, fase 3</Link></li>
+                                        <li><Link to='/article/59' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1, fase 3</Link></li>
+                                        <li><Link to='/article/60' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2-R, fase 3</Link></li>
+                                        <li><Link to='/article/61' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2, fase 3</Link></li>
+                                        <li><Link to='/article/62' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3-R, fase 3</Link></li>
+                                        <li><Link to='/article/63' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3, fase 3</Link></li>
+                                        <li><Link to='/article/64' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P1, fase 3</Link></li>
+                                        <li><Link to='/article/65' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T-R, fase 3</Link></li>
+                                        <li><Link to='/article/66' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T, fase 3</Link></li>
+                                        <li><Link to='/article/67' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K1, fase 4</Link></li>
+                                        <li><Link to='/article/68' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K2, fase 4</Link></li>
+                                        <li><Link to='/article/69' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K3, fase 4</Link></li>
+                                        <li><Link to='/article/70' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1, fase 4</Link></li>
+                                        <li><Link to='/article/71' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2, fase 4</Link></li>
+                                        <li><Link to='/article/72' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3, fase 4</Link></li>
+                                        <li><Link to='/article/73' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P1, fase 4</Link></li>
+                                        <li><Link to='/article/74' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P2, fase 4</Link></li>
+                                        <li><Link to='/article/75' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T, fase 4</Link></li>
+                                        <li><Link to='/article/76' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K1, fase 4</Link></li>
+                                        <li><Link to='/article/77' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K2, fase 4</Link></li>
+                                        <li><Link to='/article/78' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento K3, fase 4</Link></li>
+                                        <li><Link to='/article/79' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N1, fase 4</Link></li>
+                                        <li><Link to='/article/80' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N2, fase 4</Link></li>
+                                        <li><Link to='/article/81' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3, fase 4</Link></li>
+                                        <li><Link to='/article/82' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento N3_R, fase 4</Link></li>
+                                        <li><Link to='/article/83' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P1, fase 4</Link></li>
+                                        <li><Link to='/article/84' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P2, fase 4</Link></li>
+                                        <li><Link to='/article/85' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento P3, fase 4</Link></li>
+                                        <li><Link to='/article/86' style={{ 'color': 'green' }}>Lectura de espectrometría en cultivo de arroz, finca San José tratamiento T, fase 4</Link></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -201,8 +256,6 @@ class Project3 extends React.Component {
                                 valor de N foliar disminuye, mientras que en las demás fases se estableció una
                                 tendencia positiva. Esto se explica porque las regiones a las que pertenecen las
                                 longitudes de onda que se asociaron con el N foliar para IDN F1 son ρ1 = 723,88 nm y
-                                <br />
-                                <br />
                                 ρ2 = 407,97 nm, es decir que el comportamiento de una planta sana siempre estará
                                 regido por ρ1 &gt; ρ2, lo que indica que para esta fase a medida que la diferencia de
                                 reflectancia de estas dos bandas aumentaba el valor de N foliar de la planta

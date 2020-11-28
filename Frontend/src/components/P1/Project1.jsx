@@ -135,6 +135,9 @@ class Project1 extends React.Component {
                 <b>Codirector:</b> <br />
                     OSCAR BUITRAGO BERMÚDEZ <br />
                     Ingeniero Agrícola M.Sc. Ph.D. <br />
+                <Link to="/article/421" style={{ "color": "green" }}>
+                    <b>CONSULTAR TESIS</b> <span role="img" aria-label=".">📝</span>
+                </Link>
                 <hr />
                 <br />
                 <Accordion>

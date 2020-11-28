@@ -50,6 +50,10 @@ class Project2 extends React.Component {
                 <b>Director:</b> <br />
                     MAURICIO EDILBERTO RINCÓN ROMERO <br />
                     Ingeniero Catastral y Geodesta M.Sc. Ph.D. <br />
+                <b>Tesis:</b> <br />
+                <Link to="/article/422" style={{ "color": "green" }}>
+                    <b>CONSULTAR TESIS</b> <span role="img" aria-label=".">📝</span>
+                </Link>
                 <hr />
                 <br />
                 <Accordion>

@@ -37,6 +37,9 @@ class Project4 extends React.Component {
                     Ingeniero Catastral y Geodesta M.Sc. Ph.D. <br />
                 <b>Codirector:</b> <br />
                 Oscar Fernando Bedoya, PhD.<br />
+                <Link to="/article/424" style={{ "color": "green" }}>
+                    <b>CONSULTAR TESIS</b> <span role="img" aria-label=".">📝</span>
+                </Link>
                 <hr />
                 <br />
                 <Accordion>
