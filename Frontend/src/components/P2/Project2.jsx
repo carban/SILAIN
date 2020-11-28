@@ -71,7 +71,7 @@ class Project2 extends React.Component {
                             <div className="projectBody">
                                 <img src={metodo} alt="" />
                                 <div style={{ "textAlign": "left" }}>
-                                    <h6>Articulos Relacionados:</h6>
+                                    <h6>Datos Relacionados:</h6>
                                     <ul>
                                         <li>
                                             <Link to="/article/407" style={{ "color": "green" }}>
@@ -79,17 +79,17 @@ class Project2 extends React.Component {
                                         </li>
                                         <li>
                                             <Link to="/article/418" style={{ "color": "green" }}>
-                                                No Titulo
+                                                Datos espectrales por planta en Lote 8, finca San José
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/article/419" style={{ "color": "green" }}>
-                                                No Titulo
+                                                Datos climáticos finca arrocera San José lote 8
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/article/420" style={{ "color": "green" }}>
-                                                No Titulo
+                                                Información fisiológica de plantas de arroz en finca San José, lote 8
                                             </Link>
                                         </li>
                                     </ul>

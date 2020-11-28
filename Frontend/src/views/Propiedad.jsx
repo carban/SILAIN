@@ -132,7 +132,7 @@ class Propiedad extends React.Component {
                                                 )
                                                 : (
                                                     this.allSelect() ?
-                                                        <h5> <b>Selecciona un atributo de búsqueda</b></h5>
+                                                        <h5> <b>Seleccione un atributo de búsqueda</b></h5>
                                                         : <h5><b>No hay datos relacionados</b></h5>
                                                 )
 

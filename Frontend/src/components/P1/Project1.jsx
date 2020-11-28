@@ -241,7 +241,7 @@ class Project1 extends React.Component {
                                                 <hr />
                                                 {this.state.showObj === "SS1O3" || this.state.showObj === "SS2O3" || this.state.showObj === "SS3O3" ? <img width="700px" height="480px" src={O3} alt="" /> : true}
                                                 <div style={{ "textAlign": "left" }}>
-                                                    <h6>Articulos Relacionados:</h6>
+                                                    <h6>Datos Relacionados:</h6>
                                                     <ul>
                                                         <li>
                                                             <Link to="/article/417" style={{ "color": "green" }}>
