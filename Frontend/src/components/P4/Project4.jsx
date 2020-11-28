@@ -107,10 +107,6 @@ class Project4 extends React.Component {
                                 <div style={{ "textAlign": "left" }}>
                                     <h6>Datos Relacionados:</h6>
                                     <ul>
-                                        <li>
-                                            <Link to="/article/407" style={{ "color": "green" }}>
-                                                Caudales promedio diarios en cultivos de arroz, finca San José                                            </Link>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>

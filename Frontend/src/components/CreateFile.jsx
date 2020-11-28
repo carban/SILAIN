@@ -12,8 +12,6 @@ class CreateFile extends React.Component {
         super(props);
         this.state = {
             titulo: "",
-            publicador: "CIBioFi-GISMODEL",
-            derechos: "",
             resumen: "",
             descripcion: "",
             lote: "",
@@ -43,8 +41,6 @@ class CreateFile extends React.Component {
 
     validateParameters() {
         return this.state.titulo !== "" &&
-            this.state.publciador !== "" &&
-            this.state.derechos !== "" &&
             this.state.resumen !== "" &&
             this.state.descripcion !== "" &&
             this.state.pclave !== "" &&
@@ -57,8 +53,6 @@ class CreateFile extends React.Component {
 
         formData.append("file", this.state.file, this.state.file.name);
         formData.append("titulo", this.state.titulo);
-        formData.append("publicador", this.state.publicador);
-        formData.append("derechos", this.state.derechos);
         formData.append("resumen", this.state.resumen);
         formData.append("descripcion", this.state.descripcion);
         formData.append("lote", this.state.lote);
@@ -76,8 +70,6 @@ class CreateFile extends React.Component {
                 document.getElementById("createForm").reset();
                 this.setState({
                     titulo: "",
-                    publicador: "CIBioFi-GISMODEL",
-                    derechos: "",
                     resumen: "",
                     descripcion: "",
                     lote: "",
@@ -129,14 +121,6 @@ class CreateFile extends React.Component {
                                 <b>Titulo</b>
                                 <Input type="text" placeholder="Titulo" name="titulo" onChange={this.handleInput.bind(this)} required />
                             </Col>
-                            <Col>
-                                <b>Publicador</b>
-                                <Input type="text" placeholder="Publicador" name="publicador" onChange={this.handleInput.bind(this)} value="CIBioFi-GISMODEL" required />
-                            </Col>
-                            <Col>
-                                <b>Derechos</b>
-                                <Input type="text" placeholder="Derechos" name="derechos" onChange={this.handleInput.bind(this)} required />
-                            </Col>
                         </Row>
                         <Row>
                             <Col>
@@ -164,7 +148,7 @@ class CreateFile extends React.Component {
                                 <Input type="text" placeholder="Palabras clave separadas por coma (,)" name="pclave" onChange={this.handleInput.bind(this)} required />
                             </Col>
                             <Col>
-                                <b>Estado:</b> <Button
+                                <b>Acceso:</b> <Button
                                     color={this.state.publico ? "success" : "danger"} onClick={() => this.setState({ publico: !this.state.publico })} required>
                                     {this.state.publico ? "publico" : "privado"}
                                 </Button>

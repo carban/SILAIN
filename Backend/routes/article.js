@@ -196,7 +196,7 @@ router.post('/crear', async (req, res) => {
 
         // console.log(req.body, file);
 
-        let { titulo, publicador, derechos, resumen, descripcion, lote, fase, pclave, publico, filters } = req.body;
+        let { titulo, resumen, descripcion, lote, fase, pclave, publico, filters } = req.body;
         filters = JSON.parse(filters);
         let { categoria, subcategoria, tipo, formato, finca } = filters;
 
@@ -240,11 +240,11 @@ router.post('/crear', async (req, res) => {
             text: "INSERT INTO metadato(idmetadato, titulo, pclave, creado, disponibilidad, resumen, descripcion, " +
                 "tipo, lote, fase, publico, formato, tamano, url) " +
                 "VALUES($1, $2, $3, current_timestamp, current_timestamp, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-            values: [ID, titulo, pclave, resumen, descripcion, tipo, lote, fase, formato, tamano, url, publico,]
+            values: [ID, titulo, pclave, resumen, descripcion, tipo, lote, fase, publico, formato, tamano, url]
         }
 
         const queryInsertSub = {
-            text: "INSERT INTO metadatos_has_subcategoria(subcategoria_idsubcategoria, metadato_idmetadato) VALUES ($1, $2)",
+            text: "INSERT INTO metadato_has_subcategoria(subcategoria_idsubcategoria, metadato_idmetadato) VALUES ($1, $2)",
             values: [subID, ID]
         }
 
