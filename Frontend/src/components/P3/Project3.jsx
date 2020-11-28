@@ -3,6 +3,9 @@ import React from "react";
 import { Accordion, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import m_1 from "./p3_m_1.png";
+import m_2 from "./p3_m_2.png";
+
 class Project3 extends React.Component {
 
     constructor(props) {
@@ -98,6 +101,19 @@ class Project3 extends React.Component {
                                 los insumos en las plantas inducido por la disponibilidad de nutrientes, para
                                 desarrollar un índice de vegetación que permite estimar las condiciones de contenido
                                 de N en el follaje del arroz.
+
+                                <br />
+                                <br />
+
+                                <center>
+                                    <img src={m_1} alt="imagen1" width="50%" height="50%" />
+
+                                    <br />
+                                    <br />
+
+                                    <img src={m_2} alt="imagen2" width="50%" height="50%" />
+                                </center>
+
                                 <br />
                                 <br />
 
