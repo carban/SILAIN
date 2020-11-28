@@ -136,8 +136,6 @@ class Project3 extends React.Component {
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="3">
                             <div className="projectBody">
-                                CONCLUSIONES
-
                                 Para la variedad de arroz Fedearroz 60 se analizaron cuatro fases fenológicas en un
                                 experimento en campo realizado en la finca San José de la Arrocera La Esmeralda
                                 S.A.S, ubicada en el Departamento del Cauca, municipio de Santander de Quilichao
@@ -151,7 +149,8 @@ class Project3 extends React.Component {
                                 misma población debido a las alteraciones de factores que no se pudieron controlar
                                 como las condiciones de aplicación homogénea, absorción homogénea por tener un
                                 riego inundado, volatilización de la urea o la deficiencia de otros nutrientes.
-
+                                <br />
+                                <br />
                                 Se encontró también que, si se conserva la aplicación de N del tratamiento Testigo
                                 (200 kg/ha) la variedad Fedearroz 60 puede alcanzar una cantidad máxima de
                                 macollos que oscila entre 15 unidades con algunas alteraciones de plantas que
@@ -160,6 +159,8 @@ class Project3 extends React.Component {
                                 esperaban pero se evidenció la respuesta al déficit de N con valores críticos, no
                                 obstante, los tratamientos de mayor concentración de N no desarrollaron intensidades
                                 mayores al umbral de 3,5.
+                                <br />
+                                <br />
                                 Se determinaron las firmas espectrales para cada una de las fases estudiadas y se
                                 comprobó que cada parcela experimental se comporta como un tratamiento distinto
                                 dentro de su fase, esto mediante el análisis de varianza prueba H de Kruskal – Wallis,
@@ -193,16 +194,21 @@ class Project3 extends React.Component {
                                 experimento con observaciones tomadas en parcelas deficitarias, y de esta forma se
                                 podría mejorar el espectro de representatividad de la información para afinar el
                                 modelo.
+                                <br />
+                                <br />
                                 Para uno de los modelos sectorizados (Fase 1), se encontró una tendencia negativa
                                 para la correlación de modo que a medida que aumenta el valor del índice IDN F1, el
                                 valor de N foliar disminuye, mientras que en las demás fases se estableció una
                                 tendencia positiva. Esto se explica porque las regiones a las que pertenecen las
                                 longitudes de onda que se asociaron con el N foliar para IDN F1 son ρ1 = 723,88 nm y
-
+                                <br />
+                                <br />
                                 ρ2 = 407,97 nm, es decir que el comportamiento de una planta sana siempre estará
                                 regido por ρ1 &gt; ρ2, lo que indica que para esta fase a medida que la diferencia de
                                 reflectancia de estas dos bandas aumentaba el valor de N foliar de la planta
                                 disminuía.
+                                <br />
+                                <br />
                                 En cuanto a los modelos de estimación se encontró que aquellos generados con 4
                                 muestras (Fase 1 y Fase 4) arrojaron pendientes elevadas y valores de ajustes altos
                                 con R2 = 87 % y R2 = 83 % respectivamente, mientras que aquellos con un número de

@@ -10,6 +10,7 @@ import { Router, Route, Switch, NavLink } from "react-router-dom";
 import Project1 from "components/P1/Project1.jsx";
 import Project2 from "components/P2/Project2.jsx";
 import Project3 from "components/P3/Project3.jsx";
+import Project4 from "components/P4/Project4.jsx";
 
 
 class Proyectos extends React.Component {
@@ -82,7 +83,7 @@ class Proyectos extends React.Component {
                                             <Col md="11">
                                                 <center>
                                                     <h5>
-                                                        integración multiescala entre modelos climáticos globales y regionales mediante técnicas de inteligencia artificial
+                                                        Integración multiescala entre modelos climáticos globales y regionales mediante técnicas de inteligencia artificial
                                                     </h5>
                                                 </center>
                                             </Col>
@@ -98,7 +99,7 @@ class Proyectos extends React.Component {
                             <Route exact path="/search/proyecto/p1" component={Project1} />
                             <Route exact path="/search/proyecto/p2" component={Project2} />
                             <Route exact path="/search/proyecto/p3" component={Project3} />
-                            <Route exact path="/search/proyecto/p4" component={() => <h1>P4</h1>} />
+                            <Route exact path="/search/proyecto/p4" component={Project4} />
 
                             {/* <Route exact path="/search/diagrama/p1/obj2" component={() => <h1>fghfg</h1>} /> */}
                             {/* <Route exact path="/search/diagrama/p1/obj3" component={() => <h1>fhgfg</h1>} /> */}
