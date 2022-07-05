@@ -9,7 +9,7 @@
     "downloadjs": "^1.4.7",
     "history": "4.9.0",
     "leaflet": "^1.6.0",
-    "mermaid": "^8.5.2",
+    "mermaid": "^9.1.2",
     "perfect-scrollbar": "1.4.0",
     "react": "16.8.6",
     "react-bootstrap": "^1.0.1",
